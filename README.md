@@ -6,11 +6,13 @@ The main front end module has been packed into a zip.
 
 Manage Customers, HR, HR-Staff, sites and stations, link customers to sites, create survey orders, create inspection orders. 
 
-Manage equipment and there life cycle.  
+Manage equipment and there life cycle. 
+
+Not planning to do accounts.
 
 Future code for this site is ... 
-1. Technicians remote inpection report (entered on site) (IP)
-2. Some adminstration apps - written in C++ or pascal for Embarcadero RAD.
+1. Technicians remote inspection application (enter data on site via TCP/IP) 
+2. Adminstration apps - written in C++ or pascal for Embarcadero RAD.
 
 ERStudio holds the database design for MSSQL EXPRESS dbo.FES database.
 (SQL build scripts may appear in this folder.)
