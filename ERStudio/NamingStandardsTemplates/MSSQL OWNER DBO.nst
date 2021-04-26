@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<NamingStandardsTemplate xmlns="http://www.w3.org/2001/XMLSchema-instance" NSTemplateDesc="" NSTemplateName="">
+
+  <LogicalObjectConventions>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Entity" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="128" ObjectType="Attribute" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="View" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Key" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Relationship" Prefix="Ref" Suffix=""/>
+  </LogicalObjectConventions>
+
+  <PhysicalObjectConventions>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Table" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="128" ObjectType="Column" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="View" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Index" Prefix="" Suffix=""/>
+    <ObjectConvention CaseConvention="[none]" ConstraintConvention="" MaxLength="65" ObjectType="Foreign Key" Prefix="" Suffix=""/>
+  </PhysicalObjectConventions>
+
+  <Abbreviations/>
+
+  <LogicalOrder>
+    <Order ObjectType="Entity" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Attribute" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="View" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Key" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Relationship" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+  </LogicalOrder>
+
+  <PhysicalOrder>
+    <Order ObjectType="Table" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Column" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="View" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Index" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+    <Order ObjectType="Foreign Key" Part1="Prime" Part2="Qualifier(s)" Part3="Class"/>
+  </PhysicalOrder>
+
+  <GeneralOptions>
+    <LogicalWordSeparation WordSeparation="ByCharacter" WordSeparator=" "/>
+    <PhysicalWordSeparation WordSeparation="ByCharacter" WordSeparator=" "/>
+    <SpecialCharacters InvalidCharHandling="Ignore" InvalidCharReplacement="" InvalidCharacters="?.,()-=+!@"/>
+  </GeneralOptions>
+
+</NamingStandardsTemplate>
