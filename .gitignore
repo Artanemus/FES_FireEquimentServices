@@ -1,3 +1,8 @@
+# Microsoft access database files are not permitted here 
+# as they consume to much drive space
+# Use OneDrive instead
+*.accdb
+
 # Prerequisites
 *.d
 
