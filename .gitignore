@@ -1,4 +1,4 @@
-# Microsoft access database files are not permitted here 
+# Microsoft access database files are not permitted here
 # as they consume to much drive space
 # Use OneDrive instead
 *.accdb
@@ -64,10 +64,10 @@
 # Uncomment this if you are not using external objects (zlib library for example).
 #*.obj
 
-# BSA - Embarcadero OK 
-#*.skincfg 
-#*.todo 
-#*.ico 
+# BSA - Embarcadero OK
+#*.skincfg
+#*.todo
+#*.ico
 
 
 # Pascal
@@ -138,3 +138,5 @@ __astcache/
 **/ACCDB/**
 
 
+
+**/.rh/**
