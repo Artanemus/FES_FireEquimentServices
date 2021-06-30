@@ -1,20 +1,22 @@
-# FireEquimentServices
+# FES_FireEquimentServices
 FES - Fire Equipment Services an ACCESS front-end with ADO MSSQL EXPRESS backend.
 
-Ok so large .accdb files don't fit onto GitHub - my mistake.
-The main front end module has been packed into a zip.
+Manage Customers, HR, HR-Staff, Sites, (and stations), Fire Equipment, Emergency Lights, link customers to sites, Enable/Disable sites, create survey orders, create inspection orders, create customer inspection reports and manage equipment life cycles. 
 
-Manage Customers, HR, HR-Staff, sites and stations, link customers to sites, create survey orders, create inspection orders. 
+Adheres to Queenland, Australia fire and equipment standards. (AS 1851-2012 and 2293.2)
 
-Manage equipment and there life cycle. 
+This project, at this stage, doesn't include accounts and full inventory management.
 
-Not planning to do accounts.
+Future code for this site is (support applications, seperate GitHub project - preferenced with FES).
+1. Technicians remote inspection application (enter data on site via TCP/IP) Multi-plaform written in Embarcadero RAD.
+2. Adminstration apps - written in C++ or pascal for Embarcadero RAD. (Project planner)
 
-Future code for this site is ... 
-1. Technicians remote inspection application (enter data on site via TCP/IP) 
-2. Adminstration apps - written in C++ or pascal for Embarcadero RAD.
+GitHub project, FES_ERStudio, holds the database design for MSSQL EXPRESS dbo.FES database. (SQL build scripts may appear here.)
 
-ERStudio holds the database design for MSSQL EXPRESS dbo.FES database.
-(SQL build scripts may appear in this folder.)
+VBA folder holds the export of BAS and Forms.
 
-RemoteTech folder contains the application to input inspection order results (onsite).
+The .accdb file (a file I deemed to large to be contantly updated and uploaded to GitHub) is available on request. 
+
+A FES website showing it's features and with full help files ... TBA. 
+
+Currently FES is in early development.
