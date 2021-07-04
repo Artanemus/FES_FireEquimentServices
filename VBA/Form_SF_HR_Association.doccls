@@ -1,0 +1,60 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Property Get HasParent(ByRef f As Form) As Boolean
+    HasParent = False
+    On Error GoTo handler
+    HasParent = TypeName(f.Parent.Name) = "String"
+    Exit Property
+handler:
+End Property
+
+Private Sub Combo0_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim aCustomerID As Long
+    If mdlKeyBoardState.IsControlKeyDown Then
+        aCustomerID = mdlPicker.PickCustomer
+        If (aCustomerID > 0) Then
+            If (Nz(Me.HRID, 0) > 0) Then
+                ' use customer in dropdown
+                Me.CustomerID = aCustomerID
+                Me.Combo0.Requery
+            ElseIf Me.NewRecord Then
+                Me.Undo
+                If (Nz(Me.HRID, 0) = 0) Then
+                    If HasParent(Me) Then
+                        If Nz(Me.Parent.Form!HRID, 0) > 0 Then
+                            mdlCustContact.addNewCustContact Me.Parent.Form!HRID, aCustomerID
+                            mdlToolBox.RequeryFormAndKeepCurrSelectedRecord Me
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End If
+End Sub
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the creation date for this customer
+'    If Nz(Me![CreatedOn], 0) = 0 Then
+'        Me![CreatedOn] = Now()
+'    End If
+    If IsNull(Me![CreatedOn]) Then
+        Me![CreatedOn] = Now()
+    End If
+
+    If IsNull(Me![IsArchived]) Then
+        Me![IsArchived] = False
+    End If
+    
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    ' goto the customer ID
+    If Nz(Me.CustomerID, 0) > 0 Then
+        If Me.Dirty Then
+            Me.Dirty = False
+        End If
+        mdlGoto.OpenFormAndCue "_Customer", Me.CustomerID, "[CustomerID]"
+    End If
+    
+End Sub

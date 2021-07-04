@@ -1,0 +1,6 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub Command106_Click()
+    mdlGoto.GotoCust Me.CustomerID
+End Sub

@@ -1,0 +1,50 @@
+﻿Option Compare Database
+Option Explicit
+
+Const ModuleName As String = "SF_EquipFind"
+Const PKey As String = "[EquipmentID]"
+
+
+Private Property Get HasParent(ByRef f As Form) As Boolean
+    HasParent = False
+    On Error GoTo handler
+    HasParent = TypeName(f.Parent.Name) = "String"
+    Exit Property
+handler:
+End Property
+
+Private Sub Form_ApplyFilter(Cancel As Integer, ApplyType As Integer)
+    CountRecords
+End Sub
+
+Private Sub Form_Current()
+    ' this unbound hidden field lets us highlight the current selected row
+    Me.txtCurrRecord = Me.Controls(PKey)
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    If HasParent(Me) Then
+        Me.Parent.Child_Called_DlbClick Cancel
+    End If
+End Sub
+
+Public Sub CountRecords()
+    Dim rs As DAO.Recordset
+    Set rs = Me.RecordsetClone
+    If rs.RecordCount > 0 Then rs.MoveLast
+    If Not rs.EOF Then
+        Me.txtRecordCount.Caption = "Found : " & CStr(rs.RecordCount)
+        Me.txtFilterStatus.Caption = Me.Filter
+    Else
+        Me.txtRecordCount.Caption = "Found : 0"
+        Me.txtFilterStatus.Caption = ""
+    End If
+    Set rs = Nothing
+
+End Sub
+
+Private Sub Form_Load()
+Me.Filter = ""
+If Me.FilterOn Then Me.FilterOn = False
+End Sub
+

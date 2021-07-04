@@ -1,0 +1,282 @@
+﻿Option Compare Database
+Option Explicit
+Const ModuleName As String = "Equipment"
+Private CompanyCodeStr As String
+
+
+Private Sub cmdAutoBuildNameTag_Click()
+Dim strNetWeight As String, strGrossWeight As String, strLitre As String, strBrand As String
+Dim strHeight As String, strWidth As String, strChemical As String, s8 As String
+Dim s9 As String, s10 As String, strChemicalSymbol As String, s12 As String
+Dim str As String
+Dim msg As String
+Dim DoShortCaption As Boolean
+
+    On Error GoTo PROC_ERR
+    
+    DoShortCaption = False
+    If mdlKeyBoardState.IsControlKeyDown Then
+        DoShortCaption = True
+    End If
+    
+    If IsNull(Me![EquipTypeID]) Then
+        Beep
+        Exit Sub
+    End If
+    
+    If Me.NewRecord Then
+        If Me.Dirty Then
+            Me.Dirty = False
+        End If
+    End If
+
+    
+    ' Create the customer's description
+    If Not IsNull(Me![NetWeight]) Then
+        strNetWeight = Format(Me![NetWeight], "0.0") & "Kg"
+    End If
+    If Not IsNull(Me![GrossWeight]) Then
+        strGrossWeight = Format(Me![GrossWeight], "0.0") & "Kg"
+    End If
+    If Not IsNull(Me![Litres]) Then
+        strLitre = Format(Me![Litres], "0.0") & "Lts"
+    End If
+    If Not IsNull(Me![EquipBrandID]) Then
+        strBrand = CStr(Me.cbxEquipBrandID.Column(1))
+    End If
+    If Not IsNull(Me![Height]) Then
+        strHeight = Format(Me![Height], "0.0")
+    End If
+    If Not IsNull(Me![Width]) Then
+        strWidth = Format(Me![Width], "0.0")
+    End If
+    If Not IsNull(Me![ChemicalTypeID]) Then
+        strChemical = CStr(Me.cbxChemicalTypeID.Column(1))
+        strChemicalSymbol = CStr(Me.cbxChemicalTypeID.Column(2))
+    End If
+    If Not IsNull(Me![LightTypeID]) Then
+        s8 = CStr(Me.cbxLightTypeID.Column(1))
+    End If
+    If Not IsNull(Me![LightLampTypeID]) Then
+        s9 = CStr(Me.cbxLightLampTypeID.Column(1))
+    End If
+    If Not IsNull(Me![EquipTypeID]) Then
+        s10 = CStr(Me.cbxEquipTypeID.Column(1))
+    End If
+    
+    
+    str = vbNullString
+    
+    Select Case Me![EquipTypeID]
+    Case 1
+        ' hyrant
+        str = str & s9
+    Case 2
+        ' Fire Blanket
+        ' body
+        str = str & s10 & " "
+        ' Height
+        If Len(strHeight) > 0 Then
+            str = str & strHeight & " x "
+        End If
+        'width
+        If Len(strWidth) > 0 Then
+            str = str & strWidth
+        End If
+    Case 3
+        ' Fire extingisher
+        ' Gas
+        If Len(strChemical) > 0 Then
+            str = str & strChemical & " "
+        End If
+        ' weight
+        If Len(strGrossWeight) > 0 Then
+            'GROSS
+            str = str & strGrossWeight & " "
+        End If
+        ' body
+        str = str & s10
+    Case 4
+        ' hose
+        str = str & s10
+    Case 5
+        ' light
+        ' body
+        ' Emergency or Exit type
+        If Len(s8) > 0 Then
+            str = str & s8
+        End If
+        ' lamp type
+        If Len(s9) > 0 Then
+            str = str & " " & s9
+        End If
+    Case 6
+        ' electrical
+        str = str & s10
+    Case 7
+        ' Booster
+        str = str & s10
+    Case Else
+        str = str & s10
+        
+    End Select
+    
+    
+    ' BRAND NAME - Show no brand if core is empty
+'    If Len(str) > 0 Then
+'        If Len(strBrand) > 0 Then
+'            str = str & " " & UCase(strBrand)
+'        End If
+'    End If
+    
+    
+    If Len(str) > 0 Then
+        Me![Caption] = str
+    End If
+    
+    str = vbNullString
+    
+    If DoShortCaption Then
+        Select Case Me![EquipTypeID]
+        Case 2
+            str = str & "F/B"
+            If Len(strHeight) > 0 Then
+                str = str & " " & strHeight & " x "
+            End If
+            'width
+            If Len(strWidth) > 0 Then
+                str = str & strWidth
+            End If
+        Case 3
+            ' Fire extingisher
+            ' weight
+            If Len(strGrossWeight) > 0 Then
+                'GROSS
+                str = str & strGrossWeight & " "
+            End If
+            ' Gas
+            If Len(strChemical) > 0 Then
+                str = str & strChemicalSymbol & " "
+            End If
+            ' body
+            str = str & "FX"
+        Case 4
+            ' body
+            str = str & "H/R"
+        Case 5
+            If Len(s8) > 0 Then
+                str = str & s8
+            End If
+            ' lamp type
+            If Len(s9) > 0 Then
+                str = str & " " & s9
+            End If
+        Case Else
+            'MsgBox "CNTRL+CLICK hasn't been implimented for " & s10 & ".", vbOKOnly, "Work In Progress."
+        End Select
+    End If
+    
+    ' BRAND NAME - Show no brand if core is empty
+    If Len(str) > 0 Then
+        If Len(strBrand) > 0 Then
+            str = str & " " & strBrand
+        End If
+    End If
+    
+    
+    If Len(str) > 0 Then
+        Me![ShortCaption] = str
+    End If
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        msg = ModuleName & " cmdAutoBuildNameTag_Click" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+    
+End Sub
+
+Private Sub cmdNavigateFirst_Click()
+    mdlNavigationCode.cmdNav_First
+End Sub
+
+Private Sub cmdNavigateLast_Click()
+    mdlNavigationCode.cmdNav_Last
+End Sub
+
+Private Sub cmdNavigateNext_Click()
+    mdlNavigationCode.cmdNav_Next
+End Sub
+
+Private Sub cmdNavigatePrev_Click()
+    mdlNavigationCode.cmdNav_Prev
+End Sub
+
+Private Sub cmdNavigateToggleFilter_Click()
+    mdlNavigationCode.cmdNav_ToggleFilter
+End Sub
+
+Private Sub cmdNavigateSearch_Click()
+    mdlNavigationCode.cmdNav_SwitchToEquipFindForm
+End Sub
+
+Private Sub cmdNewEquip_Click()
+    mdlNavigationCode.cmdNav_NewEquip
+End Sub
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the creation date for this customer
+    Me![CreatedOn] = Now()
+    
+    If Nz(Me![IsArchived], 0) = 0 Then
+        Me![IsArchived] = False
+    End If
+    
+    If IsEmpty(Me.IsArchived) Then
+        Me.IsArchived = False
+    End If
+
+End Sub
+
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+Dim msg As String
+
+    On Error GoTo PROC_ERR
+    
+    If Nz(Me![StationTypeID], 0) = 0 Then
+        Me![StationTypeID] = 1
+    End If
+    
+    If IsEmpty(Me.IsArchived) Then
+        Me.IsArchived = False
+    End If
+    
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        msg = ModuleName & " Form_BeforeUpdate" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+End Sub
+
+Private Sub Form_Load()
+    CompanyCodeStr = mdlCompany.GetCompanyCode()
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+End Sub
+

@@ -1,0 +1,288 @@
+﻿Option Compare Database
+Option Explicit
+
+Const ModuleName As String = "_Customer"
+
+Private CompanyCodeStr As String
+
+
+
+Private Sub cmdAddContact_Click()
+    Dim success As Boolean
+    ' add a new customer contact - select from HR
+    success = mdlCustContact.ExeCustAddContact(Me.CustomerID)
+    ' return 0 = user abort, 1 = add existing HR, 2 = add new customer
+    If (success) Then
+        ' refresh
+        Me!CustHRContactNum.Requery
+    End If
+End Sub
+
+Private Sub cmdDisableSite_Click()
+Dim results As Boolean
+Dim v As Variant
+    ' DISABLE the current selected site
+    v = Nz(Me!SF_Cust_Site.Form![CustSiteID], 0)
+    If v > 0 Then
+        results = mdlSite.DisableSite(CLng(v))
+        If results = True Then
+            Me!SF_Cust_Site.Form.Requery
+        End If
+    Else
+        Beep
+    End If
+End Sub
+
+Private Sub cmdEnableSite_Click()
+Dim results As Boolean
+Dim v As Variant
+    ' enable the current selected site
+    v = Nz(Me!SF_Cust_Site.Form![CustSiteID], 0)
+    If v > 0 Then
+        results = mdlSite.EnableSite(CLng(v))
+        If results = True Then
+            Me!SF_Cust_Site.Form.Requery
+        End If
+    End If
+End Sub
+
+Private Sub cmdNavigateFirst_Click()
+    mdlNavigationCode.cmdNav_First
+End Sub
+
+Private Sub cmdNavigateLast_Click()
+    mdlNavigationCode.cmdNav_Last
+End Sub
+
+Private Sub cmdNavigateNext_Click()
+    mdlNavigationCode.cmdNav_Next
+End Sub
+
+Private Sub cmdNavigatePrev_Click()
+    If Me.NewRecord Then
+        mdlNavigationCode.cmdNav_Last
+    Else
+        mdlNavigationCode.cmdNav_Prev
+    End If
+End Sub
+
+Private Sub cmdNavigateToggleFilter_Click()
+    ' a valid PKID is needed
+    If Me.NewRecord Then
+        If Me.Dirty Then
+            Me.Dirty = False
+        End If
+    End If
+    mdlNavigationCode.cmdNav_ToggleFilter
+End Sub
+
+Private Sub cmdNavigateSearch_Click()
+    mdlNavigationCode.cmdNav_SwitchToCustFindForm
+End Sub
+
+Private Sub cmdNewCustomer_Click()
+    mdlNavigationCode.cmdNav_NewCust
+End Sub
+
+Private Sub cmdRemoveContact_Click()
+    Dim aCustContactID As Variant
+    Dim success As Boolean
+    Dim mr As Integer
+    Dim FName As String
+    ' attempt to get the current selected record's HRID
+    ' held in the subform
+    aCustContactID = Me.Form!CustHRContactNum.Form!CustContactID
+    If Nz(aCustContactID, 0) > 0 Then
+        FName = Me.Form!CustHRContactNum.Form!FName
+        mr = MsgBox("Remove " & FName & " from the customers contact list?" & _
+        vbCrLf & "IMPORTANT: Best practise is to archive this contact, so as to keep historical data!" & _
+        vbCrLf & "There is no undo for this process.", _
+        vbYesNo Or vbQuestion Or vbDefaultButton2, CompanyCodeStr & "- Remove Customer Contact.")
+        If mr = vbYes Then
+            success = mdlCustContact.RemoveCustContact(aCustContactID)
+            If success = True Then
+                Me.Form!CustHRContactNum.Form.Requery
+            End If
+        End If
+    End If
+End Sub
+
+Private Sub cmdSiteLinkBtn_Click()
+    Dim aSiteID As Long
+    Dim results  As Boolean
+    Dim linkCount As Long
+    Dim aCustName As String
+
+    If mdlKeyBoardState.IsControlKeyDown Then
+        If Nz(Me!SF_Cust_Site.Form!CustSiteID, 0) > 0 Then
+            ' open the delete link dialogue.
+            results = mdlCust.CustSite_Delete(Me!SF_Cust_Site.Form!CustSiteID)
+            If results = True Then
+                Me!SF_Cust_Site.Form.Requery
+            End If
+        End If
+    Else
+        If Nz(Me.CustomerID, 0) > 0 Then
+            aSiteID = mdlPicker.PickSite()
+            If (aSiteID > 0) Then
+                If mdlSite.IsCustLinkedToSite(Me.CustomerID, aSiteID) = True Then
+                    MsgBox "The site is already linked to this customer", _
+                           vbOKOnly Or vbExclamation Or vbDefaultButton1, _
+                           CompanyCodeStr & " - Link to site error."
+                Else
+                    results = mdlSite.ConfirmLinkCustToSite(Me.CustomerID, aSiteID)
+                    If results = True Then
+                        ' create a new dbo_CustSite record
+                        mdlSite.LinkSite aSiteID, Me.CustomerID
+                        ' refresh the table view
+                        Me.SF_Cust_Site.Form.Requery
+                        'Me.SF_Cust_Site.Form.Refresh
+                    End If
+                End If
+            End If
+        End If
+    End If
+End Sub
+
+
+
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+Dim msg As String
+' SPECIAL NOTE: I was unable to perform this case change in CustCode_BeforeUpdate
+    On Error GoTo PROC_ERR
+
+    If Not IsNull(Me![CustCode]) Then
+        If Len(Me![CustCode]) > 0 Then
+            Me![CustCode] = UCase(CStr(Me![CustCode]))
+        End If
+    End If
+    
+    If IsEmpty(Me![IsArchived]) Then
+        Me![IsArchived] = False
+    End If
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        msg = ModuleName & " Form_BeforeUpdate" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    
+    Resume PROC_EXIT
+End Sub
+
+
+Private Sub GotoContact_Click()
+    Dim aHRID As Variant
+    ' attempt to get the current selected record's HRID
+    ' held in the subform
+    aHRID = Me.Form!CustHRContactNum.Form!HRID
+    If Nz(aHRID, 0) > 0 Then
+        mdlHR.GotoHR CLng(aHRID)
+    End If
+End Sub
+
+
+
+Private Sub ValidateCustCode(aCustomerID As Long, aCustCode As String)
+    Dim strCriteria As String, str As String, str2 As String
+    Dim rst As DAO.Recordset
+    Dim intResponse As Integer
+
+    ' trim customer code to a max of 6 characters and make upper case
+    If Len(Nz(Me.CustCode, 0)) > 0 Then
+        str = UCase(Left(Me.CustCode, 6))
+        'test if customer code is already in use
+        Set rst = Me.RecordsetClone
+        strCriteria = "[CustCode] = '" & Me.CustCode & "' AND [CustomerID] <> " & CStr(aCustomerID)
+        str2 = "CustomerID " & CStr(Format(aCustomerID, "0000"))
+        rst.FindFirst strCriteria
+        ' false ... found duplicate customer code ...
+        If Not rst.NoMatch Then
+            intResponse = MsgBox("WARNING (" & str2 & ") :" & vbCrLf & _
+                                 "The CustCode is already used by another customer. ", _
+                                 vbOKOnly Or vbInformation Or vbDefaultButton1, _
+                                 CompanyCodeStr & " - Duplicate Customer Code")
+        End If
+        Set rst = Nothing
+
+    End If
+
+End Sub
+'
+'Private Sub ValidateMYOBID(aCustomerID As Long, aMYOB As Long)
+'    Dim strCriteria As String, str2 As String
+'    Dim rst As DAO.Recordset
+'    Dim intResponse As Integer
+'
+'    ' trim customer code to a max of 6 characters and make upper case
+'    If Len(Nz(Me.CustCode, 0)) > 0 Then
+'        'test if customer code is already in use
+'        Set rst = Me.RecordsetClone
+'        strCriteria = "[MYOBID] = " & CStr(aMYOB) & " AND [CustomerID] <> " & CStr(aCustomerID)
+'        str2 = "CustomerID " & CStr(Format(aCustomerID, "0000"))
+'        rst.FindFirst strCriteria
+'        ' false ... found duplicate customer code ...
+'        If Not rst.NoMatch Then
+'            intResponse = MsgBox("WARNING (" & str2 & ") :" & vbCrLf & _
+'                                 "MYOB record ID's are unique identifiers." & vbCrLf & _
+'                                 "A duplicate ID was found, used by another customer." & vbCrLf & _
+'                                 "You should re-check the data entered.", _
+'                                 vbOKOnly Or vbInformation Or vbDefaultButton1, _
+'                                 CompanyCodeStr & " - Duplicate MYOB Record ID")
+'        End If
+'        Set rst = Nothing
+'
+'    End If
+'
+'End Sub
+
+Private Sub CustTabCtl_Change()
+    Select Case Me.CustTabCtl
+    Case 0                                       ' Entry tabsheet to customer form
+        
+    Case 1                                       ' Business Address
+'        If Me.Dirty Then
+'            Me.Dirty = False
+'        End If
+    Case 2                                       ' Cust_Site
+    
+    Case 3                                       ' Cust_Station (Equipment)
+        '
+        'ToggleStationState
+    Case 4                                       'Cust_StationLight
+        'ToggleStationState
+    Case 5                                       ' Contact List
+    Case 6                                       ' Work Order History
+    End Select
+
+End Sub
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the creation date for this customer
+'    If Nz(Me![CreatedOn], 0) = 0 Then
+'        Me![CreatedOn] = Now()
+'    End If
+
+    If IsNull(Me![CreatedOn]) Then
+        Me![CreatedOn] = Now()
+    End If
+
+    Me![IsArchived] = False
+    
+End Sub
+
+Private Sub Form_Load()
+    CompanyCodeStr = mdlCompany.GetCompanyCode()
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+    
+     ' assign the default filter
+     Me.Filter = "[IsArchived] <> True"
+        
+End Sub
+
