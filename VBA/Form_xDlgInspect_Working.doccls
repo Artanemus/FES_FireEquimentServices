@@ -1,28 +1,17 @@
 ﻿Option Compare Database
 Option Explicit
-Const ModuleName As String = "SF_Global_Rules"
 
-
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-    If IsNull(Me.EnableRules) = True Then
-        Me.EnableRules = False
-    End If
-End Sub
+Const ModuleName As String = "xDlgInspect_Working"
+Private CompanyCodeStr As String
 
 Private Sub Form_Load()
-Dim v As Variant
 Dim msg As String
-
-    On Error GoTo PROC_ERR
-
-'    v = DLookup("[CompanyCode]", "dbo_CompanyInfo", "[CompanyInfoID] = 1")
-'    If Not IsNull(v) Then
-'        Me.lblCompanyCode.Caption = CStr(v)
-'    Else
-'        Me.lblCompanyCode.Caption = "FES"
-'    End If
     
+    On Error GoTo PROC_ERR
+    
+    CompanyCodeStr = mdlCompany.GetCompanyCode
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+        
 PROC_EXIT:
     On Error Resume Next
     Exit Sub
@@ -36,5 +25,5 @@ PROC_ERR:
     End If
     Resume PROC_EXIT
     
-    
 End Sub
+

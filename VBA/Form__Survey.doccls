@@ -3,7 +3,7 @@ Option Explicit
 Private CompanyCodeStr As String
 
 Private Sub cmdCompletedOn_Click()
-Dim v
+Dim v As Variant
 Dim aDate As Variant
     aDate = Me.CompletedDT
     If Nz(aDate, 0) = 0 Then
@@ -56,7 +56,7 @@ Private Sub cmdNewBtn_Click()
 End Sub
 
 Private Sub cmdRequestedOn_Click()
-Dim v
+Dim v As Variant
 Dim aDate As Variant
     aDate = Me.RequestedDT
     If Nz(aDate, 0) = 0 Then
@@ -69,7 +69,7 @@ Dim aDate As Variant
 End Sub
 
 Private Sub cmdSurveyedOn_Click()
-Dim v
+Dim v As Variant
 Dim aDate As Variant
     aDate = Me.SurveyedOn
     If Nz(aDate, 0) = 0 Then

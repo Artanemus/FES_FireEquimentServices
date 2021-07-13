@@ -20,10 +20,10 @@ On Error GoTo Err_fNumberOfOpenArgs
 Exit_fNumberOfOpenArgs:
     Exit Function
 Err_fNumberOfOpenArgs:
-    If err.Number = 94 Then       'No OpenArgs
+    If Err.Number = 94 Then       'No OpenArgs
         fNumberOfOpenArgs = Null
     Else
-        MsgBox err.Description, vbExclamation, "Error in fNumberOfOpenArgs()"
+        MsgBox Err.Description, vbExclamation, "Error in fNumberOfOpenArgs()"
         Resume Exit_fNumberOfOpenArgs
     End If
     Resume Exit_fNumberOfOpenArgs

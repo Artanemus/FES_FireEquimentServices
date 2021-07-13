@@ -33,14 +33,13 @@ Public Sub CountRecords()
         Me.txtFilterStatus.Caption = Me.Filter
     Else
         Me.txtRecordCount.Caption = "Found : 0"
-        Me.txtFilterStatus.Caption = ""
+        Me.txtFilterStatus.Caption = vbNullString
     End If
     Set rs = Nothing
 
 End Sub
 
 Private Sub Form_Load()
-Me.Filter = ""
+Me.Filter = vbNullString
 If Me.FilterOn Then Me.FilterOn = False
 End Sub
-
