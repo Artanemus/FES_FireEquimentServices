@@ -6,11 +6,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-SET IDENTITY_INSERT [IDFES].[dbo].[qfesGroup] ON 
+SET IDENTITY_INSERT [IDFES].[dbo].[CoreGroup] ON 
 ---Portable, Electrical, WaterBase, Structure
-INSERT INTO [IDFES].[dbo].[qfesGroup]
+INSERT INTO [IDFES].[dbo].[CoreGroup]
     (
-    [qfesGroupID]
+    [CoreGroupID]
     , [Caption]
     )
 VALUES
@@ -20,4 +20,4 @@ VALUES
     ,    ( 4, N'Structure'  )
 GO
 
-SET IDENTITY_INSERT [IDFES].[dbo].[qfesGroup] OFF
+SET IDENTITY_INSERT [IDFES].[dbo].[CoreGroup] OFF

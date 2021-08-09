@@ -27,35 +27,40 @@ Public Function GetCompanyInfoID() As String
 End Function
 
 
-Public Function GetServiceInterval() As Double
+Public Function GetGlobalDefServiceInterval() As Variant
 ' UNIT is given in months
     Dim v As Variant
-    GetServiceInterval = 6#
-    v = DLookup("[InspectOrderInterval]", "dbo_Global", "[GlobalID] = 1")
+    GetGlobalDefServiceInterval = Null
+    v = DLookup("[DefServiceInterval]", "dbo_Global", "[GlobalID] = 1")
     If Not IsNull(v) Then
-        GetServiceInterval = CDbl(v)
+        GetGlobalDefServiceInterval = CDbl(v)
     End If
 End Function
 
 
-Public Function GetNumOfLevels() As Double
+Public Function GetGlobalDefNumOfLevels() As Variant
 ' UNIT is given in months
     Dim v As Variant
-    GetNumOfLevels = 2
-    v = DLookup("[NumOfLevels]", "dbo_Global", "[GlobalID] = 1")
+    GetGlobalDefNumOfLevels = Null
+    v = DLookup("[DefNumOfLevels]", "dbo_Global", "[GlobalID] = 1")
     If Not IsNull(v) Then
-        GetNumOfLevels = Int(v)
+        If Not IsEmpty(v) Then
+            ' no more than 12 - one for each month in the year ...
+            If v >= 1 And v <= 12 Then
+                GetGlobalDefNumOfLevels = Int(v)
+            End If
+        End If
     End If
 End Function
 
 
-Public Function GetDefStartLevel() As Double
+Public Function GetGlobalDefStartLevel() As Variant
 ' UNIT is given in months
     Dim v As Variant
-    GetDefStartLevel = 1
+    GetGlobalDefStartLevel = Null
     v = DLookup("[DefStartLevel]", "dbo_Global", "[GlobalID] = 1")
     If Not IsNull(v) Then
-        GetDefStartLevel = Int(v)
+        GetGlobalDefStartLevel = Int(v)
     End If
 End Function
 

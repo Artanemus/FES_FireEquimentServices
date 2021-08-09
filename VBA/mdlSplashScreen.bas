@@ -120,11 +120,11 @@ Exit_Handler:
     Exit Function
 
 Err_Handler:
-    Call LogError(Err.Number, Err.Description, conMod & ".InitSplash")
+    Call LogError(err.Number, err.Description, conMod & ".InitSplash")
     Resume Exit_Handler
 End Function
 
-Public Function GetAccessVersion(Optional db As DAO.Database) As String
+Public Function GetAccessVersion(Optional dbs As DAO.Database) As String
 On Error Resume Next
     'Purpose:   Return full version information for the msaccess.exe file.
     'Argument:  The database to examine. Current database if nothing passed in.
@@ -135,7 +135,7 @@ On Error Resume Next
     GetAccessVersion = fGetProductVersion(SysCmd(acSysCmdAccessDir) & "msaccess.exe")
 End Function
 
-Public Function GetFileFormat(Optional db As DAO.Database) As String
+Public Function GetFileFormat(Optional dbs As DAO.Database) As String
 On Error GoTo Err_Handler
     'Purpose:   Return the file format of the database.
     'Argument:  The database to examine. Current database if nothing passed in.
@@ -149,14 +149,14 @@ On Error GoTo Err_Handler
     Dim strReturn As String
     
     'If no database variable was passed in, use the current database and flag to clear it.
-    If db Is Nothing Then
+    If dbs Is Nothing Then
         bResetDb = True
-        Set db = DBEngine(0)(0)
+        Set dbs = DBEngine(0)(0)
     End If
     
     'Examine the Data Format version. The final character will be determined later.
     '   (We don't use CurrentProject.FileFormat - it's not in Access 2000.)
-    Select Case Int(Val(db.Version))
+    Select Case Int(Val(dbs.Version))
     'Access 97 file format is 3.0
     Case 3
         strReturn = "97 MD"
@@ -164,7 +164,7 @@ On Error GoTo Err_Handler
     'Access 2000 or 2002/3 file format is 4.0
     Case 4
         'Examine the Project Storage version to distinguish 2000 from 2002/3.
-        Select Case db.Properties("AccessVersion")
+        Select Case dbs.Properties("AccessVersion")
         Case "08.50"        '2000 format.
             strReturn = "2000"
         Case "09.50"        '2002/3 fomat.
@@ -188,7 +188,7 @@ On Error GoTo Err_Handler
     End Select
     
     'Now determine if the final character is B (as in MDB), or E (as in MDE.)
-    bIsCompiledOnly = (db.Properties("MDE") = "T")
+    bIsCompiledOnly = (dbs.Properties("MDE") = "T")
     If bIsCompiledOnly Then
         strReturn = strReturn & "E"
     Else
@@ -204,21 +204,21 @@ Exit_Handler:
     'Dereference the database variable unless it was passed in.
     On Error Resume Next
     If bResetDb Then
-        Set db = Nothing
+        Set dbs = Nothing
     End If
     Exit Function
 
 Err_Handler:
-    Select Case Err.Number
+    Select Case err.Number
     Case 2482&, 3270&      'Object wasn't found (the Eval()). Property doesn't exist.
         Resume Next
     Case Else
-        Call LogError(Err.Number, Err.Description, conMod & ".GetFileFormat")
+        Call LogError(err.Number, err.Description, conMod & ".GetFileFormat")
         Resume Exit_Handler
     End Select
 End Function
 
-Public Function GetJetVersion(Optional db As DAO.Database) As String
+Public Function GetJetVersion(Optional dbs As DAO.Database) As String
 On Error GoTo Err_Handler
     'Purpose:   Return the full JET or ACE version number.
     'Argument:  The database to examine. Current database if nothing passed in.
@@ -227,12 +227,12 @@ On Error GoTo Err_Handler
     Dim bResetDb As Boolean
     Dim strJetFile As String
     
-    If db Is Nothing Then
+    If dbs Is Nothing Then
         bResetDb = True
-        Set db = DBEngine(0)(0)
+        Set dbs = DBEngine(0)(0)
     End If
 
-    Select Case Int(Val(db.Version))
+    Select Case Int(Val(dbs.Version))
     Case 3      'Access 97 file format is 3.0
         strJetFile = fReturnSysDir() & "\msjet35.dll"
     Case 4      'Access 2000 and 2002/3 file format are 4.0
@@ -246,7 +246,7 @@ On Error GoTo Err_Handler
     End Select
     
     If bResetDb Then
-        Set db = Nothing
+        Set dbs = Nothing
     End If
     
     If strJetFile <> vbNullString Then
@@ -257,7 +257,7 @@ Exit_Handler:
     Exit Function
 
 Err_Handler:
-    Call LogError(Err.Number, Err.Description, conMod & ".GetJetVersion")
+    Call LogError(err.Number, err.Description, conMod & ".GetJetVersion")
     Resume Exit_Handler
 End Function
 
@@ -285,7 +285,7 @@ Exit_Handler:
     Exit Function
 
 Err_Handler:
-    Call LogError(Err.Number, Err.Description, conMod & ".GetDataPath", strTable, False)
+    Call LogError(err.Number, err.Description, conMod & ".GetDataPath", strTable, False)
     GetDataPath = "#Error"
     Resume Exit_Handler
 End Function
@@ -316,7 +316,7 @@ Exit_Handler:
     Exit Function
 
 Err_Handler:
-    Call LogError(Err.Number, Err.Description, conMod & ".fOSUserName")
+    Call LogError(err.Number, err.Description, conMod & ".fOSUserName")
     Resume Exit_Handler
 End Function
 
@@ -341,7 +341,7 @@ Exit_Handler:
     Exit Function
 
 Err_Handler:
-    Call LogError(Err.Number, Err.Description, conMod & ".GetMachineName")
+    Call LogError(err.Number, err.Description, conMod & ".GetMachineName")
     Resume Exit_Handler
 End Function
 
@@ -356,7 +356,7 @@ On Error Resume Next
     '           2. Any design changes to the form/report are also lost.
     'Note:      No error is raised if the form/report was not open, or did not close.
     DoCmd.Close IIf(bIsReport, acReport, acForm), strDoc, acSaveNo
-    ForceClosed = (Err.Number = 0&)
+    ForceClosed = (err.Number = 0&)
 End Function
 
 '*******************************************************************
@@ -499,7 +499,7 @@ Err_LogError:
         "Please write down the following details:" & vbCrLf & vbCrLf & _
         "Calling Proc: " & strCallingProc & vbCrLf & _
         "Error Number " & lngErrNumber & vbCrLf & strErrDescription & vbCrLf & vbCrLf & _
-        "Unable to record because Error " & Err.Number & vbCrLf & Err.Description
+        "Unable to record because Error " & err.Number & vbCrLf & err.Description
     MsgBox strMsg, vbCritical, "LogError()"
     Resume Exit_LogError
 End Function

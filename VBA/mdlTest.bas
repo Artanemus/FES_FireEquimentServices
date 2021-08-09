@@ -2,25 +2,25 @@ Attribute VB_Name = "mdlTest"
 Option Compare Database
 Option Explicit
 
-Private mReturnValue As Variant
+Private vReturnValue As Variant
 
 Const ModuleName As String = "mdlTest"
 
 
 Public Property Get ReturnValue() As Variant
-    If IsObject(mReturnValue) Then
-        Set ReturnValue = mReturnValue
+    If IsObject(vReturnValue) Then
+        Set ReturnValue = vReturnValue
     Else
-        ReturnValue = mReturnValue
+        ReturnValue = vReturnValue
     End If
 End Property
 
 Public Property Let ReturnValue(ByVal RHS As Variant)
-    mReturnValue = RHS
+    vReturnValue = RHS
 End Property
 
 Public Property Set ReturnValue(ByVal RHS As Variant)
-    Set mReturnValue = RHS
+    Set vReturnValue = RHS
 End Property
 
 Public Sub ReBuildTestEquip(ByVal aInspectionOrderID As Long)
@@ -35,10 +35,10 @@ End Sub
 
 Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID As Integer)
     Dim s As String
-    Dim strSQL As String
-    Dim rs As DAO.Recordset
+    Dim SQL As String
+    Dim rst As DAO.Recordset
     Dim rs2 As DAO.Recordset
-    Dim db As DAO.Database
+    Dim dbs As DAO.Database
     Dim msg As String
     Dim intResponse As Integer
     Dim cCode As String
@@ -47,7 +47,7 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
 
     On Error GoTo PROC_ERR
     
-    mReturnValue = 0
+    vReturnValue = 0
     
     If aStationTypeID = 1 Then
         aStationTypeStr = "EQUIPMENT"
@@ -61,14 +61,14 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
     
     If aInspectionOrderID > 0 Then
         ' checklist contains test records
-        Set db = CurrentDb
-        strSQL = _
+        Set dbs = CurrentDb
+        SQL = _
                "SELECT dbo_Test.TestID " & _
                "FROM dbo_Test INNER JOIN dbo_Station ON dbo_Test.StationID = dbo_Station.StationID " & _
                "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.StationTypeID)=" & CStr(aStationTypeID) & "));"
         
-        Set rs = db.OpenRecordset(strSQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
-        If rs.RecordCount > 0 Then
+        Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+        If rst.RecordCount > 0 Then
         
             ' MESSAGE ...
             cCode = mdlCompany.GetCompanyCode
@@ -80,14 +80,14 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
             
                 'clear out the current test records for the given inspection order ...
                 ' ---------------------------------------------------------------------
-                strSQL = _
+                SQL = _
                        "DELETE dbo_Test.* " & _
                        "FROM dbo_Test INNER JOIN dbo_Station ON dbo_Test.StationID = dbo_Station.StationID " & _
                        "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.StationTypeID)=" & CStr(aStationTypeID) & "));"
             
-                db.Execute strSQL, dbFailOnError + dbSeeChanges
+                dbs.Execute SQL, dbFailOnError + dbSeeChanges
                 
-                mReturnValue = 1
+                vReturnValue = 1
         
             Else
                 ' --------------------------
@@ -101,8 +101,8 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
         
         End If
         
-        rs.Close
-        Set rs = Nothing
+        rst.Close
+        Set rst = Nothing
         
         
         ' iterate over the stations (filtered by StationTypeID) ...
@@ -112,7 +112,7 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
         
         If Nz(aSiteID, 0) > 0 Then
         
-            strSQL = _
+            SQL = _
                    "SELECT dbo_Station.StationID, dbo_Station.StationNum, dbo_Station.IsEmpty, dbo_Station.StationTypeID, dbo_Station.Location " & _
                    "FROM dbo_Station " & _
                    "WHERE ( " & _
@@ -122,14 +122,14 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
 
             ' Stations to iterate (ordered by station number
             ' -----------------------------------------------
-            Set rs2 = db.OpenRecordset(strSQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+            Set rs2 = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
             If rs2.RecordCount > 0 Then
     
-                strSQL = "SELECT * FROM dbo_TEST"
-                Set rs = db.OpenRecordset(strSQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
-                If Not IsNull(rs) Then
+                SQL = "SELECT * FROM dbo_TEST"
+                Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+                If Not IsNull(rst) Then
                     Do Until rs2.EOF
-                        With rs
+                        With rst
                             .AddNew
                     
                             ![StationID] = rs2![StationID]
@@ -178,18 +178,18 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
     
 PROC_EXIT:
     'Cleanup
-    Set rs = Nothing
+    Set rst = Nothing
     Set rs2 = Nothing
-    Set db = Nothing
+    Set dbs = Nothing
     On Error Resume Next
     Exit Sub
 
 PROC_ERR:
     ' display the system error
-    If Err.Number <> 0 Then
+    If err.Number <> 0 Then
         msg = ModuleName & " ReBuildTestGeneric" & vbCrLf & _
-              "Error # " & CStr(Err.Number) & " was generated by " & Err.Source & vbCrLf & Err.Description
-        MsgBox msg, , "Error", Err.HelpFile, Err.HelpContext
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
     End If
     Resume PROC_EXIT
 End Sub

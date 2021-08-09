@@ -9,6 +9,30 @@ Private Sub cmdBuildCustomOrder_Click()
     Beep
 End Sub
 
+Private Sub cmdDeleteCust_Click()
+    mdlDelete.DeleteCustomer
+End Sub
+
+Private Sub cmdDeleteEquipment_Click()
+    mdlDelete.DeleteEquipment
+End Sub
+
+Private Sub cmdDeleteHR_Click()
+    mdlDelete.DeleteHR
+End Sub
+
+Private Sub cmdDeleteInspectOrder_Click()
+    mdlDelete.DeleteInspectionOrder
+End Sub
+
+Private Sub cmdDeleteSite_Click()
+    mdlDelete.DeleteSite
+End Sub
+
+Private Sub cmdDeleteSurveyOrder_Click()
+    mdlDelete.DeleteSurveyOrder
+End Sub
+
 Private Sub cmdEditGlobal_Click()
     mdlNavigationCode.cmdNav_SwitchToGlobalForm
 End Sub
@@ -116,9 +140,8 @@ Private Sub cmdSB_NewSiteSurvey_Click()
 End Sub
 
 Private Sub cmdUPDATEInspectionOrders_Click()
-    ' update the inspection orders
-    mdlInspection.UpdateInspectionOrders
-    
+    ' update inspection orders
+    mdlUpdate.Update_Main
 End Sub
 
 Private Sub cmdViewSystemLog_Click()
@@ -132,6 +155,7 @@ End Sub
 Private Sub cmdKeyBoardShortCuts_Click()
     mdlNavigationCode.cmdNav_SwitchToKeyBoardShortCuts
 End Sub
+
 
 Private Sub Form_Load()
     Dim v As Variant

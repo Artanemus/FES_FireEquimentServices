@@ -3,7 +3,7 @@ Option Compare Database
 Option Explicit
 
 Private mRunning As Boolean
-Private mReturnValue As Variant
+Private vReturnValue As Variant
 Private mDoCreateNewContact As Variant
 
 Public Property Get Running() As Boolean
@@ -11,7 +11,7 @@ Public Property Get Running() As Boolean
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    mReturnValue = X
+    vReturnValue = X
 End Property
 
 Public Property Let DoCreateNewContact(X As Variant)
@@ -24,16 +24,16 @@ End Property
 
 Public Function PickCustCode() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     DoCmd.OpenForm "xDlgPicker_CustCode", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_CustCode"
     mRunning = False
-    PickCustCode = Nz(mReturnValue, 0)
+    PickCustCode = Nz(vReturnValue, 0)
 End Function
 
 Public Function PickEquip(Optional aEquipGroupID As Long = 0) As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     If aEquipGroupID > 0 Then
         DoCmd.OpenForm "xDlgPicker_Equip", , , , , acDialog, CStr(aEquipGroupID)
     Else
@@ -41,13 +41,13 @@ Public Function PickEquip(Optional aEquipGroupID As Long = 0) As Long
     End If
     DoCmd.Close acForm, "xDlgPicker_Equip"
     mRunning = False
-    PickEquip = Nz(mReturnValue, 0)
+    PickEquip = Nz(vReturnValue, 0)
 End Function
 
 
 Public Function PickPostcode(Optional aPostCodeNumber As Long = 0) As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     If aPostCodeNumber > 0 Then
         DoCmd.OpenForm "xDlgPicker_Postcode", , , , , acDialog, CStr(aPostCodeNumber)
     Else
@@ -55,55 +55,57 @@ Public Function PickPostcode(Optional aPostCodeNumber As Long = 0) As Long
     End If
     DoCmd.Close acForm, "xDlgPicker_Postcode"
     mRunning = False
-    PickPostcode = Nz(mReturnValue, 0)
+    PickPostcode = Nz(vReturnValue, 0)
 End Function
 
 Public Function PickSuburb() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     DoCmd.OpenForm "xDlgPicker_Suburb", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_Suburb"
     mRunning = False
-    PickSuburb = Nz(mReturnValue, 0)
+    PickSuburb = Nz(vReturnValue, 0)
 End Function
 
 Public Function PickSite() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     DoCmd.OpenForm "xDlgPicker_Site", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_Site"
     mRunning = False
-    PickSite = Nz(mReturnValue, 0)
+    PickSite = Nz(vReturnValue, 0)
 End Function
 
 Public Function PickCustomer() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     DoCmd.OpenForm "xDlgPicker_Customer", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_Customer"
     mRunning = False
-    PickCustomer = Nz(mReturnValue, 0)
+    PickCustomer = Nz(vReturnValue, 0)
 End Function
 
 Public Function PickHR() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     DoCmd.OpenForm "xDlgPicker_HR", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_HR"
     mRunning = False
     
-    PickHR = Nz(mReturnValue, 0)
+    PickHR = Nz(vReturnValue, 0)
 End Function
 
 
 Public Function PickHR_CustContact() As Long
     mRunning = True
-    mReturnValue = Null
+    vReturnValue = Null
     mDoCreateNewContact = Null
     DoCmd.OpenForm "xDlgPicker_HR_CustContact", , , , , acDialog
     DoCmd.Close acForm, "xDlgPicker_HR_CustContact"
+    ' ..Unload..Deactivate..Close
+    DoEvents
     mRunning = False
-    PickHR_CustContact = Nz(mReturnValue, 0)
+    PickHR_CustContact = Nz(vReturnValue, 0)
 End Function
 
 

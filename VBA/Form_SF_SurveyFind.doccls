@@ -29,17 +29,17 @@ Private Sub Form_DblClick(Cancel As Integer)
 End Sub
 
 Public Sub CountRecords()
-    Dim rs As DAO.Recordset
-    Set rs = Me.RecordsetClone
-    If rs.RecordCount > 0 Then rs.MoveLast
-    If Not rs.EOF Then
-        Me.txtRecordCount.Caption = "Found : " & CStr(rs.RecordCount)
+    Dim rst As DAO.Recordset
+    Set rst = Me.RecordsetClone
+    If rst.RecordCount > 0 Then rst.MoveLast
+    If Not rst.EOF Then
+        Me.txtRecordCount.Caption = "Found : " & CStr(rst.RecordCount)
         Me.txtFilterStatus.Caption = Me.Filter
     Else
         Me.txtRecordCount.Caption = "Found : 0"
         Me.txtFilterStatus.Caption = vbNullString
     End If
-    Set rs = Nothing
+    Set rst = Nothing
 
 End Sub
 
