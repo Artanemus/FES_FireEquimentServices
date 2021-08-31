@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlSite"
 Option Compare Database
 Option Explicit
 
-Private vReturnValue As Variant
+Private vReturnvalue As Variant
 Private mOpenArgs As String
 Private mDoReseed As Boolean
 Private mSeedDate As Date
@@ -21,11 +21,11 @@ handler:
 End Property
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnValue
+    ReturnValue = vReturnvalue
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnValue = X
+    vReturnvalue = X
 End Property
 
 
@@ -69,6 +69,11 @@ Public Property Let InspectOrderID_Active(X As Long)
     mInspectOrderID_Active = X
 End Property
 
+
+Public Sub ViewSiteDuplicity()
+    DoCmd.OpenForm "xDlgSite_Duplicity", , , , , acDialog
+    DoCmd.Close acForm, "xDlgSite_Duplicity"
+End Sub
 
 Public Function GetSitexAddress(ByVal aSiteID As Long) As String
 Dim v As Variant
@@ -194,7 +199,7 @@ Public Function DisableSite(ByVal aCustSiteID As Long) As Boolean
     CancelledOrderStr = vbNullString
     doDisplayCancelledOrders = False
     
-    SQL = "Select [IsEnabled] from dbo_CustSite where [CustSiteID] = " & CStr(aCustSiteID)
+    SQL = "Select [CustSiteID], [IsEnabled], [DoReseed] from dbo_CustSite where [CustSiteID] = " & CStr(aCustSiteID)
     Set dbs = CurrentDb
     Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If Not IsNull(rst) Then
@@ -204,15 +209,16 @@ Public Function DisableSite(ByVal aCustSiteID As Long) As Boolean
             Exit Function
         Else
             vOpenArgs = CStr(aCustSiteID)
-            DoCmd.OpenForm "xDlgSite_Disable", , , , , acDialog, vOpenArgs
-            DoCmd.Close acForm, "xDlgSite_Disable"
+            DoCmd.OpenForm "xDlgLink_Disable", , , , , acDialog, vOpenArgs
+            DoCmd.Close acForm, "xDlgLink_Disable"
         
-            If vReturnValue = 1 Or vReturnValue = 2 Then
+            If vReturnvalue = 1 Or vReturnvalue = 2 Then
                 rst.Edit
-                rst![IsEnabled] = False
+                rst.Fields("IsEnabled") = False
+                rst.Fields("DoReseed") = False
                 rst.Update
                 DisableSite = True
-                If vReturnValue = 2 Then
+                If vReturnvalue = 2 Then
                     ' cancell all outstanding inspection orders
                     rst.Close
                     Set rst = Nothing
@@ -267,183 +273,6 @@ PROC_ERR:
     Resume PROC_EXIT
     
 End Function
-
-Public Function EnableSite(ByVal aCustSiteID As Long) As Boolean
-    Dim v As Variant
-    Dim SQL As String
-    Dim rst As DAO.Recordset
-    Dim dbs As DAO.Database
-    Dim msg As String
-    Dim Results As Integer
-    Dim aSiteID As Long
-    Dim aCustomerID As Long
-    Dim vOpenArgs As String
-    Dim cCode As String
-    Dim Success As Boolean
-    
-
-    On Error GoTo PROC_ERR
-       
-    EnableSite = False
-    
-    Set dbs = CurrentDb
-    
-    If aCustSiteID = 0 Then
-        Beep
-        Exit Function
-    End If
-    
-    ' CHECK is the customer site isn't already enabled?
-    ' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    v = DLookup("[IsEnabled]", "dbo_CustSite", "[CustSiteID] = " & CStr(aCustSiteID))
-    ' value can be NULL or 0 if disabled else TRUE (-1)
-    If Nz(v, 0) <> 0 Then
-        Beep
-        Exit Function
-    End If
-    
-    ' CHECK has another customer got this site enabled?
-    ' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    v = DLookup("[SiteID]", "dbo_CustSite", "[CustSiteID] = " & CStr(aCustSiteID))
-    If Nz(v, 0) > 0 Then
-        aSiteID = CLng(v)
-        SQL = _
-               "SELECT dbo_CustSite.CustSiteID, dbo_CustSite.SiteID, dbo_CustSite.CustomerID, dbo_CustSite.IsEnabled, dbo_Customer.CustName " & _
-               "FROM dbo_CustSite INNER JOIN dbo_Customer ON dbo_CustSite.CustomerID = dbo_Customer.CustomerID " & _
-               "WHERE (((dbo_CustSite.CustSiteID)<> " & CStr(aCustSiteID) & ") AND ((dbo_CustSite.SiteID)= " & _
-               CStr(aSiteID) & ") AND ((dbo_CustSite.IsEnabled) = True));"
-
-
-        Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
-        If Not IsNull(rst) Then
-            If rst.RecordCount > 0 Then
-                rst.MoveFirst
-                ' found a customer who is using this site
-                msg = "Unable to enable this site as it's being used by." & vbCrLf & _
-                      "CustomerID: " & CStr(rst!CustomerID) & " " & rst![CustName] & vbCrLf & _
-                      "The action will abort."
-                cCode = mdlCompany.GetCompanyCode
-                Results = MsgBox(msg, _
-                VbMsgBoxStyle.vbOKOnly Or VbMsgBoxStyle.vbExclamation Or VbMsgBoxStyle.vbDefaultButton1, _
-                cCode & " Error - Enable Site")
-                
-                ' EXIT FUNCTION
-                ' ----------------------
-                Exit Function
-                
-            End If
-        End If
-        rst.Close
-        Set rst = Nothing
-    Else
-        Exit Function
-    End If
-    
-    mDoReseed = False
-    mSeedDate = Empty
-    mSeedLevel = 0
-    
-    ' DOES THE CUSTOMER HAVE  A INSPECTION ORDER HISTORY? ARE THEY A NEW CUSTOMER?
-    SQL = _
-        "SELECT InspectionOrderID " & _
-        "FROM dbo_InspectionOrder " & _
-        "WHERE (dbo_InspectionOrder.CustSiteID = " & CStr(aCustSiteID) & " ) "
-        
-    Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
-    mMode = 0
-    If rst.RecordCount > 0 Then
-        ' RUN DIALOGUE - CUSTOMER HAS INSPECTION ORDER HISTORY
-        ' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        ' return fMode 1 or 2
-        ' mode 1 - user input or reference past inspection order
-        ' mode 2 - make active future inspection order via fMakeActive_InspectionOrderID
-        vOpenArgs = CStr(aCustSiteID)
-        DoCmd.OpenForm "xDlgSite_Enable", , , , , acDialog, vOpenArgs
-        DoCmd.Close acForm, "xDlgSite_Enable"
-    
-    Else
-        ' RUN DIALOGUE - NEW CUSTOMER
-        ' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        vOpenArgs = CStr(aCustSiteID)
-        DoCmd.OpenForm "xDlgSite_Enable_NewCust", , , , , acDialog, vOpenArgs
-        DoCmd.Close acForm, "xDlgSite_Enable_NewCust"
-        ' RE-SEED
-        mMode = 1
-    
-    End If
-    rst.Close
-    Set rst = Nothing
-    
-    
-    ' ENABLE CUSTOMER SITE
-    ' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    If vReturnValue = 1 Then
-        SQL = "SELECT [IsEnabled], [DoReseed], [SeedDate], [SeedLevel] FROM dbo_CustSite WHERE [CustSiteID] = " & CStr(aCustSiteID)
-        Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
-        If Not IsNull(rst) Then
-            Select Case mMode
-            Case 1
-                ' RE-SEED INSPECTION ORDER
-                ' NewCustomer and ref.InspectionOrder (predated) enter here
-                rst.Edit
-                rst![IsEnabled] = True
-                rst![DoReseed] = mDoReseed
-                ' only change these params on user request for reseed
-                If mDoReseed = True Then
-                    If Not IsEmpty(mSeedDate) Then
-                        rst![SeedDate] = mSeedDate
-                        rst![SeedLevel] = mSeedLevel
-                    End If
-                End If
-                rst.Update
-                EnableSite = True
-            Case 2
-                ' reference past (completed or cancelled) inspection order
-                ' or user inputed seeddate and seedlevel
-                ' valid reference to future cancelled inspection order. MAKE ACTIVE
-                ' locate mInspectOrderID_Active (InspectionOrderID)
-                Success = False
-                If mInspectOrderID_Active > 0 Then
-                    Success = SetInspectionOrderActive(mInspectOrderID_Active)
-                End If
-                If Success = True Then
-                    rst.Edit
-                    rst![IsEnabled] = True
-                    rst![DoReseed] = False
-                    rst.Update
-                    EnableSite = True
-                    
-                    msg = "The inspection order " & CStr(mInspectOrderID_Active) & " was made ACTIVE."
-                    Results = MsgBox(msg, VbMsgBoxStyle.vbOKOnly Or VbMsgBoxStyle.vbInformation Or VbMsgBoxStyle.vbDefaultButton1, _
-                                mdlCompany.GetCompanyCode() & " - ACTIVATED INSPECTION ORDER")
-                End If
-            End Select
-        End If
-    End If
-    
-    
-    
-    
-    
-        
-PROC_EXIT:
-    'Cleanup
-    Set rst = Nothing
-    Set dbs = Nothing
-    On Error Resume Next
-    Exit Function
-
-PROC_ERR:
-    ' display the system error
-    If err.Number <> 0 Then
-        msg = ModuleName & " EnableSite" & vbCrLf & _
-              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
-        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
-    End If
-    Resume PROC_EXIT
-    
-End Function
-
 
 Public Function SetInspectionOrderActive(ByVal aInspectionOrderID As Long) As Boolean
     Dim SQL As String
@@ -503,7 +332,7 @@ Public Sub LinkSite(ByVal aSiteID As Long, ByVal aCustomerID As Long)
                 .AddNew
                 ![SiteID] = aSiteID              ' manatory
                 ![CustomerID] = aCustomerID      ' manatory
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 ![IsEnabled] = False             ' Ensures inspection orders are not generated
                 ![DoReseed] = True               ' Actual state isn't important here, but init is.
                 ![SeedDate] = Empty           ' Must have a valid date for inspection orders to be generated
@@ -638,13 +467,13 @@ Public Function ConfirmDisableCustSite(ByVal aCustSiteID As Long) As Boolean
     ConfirmDisableCustSite = False
     
     vOpenArgs = CStr(aCustSiteID)
-    DoCmd.OpenForm "xDlgSite_Disable", , , , , acDialog, vOpenArgs
-    DoCmd.Close acForm, "xDlgSite_Disable"
-    If vReturnValue = 1 Then
+    DoCmd.OpenForm "xDlgLink_Disable", , , , , acDialog, vOpenArgs
+    DoCmd.Close acForm, "xDlgLink_Disable"
+    If vReturnvalue = 1 Then
         ' Disable custSite
         DisableSite aCustSiteID
         ConfirmDisableCustSite = True
-    ElseIf vReturnValue = 2 Then
+    ElseIf vReturnvalue = 2 Then
         'Disable custSite and cancell all outstanding orders
         DisableSite aCustSiteID
         mdlInspection.CancelOutstandingInspectionOrders aCustSiteID
@@ -676,7 +505,7 @@ On Error GoTo PROC_ERR
     vOpenArgs = CStr(aCustomerID) & "|" & CStr(aSiteID)
     DoCmd.OpenForm "xDlgSite_Link", , , , , acDialog, vOpenArgs
     DoCmd.Close acForm, "xDlgSite_Link"
-    If vReturnValue = 1 Or vReturnValue = True Then
+    If vReturnvalue = 1 Or vReturnvalue = True Then
         ConfirmLinkCustToSite = True
     End If
     ' returns true of false
@@ -763,10 +592,10 @@ Public Sub addNewSiteStation(ByVal aSiteID As Long, ByVal aEquipmentID As Long)
                 .AddNew
                 ![SiteID] = aSiteID
                 ![EquipmentID] = aEquipmentID
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 .Update
                 .Bookmark = .LastModified
-                vReturnValue = ![SiteStationID]
+                vReturnvalue = ![SiteStationID]
             End With
         End If
     End If
@@ -792,7 +621,7 @@ Public Sub SetHydrantCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnValue = vbNull
+    vReturnvalue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub
@@ -834,7 +663,7 @@ Public Sub SetHoseReelCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnValue = vbNull
+    vReturnvalue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub
@@ -876,7 +705,7 @@ Public Sub SetExtingisherCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnValue = vbNull
+    vReturnvalue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub

@@ -172,4 +172,10 @@ PROC_ERR:
 
 End Function
 
+Public Sub ViewHRDuplicity()
+    DoCmd.OpenForm "xDlgHR_Duplicity", , , , , acDialog
+    DoCmd.Close acForm, "xDlgHR_Duplicity"
+End Sub
+
+
 

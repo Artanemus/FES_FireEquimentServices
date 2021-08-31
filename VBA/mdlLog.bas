@@ -33,7 +33,12 @@ On Error GoTo PROC_ERR
         rst![Detail] = aDetail
         rst![CreatedOn] = Now()
         rst![CompanyInfoID] = aCompanyInfoID 'default = 1
-        rst![LogCallerID] = aCallerID
+        ' Accept zero in aCallerID
+        If aCallerID > 0 Then
+            rst![LogCallerID] = aCallerID
+        Else
+            rst![LogCallerID] = Empty
+        End If
         rst![LogErrLevelID] = aErrLevelID 'default = NONE
         rst.Update
     rst.Close

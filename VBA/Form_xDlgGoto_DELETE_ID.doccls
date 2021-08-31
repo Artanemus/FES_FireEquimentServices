@@ -10,7 +10,7 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
 Dim v As Variant
     mTextBoxStr = vbNullString
-    mdlToolBox.ReturnValue = Null
+    mdlDelete.ReturnValue = Null
     
     'OPEN ARGUMENTS
     If Len(Me.OpenArgs) > 0 Then
@@ -26,7 +26,7 @@ Dim v As Variant
 End Sub
 
 Private Sub cmdCancel_Click()
-    mdlToolBox.ReturnValue = 0
+    mdlDelete.ReturnValue = 0
     Me.Visible = False
 End Sub
 
@@ -120,7 +120,7 @@ Private Sub cmdGotoBtn_Click()
     v = ParamChanged
     If (v > 0) Then
         ' return the booking ID
-        mdlToolBox.ReturnValue = v
+        mdlDelete.ReturnValue = v
         Me.Visible = False
     Else
         Beep

@@ -119,7 +119,7 @@ Dim dt2 As Date
 Dim i As Integer
 Dim aYear As Integer
 
-    Set aPage = Me.tcMonths.Pages.Item(Me.tcMonths.value)
+    Set aPage = Me.tcMonths.Pages.item(Me.tcMonths.value)
     If Not IsNull(aPage) Then
         i = CInt(aPage.Tag)
         aYear = DatePart("yyyy", dtYEAR)

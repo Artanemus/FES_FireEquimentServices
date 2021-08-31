@@ -39,7 +39,7 @@ Dim v As Variant
     ' enable the current selected site
     v = Nz(Me!SF_Cust_Site.Form![CustSiteID], 0)
     If v > 0 Then
-        Results = mdlSite.EnableSite(CLng(v))
+        Results = mdlEnable.EnableLINK(CLng(v))
         If Results = True Then
             Me!SF_Cust_Site.Form.Requery
         End If

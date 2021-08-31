@@ -8,10 +8,10 @@ Option Explicit
 ' ======================================================
 
 Public Function ParseOpenArgs(vOpenArgs As String, X As Variant) As Variant
-Dim Var As Variant
+Dim var As Variant
     On Error Resume Next
-    Var = Split(vOpenArgs, "|", -1)
-    ParseOpenArgs = Var(X)
+    var = Split(vOpenArgs, "|", -1)
+    ParseOpenArgs = var(X)
 End Function
 
 Public Function fNumberOfOpenArgs(vOpenArgs As String) As Variant

@@ -26,18 +26,6 @@ Public Function GetCompanyInfoID() As String
     GetCompanyInfoID = 1
 End Function
 
-
-Public Function GetGlobalDefServiceInterval() As Variant
-' UNIT is given in months
-    Dim v As Variant
-    GetGlobalDefServiceInterval = Null
-    v = DLookup("[DefServiceInterval]", "dbo_Global", "[GlobalID] = 1")
-    If Not IsNull(v) Then
-        GetGlobalDefServiceInterval = CDbl(v)
-    End If
-End Function
-
-
 Public Function GetGlobalDefNumOfLevels() As Variant
 ' UNIT is given in months
     Dim v As Variant
@@ -52,7 +40,6 @@ Public Function GetGlobalDefNumOfLevels() As Variant
         End If
     End If
 End Function
-
 
 Public Function GetGlobalDefStartLevel() As Variant
 ' UNIT is given in months

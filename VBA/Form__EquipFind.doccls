@@ -34,40 +34,19 @@ End Sub
 
 Private Sub cmdClearType_Click()
     Me.cbxEquipType = vbNullString
-    ChemicalVisibility False
     ParamChanged
     Me.Form(SubFrm).Form.CountRecords
 End Sub
 
-Private Sub ChemicalVisibility(IsVisible As Boolean)
-    If IsVisible Then
-        Me.lblChemicalType.Visible = True
-        Me.cmdClearChemicalType.Visible = True
-        Me.cbxChemicalType.Visible = True
-    Else
-        Me.lblChemicalType.Visible = False
-        Me.cmdClearChemicalType.Visible = False
-        Me.cbxChemicalType.Visible = False
-        Me.cbxChemicalType = vbNullString
-    End If
-End Sub
-
 Private Sub cbxEquipType_Change()
-'    If Me.cbxEquipType.Column(0) = 3 Then
-'        ChemicalVisibility True
-'    Else
-'        ChemicalVisibility False
-'    End If
     ParamChanged
     Me.Form(SubFrm).Form.CountRecords
 End Sub
 
 Private Sub Form_Load()
     lblSearchStatus.Visible = False
-    'aStationTypeID = 0
     Me.cbxEquipType = vbNullString
     Me.cbxChemicalType = vbNullString
-    ChemicalVisibility True
     Me.cbxEquipBrand = vbNullString
     'DynamicResize
 End Sub
@@ -225,13 +204,6 @@ Private Sub ParamChanged()
     End If
         
     Me.Form(SubFrm).Form.Filter = aFilterStr
-    
-    
-'    If aStationTypeID > 0 Then
-'        ' Split the list into: 1=Equipment or 2=Lights
-'        Me.Form(SubFrm).Form.Filter = Me.Form(SubFrm).Form.Filter & _
-'            " AND [StationTypeID] = " & CStr(aStationTypeID)
-'    End If
     
     If Me.Form(SubFrm).Form.FilterOn = False Then
         Me.Form(SubFrm).Form.FilterOn = True

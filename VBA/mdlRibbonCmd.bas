@@ -5,17 +5,36 @@ Option Explicit
 'Macro call here from the ribbon buttons
 
 
-
-Public Function ShowCurrentTime()
-  MsgBox "The time is " & Now(), , "FES Sample Function"
+Public Function ShowSwitchBoard()
+    ' SwitchBoard
+    DoCmd.OpenForm "_SwitchBoard", , , , , acWindowNormal
 End Function
 
 
-Public Function Email_CustInspectReport()
-  MsgBox "Email the customer an inspection report.", , "FES Email Inspection Report"
+Public Function ShowSchedule()
+    ' SwitchBoard
+    DoCmd.OpenForm "_InspectSchedule", , , , , acWindowNormal
+End Function
+
+Public Function ShowCustomer()
+    ' SwitchBoard
+    DoCmd.OpenForm "_CustFind", , , , , acWindowNormal
+End Function
+
+Public Function ShowHR()
+    ' SwitchBoard
+    DoCmd.OpenForm "_HRFind", , , , , acWindowNormal
+End Function
+
+Public Function ShowSite()
+    ' SwitchBoard
+    DoCmd.OpenForm "_SiteFind", , , , , acWindowNormal
+End Function
+
+Public Function ShowInspect()
+    ' SwitchBoard
+    DoCmd.OpenForm "_InspectOrderFind", , , , , acWindowNormal
 End Function
 
 
-Public Function Email_CustInspectForm()
-  MsgBox "Email the technician an inspection form.", , "FES Email Inspection Form"
-End Function
+

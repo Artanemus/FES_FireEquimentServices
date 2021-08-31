@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlInspection"
 Option Compare Database
 Option Explicit
 
-Private vReturnValue As Variant
+Private vReturnvalue As Variant
 Private mOpenArgs As String
 
 
@@ -22,11 +22,11 @@ Const ModuleName As String = "Inspection"
 
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnValue
+    ReturnValue = vReturnvalue
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnValue = X
+    vReturnvalue = X
 End Property
 
 
@@ -135,7 +135,7 @@ Public Sub promptViewLog()
 End Sub
 
 
-Public Function CreateInspectionOrder(aCustSiteID As Long, aRequestedDT As Date, Optional aLevel As Integer = 1) As Long
+Public Function CreateInspectionOrder(aCustSiteID As Long, aRequestedDT As Date, dblServiceInterval As Double, Optional aLevel As Integer = 1) As Long
 
     Dim SQL As String
     Dim dbs As Database
@@ -150,7 +150,8 @@ Public Function CreateInspectionOrder(aCustSiteID As Long, aRequestedDT As Date,
     SQL = _
            "SELECT dbo_InspectionOrder.InspectionOrderID, dbo_InspectionOrder.CreatedOn, dbo_InspectionOrder.RequestedDT, " & _
            "dbo_InspectionOrder.CompletedDT, dbo_InspectionOrder.InspectionStatusID, dbo_InspectionOrder.HRID, " & _
-           "dbo_InspectionOrder.CustSiteID, dbo_InspectionOrder.CustomerID, dbo_InspectionOrder.SiteID,  dbo_InspectionOrder.LevelNum " & _
+           "dbo_InspectionOrder.CustSiteID, dbo_InspectionOrder.CustomerID, dbo_InspectionOrder.SiteID,  " & _
+           "dbo_InspectionOrder.ServiceInterval, dbo_InspectionOrder.LevelNum " & _
            "FROM dbo_InspectionOrder;"
     
     aCustomerID = DLookup("[CustomerID]", "dbo_CustSite", "[CustSiteID] = " & aCustSiteID)
@@ -169,6 +170,7 @@ Public Function CreateInspectionOrder(aCustSiteID As Long, aRequestedDT As Date,
             ![RequestedDT] = aRequestedDT
             ![LevelNum] = aLevel
             ![InspectionStatusID] = 1
+            ![ServiceInterval] = dblServiceInterval
             ![CustSiteID] = aCustSiteID
             ![CustomerID] = aCustomerID
             ![SiteID] = aSiteID
@@ -219,7 +221,7 @@ Public Function SetInspectOrderStatus(ByVal aInspectionOrderID As Long) As Boole
         DoCmd.OpenForm "xDlgInspectOrder_SetStatus", , , , , acDialog, vOpenArgs
         DoCmd.Close acForm, "xDlgInspectOrder_SetStatus"
     
-        If (Nz(vReturnValue, 0) > 0) Then
+        If (Nz(vReturnvalue, 0) > 0) Then
             SetInspectOrderStatus = True
         End If
     End If

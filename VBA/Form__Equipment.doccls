@@ -4,29 +4,53 @@ Const ModuleName As String = "Equipment"
 Private CompanyCodeStr As String
 
 
+Private Sub cbxEquipTypeID_Change()
+    'Display the core group for this equipmenttype
+    Dim v As Variant
+    If Not IsNull(Me.cbxEquipTypeID.Column(3)) Then
+        v = DLookup("[Caption]", "dbo_CoreGroup", "CoreGroupID = " & CStr(Me.cbxEquipTypeID.Column(3)))
+        If Nz(v, 0) <> 0 Then
+            lblCoreGroup.Caption = CStr(v)
+        Else
+            lblCoreGroup.Caption = vbNullString
+        End If
+    Else
+        lblCoreGroup.Caption = vbNullString
+    End If
+    DoEvents
+End Sub
+
 Private Sub cmdAutoBuildNameTag_Click()
+' MAIN GENERIC TYPE
+Dim strEquipType As String, strEquipTypeShort As String
+
+' MISCELLANEOUS EQUIPMENT DETAILS
 Dim strNetWeight As String, strGrossWeight As String, strLitre As String, strBrand As String
 Dim strHeight As String, strWidth As String, strChemical As String
-Dim strEquipType As String, strEquipTypeShort As String
-Dim strChemicalSymbol As String, s12 As String
+Dim strChemicalSymbol As String
 Dim strPower As String
 Dim strLightFormFactor As String, strLightFormFactorShort As String
+
+' EXTENDED TYPES - TABLES
 Dim strLightType As String, strLightTypeShort As String
 Dim strLampType As String, strLampTypeShort As String
+Dim strHydrantType As String, strHydrantTypeShort As String
+
+' NOT SUPPLIED
+'Dim strFireBlanketType As String, strFireBlanketTypeShort As String
 
 
 Dim str As String
 Dim msg As String
 
 
-
 Dim DoShortCaption As Boolean
 
     On Error GoTo PROC_ERR
     
-    DoShortCaption = False
+    DoShortCaption = True
     If mdlKeyBoardState.IsControlKeyDown Then
-        DoShortCaption = True
+        DoShortCaption = False
     End If
     
     If IsNull(Me![EquipTypeID]) Then
@@ -39,8 +63,13 @@ Dim DoShortCaption As Boolean
             Me.Dirty = False
         End If
     End If
-
-    
+        
+    ' GENERIC NAMES
+    If Not IsNull(Me![EquipTypeID]) Then
+        strEquipType = CStr(Me.cbxEquipTypeID.Column(1))
+        strEquipTypeShort = CStr(Me.cbxEquipTypeID.Column(2))
+    End If
+                   
     ' Create the customer's description
     If Not IsNull(Me![NetWeight]) Then
         strNetWeight = Format(Me![NetWeight], "0.0") & "Kg"
@@ -64,11 +93,6 @@ Dim DoShortCaption As Boolean
         strChemical = CStr(Me.cbxChemicalTypeID.Column(1))
         strChemicalSymbol = CStr(Me.cbxChemicalTypeID.Column(2))
     End If
-    If Not IsNull(Me![EquipTypeID]) Then
-        strEquipType = CStr(Me.cbxEquipTypeID.Column(1))
-        strEquipTypeShort = CStr(Me.cbxEquipTypeID.Column(2))
-    End If
-    
     ' POWER in Watts ....
     If Not IsNull(Me![Power]) Then
         strPower = CStr(Me![Power]) & "W"
@@ -88,13 +112,19 @@ Dim DoShortCaption As Boolean
         strLampTypeShort = CStr(Me.cbxLightLampTypeID.Column(2))
     End If
     
+    'HYRANTS .....
+    If Not IsNull(Me![HydrantTypeID]) Then
+        strHydrantType = CStr(Me.cbxHydrantTypeID.Column(1))
+        strHydrantTypeShort = CStr(Me.cbxHydrantTypeID.Column(2))
+    End If
+    
     
     str = vbNullString
     
     Select Case Me![EquipTypeID]
-'    Case 1
-'        ' hyrant
-'        str = str & strEquipType
+    Case 1
+        ' hyrant
+        str = str & strHydrantType
     Case 2
         ' Fire Blanket
         ' body
@@ -157,15 +187,7 @@ Dim DoShortCaption As Boolean
         str = str & strEquipType
         
     End Select
-    
-    
-' BRAND NAME - Show no brand if core is empty
-'    If Len(str) > 0 Then
-'        If Len(strBrand) > 0 Then
-'            str = str & " " & UCase(strBrand)
-'        End If
-'    End If
-    
+       
     
     If Len(str) > 0 Then
         Me![Caption] = str
@@ -175,8 +197,9 @@ Dim DoShortCaption As Boolean
     
     If DoShortCaption Then
         Select Case Me![EquipTypeID]
-'        Case 1
-'            str = str & strEquipTypeShort
+        Case 1
+            'Hydrant
+            str = str & strHydrantTypeShort
         Case 2
             str = str & strEquipTypeShort
             If Len(strHeight) > 0 Then
@@ -199,9 +222,9 @@ Dim DoShortCaption As Boolean
             End If
             ' body
             str = str & strEquipTypeShort
-'        Case 4
-'            ' body - HOSE REEEL
-'            str = str & strEquipTypeShort
+        Case 4
+            ' body - HOSE REEEL
+            str = str & strEquipTypeShort
         Case 5
             If Len(strLightTypeShort) > 0 Then
                 str = str & strLightTypeShort
@@ -218,9 +241,21 @@ Dim DoShortCaption As Boolean
             If Len(strPower) > 0 Then
                 str = str & " " & strPower
             End If
+        Case 6
+            ' electrical
+            str = str & strEquipTypeShort
+            ' Power in watts
+            If Len(strPower) > 0 Then
+                str = str & " " & strPower
+            End If
+    '    Case 7
+    '        ' Booster
+    '        str = str & strEquipType
+        
+            
         Case Else
             str = str & strEquipTypeShort
-            'MsgBox "CNTRL+CLICK hasn't been implimented for " & strEquipType & ".", vbOKOnly, "Work In Progress."
+            'MsgBox "Hasn't been implimented for " & strEquipType & ".", vbOKOnly, "Work In Progress."
         End Select
     End If
     
@@ -230,7 +265,6 @@ Dim DoShortCaption As Boolean
             str = str & " " & strBrand
         End If
     End If
-    
     
     If Len(str) > 0 Then
         Me![ShortCaption] = str
@@ -303,10 +337,6 @@ Dim msg As String
 
     On Error GoTo PROC_ERR
     
-    If Nz(Me![StationTypeID], 0) = 0 Then
-        Me![StationTypeID] = 1
-    End If
-    
     If IsEmpty(Me.IsArchived) Then
         Me.IsArchived = False
     End If
@@ -325,6 +355,10 @@ PROC_ERR:
     End If
     Resume PROC_EXIT
     
+End Sub
+
+Private Sub Form_Current()
+    cbxEquipTypeID_Change
 End Sub
 
 Private Sub Form_Load()

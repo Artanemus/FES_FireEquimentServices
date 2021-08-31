@@ -19,6 +19,7 @@ Private fOrdersBuilt As Long
 Private fErrors As Long
 Private fWarnings As Long
 Private fSkipped As Long
+Private fSkippedSI As Long
 
 Public Property Get Total() As Long
     Total = fTotal
@@ -84,6 +85,13 @@ Public Property Let Skipped(ByVal RHS As Long)
 End Property
 
 
+Public Property Get SkippedServiceInterval() As Long
+    SkippedServiceInterval = fSkippedSI
+End Property
+Public Property Let SkippedServiceInterval(ByVal RHS As Long)
+    fSkippedSI = RHS
+End Property
+
 Private Sub Class_Initialize()
     ' Default Initialization
     fTotal = 0
@@ -95,6 +103,7 @@ Private Sub Class_Initialize()
     fErrors = 0
     fWarnings = 0
     fSkipped = 0
+    fSkippedSI = 0
 End Sub
 
 Private Sub Class_Terminate()

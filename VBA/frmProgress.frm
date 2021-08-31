@@ -22,42 +22,54 @@ Option Explicit
 ' MSForm.labels instead of Access.labels
 Private fPrgBar As clsProgressBarUF
 
-'Public Property Get Max() As Double
-'    Max = 100
-'    If Not fPrgBar Is Nothing Then
-'        Max = fPrgBar.Max
-'    End If
-'End Property
+Public Property Get xMax() As Double
+    xMax = 100
+    If Not fPrgBar Is Nothing Then
+        xMax = fPrgBar.Max
+    End If
+End Property
 
-Public Property Let Max(ByVal RHS As Double)
+
+Public Property Get xFrontWidth() As Double
+    xFrontWidth = fPrgBar.FrontWidth
+End Property
+
+
+Public Property Let xMax(ByVal RHS As Double)
     If Not fPrgBar Is Nothing Then
         fPrgBar.Max = RHS
     End If
 End Property
 
-'Public Property Get value() As Double
-'    Max = 0
-'    If Not fPrgBar Is Nothing Then
-'        value = fPrgBar.value
-'    End If
-'End Property
+Public Property Get xValue() As Double
+    xValue = 0
+    If Not fPrgBar Is Nothing Then
+        xValue = fPrgBar.value
+    End If
+End Property
 
-Public Property Let value(ByVal RHS As Double)
+Public Property Let xValue(ByVal RHS As Double)
     If Not fPrgBar Is Nothing Then
         fPrgBar.value = RHS
     End If
 End Property
 
-Public Sub ClearProgress()
+Public Sub xClear()
     If Not fPrgBar Is Nothing Then
         ' after a call clear - use call initialise to reset the progress bar.
         fPrgBar.Clear
     End If
 End Sub
 
-Public Sub InitializeProgress()
+Public Sub xInitialize()
     If Not fPrgBar Is Nothing Then
-        fPrgBar.Initialize lbl01, lbl02, lblText
+        fPrgBar.Initialize lblBack, lblFront, lblText
+    End If
+End Sub
+
+Public Sub xIncrement()
+    If Not fPrgBar Is Nothing Then
+        fPrgBar.Increment
     End If
 End Sub
 
@@ -68,13 +80,12 @@ Private Sub UserForm_Initialize()
     lblFES.Caption = mdlCompany.GetCompanyCode
     ' create the UserForm progress bar
     Set fPrgBar = New clsProgressBarUF
-    fPrgBar.IncrementSize = 1
     ' remove the design-time caption ...
-    Me.lbl01.Caption = vbNullString
-    Me.lbl02.Caption = vbNullString
+    Me.lblBack.Caption = vbNullString
+    Me.lblFront.Caption = vbNullString
     Me.lblText.Caption = vbNullString
     ' assign the controls to the UserForm progress bar
-    fPrgBar.Initialize lbl01, lbl02, lblText
+    fPrgBar.Initialize lblBack, lblFront, lblText
 PROC_EXIT:
     On Error Resume Next
     Exit Sub
@@ -91,6 +102,8 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 'Cancel  An integer. Setting this argument to any value other than 0 stops the QueryClose event in all loaded
 '           user forms and prevents the UserForm and application from closing.
 'CloseMode   A value or constant indicating the cause of the QueryClose event.
+Cancel = 1
+
 End Sub
 
 Private Sub UserForm_Terminate()

@@ -90,9 +90,9 @@ End Sub
 Private Sub Form_Open(Cancel As Integer)
     Dim v As Variant
     Dim msg As String
-    Dim d As Double
+'    Dim d As Double
     Dim cCode As String
-    Dim s As String
+'    Dim s As String
 
     On Error GoTo PROC_ERR
     
@@ -103,13 +103,13 @@ Private Sub Form_Open(Cancel As Integer)
         Me.Filter = "[StationID] = " & CStr(aStationID)
         If Me.FilterOn = False Then Me.FilterOn = True
         
-        d = mdlLifeCycle.GetMajorIntervalStation(aStationID)
-        If d > 0 Then
-            s = mdlLifeCycle.PrettyIntervalStr(d)
-            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", s)
-        Else
-            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", vbNullString)
-        End If
+'        d = mdlLifeCycle.GetMajorLifeCyclelStation(aStationID)
+'        If d > 0 Then
+'            s = mdlLifeCycle.PrettyIntervalStr(d)
+'            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", s)
+'        Else
+'            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", vbNullString)
+'        End If
         
     Else
         '

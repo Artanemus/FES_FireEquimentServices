@@ -2,25 +2,25 @@ Attribute VB_Name = "mdlTest"
 Option Compare Database
 Option Explicit
 
-Private vReturnValue As Variant
+Private vReturnvalue As Variant
 
 Const ModuleName As String = "mdlTest"
 
 
 Public Property Get ReturnValue() As Variant
-    If IsObject(vReturnValue) Then
-        Set ReturnValue = vReturnValue
+    If IsObject(vReturnvalue) Then
+        Set ReturnValue = vReturnvalue
     Else
-        ReturnValue = vReturnValue
+        ReturnValue = vReturnvalue
     End If
 End Property
 
 Public Property Let ReturnValue(ByVal RHS As Variant)
-    vReturnValue = RHS
+    vReturnvalue = RHS
 End Property
 
 Public Property Set ReturnValue(ByVal RHS As Variant)
-    Set vReturnValue = RHS
+    Set vReturnvalue = RHS
 End Property
 
 Public Sub ReBuildTestEquip(ByVal aInspectionOrderID As Long)
@@ -33,7 +33,7 @@ End Sub
 
 
 
-Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID As Integer)
+Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, lngCoreGroup As Integer)
     Dim s As String
     Dim SQL As String
     Dim rst As DAO.Recordset
@@ -42,22 +42,22 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
     Dim msg As String
     Dim intResponse As Integer
     Dim cCode As String
-    Dim aStationTypeStr As String
+    Dim strCoreGroup As String
     Dim aSiteID As Variant
+    Dim v As Variant
 
     On Error GoTo PROC_ERR
     
-    vReturnValue = 0
+    vReturnvalue = 0
     
-    If aStationTypeID = 1 Then
-        aStationTypeStr = "EQUIPMENT"
-    Else
-        aStationTypeStr = "LIGHTS"
+    v = DLookup("[Caption]", "dbo_CoreGroup", CStr(lngCoreGroup))
+    If Not IsNull(v) Then
+        strCoreGroup = CStr(v)
     End If
     
     ' SNIP-ITS for different station types
-    ' " & cstr(aStationTypeID) & "
-    ' " & aStationTypeStr & "
+    ' " & cstr(lngCoreGroup) & "
+    ' " & strCoreGroup & "
     
     If aInspectionOrderID > 0 Then
         ' checklist contains test records
@@ -65,14 +65,14 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
         SQL = _
                "SELECT dbo_Test.TestID " & _
                "FROM dbo_Test INNER JOIN dbo_Station ON dbo_Test.StationID = dbo_Station.StationID " & _
-               "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.StationTypeID)=" & CStr(aStationTypeID) & "));"
+               "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.CoreGroupID)=" & CStr(lngCoreGroup) & "));"
         
         Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If rst.RecordCount > 0 Then
         
             ' MESSAGE ...
             cCode = mdlCompany.GetCompanyCode
-            intResponse = MsgBox("Re-Build the " & aStationTypeStr & " checklist for the inspection order? " & _
+            intResponse = MsgBox("Re-Build the " & strCoreGroup & " checklist for the inspection order? " & _
                                  vbCrLf & "(All test results that have been entered will be lost!)", _
                                  vbYesNo Or vbQuestion Or vbDefaultButton2, _
                                  cCode & " - Re-Build Check List.")
@@ -83,11 +83,11 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
                 SQL = _
                        "DELETE dbo_Test.* " & _
                        "FROM dbo_Test INNER JOIN dbo_Station ON dbo_Test.StationID = dbo_Station.StationID " & _
-                       "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.StationTypeID)=" & CStr(aStationTypeID) & "));"
+                       "WHERE (((dbo_Test.InspectionOrderID)=" & CStr(aInspectionOrderID) & ") AND ((dbo_Station.CoreGroupID)=" & CStr(lngCoreGroup) & "));"
             
                 dbs.Execute SQL, dbFailOnError + dbSeeChanges
                 
-                vReturnValue = 1
+                vReturnvalue = 1
         
             Else
                 ' --------------------------
@@ -105,7 +105,7 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
         Set rst = Nothing
         
         
-        ' iterate over the stations (filtered by StationTypeID) ...
+        ' iterate over the stations (filtered by CoreGroupID) ...
         ' ... for the given site (found in the inspection order)
         ' ------------------------------------------------------------------------------------------
         aSiteID = DLookup("[SiteID]", "dbo_InspectionOrder", "InspectionOrderID = " & CStr(aInspectionOrderID))
@@ -113,10 +113,10 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
         If Nz(aSiteID, 0) > 0 Then
         
             SQL = _
-                   "SELECT dbo_Station.StationID, dbo_Station.StationNum, dbo_Station.IsEmpty, dbo_Station.StationTypeID, dbo_Station.Location " & _
+                   "SELECT dbo_Station.StationID, dbo_Station.StationNum, dbo_Station.IsEmpty, dbo_Station.CoreGroupID, dbo_Station.Location " & _
                    "FROM dbo_Station " & _
                    "WHERE ( " & _
-                   "((dbo_Station.StationTypeID)=" & CStr(aStationTypeID) & ") AND " & _
+                   "((dbo_Station.CoreGroupID)=" & CStr(lngCoreGroup) & ") AND " & _
                    "((dbo_Station.SiteID)=" & CStr(aSiteID) & ")" & _
                    ") ORDER BY dbo_Station.StationNum ASC;"
 
@@ -160,7 +160,7 @@ Public Sub ReBuildTestGeneric(ByVal aInspectionOrderID As Long, aStationTypeID A
                 End If                           ' break on invalid recorset
             Else
                 s = Format(CLng(aSiteID), "0000")
-                MsgBox "The Site# " & s & " doesn't contain any " & aStationTypeStr & " stations! " & _
+                MsgBox "The Site# " & s & " doesn't contain any " & strCoreGroup & " stations! " & _
                         vbCrLf & "Unable to build the check-list.", _
                         vbOKOnly Or vbDefaultButton1, _
                         cCode & " - Re-Build Check List."

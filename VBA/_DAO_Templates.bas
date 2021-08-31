@@ -27,11 +27,11 @@ Option Explicit
 
 ' SNIP-ITS
 
-Private Sub DAO_Execute_An_Update(a As Control, B As Control)
+Private Sub DAO_Execute_An_Update(A As Control, B As Control)
    Dim dbs As Database
    Set dbs = CurrentDb
 
-   DBEngine(0)(0).Execute "UPDATE Table SET Path = '" & a.value & "' WHERE B = '" & B.value & "'", dbFailOnError + dbSeeChanges
+   DBEngine(0)(0).Execute "UPDATE Table SET Path = '" & A.value & "' WHERE B = '" & B.value & "'", dbFailOnError + dbSeeChanges
 
    dbs.Close
 End Sub
@@ -56,7 +56,7 @@ Private Sub DAO_AddNewRecord_Recordset(ByVal aHRID As Long, ByVal aCustomerID As
                 .AddNew
                 ![HRID] = aHRID
                 ![CustomerID] = aCustomerID
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 ![Caption] = "Contact added on " & Format$(Date, "dd/mmm/yyyy")
                 ![ContactTypeID] = 1             'PRIMARY ...
                 .Update

@@ -1,0 +1,232 @@
+﻿Option Compare Database
+Option Explicit
+
+Const ModuleName As String = "xDlgHR_Duplicity"
+' Const MainTable As String = "dbo_Site"
+Private CompanyCodeStr As String
+
+Private Sub cmdCancel_Click()
+    ' mdl#.ReturnValue = vbNull
+    Me.Visible = False
+End Sub
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyEscape Then
+        cmdCancel_Click
+        KeyCode = 0
+    End If
+End Sub
+
+Private Sub Form_Load()
+    Dim msg As String
+    Dim rst As DAO.Recordset
+    Dim SQL As String
+    Dim v As Variant
+    
+    On Error GoTo PROC_ERR
+    
+    CompanyCodeStr = mdlCompany.GetCompanyCode
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+    DynamicResize
+    
+    ' CHECK for other errors.
+    SQL = _
+        "SELECT Count(dbo_HR.HRID) AS CountOfHRID FROM dbo_HR WHERE (([FirstName] Is Null And [Lastname] Is Null));"
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    If rst.RecordCount > 0 Then
+        Me.txtErr1.Caption = CStr(rst.Fields("CountOfHRID"))
+    Else
+        Me.txtErr1.Caption = "0"
+    End If
+    rst.Close
+    Set rst = Nothing
+    
+'    v = DLookup("[AliasHR]", "dbo_ContactNumType", "[ContactNumTypeID] = 1")
+'    If Not IsNull(v) Then
+'        Me.lbl2.Caption = Replace(Me.lbl2.Caption, "PRIMARY", CStr(v))
+'    End If
+
+'    SQL = _
+'    "SELECT dbo_HR.HRID, dbo_HRContactNum.ContactNum, Count(dbo_HRContactNum.ContactNum) AS CountOfContactNum " & _
+'    "FROM dbo_HR INNER JOIN dbo_HRContactNum ON dbo_HR.HRID = dbo_HRContactNum.HRID " & _
+'    "WHERE (((dbo_HRContactNum.IsArchived) <> True) And ((dbo_HRContactNum.ContactNumTypeID) = 1)) " & _
+'    "GROUP BY dbo_HR.HRID, dbo_HRContactNum.ContactNum " & _
+'    "HAVING (((Count(dbo_HRContactNum.ContactNum))>1));"
+'    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+'    If rst.RecordCount > 0 Then
+'        Me.txtErr2.Caption = CStr(rst.Fields("CountOfContactNum"))
+'    Else
+'        Me.txtErr2.Caption = "0"
+'    End If
+'    rst.Close
+'    Set rst = Nothing
+    
+'    If Not IsNull(v) Then
+'        Me.lbl3.Caption = Replace(Me.lbl3.Caption, "PRIMARY", CStr(v))
+'    End If
+'
+'    SQL = _
+'    "SELECT dbo_HR.HRID, dbo_HRContactNum.ContactNum, Count(dbo_HRContactNum.ContactNum) AS CountOfContactNum " & _
+'    "FROM dbo_HR INNER JOIN dbo_HRContactNum ON dbo_HR.HRID = dbo_HRContactNum.HRID " & _
+'    "GROUP BY dbo_HR.HRID, dbo_HRContactNum.ContactNum " & _
+'    "HAVING (((Count(dbo_HRContactNum.ContactNum))>1));"
+'    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+'    If rst.RecordCount > 0 Then
+'        Me.txtErr3.Caption = CStr(rst.Fields("CountOfContactNum"))
+'    Else
+'        Me.txtErr3.Caption = "0"
+'    End If
+'    rst.Close
+'    Set rst = Nothing
+    
+'SELECT Sum(xqryDuplicate_CountHRContactNum.CountOfContactNum) AS SumOfCountOfContactNum FROM xqryDuplicate_CountHRContactNum;
+
+    Set rst = CurrentDb.OpenRecordset("xqryDuplicate_SumHRContactNum", dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    If rst.RecordCount > 0 Then
+        Me.txtErr3.Caption = CStr(rst.Fields("SumOfCountOfContactNum"))
+    Else
+        Me.txtErr3.Caption = "0"
+    End If
+    rst.Close
+    Set rst = Nothing
+    
+    
+'    v = DLookup("[AliasHR]", "dbo_EmailType", "[EmailTypeID] = 1")
+'    If Not IsNull(v) Then
+'        Me.lbl4.Caption = Replace(Me.lbl4.Caption, "PRIMARY", CStr(v))
+'    End If
+'
+'    SQL = _
+'    "SELECT dbo_HR.HRID, Count(dbo_HREmail.Email) AS CountOfEmail " & _
+'    "FROM dbo_HR INNER JOIN dbo_HREmail ON dbo_HR.HRID = dbo_HREmail.HRID " & _
+'    "WHERE (((dbo_HREmail.IsArchived) <> True) And ((dbo_HREmail.EmailTypeID) = 1)) " & _
+'    "GROUP BY dbo_HR.HRID " & _
+'    "HAVING (((Count(dbo_HREmail.Email))>1));"
+'
+'    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+'    If rst.RecordCount > 0 Then
+'        Me.txtErr4.Caption = CStr(rst.Fields("CountOfEmail"))
+'    Else
+'        Me.txtErr4.Caption = "0"
+'    End If
+'    rst.Close
+'    Set rst = Nothing
+
+
+
+SQL = _
+"SELECT Count(dbo_HRAddress.HRAddressID) AS CountOfHRAddressID FROM dbo_HRAddress WHERE ((dbo_HRAddress.Address) Is Null);"
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    If rst.RecordCount > 0 Then
+        Me.lblEmptyAddress.Caption = CStr(rst.Fields("CountOfHRAddressID"))
+    Else
+        Me.lblEmptyAddress.Caption = "0"
+    End If
+    rst.Close
+    Set rst = Nothing
+    
+SQL = _
+"SELECT Count(dbo_HRContactNum.HRContactNumID) AS CountOfHRContactNumID FROM dbo_HRContactNum WHERE ((dbo_HRContactNum.ContactNum) Is Null);"
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    If rst.RecordCount > 0 Then
+        Me.lblEmptyContactNum.Caption = CStr(rst.Fields("CountOfHRContactNumID"))
+    Else
+        Me.lblEmptyContactNum.Caption = "0"
+    End If
+    rst.Close
+    Set rst = Nothing
+    
+SQL = _
+"SELECT Count(dbo_HREmail.HREmailID) AS CountOfHREmailID FROM dbo_HREmail WHERE ((dbo_HREmail.Email) Is Null);"
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    If rst.RecordCount > 0 Then
+        Me.lblEmptyEmail.Caption = CStr(rst.Fields("CountOfHREmailID"))
+    Else
+        Me.lblEmptyEmail.Caption = "0"
+    End If
+    rst.Close
+    Set rst = Nothing
+    
+
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        msg = Me.Name & " Form_Load" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+    Dim msg As String
+
+    On Error GoTo PROC_ERR
+
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        msg = Me.Name & " Form_Open" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+End Sub
+
+Private Sub DynamicResize()
+    'Variables
+    Dim lngCount As Long
+    Dim lngWindowHeight As Long
+    Dim lngOldWindowHeight As Long
+    Dim lngDeltaTop As Long
+    Dim lngMaxRecordsToShow As Long
+    Dim lngMinRecordsToShow As Long
+    
+    Dim rst As DAO.Recordset
+
+    lngMaxRecordsToShow = 20
+    lngMinRecordsToShow = 10
+    'Find the amount of records in form
+    Set rst = Me.RecordsetClone
+    If Not rst.EOF Then rst.MoveLast
+    lngCount = rst.RecordCount
+    'Cleanup
+    Set rst = Nothing
+    'Assert Minimum height
+    If lngCount <= lngMinRecordsToShow Then lngCount = lngMinRecordsToShow
+    'Check whether there are more then Max amount of records
+    If lngCount > lngMaxRecordsToShow Then
+        lngCount = lngMaxRecordsToShow
+        'Enable vertical scrollbar
+        Me.ScrollBars = 2 'Vertical
+    Else
+        'Disable scrollbars
+        Me.ScrollBars = 0 'None
+    End If
+    'Calculate new windowheight.
+    'If you do not have a header/footer, or they are not visible adjust accordingly
+    lngWindowHeight = Me.FormHeader.Height + _
+                      (Me.Detail.Height * lngCount) + _
+                      Me.FormFooter.Height + _
+                      20 ' 567
+    'The 567 is to account for title bar Height.
+    'If you use thin border, adjust accordingly
+    'The form will be "shortened" and we need to adjust the top property as well to keep it properly centered
+    lngOldWindowHeight = Me.WindowHeight
+    lngDeltaTop = (lngOldWindowHeight - lngWindowHeight) / 2
+    'Use the move function to move the form
+    Me.Move Me.WindowLeft, Me.WindowTop + lngDeltaTop, , lngWindowHeight
+
+End Sub
+

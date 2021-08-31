@@ -139,9 +139,21 @@ Private Sub cmdSB_NewSiteSurvey_Click()
     mdlNavigationCode.cmdNav_NewSurvey
 End Sub
 
+Private Sub cmdUndoUpdate_Click()
+    mdlDelete.UndoUpdate
+End Sub
+
 Private Sub cmdUPDATEInspectionOrders_Click()
     ' update inspection orders
     mdlUpdate.Update_Main
+End Sub
+
+Private Sub cmdViewCustDuplicity_Click()
+    mdlCust.ViewCustDuplicity
+End Sub
+
+Private Sub cmdViewSiteDuplicity_Click()
+    mdlSite.ViewSiteDuplicity
 End Sub
 
 Private Sub cmdViewSystemLog_Click()
@@ -156,6 +168,9 @@ Private Sub cmdKeyBoardShortCuts_Click()
     mdlNavigationCode.cmdNav_SwitchToKeyBoardShortCuts
 End Sub
 
+Private Sub cmdViewHRDuplicity_Click()
+    mdlHR.ViewHRDuplicity
+End Sub
 
 Private Sub Form_Load()
     Dim v As Variant

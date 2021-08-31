@@ -5,12 +5,12 @@ Option Explicit
 Const ModuleName As String = "mdlCustContact"
 
 
-Private vReturnValue As Variant                  'Routines called by this module write to this param
+Private vReturnvalue As Variant                  'Routines called by this module write to this param
 Private mHRID As Variant
 Private mCustContactID As Variant
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnValue = X
+    vReturnvalue = X
 End Property
 
 Public Property Let HR_ID(X As Variant)
@@ -63,7 +63,7 @@ End Function
 
 Public Function ExeCustAddContact(ByVal aCustID As Variant) As Boolean
     mHRID = Null
-    vReturnValue = Null
+    vReturnvalue = Null
     ExeCustAddContact = False
     If (Nz(aCustID, 0) > 0) Then
     
@@ -89,9 +89,9 @@ Public Function ExeCustAddContact(ByVal aCustID As Variant) As Boolean
                 ' remove from memory
                 Unload Forms("xDlgCustAddNewContact")
                 
-                If Nz(vReturnValue, 0) > 0 Then
+                If Nz(vReturnvalue, 0) > 0 Then
                     ' return value holds the newly created HRID
-                    mHRID = vReturnValue
+                    mHRID = vReturnvalue
                     'create a new contactlink record for the customer
                     addNewCustContact mHRID, CLng(aCustID)
                         
@@ -204,7 +204,7 @@ Public Sub addNewCustContact(ByVal aHRID As Long, ByVal aCustomerID As Long)
                 .AddNew
                 ![HRID] = aHRID
                 ![CustomerID] = aCustomerID
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 ![Caption] = "Contact added on " & Format(Date, "dd/mmm/yyyy")
                 ![ContactTypeID] = 1             'PRIMARY ...
                 .Update

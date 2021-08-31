@@ -34,7 +34,7 @@ End Sub
 
 
 Private Sub Form_BeforeInsert(Cancel As Integer)
-    Me![CreatedOn] = Now
+    Me![CreatedOn] = Now()
 End Sub
 
 Private Sub Form_Load()
@@ -190,7 +190,7 @@ Private Sub AddPhone(aHRID As Long, aContactNumTypeID As Variant, aPhoneNumStr A
                 .AddNew
                 ![HRID] = aHRID
                 ![ContactNum] = s
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 ![ContactNumTypeID] = aContactNumTypeID
                 .Update
                 '.Bookmark = .LastModified
@@ -233,7 +233,7 @@ Private Sub AddEmail(aHRID As Long, aEmailTypeID As Variant, aEmailStr As String
                 .AddNew
                 ![HRID] = aHRID
                 ![Email] = aEmailStr
-                ![CreatedOn] = Date
+                ![CreatedOn] = Now()
                 ![EmailTypeID] = aEmailTypeID
                 .Update
                 '.Bookmark = .LastModified
@@ -276,7 +276,7 @@ Private Sub AddAddress(aHRID As Long, aAddressTypeID As Variant, aAddressStr As 
             .AddNew
             ![HRID] = aHRID
             ![Address] = aAddressStr
-            ![CreatedOn] = Date
+            ![CreatedOn] = Now()
             ![AddressTypeID] = aAddressTypeID
             If Nz(aPostCodeID, 0) > 0 Then
                 ![PostCodeID] = aPostCodeID

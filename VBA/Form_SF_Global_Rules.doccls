@@ -3,13 +3,6 @@ Option Explicit
 Const ModuleName As String = "SF_Global_Rules"
 
 
-
-Private Sub Form_BeforeUpdate(Cancel As Integer)
-    If IsNull(Me.EnableRules) = True Then
-        Me.EnableRules = False
-    End If
-End Sub
-
 Private Sub Form_Load()
 Dim v As Variant
 Dim msg As String

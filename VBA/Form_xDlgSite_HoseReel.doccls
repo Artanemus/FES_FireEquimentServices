@@ -103,13 +103,13 @@ Private Sub Form_Open(Cancel As Integer)
         Me.Filter = "[StationID] = " & CStr(aStationID)
         If Me.FilterOn = False Then Me.FilterOn = True
         
-        d = mdlLifeCycle.GetMajorIntervalStation(aStationID)
-        If d > 0 Then
-            s = mdlLifeCycle.PrettyIntervalStr(d)
-            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", s)
-        Else
-            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", vbNullString)
-        End If
+'        d = mdlLifeCycle.GetMajorLifeCyclelStation(aStationID)
+'        If d > 0 Then
+'            s = mdlLifeCycle.PrettyIntervalStr(d)
+'            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", s)
+'        Else
+'            Label4.Caption = Replace(Label4.Caption, "#INTERVAL#", vbNullString)
+'        End If
         
     Else
         '

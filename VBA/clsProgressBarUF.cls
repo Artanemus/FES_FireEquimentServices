@@ -36,6 +36,39 @@ Private mblnNotSmooth As Boolean    ' Display smooth bar by doevents after every
 ' and use this back label to position the
 ' progress bar.
 
+
+
+Private Sub Class_Initialize()
+    'BSA FIX
+    ' Default Initialization
+    mdblMax = 100
+    mdblVal = 0
+    mdblIncSize = 1
+    mblnHideCap = False
+    mblnNotSmooth = True    ' Display smooth bar by doevents after every update.
+End Sub
+
+Private Sub Class_Terminate()
+
+    On Error GoTo 0    ' Debug Mode
+
+    On Error Resume Next
+    mlblFront.Visible = False
+    mlblCaption.Visible = False
+    On Error GoTo 0    ' Debug Mode
+
+    Exit Sub
+
+ErrHandler:
+
+    Select Case err.Number
+        Case Else
+            LogErr err, "clsPRG_ProgressBar", "Class_Terminate", Erl
+            Resume Next ' Resume at next line.
+    End Select
+
+End Sub
+
 Public Sub Initialize(BackLabel As MSForms.Label, FrontLabel As MSForms.Label, CaptionLabel As MSForms.Label)
 
     On Error GoTo 0    ' Debug Mode
@@ -95,30 +128,10 @@ ErrHandler:
 
 End Sub
 
-Private Sub Class_Initialize()
-    ' init Class
-End Sub
 
-Private Sub Class_Terminate()
-
-    On Error GoTo 0    ' Debug Mode
-
-    On Error Resume Next
-    mlblFront.Visible = False
-    mlblCaption.Visible = False
-    On Error GoTo 0    ' Debug Mode
-
-    Exit Sub
-
-ErrHandler:
-
-    Select Case err.Number
-        Case Else
-            LogErr err, "clsPRG_ProgressBar", "Class_Terminate", Erl
-            Resume Next ' Resume at next line.
-    End Select
-
-End Sub
+Public Property Get FrontWidth() As Double
+    FrontWidth = mlblFront.Width
+End Property
 
 Public Property Get Max() As Double
 
@@ -177,14 +190,22 @@ End Property
 Public Property Let value(ByVal dblVal As Double)
 
     On Error GoTo 0    ' Debug Mode
-
-    'update only if change is => 1%
-    If (CInt(dblVal * (100 / mdblMax))) > (CInt(mdblVal * (100 / mdblMax))) Then
+    ' BSA FIX
+    ' trap division by zero
+    If dblVal = 0 Then
         mdblVal = dblVal
         Update
     Else
-        mdblVal = dblVal
+        'update only if change is => 1%
+        If (CInt(dblVal * (100 / mdblMax))) > (CInt(mdblVal * (100 / mdblMax))) Then
+            mdblVal = dblVal
+            Update
+        Else
+            mdblVal = dblVal
+        End If
     End If
+
+
 
     Exit Property
 
@@ -277,11 +298,18 @@ Private Sub Update()
     Dim intPercent As Integer
     Dim dblWidth As Double
     'On Error Resume Next
-    intPercent = mdblVal * (100 / mdblMax)
-    dblWidth = mdblVal * (mdblFullWidth / mdblMax)
+    ' BSA FIX
+    ' trap division by zero
+    If mdblMax = 0 Then
+        intPercent = 0
+        dblWidth = 0
+    Else
+        intPercent = mdblVal * (100 / mdblMax)
+        dblWidth = mdblVal * (mdblFullWidth / mdblMax)
+    End If
     mlblFront.Width = dblWidth
     mlblCaption.Caption = intPercent & "%"
-    'mlblFront.Parent.Repaint    ' may not be needed
+    mlblFront.Parent.Repaint    ' may not be needed
 
     ' Use white or black, depending on progress
     If Me.value > (Me.Max / 2) Then
@@ -320,7 +348,7 @@ Public Sub Increment()
     dblVal = Me.value
     If dblVal < Me.Max Then
         Me.value = dblVal + 1
-        'Call Update
+        Call Update
     End If
 
     Exit Sub

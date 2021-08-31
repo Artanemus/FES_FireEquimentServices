@@ -92,6 +92,7 @@ Private Sub ParamChanged()
     If Len(s) = 0 Then
         lblSearchStatus.Caption = vbNullString
         lblSearchStatus.Visible = False
+        Me.Form(SubFrm).Form.Filter = vbNullString
         SetSF_FilterOff
         Exit Sub
     End If

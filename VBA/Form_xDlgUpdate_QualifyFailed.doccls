@@ -1,11 +1,12 @@
 ﻿Option Compare Database
 Option Explicit
 
-Const ModuleName As String = "xTemplate_Dlg"
+Const ModuleName As String = "xDlgUpdate_QualifyFailed"
 Private CompanyCodeStr As String
 
 
 Private Sub cmdCancel_Click()
+    ' mdl#.ReturnValue = vbNull
     Me.Visible = False
 End Sub
 
@@ -14,7 +15,7 @@ Dim msg As String
     
     On Error GoTo PROC_ERR
     Me.Visible = False
-    mdlUpdate.ReturnValue = 1
+    ' mdl#.ReturnValue = vbNull
     
 PROC_EXIT:
     On Error Resume Next
@@ -31,6 +32,8 @@ PROC_ERR:
     
 End Sub
 
+
+
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If KeyCode = vbKeyEscape Then
         cmdCancel_Click
@@ -45,7 +48,6 @@ Dim msg As String
     
     CompanyCodeStr = mdlCompany.GetCompanyCode
     Me.lblCompanyCode.Caption = CompanyCodeStr
-    mdlUpdate.ReturnValue = 0
         
 PROC_EXIT:
     On Error Resume Next

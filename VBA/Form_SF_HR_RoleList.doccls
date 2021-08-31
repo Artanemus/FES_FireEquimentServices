@@ -1,0 +1,8 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    If IsNull(Me![CreatedOn]) Then
+        Me![CreatedOn] = Now()
+    End If
+End Sub

@@ -11,7 +11,7 @@ Const SearchFld As String = "[ShortCaption]"
 
 Const ModuleName As String = "xDlgPicker_Equip"
 
-Private aStationTypeID As Long
+Private lngCoreGroupID As Long
 
 Private Sub cbxChemicalType_Change()
     ParamChanged
@@ -37,40 +37,20 @@ End Sub
 
 Private Sub cmdClearType_Click()
     Me.cbxEquipType = vbNullString
-'    ChemicalVisibility False
     ParamChanged
     Me.Form(SubFrm).Form.CountRecords
 End Sub
 
-Private Sub ChemicalVisibility(IsVisible As Boolean)
-    If IsVisible Then
-        Me.lblChemicalType.Visible = True
-        Me.cmdClearChemicalType.Visible = True
-        Me.cbxChemicalType.Visible = True
-    Else
-        Me.lblChemicalType.Visible = False
-        Me.cmdClearChemicalType.Visible = False
-        Me.cbxChemicalType.Visible = False
-        Me.cbxChemicalType = vbNullString
-    End If
-End Sub
-
 Private Sub cbxEquipType_Change()
-'    If Me.cbxEquipType.Column(0) = 3 Then
-'        ChemicalVisibility True
-'    Else
-'        ChemicalVisibility False
-'    End If
     ParamChanged
     Me.Form(SubFrm).Form.CountRecords
 End Sub
 
 Private Sub Form_Load()
     lblSearchStatus.Visible = False
-    aStationTypeID = 0
+    lngCoreGroupID = 0
     Me.cbxEquipType = vbNullString
     Me.cbxChemicalType = vbNullString
-    ChemicalVisibility True
     Me.cbxEquipBrand = vbNullString
     DynamicResize
 End Sub
@@ -80,7 +60,7 @@ Private Sub Form_Open(Cancel As Integer)
     If Me.txtTextBox.Visible Then Me.txtTextBox.SetFocus
     
     If Len(Me.OpenArgs) > 0 Then
-        aStationTypeID = mdlOpenArgs.AssertParseOpenArgs(Me.OpenArgs, 0)
+        lngCoreGroupID = mdlOpenArgs.AssertParseOpenArgs(Me.OpenArgs, 0)
         
     End If
     
@@ -139,12 +119,13 @@ Private Sub txtTextBox_Change()
 End Sub
 
 Private Sub SetSF_FilterOff()
-    If aStationTypeID = 0 Then
+    If lngCoreGroupID = 0 Then
         If Me.Form(SubFrm).Form.FilterOn Then
             Me.Form(SubFrm).Form.FilterOn = False
         End If
     Else
-        Me.Form(SubFrm).Form.Filter = " [StationTypeID] = " & CStr(aStationTypeID)
+        ' Split the list into: Portable, Electrical, WaterBase, Structual
+        Me.Form(SubFrm).Form.Filter = " [CoreGroupID] = " & CStr(lngCoreGroupID)
         If Me.Form(SubFrm).Form.FilterOn = False Then
             Me.Form(SubFrm).Form.FilterOn = True
         End If
@@ -210,9 +191,9 @@ Private Sub ParamChanged()
         fStr4 = " AND [ChemicalTypeStr] LIKE '%" & aChemicalTypeStr & "%'"
     End If
     
-    If aStationTypeID > 0 Then
-        ' Split the list into: 1=Equipment or 2=Lights
-        fStr5 = " AND [StationTypeID] = " & CStr(aStationTypeID)
+    If lngCoreGroupID > 0 Then
+        ' Split the list into: Portable, Electrical, WaterBase, Structual
+        fStr5 = " AND [CoreGroupID] = " & CStr(lngCoreGroupID)
     End If
     
     aFilterStr = fStr1 & fStr2 & fStr3 & fStr4 & fStr5

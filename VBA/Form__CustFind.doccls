@@ -163,6 +163,7 @@ Private Sub ParamChanged()
     If ((Len(Nz(aSearchStr, vbNullString)) = 0) And (Len(Nz(aSuburbStr, vbNullString)) = 0)) Then
         lblSearchStatus.Caption = "Enter a search string."
         lblSearchStatus.Visible = True
+        Me.Form(SubFrm).Form.Filter = vbNullString
         SetSF_FilterOff
         Exit Sub
     End If
