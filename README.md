@@ -13,9 +13,9 @@ Future code for this site is (support applications, seperate GitHub project - pr
 
 GitHub project, FES_ERStudio, holds the database design for MSSQL EXPRESS dbo.FES database. (SQL build scripts may appear here.)
 
-VBA folder holds the export of BAS and Forms.
+VBA folder holds the export of BAS and Forms. via RubberDuck addin
 
-The .accdb file (a file I deemed to large to be contantly updated and uploaded to GitHub) is available on request. 
+Folder BUILD contains accdb snapshot and T-SQL for backend creation and system data dump. 
 
 A FES website showing it's features and with full help files ... TBA. 
 
