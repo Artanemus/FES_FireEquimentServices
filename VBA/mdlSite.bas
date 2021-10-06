@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlSite"
 Option Compare Database
 Option Explicit
 
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 Private mOpenArgs As String
 Private mDoReseed As Boolean
 Private mSeedDate As Date
@@ -21,11 +21,11 @@ handler:
 End Property
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnvalue = X
+    vReturnValue = X
 End Property
 
 
@@ -212,13 +212,13 @@ Public Function DisableSite(ByVal aCustSiteID As Long) As Boolean
             DoCmd.OpenForm "xDlgLink_Disable", , , , , acDialog, vOpenArgs
             DoCmd.Close acForm, "xDlgLink_Disable"
         
-            If vReturnvalue = 1 Or vReturnvalue = 2 Then
+            If vReturnValue = 1 Or vReturnValue = 2 Then
                 rst.Edit
                 rst.Fields("IsEnabled") = False
                 rst.Fields("DoReseed") = False
                 rst.Update
                 DisableSite = True
-                If vReturnvalue = 2 Then
+                If vReturnValue = 2 Then
                     ' cancell all outstanding inspection orders
                     rst.Close
                     Set rst = Nothing
@@ -469,11 +469,11 @@ Public Function ConfirmDisableCustSite(ByVal aCustSiteID As Long) As Boolean
     vOpenArgs = CStr(aCustSiteID)
     DoCmd.OpenForm "xDlgLink_Disable", , , , , acDialog, vOpenArgs
     DoCmd.Close acForm, "xDlgLink_Disable"
-    If vReturnvalue = 1 Then
+    If vReturnValue = 1 Then
         ' Disable custSite
         DisableSite aCustSiteID
         ConfirmDisableCustSite = True
-    ElseIf vReturnvalue = 2 Then
+    ElseIf vReturnValue = 2 Then
         'Disable custSite and cancell all outstanding orders
         DisableSite aCustSiteID
         mdlInspection.CancelOutstandingInspectionOrders aCustSiteID
@@ -505,7 +505,7 @@ On Error GoTo PROC_ERR
     vOpenArgs = CStr(aCustomerID) & "|" & CStr(aSiteID)
     DoCmd.OpenForm "xDlgSite_Link", , , , , acDialog, vOpenArgs
     DoCmd.Close acForm, "xDlgSite_Link"
-    If vReturnvalue = 1 Or vReturnvalue = True Then
+    If vReturnValue = 1 Or vReturnValue = True Then
         ConfirmLinkCustToSite = True
     End If
     ' returns true of false
@@ -595,7 +595,7 @@ Public Sub addNewSiteStation(ByVal aSiteID As Long, ByVal aEquipmentID As Long)
                 ![CreatedOn] = Now()
                 .Update
                 .Bookmark = .LastModified
-                vReturnvalue = ![SiteStationID]
+                vReturnValue = ![SiteStationID]
             End With
         End If
     End If
@@ -621,7 +621,7 @@ Public Sub SetHydrantCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnvalue = vbNull
+    vReturnValue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub
@@ -663,7 +663,7 @@ Public Sub SetHoseReelCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnvalue = vbNull
+    vReturnValue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub
@@ -705,7 +705,7 @@ Public Sub SetExtingisherCommissionDate(StationID As Long)
     Dim msg As String
     Dim cCode As String
     
-    vReturnvalue = vbNull
+    vReturnValue = vbNull
     
     If Nz(StationID, 0) = 0 Then
         Exit Sub

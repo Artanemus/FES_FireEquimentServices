@@ -251,7 +251,7 @@ Private Sub ParamChanged()
     If (Me.edtStartDate Is Me.ActiveControl) Then
         aStartDTStr = Me.edtStartDate.Text
     Else
-        aStartDTStr = Me.edtStartDate.value
+        aStartDTStr = Me.edtStartDate.Value
     End If
     If (Len(Nz(aStartDTStr, vbNullString)) > 0) Then
         If IsDate(aStartDTStr) Then
@@ -262,7 +262,7 @@ Private Sub ParamChanged()
     If (Me.edtEndDate Is Me.ActiveControl) Then
         aEndDTStr = Me.edtEndDate.Text
     Else
-        aEndDTStr = Me.edtEndDate.value
+        aEndDTStr = Me.edtEndDate.Value
     End If
     If (Len(Nz(aEndDTStr, vbNullString)) > 0) Then
         If IsDate(aEndDTStr) Then
@@ -273,7 +273,7 @@ Private Sub ParamChanged()
     If (Me.ComboSuburb Is Me.ActiveControl) Then
         aSuburbStr = Me.ComboSuburb.Text
     Else
-        aSuburbStr = Me.ComboSuburb.value
+        aSuburbStr = Me.ComboSuburb.Value
     End If
     If (Len(Nz(aSuburbStr, vbNullString)) > 0) Then
         s3 = " AND [Suburb] LIKE '%" & aSuburbStr & "%'"
@@ -282,7 +282,7 @@ Private Sub ParamChanged()
     If (Me.ComboStatus Is Me.ActiveControl) Then
         aStatusStr = Me.ComboStatus.Text
     Else
-        aStatusStr = Me.ComboStatus.value
+        aStatusStr = Me.ComboStatus.Value
     End If
     If (Len(Nz(aStatusStr, vbNullString)) > 0) Then
         s4 = " AND [Caption] LIKE '%" & aStatusStr & "%'"
@@ -291,7 +291,7 @@ Private Sub ParamChanged()
     If (Me.edtCustName Is Me.ActiveControl) Then
         aCustName = Me.edtCustName.Text
     Else
-        aCustName = Me.edtCustName.value
+        aCustName = Me.edtCustName.Value
     End If
     If (Len(Nz(aCustName, vbNullString)) > 0) Then
         s5 = " AND [CustName] LIKE '%" & aCustName & "%'"
@@ -300,7 +300,7 @@ Private Sub ParamChanged()
     If (Me.edtSiteAddress Is Me.ActiveControl) Then
         aSiteAddress = Me.edtSiteAddress.Text
     Else
-        aSiteAddress = Me.edtSiteAddress.value
+        aSiteAddress = Me.edtSiteAddress.Value
     End If
     If (Len(Nz(aSiteAddress, vbNullString)) > 0) Then
         s5 = " AND [xAddress] LIKE '%" & aSiteAddress & "%'"

@@ -138,19 +138,19 @@ Private Sub ParamChanged()
     If (Me.txtTextBox Is Me.ActiveControl) Then
         strSiteAddress = Me.txtTextBox.Text
     Else
-        strSiteAddress = Me.txtTextBox.value
+        strSiteAddress = Me.txtTextBox.Value
     End If
     
     If (Me.ComboSuburb Is Me.ActiveControl) Then
         strSuburb = Me.ComboSuburb.Text
     Else
-        strSuburb = Me.ComboSuburb.value
+        strSuburb = Me.ComboSuburb.Value
     End If
     
     If (Me.txtCustomer Is Me.ActiveControl) Then
         strCustomer = Me.txtCustomer.Text
     Else
-        strCustomer = Me.txtCustomer.value
+        strCustomer = Me.txtCustomer.Value
     End If
         
     If ((Len(Nz(strSiteAddress, vbNullString)) = 0) And (Len(Nz(strSuburb, vbNullString)) = 0) And (Len(Nz(strCustomer, vbNullString)) = 0)) Then

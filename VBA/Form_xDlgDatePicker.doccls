@@ -105,7 +105,7 @@ Dim msg As String
 On Error GoTo PROC_ERR
 
     myYear = Year(myDate)
-    myMonth = month(myDate)
+    myMonth = Month(myDate)
     myDay = Day(myDate)
     
     txtYear = myYear
@@ -263,7 +263,7 @@ DateToElements
 DoEvents
 End Sub
 Private Sub txtYear_AfterUpdate()
-myYear = txtYear.value
+myYear = txtYear.Value
 ElementsToDate
 End Sub
 Private Sub cmdNextYear_Click()
@@ -279,7 +279,7 @@ DateToElements
 DoEvents
 End Sub
 Private Sub cboMonth_AfterUpdate()
-myMonth = cboMonth.value
+myMonth = cboMonth.Value
 ElementsToDate
 End Sub
 Private Sub cmdNextMonth_Click()

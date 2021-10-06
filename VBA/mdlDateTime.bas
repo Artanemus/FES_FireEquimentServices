@@ -5,7 +5,7 @@ Option Explicit
 Private mRunning As Boolean
 Private mPrompt As String
 Private mInitDate As Variant
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 
 ' +-----------------------------------------------------------
 ' |
@@ -21,7 +21,7 @@ On Error GoTo PROC_ERR
     mPrompt = Prompt
     mInitDate = InitDate
     RunDialog
-    InputDate = vReturnvalue
+    InputDate = vReturnValue
 
 PROC_EXIT:
     On Error Resume Next
@@ -42,10 +42,10 @@ Public Sub InputDateField(X As TextBox, Optional Prompt As String = "Select Date
 Dim msg As String
 On Error GoTo PROC_ERR
     mPrompt = Prompt
-    mInitDate = X.value
+    mInitDate = X.Value
     RunDialog
-    If IsDate(vReturnvalue) Then
-        X.value = vReturnvalue
+    If IsDate(vReturnValue) Then
+        X.Value = vReturnValue
     End If
 PROC_EXIT:
     On Error Resume Next
@@ -99,7 +99,7 @@ Public Property Get InitDate() As Variant
 InitDate = mInitDate
 End Property
 Public Property Let ReturnValue(X As Variant)
-vReturnvalue = X
+vReturnValue = X
 End Property
 
 

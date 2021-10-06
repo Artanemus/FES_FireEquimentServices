@@ -363,7 +363,7 @@ End Function
 'Private functions
 '*******************************************************************
 Private Function fGetProductVersion(strExeFullPath As String) As String
-On Error GoTo ErrHandler
+On Error GoTo errHandler
     'Purpose:   return the full build number for an executable.
     'Return:    Version number as string, e.g. "9.0.0.2719"
     '           Zero-length string on error.
@@ -403,7 +403,7 @@ ExitHere:
     Erase pBlock
     Exit Function
     
-ErrHandler:
+errHandler:
     Resume ExitHere
 End Function
  

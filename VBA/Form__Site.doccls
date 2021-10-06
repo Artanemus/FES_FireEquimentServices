@@ -124,7 +124,7 @@ Public Sub ExtendedParam(SubFormName As String, KeyName As String)
 End Sub
 
 Private Sub cmdExtendedParamEquip_Click()
-'    ExtendedParam "[SF_Site_Equip]", "[StationID]"
+'    ExtendedParam "[SF_Site_Portable]", "[StationID]"
 End Sub
 
 Private Sub cmdGetPostcode_Click()
@@ -232,8 +232,9 @@ PROC_ERR:
     Resume PROC_EXIT
 End Sub
 
-Private Sub cmdGotoSite_Click()
-mdlGoto.GotoSite
+
+Private Sub cmdGotoSiteID_Click()
+    mdlGoto.GotoSite
 End Sub
 
 Private Sub cmdNavigateToggleFilter_Click()
@@ -290,23 +291,23 @@ Private Sub TabCtl0_Change()
 
     If Me.Dirty Then Me.Dirty = False
     
-    Select Case Me.TabCtl0.value
+    Select Case Me.TabCtl0.Value
     Case 0
     Case 1
         If Nz(Me.SiteID, 0) = 0 Then
-            Me.Form!SF_Site_Equip.Enabled = False
-            Me.Form!SF_Site_Equip.GridlineColor = 4678655
+            Me.Form!SF_Site_Portable.Enabled = False
+            Me.Form!SF_Site_Portable.GridlineColor = 4678655
         Else
-            Me.Form!SF_Site_Equip.Enabled = True
-            Me.Form!SF_Site_Equip.GridlineColor = 10921638
+            Me.Form!SF_Site_Portable.Enabled = True
+            Me.Form!SF_Site_Portable.GridlineColor = 10921638
         End If
     Case 2
         If Nz(Me.SiteID, 0) = 0 Then
-            Me.Form!SF_Site_Light.Enabled = False
-            Me.Form!SF_Site_Light.GridlineColor = 4678655
+            Me.Form!SF_Site_Electrical.Enabled = False
+            Me.Form!SF_Site_Electrical.GridlineColor = 4678655
         Else
-            Me.Form!SF_Site_Light.Enabled = True
-            Me.Form!SF_Site_Light.GridlineColor = 10921638
+            Me.Form!SF_Site_Electrical.Enabled = True
+            Me.Form!SF_Site_Electrical.GridlineColor = 10921638
         End If
     Case 3
     End Select

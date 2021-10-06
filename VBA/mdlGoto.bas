@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlGoto"
 Option Compare Database
 Option Explicit
 Private mRunning As Boolean
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 Private mOpenArgs As String
 
 Const ModuleName As String = "mdlGoto"
@@ -17,22 +17,22 @@ Public Property Get Running() As Boolean
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnvalue = X
+    vReturnValue = X
 End Property
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
     
 Public Function GotoCustCode(Optional ByVal aRtnValueOnly As Boolean = False) As Long
     Dim msg As String
     On Error GoTo PROC_ERR
     
-    vReturnvalue = mdlPicker.PickCustCode
-    If (Nz(vReturnvalue, 0) > 0) Then
-        GotoCustCode = vReturnvalue
+    vReturnValue = mdlPicker.PickCustCode
+    If (Nz(vReturnValue, 0) > 0) Then
+        GotoCustCode = vReturnValue
         ' name of form, ID to lookup, ID fieldname
-        OpenFormAndCue "_Customer", vReturnvalue, "[CustomerID]"
+        OpenFormAndCue "_Customer", vReturnValue, "[CustomerID]"
     End If
 PROC_EXIT:
     On Error Resume Next
@@ -61,12 +61,12 @@ Public Function GotoEquip(Optional ByVal aEquipmentID As Long = 0) As Long
     mOpenArgs = vbNullString
     If aEquipmentID = 0 Then
         ExeEquipGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoEquip = vReturnvalue
+            GotoEquip = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_Equipment", vReturnvalue, "[EquipmentID]"
+            OpenFormAndCue "_Equipment", vReturnValue, "[EquipmentID]"
         End If
     Else
         GotoEquip = aEquipmentID
@@ -92,12 +92,12 @@ Public Function GotoCust(Optional ByVal aCustomerID As Long = 0) As Long
     mOpenArgs = vbNullString
     If aCustomerID = 0 Then
         ExeCustGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoCust = vReturnvalue
+            GotoCust = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_Customer", vReturnvalue, "[CustomerID]"
+            OpenFormAndCue "_Customer", vReturnValue, "[CustomerID]"
         End If
     Else
         GotoCust = aCustomerID
@@ -124,12 +124,12 @@ Public Function GotoHR(Optional ByVal aHRID As Long = 0) As Long
     mOpenArgs = vbNullString
     If aHRID = 0 Then
         ExeHRGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoHR = vReturnvalue
+            GotoHR = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_HR", vReturnvalue, "[HRID]"
+            OpenFormAndCue "_HR", vReturnValue, "[HRID]"
         End If
     Else
         GotoHR = aHRID
@@ -163,7 +163,7 @@ Public Function GotoCustSite(Optional ByVal aCustSiteID As Long = 0) As Long
         GotoCustSite = CLng(v)
         OpenFormAndCue "_Customer", CLng(v), "[CustomerID]"
         If Screen.ActiveForm.Name = "_Customer" Then
-            Forms("_Customer").Form!CustTabCtl.value = 3
+            Forms("_Customer").Form!CustTabCtl.Value = 3
             Forms("_Customer").Form!SF_Cust_Site.Form.CueToRec aCustSiteID
         ' Screen.ActiveForm.Form!CustTabCtl.TabIndex = 3
         ' Screen.ActiveForm.Form!SF_Cust_Site.CueTo aCustSiteID
@@ -190,12 +190,12 @@ Public Function GotoSite(Optional ByVal aSiteID As Long = 0) As Long
     mOpenArgs = vbNullString
     If aSiteID = 0 Then
         ExeSiteGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoSite = vReturnvalue
+            GotoSite = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_Site", vReturnvalue, "[SiteID]"
+            OpenFormAndCue "_Site", vReturnValue, "[SiteID]"
         End If
     Else
         GotoSite = aSiteID
@@ -223,12 +223,12 @@ Public Function GotoSurveyOrder(Optional ByVal aSurveyOrderID As Long = 0) As Lo
     
     If aSurveyOrderID = 0 Then
         ExeSurveyOrderGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoSurveyOrder = vReturnvalue
+            GotoSurveyOrder = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_SurveyOrder", vReturnvalue, "[SurveyOrderID]"
+            OpenFormAndCue "_SurveyOrder", vReturnValue, "[SurveyOrderID]"
         End If
     Else
         GotoSurveyOrder = aSurveyOrderID
@@ -256,12 +256,12 @@ Public Function GotoInspectionOrder(Optional ByVal aInspectionOrderID As Long = 
     
     If aInspectionOrderID = 0 Then
         ExeInspectionOrderGotoID
-        If (Nz(vReturnvalue, 0) = 0) Then
+        If (Nz(vReturnValue, 0) = 0) Then
             Exit Function
         Else
-            GotoInspectionOrder = vReturnvalue
+            GotoInspectionOrder = vReturnValue
             ' name of form, ID to lookup, ID fieldname
-            OpenFormAndCue "_InspectOrder", vReturnvalue, "[InspectionOrderID]"
+            OpenFormAndCue "_InspectOrder", vReturnValue, "[InspectionOrderID]"
         End If
     Else
         GotoInspectionOrder = aInspectionOrderID

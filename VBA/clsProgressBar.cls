@@ -84,7 +84,7 @@ Public Sub Initialize(BackLabel As Access.Label, FrontLabel As Access.Label, Cap
 
     Exit Sub
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -109,7 +109,7 @@ Private Sub Class_Terminate()
 
     Exit Sub
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -127,7 +127,7 @@ Public Property Get Max() As Double
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -145,7 +145,7 @@ Public Property Let Max(ByVal dblMax As Double)
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -155,15 +155,15 @@ ErrHandler:
 
 End Property
 
-Public Property Get value() As Double
+Public Property Get Value() As Double
 
     On Error GoTo 0    ' Debug Mode
 
-    value = mdblVal
+    Value = mdblVal
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -173,7 +173,7 @@ ErrHandler:
 
 End Property
 
-Public Property Let value(ByVal dblVal As Double)
+Public Property Let Value(ByVal dblVal As Double)
 
     On Error GoTo 0    ' Debug Mode
 
@@ -187,7 +187,7 @@ Public Property Let value(ByVal dblVal As Double)
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -205,7 +205,7 @@ Public Property Get IncrementSize() As Double
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -223,7 +223,7 @@ Public Property Let IncrementSize(ByVal dblSize As Double)
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -241,7 +241,7 @@ Public Property Get HideCaption() As Boolean
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -259,7 +259,7 @@ Public Property Let HideCaption(ByVal blnHide As Boolean)
 
     Exit Property
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -283,7 +283,7 @@ Private Sub Update()
     'mlblFront.Parent.Repaint    ' may not be needed
 
     ' Use white or black, depending on progress
-    If Me.value > (Me.Max / 2) Then
+    If Me.Value > (Me.Max / 2) Then
         mlblCaption.ForeColor = 16777215   ' white
     Else
         mlblCaption.ForeColor = 0  ' black
@@ -301,7 +301,7 @@ Private Sub Update()
 
     Exit Sub
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -316,15 +316,15 @@ Public Sub Increment()
     On Error GoTo 0    ' Debug Mode
 
     Dim dblVal As Double
-    dblVal = Me.value
+    dblVal = Me.Value
     If dblVal < Me.Max Then
-        Me.value = dblVal + 1
+        Me.Value = dblVal + 1
         'Call Update
     End If
 
     Exit Sub
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else
@@ -342,7 +342,7 @@ Public Sub Clear()
 
     Exit Sub
 
-ErrHandler:
+errHandler:
 
     Select Case err.Number
         Case Else

@@ -3,7 +3,7 @@ Option Compare Database
 Option Explicit
 
 Private mRunning As Boolean
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 Private mOpenArgs As String
 
 ' +-----------------------------------------------------------
@@ -15,11 +15,11 @@ Running = mRunning
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-vReturnvalue = X
+vReturnValue = X
 End Property
 
 Public Property Get ReturnValue() As Variant
-ReturnValue = vReturnvalue
+ReturnValue = vReturnValue
 End Property
 
 ' +-----------------------------------------------------------

@@ -3,14 +3,14 @@ Option Compare Database
 Option Explicit
 
 Const ModuleName As String = "mdlToolBox"
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnvalue = X
+    vReturnValue = X
 End Property
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
 
 Public Function LUCompanyInfoID() As Long

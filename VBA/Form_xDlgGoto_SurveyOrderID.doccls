@@ -36,13 +36,13 @@ Private Sub txtTextBox_Change()
         If (Me.txtTextBox Is ctl) Then
             mTextBoxStr = Me.txtTextBox.Text
             i = Me.txtTextBox.SelStart
-            If IsNull(mTextBoxStr) Then mTextBoxStr = Me.txtTextBox.value
+            If IsNull(mTextBoxStr) Then mTextBoxStr = Me.txtTextBox.Value
         Else
-            mTextBoxStr = Me.txtTextBox.value
+            mTextBoxStr = Me.txtTextBox.Value
             i = Len(mTextBoxStr)
         End If
     Else
-        mTextBoxStr = Me.txtTextBox.value
+        mTextBoxStr = Me.txtTextBox.Value
         i = Len(mTextBoxStr)
     End If
 ERR_2:
@@ -61,7 +61,7 @@ PROC_EXIT:
     Set ctl = Nothing
     Exit Sub
 ERR_1:
-    mTextBoxStr = Me.txtTextBox.value
+    mTextBoxStr = Me.txtTextBox.Value
     i = Len(Nz(mTextBoxStr, 0))
     GoTo ERR_2
 PROC_ERR:

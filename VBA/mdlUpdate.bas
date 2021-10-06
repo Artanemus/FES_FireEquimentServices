@@ -3,7 +3,7 @@ Option Compare Database
 Option Explicit
 
 
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 Private vOpenArgs As String
 Private vCompanyInfoID As Long
 Private vLogCallerID As Long
@@ -16,11 +16,11 @@ Private PROGRESS As frmProgress
 Const ModuleName As String = "mdlUpdate"
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
 
 Public Property Let ReturnValue(RHS As Variant)
-    vReturnvalue = RHS
+    vReturnValue = RHS
 End Property
 
 Public Property Get Stats() As clsUpdateStats
@@ -64,9 +64,9 @@ Public Sub Update_Main()
     DoCmd.OpenForm "xDlgUpdate_Begin", , , , , acDialog
     DoCmd.Close acForm, "xDlgUpdate_Begin", acSaveNo
     ' User said YES
-    If vReturnvalue = 1 Then
+    If vReturnValue = 1 Then
         
-        PROGRESS.show
+        PROGRESS.Show
     
         '#### Clear the system log file
         PROGRESS.lblCaption.Caption = "Clear System Log..."
@@ -74,7 +74,7 @@ Public Sub Update_Main()
         Success = mdlLog.ExeClearLog()
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             errMsg = _
                    "This is a system error. Your dbo.Log table may be corrupt." & _
                    vbCrLf & "Use Microsoft's SQL Server Management Studio to inspect the error."
@@ -92,7 +92,7 @@ Public Sub Update_Main()
         Success = mdlCheck.CheckSystemGlobals(errMsg)
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             DoCmd.OpenForm "xDlgUpdate_CheckFailed", , , , , acDialog, errMsg
             DoCmd.Close acForm, "xDlgUpdate_CheckFailed", acSaveNo
             Unload PROGRESS
@@ -106,7 +106,7 @@ Public Sub Update_Main()
         Success = mdlCheck.CheckCustSiteSeeds(errMsg)
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             DoCmd.OpenForm "xDlgUpdate_CheckFailed", , , , , acDialog, errMsg
             DoCmd.Close acForm, "xDlgUpdate_CheckFailed", acSaveNo
             Unload PROGRESS
@@ -120,7 +120,7 @@ Public Sub Update_Main()
         Success = mdlCheck.CheckEquipType(errMsg)
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             DoCmd.OpenForm "xDlgUpdate_CheckFailed", , , , , acDialog, errMsg
             DoCmd.Close acForm, "xDlgUpdate_CheckFailed", acSaveNo
             Unload PROGRESS
@@ -135,7 +135,7 @@ Public Sub Update_Main()
         Success = mdlCheck.CheckInspectOrdersSI(errMsg)
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             DoCmd.OpenForm "xDlgUpdate_CheckFailed", , , , , acDialog, errMsg
             DoCmd.Close acForm, "xDlgUpdate_CheckFailed", acSaveNo
             Unload PROGRESS
@@ -151,7 +151,7 @@ Public Sub Update_Main()
         Success = mdlCheck.CheckMultiInProgress(errMsg)
         If Not Success Then
             ' hide the UserForm
-            PROGRESS.hide
+            PROGRESS.Hide
             DoCmd.OpenForm "xDlgUpdate_CheckFailed", , , , , acDialog, errMsg
             DoCmd.Close acForm, "xDlgUpdate_CheckFailed", acSaveNo
             Unload PROGRESS
@@ -170,7 +170,7 @@ Public Sub Update_Main()
         PROGRESS.lblCaption.Caption = "Clean up and tally stats..."
         DoEvents
                         
-        PROGRESS.hide
+        PROGRESS.Hide
                         
         If Not Success Then
             ' hide the UserForm
@@ -196,7 +196,7 @@ Public Sub Update_Main()
 PROC_EXIT:
     'Cleanup
     If PROGRESS.Visible Then
-        PROGRESS.hide
+        PROGRESS.Hide
     End If
     Unload PROGRESS
     Set PROGRESS = Nothing

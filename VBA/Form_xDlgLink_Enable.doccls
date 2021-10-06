@@ -27,7 +27,7 @@ Private Sub cmdOK_Click()
         
     Dim Results As Integer
     ' DO A RESEED OF RequestedDT and LevelNum
-    If Frame107.value = 2 Then
+    If Frame107.Value = 2 Then
         'ASSERT SEED DATE
         If Nz(Me.txtSeedDate, 0) = 0 Then
             msg = "A SeedDate must be given." & vbCrLf & _
@@ -86,7 +86,7 @@ Private Sub cmdOK_Click()
     End If
     
     mdlEnable.ReturnValue = 1
-    mdlEnable.Mode = Frame107.value
+    mdlEnable.Mode = Frame107.Value
     Me.Visible = False
     
     
@@ -167,7 +167,7 @@ Private Sub Form_Open(Cancel As Integer)
     On Error GoTo PROC_ERR
     
     If Len(Me.OpenArgs) > 0 Then
-        Frame107.value = 1
+        Frame107.Value = 1
     
         ' ArgCount is Base zero
         ' -------------------------------------------------

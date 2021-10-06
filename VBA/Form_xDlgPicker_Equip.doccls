@@ -159,23 +159,23 @@ Private Sub ParamChanged()
     If (Me.txtTextBox Is Me.ActiveControl) Then
         aSearchStr = Me.txtTextBox.Text
     Else
-        aSearchStr = Me.txtTextBox.value
+        aSearchStr = Me.txtTextBox.Value
     End If
     
     If (Me.cbxEquipType Is Me.ActiveControl) Then
         aEquipTypeStr = Me.cbxEquipType.Text
     Else
-        aEquipTypeStr = Me.cbxEquipType.value
+        aEquipTypeStr = Me.cbxEquipType.Value
     End If
     If (Me.cbxEquipBrand Is Me.ActiveControl) Then
         aEquipBrandStr = Me.cbxEquipBrand.Text
     Else
-        aEquipBrandStr = Me.cbxEquipBrand.value
+        aEquipBrandStr = Me.cbxEquipBrand.Value
     End If
     If (Me.cbxChemicalType Is Me.ActiveControl) Then
         aChemicalTypeStr = Me.cbxChemicalType.Text
     Else
-        aChemicalTypeStr = Me.cbxChemicalType.value
+        aChemicalTypeStr = Me.cbxChemicalType.Value
     End If
     
     If (Len(Nz(aSearchStr, vbNullString)) > 0) Then

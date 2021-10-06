@@ -42,10 +42,16 @@ End Sub
 Private Sub cmdSetToCurrMonth_Click()
     'Set to current month ... same as form load routine
     dtYEAR = Date
-    Me.Text48.value = Format(dtYEAR, "YYYY")
-    Me.tcMonths.value = DatePart("m", dtYEAR) - 1
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
+    Me.tcMonths.Value = DatePart("m", dtYEAR) - 1
     ' update recordset
     tcMonths_Change
+End Sub
+
+Private Sub cmdTechFormBatchReport_Click()
+Dim DT As Date
+    DT = DateSerial(Me.Text48.Value, Me.tcMonths.Value + 1, 1)
+    mdlBatchPrint.BatchPrintRptTech DT
 End Sub
 
 Private Sub comboInspectStatus_Change()
@@ -94,7 +100,7 @@ Private Sub Form_Load()
     Me.lblCompanyCode.Caption = CompanyCodeStr
     
     dtYEAR = Date
-    Me.Text48.value = Format(dtYEAR, "YYYY")
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
     Set dbs = CurrentDb
     Set qryDef = dbs.QueryDefs("qrySchedule")
     ' assigns recordset
@@ -119,13 +125,13 @@ Dim dt2 As Date
 Dim i As Integer
 Dim aYear As Integer
 
-    Set aPage = Me.tcMonths.Pages.item(Me.tcMonths.value)
+    Set aPage = Me.tcMonths.Pages.item(Me.tcMonths.Value)
     If Not IsNull(aPage) Then
         i = CInt(aPage.Tag)
         aYear = DatePart("yyyy", dtYEAR)
         dt1 = DateSerial(aYear, i, 1)
         i = i + 1
-        If Me.tcMonths.value = 11 Then
+        If Me.tcMonths.Value = 11 Then
             dt2 = DateSerial((aYear + 1), 1, 1)
         Else
             dt2 = DateSerial(aYear, i, 1)
@@ -133,19 +139,19 @@ Dim aYear As Integer
         If Not (qryDef Is Nothing) Then
             Set Me.Form.Recordset = Nothing
             qryDef.Close
-            qryDef.Parameters("startDate").value = dt1
-            qryDef.Parameters("endDate").value = dt2
+            qryDef.Parameters("startDate").Value = dt1
+            qryDef.Parameters("endDate").Value = dt2
             
             ' 21/5/2021
             '  DEFAULT IS TO SHOW ALL DISABLED CUSTSITES
             '  This means all inspection orders are shown ....
             ' ---------------------------------------------------------------------
-            qryDef.Parameters("HideDisabled").value = Me.chkHideDisabledLinks.value
+            qryDef.Parameters("HideDisabled").Value = Me.chkHideDisabledLinks.Value
             ' ---------------------------------------------------------------------
             
             ' 15/5/2021 - filter on InspectionOrderStatusID
             ' -----------------------------------------------------------
-            qryDef.Parameters("status").value = Nz(Me.comboInspectStatus.Column(0), 0)
+            qryDef.Parameters("status").Value = Nz(Me.comboInspectStatus.Column(0), 0)
             ' -----------------------------------------------------------
             
             Set Me.Form.Recordset = qryDef.OpenRecordset(dbOpenSnapshot)
@@ -157,7 +163,7 @@ End Sub
 Private Sub cmdFWD_Click()
     'increment the date and requery
     dtYEAR = DateAdd("yyyy", 1, dtYEAR)
-    Me.Text48.value = Format(dtYEAR, "YYYY")
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
     ' calling here will update the forms filter
     tcMonths_Change
 End Sub
@@ -165,7 +171,7 @@ End Sub
 Private Sub cmdREV_Click()
     'increment the date and requery
     dtYEAR = DateAdd("yyyy", -1, dtYEAR)
-    Me.Text48.value = Format(dtYEAR, "YYYY")
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
     ' calling here will update the forms filter
     tcMonths_Change
 End Sub

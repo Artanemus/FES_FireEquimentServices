@@ -22,7 +22,7 @@ End Sub
 
 Private Sub Form_Load()
     lblSearchStatus.Visible = False
-    Me.chkShowArchivedSites.value = True
+    Me.chkShowArchivedSites.Value = True
     mHideArchived = False
     DynamicResize
 End Sub

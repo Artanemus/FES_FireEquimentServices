@@ -1,7 +1,7 @@
 ﻿Option Compare Database
 Option Explicit
 
-Const ModuleName As String = "[SF_Site_Light]"
+Const ModuleName As String = "[SF_Site_Electrical]"
 Const PKey As String = "[StationID]"
 Const msgEmpty As String = "STATION IS EMPTY"
 
@@ -130,6 +130,14 @@ Dim v As Variant
     
 End Sub
 
+Private Sub Form_Current()
+    ' re-init PowerBoard combobox
+    Dim SQL As String
+    SQL = "SELECT dbo_PowerBoard.PowerBoardID, dbo_PowerBoard.PowerBoardNum FROM dbo_PowerBoard WHERE (((dbo_PowerBoard.SiteID)=" & CStr(Nz(Me.SiteID, 0)) & "));"
+    Me.cbxPowerBoardID.RowSource = SQL
+    Me.cbxPowerBoardID.Requery
+End Sub
+
 Private Sub Form_DblClick(Cancel As Integer)
     ' goto equipment
     If Nz(Me.EquipmentID, 0) > 0 Then
@@ -153,6 +161,6 @@ Private Sub Note_DblClick(Cancel As Integer)
     ' perform extended Parma
     If HasParent(Me.Form) Then
         If Me.Dirty Then Me.Dirty = False
-        Me.Form.Parent.ExtendedParam "[SF_Site_Light]", "[StationID]"
+        Me.Form.Parent.ExtendedParam "[SF_Site_Electrical]", "[StationID]"
     End If
 End Sub

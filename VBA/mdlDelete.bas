@@ -4,14 +4,14 @@ Option Compare Database
 Option Explicit
 
 Const ModuleName As String = "mdlToolBox"
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnvalue = X
+    vReturnValue = X
 End Property
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
 
 Public Function UndoUpdate() As Boolean
@@ -95,8 +95,8 @@ Public Function DeleteEquipment() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[EquipmentID]", "dbo_Equipment", "[EquipmentID] = " & CStr(vReturnvalue))
+    If (Nz(vReturnValue, 0) > 0) Then
+        v = DLookup("[EquipmentID]", "dbo_Equipment", "[EquipmentID] = " & CStr(vReturnValue))
         If IsNull(v) Then
             'The Equipment ID doesn't exist.
             Beep
@@ -108,10 +108,10 @@ Public Function DeleteEquipment() As Boolean
         Exit Function
     End If
     
-    v = DLookup("[Caption]", "dbo_Equipment", "[EquipmentID] = " & CStr(vReturnvalue))
+    v = DLookup("[Caption]", "dbo_Equipment", "[EquipmentID] = " & CStr(vReturnValue))
         
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000") & " " & CStr(v)
+    s = Format(CStr(vReturnValue), "0000") & " " & CStr(v)
     s = s & vbCrLf
     s = s & vbCrLf & "This action will result in ...."
     s = s & vbCrLf & " ...REMOVE ALL references in Stations (make EMPTY)."
@@ -123,15 +123,15 @@ Public Function DeleteEquipment() As Boolean
     If rtn = vbYes Then
     
         ' iterate over stations and NULL equipment and SET state of IsManaged and IsEmpty results
-        SQL = "UPDATE dbo_Station SET [IsEmpty]=1,[IsManaged]=0,[EquipmentID]=NULL WHERE [EquipmentID]= " & CStr(vReturnvalue)
+        SQL = "UPDATE dbo_Station SET [IsEmpty]=1,[IsManaged]=0,[EquipmentID]=NULL WHERE [EquipmentID]= " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         
         ' DELETE ALL TESTs that reference the equipment
-        SQL = "DELETE * FROM dbo_Test WHERE [EquipmentID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_Test WHERE [EquipmentID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_Equipment WHERE [EquipmentID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_Equipment WHERE [EquipmentID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteEquipment = True
@@ -174,8 +174,8 @@ Public Function DeleteSurveyOrder() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[SurveyOrderID]", "dbo_SurveyOrder", "[SurveyOrderID] = " & CStr(vReturnvalue))
+    If (Nz(vReturnValue, 0) > 0) Then
+        v = DLookup("[SurveyOrderID]", "dbo_SurveyOrder", "[SurveyOrderID] = " & CStr(vReturnValue))
         If IsNull(v) Then
             'The SurveyOrder ID doesn't exist.
             Beep
@@ -188,14 +188,14 @@ Public Function DeleteSurveyOrder() As Boolean
     End If
         
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000")
+    s = Format(CStr(vReturnValue), "0000")
     s = s & vbCrLf
     s = s & vbCrLf & "DO YOU REALLY WANT TO DELETE THE SURVEY ORDER?"
         
     rtn = MsgBox(s, vbYesNo Or vbExclamation Or vbDefaultButton2, "DELETE SURVEY ORDER")
     If rtn = vbYes Then
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_SurveyOrder WHERE [SurveyOrderID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_SurveyOrder WHERE [SurveyOrderID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteSurveyOrder = True
@@ -238,8 +238,8 @@ Public Function DeleteInspectionOrder() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[InspectionOrderID]", "dbo_InspectionOrder", "[InspectionOrderID] = " & CStr(vReturnvalue))
+    If (Nz(vReturnValue, 0) > 0) Then
+        v = DLookup("[InspectionOrderID]", "dbo_InspectionOrder", "[InspectionOrderID] = " & CStr(vReturnValue))
         If IsNull(v) Then
             'The InspectionOrder ID doesn't exist.
             Beep
@@ -252,7 +252,7 @@ Public Function DeleteInspectionOrder() As Boolean
     End If
     
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000")
+    s = Format(CStr(vReturnValue), "0000")
     s = s & vbCrLf & "This action will result in ...."
     s = s & vbCrLf & " ...DELETE ALL InspectionOrder's inspection test results."
     s = s & vbCrLf
@@ -261,7 +261,7 @@ Public Function DeleteInspectionOrder() As Boolean
     rtn = MsgBox(s, vbYesNo Or vbExclamation Or vbDefaultButton2, "DELETE InspectionOrder")
     If rtn = vbYes Then
         ' iterate over inspection orders and delete test results
-        SQL = "SELECT * FROM dbo_InspectionOrder WHERE [InspectionOrderID] = " & CStr(vReturnvalue)
+        SQL = "SELECT * FROM dbo_InspectionOrder WHERE [InspectionOrderID] = " & CStr(vReturnValue)
         Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
            SQL = "DELETE * FROM dbo_Test WHERE [InspectionOrderID] = " & CStr(rst![InspectionOrderID])
@@ -272,7 +272,7 @@ Public Function DeleteInspectionOrder() As Boolean
         Set rst = Nothing
                          
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_InspectionOrder WHERE [InspectionOrderID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_InspectionOrder WHERE [InspectionOrderID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteInspectionOrder = True
@@ -302,7 +302,8 @@ Public Function DeleteSite() As Boolean
     Dim frm As Form
     Dim mOpenArgs As String
     Dim SQL As String
-    Dim v As Variant
+    Dim varSiteID As Variant
+    Dim varAddress As Variant
     Dim rtn As Integer
     Dim rst As DAO.Recordset
 
@@ -315,9 +316,9 @@ Public Function DeleteSite() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[SiteID]", "dbo_Site", "[SiteID] = " & CStr(vReturnvalue))
-        If IsNull(v) Then
+    If (Nz(vReturnValue, 0) > 0) Then
+        varSiteID = DLookup("[SiteID]", "dbo_Site", "[SiteID] = " & CStr(vReturnValue))
+        If IsNull(varSiteID) Then
             'The Site ID doesn't exist.
             Beep
             MsgBox "The Site doesn't exist", vbOKOnly, "DELETE SITE FAILED"
@@ -328,12 +329,13 @@ Public Function DeleteSite() As Boolean
         Exit Function
     End If
     
-    v = DLookup("[Address]", "dbo_Site", "[SiteID] = " & CStr(vReturnvalue))
+    varAddress = DLookup("[Address]", "dbo_Site", "[SiteID] = " & CStr(varSiteID))
     
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000") & " " & CStr(v)
+    s = Format(CStr(varSiteID), "0000") & " " & CStr(varAddress)
     s = s & vbCrLf & "This action will result in ...."
-    s = s & vbCrLf & " ...DELETE ALL Test results for each Site's Stations."
+    s = s & vbCrLf & " ...DELETE ALL Test results for each Inspection Order that uses the Site."
+    s = s & vbCrLf & " ...DELETE ALL Inspection Orders that uses the Site."
     s = s & vbCrLf & " ...DELETE ALL Site's Stations."
     s = s & vbCrLf & " ...DELETE ALL Site's customer-site LINKs."
     s = s & vbCrLf
@@ -341,30 +343,35 @@ Public Function DeleteSite() As Boolean
         
     rtn = MsgBox(s, vbYesNo Or vbExclamation Or vbDefaultButton2, "DELETE SITE")
     If rtn = vbYes Then
+    
         ' ##############  DELETE THE Site
         
         ' Delete ALL Test's
-        ' iterate over each station
-        SQL = "SELECT * FROM dbo_Station WHERE [SiteID] = " & CStr(vReturnvalue)
+        ' iterate over each Inspection Order - with site id
+        SQL = "SELECT dbo_InspectionOrder.InspectionOrderID FROM dbo_InspectionOrder WHERE [SiteID] = " & CStr(varSiteID)
         Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
-           SQL = "DELETE * FROM dbo_Test WHERE [StationID] = " & CStr(rst![StationID])
+           SQL = "DELETE * FROM dbo_Test WHERE [dbo_InspectionOrder] = " & CStr(rst![InspectionOrderID])
            CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
            rst.MoveNext
         Loop
         rst.Close
         Set rst = Nothing
         
+        ' Delete ALL INSPECTION ORDERS
+        SQL = "DELETE * FROM dbo_InspectionOrder WHERE [SiteID] = " & CStr(varSiteID)
+        CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
+        
         ' Delete ALL STATIONS
-        SQL = "DELETE * FROM dbo_Station WHERE [SiteID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_Station WHERE [SiteID] = " & CStr(varSiteID)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
                 
         ' Delete ALL CustSite LINKS
-        SQL = "DELETE * FROM dbo_CustSite WHERE [SiteID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustSite WHERE [SiteID] = " & CStr(varSiteID)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_Site WHERE [SiteID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_Site WHERE [SiteID] = " & CStr(varSiteID)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteSite = True
@@ -409,8 +416,8 @@ Public Function DeleteCustomer() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[CustomerID]", "dbo_Customer", "[CustomerID] = " & CStr(vReturnvalue))
+    If (Nz(vReturnValue, 0) > 0) Then
+        v = DLookup("[CustomerID]", "dbo_Customer", "[CustomerID] = " & CStr(vReturnValue))
         If IsNull(v) Then
             'The Customer ID doesn't exist.
             Beep
@@ -422,10 +429,10 @@ Public Function DeleteCustomer() As Boolean
         Exit Function
     End If
     
-    v = DLookup("[CustName]", "dbo_Customer", "[CustomerID] = " & CStr(vReturnvalue))
+    v = DLookup("[CustName]", "dbo_Customer", "[CustomerID] = " & CStr(vReturnValue))
     
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000") & " " & CStr(v)
+    s = Format(CStr(vReturnValue), "0000") & " " & CStr(v)
     s = s & vbCrLf & "This action will result in ...."
     s = s & vbCrLf & " ...DELETE ALL Customer's contact numbers."
     s = s & vbCrLf & " ...DELETE ALL Customer's addresses."
@@ -442,23 +449,23 @@ Public Function DeleteCustomer() As Boolean
     If rtn = vbYes Then
         'DELETE THE Customer
         ' Delete ALL contact numbers
-        SQL = "DELETE * FROM dbo_CustContactNum WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustContactNum WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Addresses
-        SQL = "DELETE * FROM dbo_CustAddress WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustAddress WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Email
-        SQL = "DELETE * FROM dbo_CustEmail WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustEmail WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL CustContact Info
-        SQL = "DELETE * FROM dbo_CustContact WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustContact WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Survey Orders
-        SQL = "DELETE * FROM dbo_SurveyOrder WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_SurveyOrder WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         
         ' iterate over inspection orders and delete test results
-        SQL = "SELECT * FROM dbo_InspectionOrder WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "SELECT * FROM dbo_InspectionOrder WHERE [CustomerID] = " & CStr(vReturnValue)
         Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
            SQL = "DELETE * FROM dbo_Test WHERE [InspectionOrderID] = " & CStr(rst![InspectionOrderID])
@@ -469,15 +476,15 @@ Public Function DeleteCustomer() As Boolean
         Set rst = Nothing
          
         ' Delete ALL Inspection Orders
-        SQL = "DELETE * FROM dbo_InspectionOrder WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_InspectionOrder WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
                 
         ' Delete ALL CustSite
-        SQL = "DELETE * FROM dbo_CustSite WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustSite WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_Customer WHERE [CustomerID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_Customer WHERE [CustomerID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteCustomer = True
@@ -524,8 +531,8 @@ Public Function DeleteHR() As Boolean
     DoCmd.OpenForm "xDlgGoto_DELETE_ID", , , , , acDialog, mOpenArgs
     DoCmd.Close acForm, "xDlgGoto_DELETE_ID"
     
-    If (Nz(vReturnvalue, 0) > 0) Then
-        v = DLookup("[HRID]", "dbo_HR", "[HRID] = " & CStr(vReturnvalue))
+    If (Nz(vReturnValue, 0) > 0) Then
+        v = DLookup("[HRID]", "dbo_HR", "[HRID] = " & CStr(vReturnValue))
         If IsNull(v) Then
             'The HR ID doesn't exist.
             Beep
@@ -537,11 +544,11 @@ Public Function DeleteHR() As Boolean
         Exit Function
     End If
     
-    v = DLookup("[LastName]", "dbo_HR", "[HRID] = " & CStr(vReturnvalue))
-    v2 = DLookup("[FirstName]", "dbo_HR", "[HRID] = " & CStr(vReturnvalue))
+    v = DLookup("[LastName]", "dbo_HR", "[HRID] = " & CStr(vReturnValue))
+    v2 = DLookup("[FirstName]", "dbo_HR", "[HRID] = " & CStr(vReturnValue))
     
     s = vbNullString
-    s = Format(CStr(vReturnvalue), "0000") & " " & CStr(v2) & " " & UCase(CStr(v))
+    s = Format(CStr(vReturnValue), "0000") & " " & CStr(v2) & " " & UCase(CStr(v))
     s = s & vbCrLf & "This action will result in ...."
     s = s & vbCrLf & " ...DELETE ALL HR's contact numbers."
     s = s & vbCrLf & " ...DELETE ALL HR's addresses."
@@ -559,35 +566,35 @@ Public Function DeleteHR() As Boolean
     If rtn = vbYes Then
         'DELETE THE HR
         ' Delete ALL contact numbers
-        SQL = "DELETE * FROM dbo_HRContactNum WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_HRContactNum WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Addresses
-        SQL = "DELETE * FROM dbo_HRAddress WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_HRAddress WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Email
-        SQL = "DELETE * FROM dbo_HREmail WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_HREmail WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL ZONE Infor
-        SQL = "DELETE * FROM dbo_HRZone WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_HRZone WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL Roles
-        SQL = "DELETE * FROM dbo_RoleList WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_RoleList WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Delete ALL CustContact Info
-        SQL = "DELETE * FROM dbo_CustContact WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_CustContact WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Update CustSite info
-        SQL = "UPDATE dbo_CustSite SET [SiteContactID] = NULL WHERE [SiteContactID] = " & CStr(vReturnvalue)
+        SQL = "UPDATE dbo_CustSite SET [SiteContactID] = NULL WHERE [SiteContactID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Update Survey Orders info
-        SQL = "UPDATE dbo_SurveyOrder SET [HRID] = NULL WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "UPDATE dbo_SurveyOrder SET [HRID] = NULL WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         ' Update Inspection Orders info
-        SQL = "UPDATE dbo_InspectionOrder SET [HRID] = NULL WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "UPDATE dbo_InspectionOrder SET [HRID] = NULL WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         ' DELETE .. DELETE .. DELETE .. DELETE .. DELETE .. DELETE
-        SQL = "DELETE * FROM dbo_HR WHERE [HRID] = " & CStr(vReturnvalue)
+        SQL = "DELETE * FROM dbo_HR WHERE [HRID] = " & CStr(vReturnValue)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
     
         DeleteHR = True

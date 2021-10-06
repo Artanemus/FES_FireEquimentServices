@@ -47,25 +47,91 @@ PROC_ERR:
     Resume PROC_EXIT
 End Sub
 
+Private Sub cmdGotoCustID_Click()
+    mdlGoto.GotoCust Me.CustomerID
+End Sub
+
 Private Sub cmdGotoInspectionOrder_Click()
     mdlGoto.GotoInspectionOrder
 End Sub
 
-Private Sub cmdReBuildCheckList_Click()
+Private Sub cmdGotoSiteID_Click()
+    mdlGoto.GotoSite Me.SiteID
+End Sub
+
+Private Sub cmdReBuildCheckListALL_Click()
+Dim DoRequery As Boolean
+    DoRequery = False
     ' rebuild the inspection equipment site check list
-    mdlTest.ReBuildTestEquip Me.InspectionOrderID
-    If mdlTest.ReturnValue = 1 Then
-        Me.Form![SF_InspectOrder_Equip].Form.Requery
+    If mdlKeyBoardState.IsControlKeyDown Then
+        mdlTest.ClearAll Me.InspectionOrderID
+        DoRequery = True
+    Else
+        mdlTest.ReBuildTestALLCoreGroups Me.InspectionOrderID
+        If mdlTest.ReturnValue = 1 Then
+            DoRequery = True
+        End If
+    End If
+    If DoRequery Then
+        Me.Form![SF_InspectOrder_Portable].Form.Requery
+        Me.Form![SF_InspectOrder_Electrical].Form.Requery
+        Me.Form![SF_InspectOrder_WaterBase].Form.Requery
+        Me.Form![SF_InspectOrder_Structual].Form.Requery
     End If
 End Sub
 
-Private Sub cmdReBuildCheckListLight_Click()
-    ' rebuild the inspection equipment site check list
-    mdlTest.ReBuildTestLight Me.InspectionOrderID
-    If mdlTest.ReturnValue = 1 Then
-        Me.Form![SF_InspectOrder_Light].Form.Requery
+Private Sub cmdReBuildCheckListPortable_Click()
+    ' rebuild the inspection Portable site check list
+    If mdlKeyBoardState.IsControlKeyDown Then
+        mdlTest.ClearSelected Me.InspectionOrderID, 1
+        Me.Form![SF_InspectOrder_Portable].Form.Requery
+    Else
+        mdlTest.ReBuildTestPortable Me.InspectionOrderID
+        If mdlTest.ReturnValue = 1 Then
+            Me.Form![SF_InspectOrder_Portable].Form.Requery
+        End If
     End If
 End Sub
+
+Private Sub cmdReBuildCheckListElectrical_Click()
+    ' rebuild the inspection equipment site check list
+    If mdlKeyBoardState.IsControlKeyDown Then
+        mdlTest.ClearSelected Me.InspectionOrderID, 2
+        Me.Form![SF_InspectOrder_Electrical].Form.Requery
+    Else
+        mdlTest.ReBuildTestElectrical Me.InspectionOrderID
+        If mdlTest.ReturnValue = 1 Then
+            Me.Form![SF_InspectOrder_Electrical].Form.Requery
+        End If
+    End If
+End Sub
+
+Private Sub cmdReBuildCheckListWaterBase_Click()
+    ' rebuild the inspection WaterBase site check list
+    If mdlKeyBoardState.IsControlKeyDown Then
+        mdlTest.ClearSelected Me.InspectionOrderID, 3
+        Me.Form![SF_InspectOrder_WaterBase].Form.Requery
+    Else
+        mdlTest.ReBuildTestWaterBase Me.InspectionOrderID
+        If mdlTest.ReturnValue = 1 Then
+            Me.Form![SF_InspectOrder_WaterBase].Form.Requery
+        End If
+    End If
+End Sub
+
+Private Sub cmdReBuildCheckListStructual_Click()
+    ' rebuild the inspection Structual site check list
+    If mdlKeyBoardState.IsControlKeyDown Then
+        mdlTest.ClearSelected Me.InspectionOrderID, 4
+        Me.Form![SF_InspectOrder_Structual].Form.Requery
+    Else
+        mdlTest.ReBuildTestStructual Me.InspectionOrderID
+        If mdlTest.ReturnValue = 1 Then
+            Me.Form![SF_InspectOrder_Structual].Form.Requery
+        End If
+    End If
+End Sub
+
 
 Private Sub cmdRequestDT_Click()
 Dim v As Variant
@@ -113,6 +179,7 @@ On Error GoTo PROC_ERR
     If Me.InspectionOrderID > 0 Then
 '        s = d1 & "|" & d2 & "|" & CStr(TOTRangeNonCore) & "|" & CStr(TOTRangeCore)
         s = CStr(Me.InspectionOrderID)
+        s = s & "|" & CStr(Me.ServiceInterval)
         DoCmd.OpenReport "_rpt_InspectTech", acViewReport, vbNullString, , acNormal, s
 '        vReturnValue = 1
     End If
@@ -133,6 +200,11 @@ PROC_ERR:
 
     
 
+End Sub
+
+Private Sub Combo25_Change()
+    ' lock the form?
+    Call Form_Current
 End Sub
 
 Private Sub Form_BeforeInsert(Cancel As Integer)
@@ -161,7 +233,7 @@ Private Sub Form_AfterUpdate()
     If Nz(Me![LevelNum], 0) = 0 Then
         DoErrMsg = True
     Else
-        v = DLookup("NumOfLevels", "dbo_Global", "[GlobalID] = 1")
+        v = DLookup("DefNumOfLevels", "dbo_Global", "[GlobalID] = 1")
         If Nz(v, 0) <> 0 Then
             If (Me![LevelNum] > v) Then
                 DoErrMsg = True
@@ -176,11 +248,76 @@ Private Sub Form_AfterUpdate()
     End If
 End Sub
 
+Private Sub Form_Current()
+    ' TEST for IsLockedStatus and LOCK the CoreGroup Grids
+Dim var As Variant
+Dim frm As SubForm
+Dim lngRed As Long
+Dim lngBlack As Long
+
+    lngRed = RGB(255, 0, 0)
+    lngBlack = RGB(0, 0, 0)
+    
+    var = Me.InspectionStatusID
+    If Nz(var, 0) <> 0 Then
+        If (CLng(var) = 3) Or (CLng(var) = 2) Then
+        
+            Set frm = Me.Form("SF_InspectOrder_Portable")
+            frm.Locked = True
+            frm.Properties.item("BorderWidth") = 2
+            frm.Properties.item("BorderColor") = lngRed
+            
+            Set frm = Me.Form("SF_InspectOrder_Electrical")
+            frm.Locked = True
+            frm.Properties.item("BorderWidth") = 2
+            frm.Properties.item("BorderColor") = lngRed
+            
+            Set frm = Me.Form("SF_InspectOrder_WaterBase")
+            frm.Locked = True
+            frm.Properties.item("BorderWidth") = 2
+            frm.Properties.item("BorderColor") = lngRed
+            
+            Set frm = Me.Form("SF_InspectOrder_Structual")
+            frm.Locked = True
+            frm.Properties.item("BorderWidth") = 2
+            frm.Properties.item("BorderColor") = lngRed
+            
+            Set frm = Nothing
+            
+            Me.lblLocked.Visible = True
+        Else
+            Set frm = Me.Form("SF_InspectOrder_Portable")
+            frm.Locked = False
+            frm.Properties.item("BorderWidth") = 0  ' Hairline
+            frm.Properties.item("BorderColor") = lngBlack
+            
+            Set frm = Me.Form("SF_InspectOrder_Electrical")
+            frm.Locked = False
+            frm.Properties.item("BorderWidth") = 0  ' Hairline
+            frm.Properties.item("BorderColor") = lngBlack
+            
+            Set frm = Me.Form("SF_InspectOrder_WaterBase")
+            frm.Locked = False
+            frm.Properties.item("BorderWidth") = 0  ' Hairline
+            frm.Properties.item("BorderColor") = lngBlack
+            
+            Set frm = Me.Form("SF_InspectOrder_Structual")
+            frm.Locked = False
+            frm.Properties.item("BorderWidth") = 0  ' Hairline
+            frm.Properties.item("BorderColor") = lngBlack
+            
+            Set frm = Nothing
+            
+            Me.lblLocked.Visible = False
+        End If
+    End If
+End Sub
+
 Private Sub Form_Load()
     CompanyCodeStr = mdlCompany.GetCompanyCode()
     Me.lblCompanyCode.Caption = CompanyCodeStr
     ' assign the default filter
-    Me.Filter = "[InspectionStatusID] <> 2 AND [InspectionStatusID] <> 3"
+    ' Me.Filter = "[InspectionStatusID] <> 2 AND [InspectionStatusID] <> 3"
     
 End Sub
 

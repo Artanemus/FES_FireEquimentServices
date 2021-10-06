@@ -149,14 +149,14 @@ Private Sub ParamChanged()
     If (Me.txtTextBox Is Me.ActiveControl) Then
         aSearchStr = Me.txtTextBox.Text
     Else
-        aSearchStr = Me.txtTextBox.value
+        aSearchStr = Me.txtTextBox.Value
     End If
     
     
     If (Me.ComboSuburb Is Me.ActiveControl) Then
         aSuburbStr = Me.ComboSuburb.Text
     Else
-        aSuburbStr = Me.ComboSuburb.value
+        aSuburbStr = Me.ComboSuburb.Value
     End If
     
     

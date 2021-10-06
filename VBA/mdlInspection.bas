@@ -2,7 +2,7 @@ Attribute VB_Name = "mdlInspection"
 Option Compare Database
 Option Explicit
 
-Private vReturnvalue As Variant
+Private vReturnValue As Variant
 Private mOpenArgs As String
 
 
@@ -22,11 +22,11 @@ Const ModuleName As String = "Inspection"
 
 
 Public Property Get ReturnValue() As Variant
-    ReturnValue = vReturnvalue
+    ReturnValue = vReturnValue
 End Property
 
 Public Property Let ReturnValue(X As Variant)
-    vReturnvalue = X
+    vReturnValue = X
 End Property
 
 
@@ -221,7 +221,7 @@ Public Function SetInspectOrderStatus(ByVal aInspectionOrderID As Long) As Boole
         DoCmd.OpenForm "xDlgInspectOrder_SetStatus", , , , , acDialog, vOpenArgs
         DoCmd.Close acForm, "xDlgInspectOrder_SetStatus"
     
-        If (Nz(vReturnvalue, 0) > 0) Then
+        If (Nz(vReturnValue, 0) > 0) Then
             SetInspectOrderStatus = True
         End If
     End If

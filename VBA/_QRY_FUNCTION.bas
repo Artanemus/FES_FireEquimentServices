@@ -152,7 +152,7 @@ Dim SQL As String
             LifeCycleSeedDT = 0
             Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
             If rst.RecordCount > 0 Then
-                LifeCycleSeedDT = rst.Fields("LifeCycleSeed").value
+                LifeCycleSeedDT = rst.Fields("LifeCycleSeed").Value
                 Select Case GetMinor
                 Case True
                     If Nz(rst![MinorLifeCycle], 0) > 0 Then
@@ -229,7 +229,7 @@ Private Function GetNextLifeCycle_B(aStationID As Long, Optional GetMinor As Boo
         LifeCycleSeedDT = 0
         Set rst = dbs.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If rst.RecordCount > 0 Then
-            LifeCycleSeedDT = rst.Fields("LifeCycleSeed").value
+            LifeCycleSeedDT = rst.Fields("LifeCycleSeed").Value
             Select Case GetMinor
             Case True
                 If Nz(rst![MinorInterval], 0) > 0 Then
@@ -424,14 +424,14 @@ End Function
 Public Function CustPrimaryHR_Phone(aCustomerID As Long) As String
     Dim v As Variant
     Dim rst As DAO.Recordset
-    Dim dbs As DAO.Database
+    Dim qdf As QueryDef
     Dim i As Variant
     Dim ContactNum As String
     
     CustPrimaryHR_Phone = vbNullString
-
-    Set dbs = CurrentDb
-    Set rst = dbs.OpenRecordset("xqry_Cust_PRIMARYHRNumber", dbOpenDynaset, dbFailOnError + dbSeeChanges)
+    Set qdf = CurrentDb.QueryDefs("xqry_Cust_BESTHRNumberParam")
+    qdf.Parameters("[aCustomerID]").Value = aCustomerID
+    Set rst = qdf.OpenRecordset
     rst.Filter = "[CustomerID] = " & CStr(aCustomerID)
     rst.Requery
     If rst.BOF = True And rst.EOF = True Then
@@ -442,7 +442,7 @@ Public Function CustPrimaryHR_Phone(aCustomerID As Long) As String
         v = rst![HRID]
         If Nz(v, 0) > 0 Then
             CustPrimaryHR_Phone = rst![FirstName] & " " & UCase(rst![LastName])
-            v = PrettyPhoneNum(rst![ContactNum])
+            v = PrettyPhoneNum(rst![LastOfContactNum])
             If Len(Nz(v, vbNullString) > 0) Then
                 CustPrimaryHR_Phone = CustPrimaryHR_Phone & " (PH:" & CStr(v) & ")"
             End If
@@ -471,7 +471,7 @@ Public Function CustSiteContact_Phone(aCustSiteID As Long) As String
         v = rst![SiteContactID]
         If Nz(v, 0) > 0 Then
             CustSiteContact_Phone = rst![FirstName] & " " & UCase(rst![LastName])
-            v = PrettyPhoneNum(rst![ContactNum])
+            v = PrettyPhoneNum(rst![LastOfContactNum])
             If Len(Nz(v, vbNullString) > 0) Then
                 CustSiteContact_Phone = CustSiteContact_Phone & " (PH:" & CStr(v) & ")"
             End If

@@ -31,7 +31,7 @@ Private Sub DAO_Execute_An_Update(A As Control, B As Control)
    Dim dbs As Database
    Set dbs = CurrentDb
 
-   DBEngine(0)(0).Execute "UPDATE Table SET Path = '" & A.value & "' WHERE B = '" & B.value & "'", dbFailOnError + dbSeeChanges
+   DBEngine(0)(0).Execute "UPDATE Table SET Path = '" & A.Value & "' WHERE B = '" & B.Value & "'", dbFailOnError + dbSeeChanges
 
    dbs.Close
 End Sub

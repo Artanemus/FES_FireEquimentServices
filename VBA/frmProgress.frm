@@ -21,6 +21,7 @@ Option Explicit
 ' UserForm progress bar
 ' MSForm.labels instead of Access.labels
 Private fPrgBar As clsProgressBarUF
+Private fAbort As Boolean
 
 Public Property Get xMax() As Double
     xMax = 100
@@ -29,6 +30,9 @@ Public Property Get xMax() As Double
     End If
 End Property
 
+Public Property Get xAbort() As Boolean
+    xAbort = fAbort
+End Property
 
 Public Property Get xFrontWidth() As Double
     xFrontWidth = fPrgBar.FrontWidth
@@ -44,13 +48,13 @@ End Property
 Public Property Get xValue() As Double
     xValue = 0
     If Not fPrgBar Is Nothing Then
-        xValue = fPrgBar.value
+        xValue = fPrgBar.Value
     End If
 End Property
 
 Public Property Let xValue(ByVal RHS As Double)
     If Not fPrgBar Is Nothing Then
-        fPrgBar.value = RHS
+        fPrgBar.Value = RHS
     End If
 End Property
 
@@ -65,6 +69,7 @@ Public Sub xInitialize()
     If Not fPrgBar Is Nothing Then
         fPrgBar.Initialize lblBack, lblFront, lblText
     End If
+    fAbort = False
 End Sub
 
 Public Sub xIncrement()
@@ -72,6 +77,12 @@ Public Sub xIncrement()
         fPrgBar.Increment
     End If
 End Sub
+
+Private Sub cmdCancel_Click()
+    ' ABORT
+    fAbort = True
+End Sub
+
 
 Private Sub UserForm_Initialize()
     Dim msg As String
@@ -102,7 +113,11 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 'Cancel  An integer. Setting this argument to any value other than 0 stops the QueryClose event in all loaded
 '           user forms and prevents the UserForm and application from closing.
 'CloseMode   A value or constant indicating the cause of the QueryClose event.
-Cancel = 1
+    Cancel = 1
+    fAbort = True
+'If CloseMode = vbFormControlMenu Then
+'    Cancel = True
+'End If
 
 End Sub
 

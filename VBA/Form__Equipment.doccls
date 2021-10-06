@@ -28,7 +28,7 @@ Dim strEquipType As String, strEquipTypeShort As String
 Dim strNetWeight As String, strGrossWeight As String, strLitre As String, strBrand As String
 Dim strHeight As String, strWidth As String, strChemical As String
 Dim strChemicalSymbol As String
-Dim strPower As String
+Dim strWatt As String
 Dim strLightFormFactor As String, strLightFormFactorShort As String
 
 ' EXTENDED TYPES - TABLES
@@ -94,8 +94,8 @@ Dim DoShortCaption As Boolean
         strChemicalSymbol = CStr(Me.cbxChemicalTypeID.Column(2))
     End If
     ' POWER in Watts ....
-    If Not IsNull(Me![Power]) Then
-        strPower = CStr(Me![Power]) & "W"
+    If Not IsNull(Me![Watt]) Then
+        strWatt = CStr(Me![Watt]) & "W"
     End If
     
     ' LIGHTS ....
@@ -168,17 +168,17 @@ Dim DoShortCaption As Boolean
         If Len(strLightFormFactor) > 0 Then
             str = str & " " & strLightFormFactor
         End If
-        ' Power in watts
-        If Len(strPower) > 0 Then
-            str = str & " " & strPower
+        ' Watt in watts
+        If Len(strWatt) > 0 Then
+            str = str & " " & strWatt
         End If
         
     Case 6
         ' electrical
         str = str & strEquipType
-        ' Power in watts
-        If Len(strPower) > 0 Then
-            str = str & " " & strPower
+        ' Watt in watts
+        If Len(strWatt) > 0 Then
+            str = str & " " & strWatt
         End If
 '    Case 7
 '        ' Booster
@@ -237,16 +237,16 @@ Dim DoShortCaption As Boolean
             If Len(strLightFormFactorShort) > 0 Then
                 str = str & " " & strLightFormFactorShort
             End If
-            ' Power in watts
-            If Len(strPower) > 0 Then
-                str = str & " " & strPower
+            ' Watt in watts
+            If Len(strWatt) > 0 Then
+                str = str & " " & strWatt
             End If
         Case 6
             ' electrical
             str = str & strEquipTypeShort
-            ' Power in watts
-            If Len(strPower) > 0 Then
-                str = str & " " & strPower
+            ' Watt in watts
+            If Len(strWatt) > 0 Then
+                str = str & " " & strWatt
             End If
     '    Case 7
     '        ' Booster

@@ -1,7 +1,7 @@
 ﻿Option Compare Database
 Option Explicit
 
-Const ModuleName As String = "[SF_Site_Equip]"
+Const ModuleName As String = "[SF_Site_WaterBase]"
 Const PKey As String = "[StationID]"
 Const msgEmpty As String = "STATION IS EMPTY"
 

@@ -84,7 +84,7 @@ Private Sub ParamChanged()
     If (Me.txtTextBox Is Me.ActiveControl) Then
         s = Me.txtTextBox.Text
     Else
-        s = Me.txtTextBox.value
+        s = Me.txtTextBox.Value
     End If
 
     If Len(Nz(s, vbNullString)) = 0 Then
