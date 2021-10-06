@@ -1,7 +1,9 @@
 # Microsoft access database files are not permitted here
 # as they consume to much drive space
 # Use OneDrive instead
-*.accdb
+**/ACCDB/**
+#  **/BUILD/FES.accdb permitted
+# *.accdb
 
 # Prerequisites
 *.d
