@@ -9,37 +9,20 @@ Private Sub cmdBuildCustomOrder_Click()
     Beep
 End Sub
 
-Private Sub cmdDeleteCust_Click()
-    mdlDelete.DeleteCustomer
-End Sub
 
-Private Sub cmdDeleteEquipment_Click()
-    mdlDelete.DeleteEquipment
-End Sub
 
-Private Sub cmdDeleteHR_Click()
-    mdlDelete.DeleteHR
-End Sub
 
-Private Sub cmdDeleteInspectOrder_Click()
-    mdlDelete.DeleteInspectionOrder
-End Sub
 
-Private Sub cmdDeleteSite_Click()
-    mdlDelete.DeleteSite
-End Sub
 
-Private Sub cmdDeleteSurveyOrder_Click()
-    mdlDelete.DeleteSurveyOrder
-End Sub
 
-Private Sub cmdEditGlobal_Click()
-    mdlNavigationCode.cmdNav_SwitchToGlobalForm
-End Sub
 
-Private Sub cmdFindEquipment_Click()
-    mdlNavigationCode.cmdNav_SwitchToEquipFindForm
-End Sub
+
+
+
+
+
+
+
 
 Private Sub cmdFindInspectionOrder_Click()
     mdlNavigationCode.cmdNav_SwitchToInspectOrderFindForm
@@ -74,9 +57,7 @@ Private Sub cmdGotoCustID_Click()
     mdlGoto.GotoCust
 End Sub
 
-Private Sub cmdGotoEquipID_Click()
-    mdlGoto.GotoEquip
-End Sub
+
 
 Private Sub cmdGotoHRID_Click()
     mdlGoto.GotoHR
@@ -94,9 +75,6 @@ Private Sub cmdSB_BrowseCustomer_Click()
     mdlNavigationCode.cmdNav_SwitchToCustomerForm
 End Sub
 
-Private Sub cmdSB_BrowseEquip_Click()
-    mdlNavigationCode.cmdNav_SwitchToEquipForm
-End Sub
 
 Private Sub cmdSB_BrowseHR_Click()
     mdlNavigationCode.cmdNav_SwitchToHRForm
@@ -119,10 +97,7 @@ Private Sub cmdSB_NewCust_Click()
     mdlNavigationCode.cmdNav_NewCust
 End Sub
 
-Private Sub cmdSB_NewEquipment_Click()
-    mdlNavigationCode.cmdNav_SwitchToEquipForm
-    mdlNavigationCode.cmdNav_NewEquip
-End Sub
+
 
 Private Sub cmdSB_NewHR_Click()
     mdlNavigationCode.cmdNav_SwitchToHRForm
@@ -139,9 +114,7 @@ Private Sub cmdSB_NewSiteSurvey_Click()
     mdlNavigationCode.cmdNav_NewSurvey
 End Sub
 
-Private Sub cmdUndoUpdate_Click()
-    mdlDelete.UndoUpdate
-End Sub
+
 
 Private Sub cmdUPDATEInspectionOrders_Click()
     ' update inspection orders
@@ -156,17 +129,10 @@ Private Sub cmdViewSiteDuplicity_Click()
     mdlSite.ViewSiteDuplicity
 End Sub
 
-Private Sub cmdViewSystemLog_Click()
-    mdlLog.ViewLog
-End Sub
 
-Private Sub cmdEditCompanyInfo_Click()
-    mdlNavigationCode.cmdNav_SwitchToCompanyInfoForm
-End Sub
 
-Private Sub cmdKeyBoardShortCuts_Click()
-    mdlNavigationCode.cmdNav_SwitchToKeyBoardShortCuts
-End Sub
+
+
 
 Private Sub cmdViewHRDuplicity_Click()
     mdlHR.ViewHRDuplicity

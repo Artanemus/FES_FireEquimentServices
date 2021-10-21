@@ -39,7 +39,7 @@ Public Function UndoUpdate() As Boolean
     
             ' iterate over inspection orders and delete test results
         SQL = "SELECT * FROM dbo_InspectionOrder WHERE ((dbo_InspectionOrder.InspectionStatusID)=1) "
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If rst.RecordCount > 0 Then
             Do While Not rst.EOF
                SQL = "DELETE * FROM dbo_Test WHERE [InspectionOrderID] = " & CStr(rst![InspectionOrderID])
@@ -262,7 +262,7 @@ Public Function DeleteInspectionOrder() As Boolean
     If rtn = vbYes Then
         ' iterate over inspection orders and delete test results
         SQL = "SELECT * FROM dbo_InspectionOrder WHERE [InspectionOrderID] = " & CStr(vReturnValue)
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
            SQL = "DELETE * FROM dbo_Test WHERE [InspectionOrderID] = " & CStr(rst![InspectionOrderID])
            CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
@@ -349,7 +349,7 @@ Public Function DeleteSite() As Boolean
         ' Delete ALL Test's
         ' iterate over each Inspection Order - with site id
         SQL = "SELECT dbo_InspectionOrder.InspectionOrderID FROM dbo_InspectionOrder WHERE [SiteID] = " & CStr(varSiteID)
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
            SQL = "DELETE * FROM dbo_Test WHERE [dbo_InspectionOrder] = " & CStr(rst![InspectionOrderID])
            CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
@@ -360,6 +360,10 @@ Public Function DeleteSite() As Boolean
         
         ' Delete ALL INSPECTION ORDERS
         SQL = "DELETE * FROM dbo_InspectionOrder WHERE [SiteID] = " & CStr(varSiteID)
+        CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
+        
+        ' Delete ALL POWER BOARDS
+        SQL = "DELETE * FROM dbo_PowerBoard WHERE [SiteID] = " & CStr(varSiteID)
         CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges
         
         ' Delete ALL STATIONS
@@ -466,7 +470,7 @@ Public Function DeleteCustomer() As Boolean
         
         ' iterate over inspection orders and delete test results
         SQL = "SELECT * FROM dbo_InspectionOrder WHERE [CustomerID] = " & CStr(vReturnValue)
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         Do While Not rst.EOF
            SQL = "DELETE * FROM dbo_Test WHERE [InspectionOrderID] = " & CStr(rst![InspectionOrderID])
            CurrentDb.Execute SQL, dbFailOnError + dbSeeChanges

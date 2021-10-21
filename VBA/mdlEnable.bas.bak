@@ -78,10 +78,10 @@ Private Function CheckIsEnabled(ByVal lngCustSiteID As Long) As Boolean
     ' value can be NULL or 0 if disabled else TRUE (-1)
     If IsNull(v) Or CBool(v) = True Then
         Beep
-        '        Msg = _
+        '        msg = _
         '           "The site is already enabled."
         '        cCode = mdlCompany.GetCompanyCode
-        '        Results = MsgBox(Msg, _
+        '        Results = MsgBox(msg, _
         '        VbMsgBoxStyle.vbOKOnly Or VbMsgBoxStyle.vbExclamation Or VbMsgBoxStyle.vbDefaultButton1, _
         '        cCode & " Error - Enable Site")
         Exit Function
@@ -115,7 +115,7 @@ Private Function CheckEnabledBy(ByVal lngCustSiteID As Long) As Boolean
             CStr(lngSiteID) & ") AND ((dbo_CustSite.IsEnabled) = True));"
 
 
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If Not IsNull(rst) Then
             If rst.RecordCount > 0 Then
                 rst.MoveFirst
@@ -181,7 +181,7 @@ Private Function HasInspectionOrderHistory(ByVal lngCustSiteID As Long, ByVal db
         "WHERE (dbo_InspectionOrder.CustSiteID = " & CStr(lngCustSiteID) & " ) " & _
         " AND dbo_InspectionOrder.ServiceInterval = " & CStr(dblServiceInterval)
         
-    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If rst.RecordCount = 0 Then
         HasInspectionOrderHistory = False
     End If
@@ -351,7 +351,7 @@ Private Function GetMaxServiceIntervalOnSite(lngCustSiteID) As Double
     "INNER JOIN dbo_Equipment ON dbo_Station.EquipmentID = dbo_Equipment.EquipmentID) " & _
     "INNER JOIN dbo_EquipType ON dbo_Equipment.EquipTypeID = dbo_EquipType.EquipTypeID) ON dbo_CustSite.SiteID = dbo_Site.SiteID " & _
     "WHERE (((dbo_CustSite.CustSiteID)=" & CStr(lngCustSiteID) & "));"
-    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If rst.RecordCount > 0 Then
         GetMaxServiceIntervalOnSite = rst.Fields("MaxOfServiceInterval")
     End If
@@ -578,5 +578,36 @@ PROC_ERR:
 End Function
 
 
+
+
+' ###########################################################################
+' DEPRECIATED - USE clsLinkData
+' ###########################################################################
+
+'    ' Is the Last inspection order NOT COMPLETED OR CANCELLED ?
+'    ' SQL pulls the most recent inspection order for the customer site
+'    SQL = _
+'        "SELECT Top 1 InspectionOrderID, RequestedDT, InspectionStatusID FROM dbo_InspectionOrder " & _
+'        "WHERE (dbo_InspectionOrder.CustSiteID = " & CStr(lngCustSiteID) & " ) AND dbo_InspectionOrder.RequestedDT IS NOT NULL " & _
+'        " AND dbo_InspectionOrder.ServiceInterval = " & CStr(dblServiceInterval) & _
+'        " ORDER BY dbo_InspectionOrder.RequestedDT DESC;"
+'
+'    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+'    If rst.RecordCount > 0 Then
+'        lngInspectionOrderID = rst.Fields("InspectionOrderID")
+'        ' last inspection order is still in progress
+'        If ((rst.Fields("InspectionStatusID") <> 2) And (rst.Fields("InspectionStatusID") <> 3)) Then
+'            rst.Close
+'            Set rst = Nothing
+'            ' FORCE MODE ...
+'            aMode = 1 ' just enable the site and exit
+'        End If
+'    Else
+'        errMsg = _
+'        "FES - SYSTEM ERROR " & _
+'        vbCrLf & "Unable to locate the 'Last Inspection Order'" & _
+'        vbCrLf & "needed to REFERENCE the customer-site LINK."
+'        Exit Function ' unexpected error
+'    End If
 
 

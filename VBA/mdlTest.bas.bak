@@ -176,7 +176,7 @@ Dim rst As DAO.Recordset
         ' #### RE-BUILD
         ' iterate over core groups - re-build each station
         ' ------------------------------------------------------------------------------------------
-        Set rst = CurrentDb.OpenRecordset("SELECT dbo_CoreGroup.CoreGroupID FROM dbo_CoreGroup", dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset("SELECT dbo_CoreGroup.CoreGroupID FROM dbo_CoreGroup", dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If rst.RecordCount > 0 Then
             Success = True
             Do While Not rst.EOF
@@ -222,7 +222,7 @@ Dim Msg As String
     CheckALL_CoreGroupAssignment = False
     Success = True
     ' ##### CHECK COREGROUP
-    Set rst = CurrentDb.OpenRecordset("SELECT dbo_CoreGroup.CoreGroupID FROM dbo_CoreGroup", dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+    Set rst = CurrentDb.OpenRecordset("SELECT dbo_CoreGroup.CoreGroupID FROM dbo_CoreGroup", dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If rst.RecordCount > 0 Then
         Do While Not rst.EOF
             If Not CheckCoreGroupAssignment(lngSiteID, CLng(rst.Fields("CoreGroupID"))) Then
@@ -269,7 +269,7 @@ Dim Msg As String
     
    ' Does the Station's CoreGroup and the EquipmentID's coregroup don't match then ERROR
    
-    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+    Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If rst.RecordCount > 0 Then
         errMsg = _
                "The CoreGroupID for StationID: " & CStr(rst.Fields("StationID")) & " in SiteID: " & CStr(rst.Fields("SiteID")) & _
@@ -333,7 +333,7 @@ Public Sub ReBuildTestGeneric(ByVal lngInspectionOrderID As Long, lngCoreGroupID
                "FROM (dbo_Test INNER JOIN dbo_Equipment ON dbo_Test.EquipmentID = dbo_Equipment.EquipmentID) INNER JOIN dbo_EquipType ON dbo_Equipment.EquipTypeID = dbo_EquipType.EquipTypeID " & _
                "WHERE dbo_Test.InspectionOrderID = " & CStr(lngInspectionOrderID) & " AND dbo_EquipType.CoreGroupID = " & CStr(lngCoreGroupID)
         
-        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+        Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If rst.RecordCount > 0 Then
             ' MESSAGE ...
             cCode = mdlCompany.GetCompanyCode
@@ -401,6 +401,7 @@ Private Function ConstructTests(ByVal lngInspectionOrderID As Long, ByVal lngSit
     Dim SQL As String
     Dim rst As DAO.Recordset
     Dim rs2 As DAO.Recordset
+    Dim rs3 As DAO.Recordset
     Dim Msg As String
     Dim v As Variant
     Dim strCoreGroup As String
@@ -410,15 +411,13 @@ Private Function ConstructTests(ByVal lngInspectionOrderID As Long, ByVal lngSit
     ConstructTests = False
 
     SQL = _
-           "SELECT dbo_Station.StationID, dbo_Station.StationNum, dbo_Station.Location, " & _
-           "dbo_Station.IsManaged, dbo_Station.Note, dbo_Equipment.EquipmentID, dbo_EquipType.ServiceInterval " & _
-           "FROM (dbo_Station " & _
-           "INNER JOIN dbo_Equipment ON dbo_Station.EquipmentID = dbo_Equipment.EquipmentID) INNER JOIN dbo_EquipType ON dbo_Equipment.EquipTypeID = dbo_EquipType.EquipTypeID " & _
+           "SELECT * " & _
+           "FROM dbo_Station " & _
            "WHERE ( " & _
            "((dbo_Station.CoreGroupID)=" & CStr(lngCoreGroupID) & ") AND " & _
            "((dbo_Station.SiteID)=" & CStr(lngSiteID) & ")" & _
            ") ORDER BY dbo_Station.StationNum ASC;"
-                               
+           
     ' Get the service interval for the inspection order
     v = DLookup("ServiceInterval", "dbo_InspectionOrder", "[InspectionOrderID] = " & CStr(lngInspectionOrderID))
     If Nz(v, 0) = 0 Then
@@ -433,42 +432,78 @@ Private Function ConstructTests(ByVal lngInspectionOrderID As Long, ByVal lngSit
 
     ' Stations to iterate (ordered by station number
     ' -----------------------------------------------
-    Set rs2 = CurrentDb.OpenRecordset(SQL, dbOpenSnapshot, dbFailOnError + dbSeeChanges)
+    Set rs2 = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
     If rs2.RecordCount > 0 Then
         SQL = "SELECT * FROM dbo_TEST"
         Set rst = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
         If Not IsNull(rst) Then
             Do While Not rs2.EOF
-                If Nz(rs2.Fields("ServiceInterval"), 0) = 0 Then
-                    ' UNEXPECTED ERROR - NO SERVICE LEVEL
-                    If Not IgnoreMissingErr Then
-                        MsgBox "Unable to the find Service Interval for Equipment ID: " & CStr(rs2.Fields("EquipmentID")) & ".", _
+                ' LOOKUP the service interval for the equipment
+                If Nz(rs2![EquipmentID], 0) <> 0 Then
+                SQL = _
+                    "SELECT dbo_Equipment.EquipmentID, dbo_EquipType.ServiceInterval " & _
+                    "FROM dbo_Equipment INNER JOIN dbo_EquipType ON dbo_Equipment.EquipTypeID = dbo_EquipType.EquipTypeID " & _
+                    "WHERE (((dbo_Equipment.EquipmentID)=" & CStr(rs2.Fields("EquipmentID")) & "));"
+                    
+                    Set rs3 = CurrentDb.OpenRecordset(SQL, dbOpenDynaset, dbFailOnError + dbSeeChanges)
+                    If rs3.RecordCount > 0 Then
+                        If rs3.Fields("ServiceInterval") <> dblServiceInterval Then
+                            ' SKIP THIS STATION - EQUIPMENT DOESN"T USE THE SERVICE INTERVAL USED BY THE INSPECTION ORDER.
+                            GoTo JUMP_001
+                        End If
+                    Else
+                        ' UNEXPECTED ERROR - NO EQUIPMENT DESCRIPTION
+                        MsgBox "Unable to the find Service Interval for Equipment ID: " & CStr(rs3.Fields("EquipmentID")) & ".", _
                         vbOKOnly Or vbDefaultButton1, _
                         mdlCompany.GetCompanyCode() & " - Build Check List."
+                        rs3.Close
+                        rs2.Close
+                        rst.Close
+                        Exit Function
                     End If
-                Else
-                    ' COMPARE SERVICEINTERVAL Station_Equipment ... InspectionOrder
-                    If rs2.Fields("ServiceInterval") = dblServiceInterval Then
-                        With rst
-                            ' ##############################################################
-                            ' #### TAKE A SNAP SHOT OF THE CURRENT STATE OF THE STATION
-                            ' ##############################################################
-                            .AddNew
-                            .Fields("InspectionOrderID") = lngInspectionOrderID
-                            ' NON-SPECIFIC RELATIONSHIP with the Reference Parent (the Station) that seeded this Test
-                            ' As the site changes this reference may become useless.
-                            .Fields("ReferenceID") = rs2.Fields("StationID")
-                            .Fields("StationNum") = rs2.Fields("StationNum")
-                            .Fields("Location") = rs2.Fields("Location")
-                            .Fields("IsManaged") = rs2.Fields("IsManaged") ' DEPRECIATED ???
-                            .Fields("EquipmentID") = rs2.Fields("EquipmentID")
-                            .Fields("Passed") = False
-                            .Update
-                            '.Bookmark = .LastModified
-                            'ReturnValue = ![TestID]
-                        End With
-                    End If
+
                 End If
+            
+                With rst
+                    ' ##############################################################
+                    ' #### TAKE A SNAP SHOT OF THE CURRENT STATE OF THE STATION
+                    ' ##############################################################
+                    .AddNew
+                    .Fields("InspectionOrderID") = lngInspectionOrderID
+                    ' NON-SPECIFIC RELATIONSHIP with the Reference Parent (the Station) that seeded this Test
+                    ' As the site changes this reference may become useless.
+                    .Fields("ReferenceID") = rs2.Fields("StationID")
+                    ' USE THE CoreGroupID found in EquipmentID ... EquipmentTypeID ...
+                    '.Fields("CoreGroupID") = rs2.Fields("CoreGroupID") ' TODO:
+                    .Fields("StationNum") = rs2.Fields("StationNum")
+                    .Fields("Location") = rs2.Fields("Location")
+                    .Fields("IsManaged") = rs2.Fields("IsManaged") ' TODO:
+                    
+                    ' Empty stations doesn't require a test result and therefore passes
+                    If Nz(rs2![EquipmentID], 0) = 0 Then
+                        ![Note] = "EMPTY STATION"
+                        ![Passed] = True
+                        .Fields("EquipmentID") = Null
+                    Else
+                        ![Note] = vbNullString
+                        ![Passed] = 0
+                        .Fields("EquipmentID") = rs2.Fields("EquipmentID") ' CORE GROUP IS FOUND IN EquipmentID
+                    End If
+                    
+                    ' TODO: Test life cycle ....
+                    ' CALCULATE MINOR OR MAJOR life cycle for this Equipment as this station ....
+                    '![TestLifeCycleID] = vbNull
+                    ' Inspector populates this parameter
+                    ' REPLACE, REPAIR OR RESUPPLY
+                    '![TestActionID] = vbNull
+            
+                    .Update
+                    
+                    '.Bookmark = .LastModified
+                    'ReturnValue = ![TestID]
+                    
+                End With
+JUMP_001:
                 rs2.MoveNext
             Loop
         End If                           ' break on invalid recorset
@@ -510,8 +545,6 @@ PROC_ERR:
     End If
     Resume PROC_EXIT
 End Function
-
-
 
 
 

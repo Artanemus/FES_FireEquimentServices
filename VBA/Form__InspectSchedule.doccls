@@ -21,6 +21,12 @@ Private Sub cmdClear_Click()
     comboInspectStatus_Change
 End Sub
 
+Private Sub cmdCustTestResultBatchReport_Click()
+Dim DT As Date
+    DT = DateSerial(Me.Text48.Value, Me.tcMonths.Value + 1, 1)
+    mdlBatchPrint.BatchPrintCustRpt DT
+End Sub
+
 Private Sub cmdGotoCust_Click()
     If Me!CustomerID > 0 Then
         mdlGoto.GotoCust Me!CustomerID
@@ -96,18 +102,21 @@ Private Sub Form_DblClick(Cancel As Integer)
 End Sub
 
 Private Sub Form_Load()
+    ' Header information
     CompanyCodeStr = mdlCompany.GetCompanyCode()
     Me.lblCompanyCode.Caption = CompanyCodeStr
     
-    dtYEAR = Date
-    Me.Text48.Value = Format(dtYEAR, "YYYY")
     Set dbs = CurrentDb
+    ' Recordset is empty on creation - assign QUERY
     Set qryDef = dbs.QueryDefs("qrySchedule")
-    ' assigns recordset
-    tcMonths_Change
+    
+    ' ON LOAD MOVE TO THE CURRENT YEAR - MONTH ...
+    cmdSetToCurrMonth_Click
+    ' Clear all search parameters
     Me.Form.Filter = vbNullString
-    ' filters status
+    ' then call proc to update the SQL filter state and grid view
     comboInspectStatus_Change
+    
 End Sub
 
 Private Sub InspectionOrderID_DblClick(Cancel As Integer)

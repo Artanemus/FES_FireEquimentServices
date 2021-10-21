@@ -9,6 +9,7 @@ Private mInspectionOrderID As Long
 Private mServiceInterval As Double
 
 
+
 ' HOW TO REFERENCE SUB-REPORTS
 '    If Me.Report("rICMSCore").Report.CurrentView = 6 Then
 '        s = "([Arrival] >= #" & Format(mDateSeedS, "mm/dd/yyyy") & _
@@ -42,8 +43,7 @@ Private Sub Report_Activate()
 Dim s As String
 
     If Me.CurrentView = 6 Then
-    
-        lblCompanyName.Caption = mdlCompany.GetCompanyName()
+        ' lblCompanyName.Caption = mdlCompany.GetCompanyName()
 '        Me.txtDateStart.Caption = Format(mDateSeedS, "Long Date")
 '        Me.txtDateEnd.Caption = Format(mDateSeedE, "Long Date")
 '        Me.OrderBy = mOrderBy
@@ -63,17 +63,10 @@ Private Sub Report_Load()
 Dim d As Date
 Dim Msg As String
 Dim v As Variant
-Dim LifeCycleErr As Boolean
 
     On Error GoTo PROC_ERR:
 
-    mInspectionOrderID = 0
-    mServiceInterval = 1
-    
-    'Me.lblLifeCycleErr.Visible = False
-    Me.lblFXMajor.Visible = False
-    Me.lblHyrantMajor.Visible = False
-    
+
     If Not IsNull(Me.OpenArgs) And Len(Me.OpenArgs > 0) Then
         v = mdlOpenArgs.AssertParseOpenArgs(Me.OpenArgs, 0)
         If Nz(v, 0) > 0 Then
@@ -84,9 +77,8 @@ Dim LifeCycleErr As Boolean
         If Nz(v, 0) > 0 Then
             mServiceInterval = CLng(v)
         End If
-
-    
-    
+        
+        
 '        v = mdlOpenArgs.AssertParseOpenArgs(Me.OpenArgs, 0)
 '        If Nz(v, 0) > 0 Then
 '            mDateSeedS = CDate(v)
@@ -100,29 +92,9 @@ Dim LifeCycleErr As Boolean
 '            mOrderBy = CStr(v)
 '        End If
         
+    Else
+        ' GoTo PROC_ERR:
     End If
-    
-'    ' when placed in Report_Load exception error appeared - couldn't find xqryLifeCycle_Hydrant
-'    If Nz(Me![InspectionOrderID], 0) > 0 Then
-'        If IsHydrantMajorMinor(Me![InspectionOrderID], LifeCycleErr, False) = True Then
-'            Me.lblHyrantMajor.Visible = True
-'        End If
-''        If LifeCycleErr = True Then
-''                Me.lblLifeCycleErr.Visible = True
-''        End If
-'
-'        If IsHydrantMajorMinor(Me![InspectionOrderID], LifeCycleErr, True) = True Then
-'            Me.lblHyrantMajor.Visible = True
-'        End If
-'
-''        If LifeCycleErr = True Then
-''                Me.lblLifeCycleErr.Visible = True
-''        End If
-'    Else
-'        Me.lblLifeCycleErr.Visible = True
-'    End If
-    
-
     
 PROC_EXIT:
     On Error Resume Next
@@ -134,4 +106,14 @@ PROC_ERR:
         MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
     End If
     Resume PROC_EXIT
+End Sub
+
+Private Sub Report_Open(Cancel As Integer)
+
+'    If IsNull(Me.OpenArgs) Then
+'        Cancel = True
+'    End If
+'    If Len(Me.OpenArgs) = 0 Then
+'        Cancel = True
+'    End If
 End Sub
