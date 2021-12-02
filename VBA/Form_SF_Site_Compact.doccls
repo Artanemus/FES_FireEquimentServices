@@ -1,6 +1,0 @@
-﻿Option Compare Database
-Option Explicit
-
-Private Sub Command106_Click()
-    mdlGoto.GotoSite Me.SiteID
-End Sub

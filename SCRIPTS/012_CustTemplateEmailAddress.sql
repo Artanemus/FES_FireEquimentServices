@@ -8,23 +8,25 @@ go
 
 -- Drop Constraint, Rename and Create Table SQL
 
-EXEC sp_rename 'dbo.Global.PK233','PK233_09132021232910001','INDEX'
+EXEC sp_rename 'dbo.Global.PK233','PK233_12022021001540001','INDEX'
 go
-EXEC sp_rename 'dbo.Global','Global_09132021232910000',OBJECT
+EXEC sp_rename 'dbo.Global','Global_12022021001540000',OBJECT
 go
 CREATE TABLE dbo.[Global]
 (
     GlobalID                 int              NOT NULL,
     DefNumOfLevels           int             NULL,
     DefStartLevel            int             NULL,
-    TechInspectOrderRootPath nvarchar(2048)  NULL,
+    RootPathBatchReports     nvarchar(2048)  NULL,
+    CustTemplateEmailAddress nvarchar(2048)  NULL,
     SQLversion               int             NULL,
     SQLmajor                 int             NULL,
     SQLminor                 int             NULL,
     SQLbuild                 int             NULL,
     Author                   nvarchar(64)    NULL,
     AuthorEmail              nvarchar(256)   NULL,
-    Copyright                nvarchar(128)   NULL
+    Copyright                nvarchar(128)   NULL,
+    SQLConnectStr            nvarchar(2048)  NULL
 )
 ON [PRIMARY]
 go
@@ -35,19 +37,22 @@ INSERT INTO dbo.[Global](
                          GlobalID,
                          DefNumOfLevels,
                          DefStartLevel,
-                         TechInspectOrderRootPath,
+                         RootPathBatchReports,
+                         CustTemplateEmailAddress,
                          SQLversion,
                          SQLmajor,
                          SQLminor,
                          SQLbuild,
                          Author,
                          AuthorEmail,
-                         Copyright
+                         Copyright,
+                         SQLConnectStr
                         )
                   SELECT 
                          GlobalID,
                          DefNumOfLevels,
                          DefStartLevel,
+                         RootPathBatchReports,
                          NULL,
                          SQLversion,
                          SQLmajor,
@@ -55,8 +60,9 @@ INSERT INTO dbo.[Global](
                          SQLbuild,
                          Author,
                          AuthorEmail,
-                         Copyright
-                    FROM dbo.Global_09132021232910000 
+                         Copyright,
+                         SQLConnectStr
+                    FROM dbo.Global_12022021001540000 
 go
 
 -- Add Constraint SQL

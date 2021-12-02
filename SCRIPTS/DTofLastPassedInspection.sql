@@ -68,7 +68,7 @@ WHERE (InspectionOrder.InspectionStatusID = 2)
 ORDER BY InspectionOrder.RequestedDT DESC;
 
 -- PICK the last successful test that was completed for the station's equipment.
-SELECT TOP 10 iif(InspectedOn IS NULL, RequestedDT, InspectedOn) AS DTofLastPassedInspection
+SELECT TOP 1 iif(InspectedOn IS NULL, RequestedDT, InspectedOn) AS DTofLastPassedInspection
     , InspectionOrderID
     , TestLifeCycleID
 FROM #tmpB;
