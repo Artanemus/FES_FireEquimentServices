@@ -36,6 +36,7 @@ SELECT dbo.InspectionOrder.InspectionOrderID
 	, dbo.GetHRContactSingleLine(dbo.InspectionOrder.HRID, 0) AS xTechNameNum
 
 	, SUBSTRING(CustSite.Note, 1, 128) as xCustSiteNotes
+	, dbo.GetPOSstate(dbo.InspectionOrder.SiteID) as xCanPayOnSite
 
 FROM dbo.InspectionOrder
 INNER JOIN CustSite
