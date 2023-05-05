@@ -1,0 +1,34 @@
+﻿Option Compare Database
+Option Explicit
+
+
+Private Property Get HasParent(ByRef f As Form) As Boolean
+    HasParent = False
+    On Error GoTo handler
+    HasParent = TypeName(f.Parent.Name) = "String"
+    Exit Property
+handler:
+End Property
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the TIMESTAMP
+    Me![CreatedOn] = Now()
+    Me![IsArchived] = False
+End Sub
+
+Private Sub Form_Current()
+    If HasParent(Me.Form) Then
+        Me.Form.Parent.Form![CurrHRID].Value = Me.HRID
+    End If
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    If Me.Dirty = True Then
+        Me.Dirty = False
+    End If
+    
+    If Nz(Me![HRID], 0) > 0 Then
+        ' open the hr form and cur to hrid
+        mdlHR.GotoHR (Me![HRID])
+    End If
+End Sub

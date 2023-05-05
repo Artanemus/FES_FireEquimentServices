@@ -1,0 +1,7 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set TIMESTAMP
+    Me![CreatedOn] = Now()
+End Sub

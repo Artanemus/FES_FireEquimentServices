@@ -1,0 +1,20 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the TIMESTAMP
+    Me![CreatedOn] = Now()
+    Me![IsArchived] = False
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+' GOTO CUSTOMER INSPECTION ORDER
+    If Me.Dirty = True Then
+        Me.Dirty = False
+    End If
+    
+    If Nz(Me![SurveyOrderID], 0) > 0 Then
+        ' open the hr form and cur to hrid
+        mdlGoto.GotoSurveyOrder (Me![SurveyOrderID])
+    End If
+End Sub

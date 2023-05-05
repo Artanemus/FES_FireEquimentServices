@@ -1,0 +1,290 @@
+﻿Option Compare Database
+Option Explicit
+
+Private mTextBoxStr As Variant
+Private mTxt As String
+Private FailedSelectLength As Boolean
+
+
+'+---------------------------------------------------------
+' FORM CONTROLS
+'+---------------------------------------------------------
+
+
+
+Private Sub chkboxToggledArchived_Click()
+    cmdClear_Click
+End Sub
+
+Private Sub cmdAddContact_Click()
+    If Nz(Me.HRID, 0) = 0 Then
+        Beep
+    Else
+        ' indicates the caller wants to add this contact
+        mdlCustContact.ReturnValue = 1
+        mdlCustContact.HR_ID = Me.HRID
+        ' returns to caller - mdlCustContact
+        Me.Visible = False
+    End If
+End Sub
+
+Private Sub cmdCreateNewContact_Click()
+    ' indicates the caller wants to create a new contact
+    mdlCustContact.ReturnValue = 2
+    mdlCustContact.HR_ID = Null
+    ' returns to caller - mdlCustContact
+    Me.Visible = False
+End Sub
+
+Private Sub cmdCancel_Click()
+    mdlCustContact.ReturnValue = 0
+    mdlCustContact.HR_ID = Null
+    ' returns to caller - mdlCustContact
+    Me.Visible = False
+End Sub
+
+Private Sub cmdClear_Click()
+    ' initialise controls
+    ' hide message text
+    FailedSelectLength = False
+    Me.lblFailedSelectLength.Visible = False
+    Me.lblNotification.Visible = False
+    ' initialise search text box
+    Me.txtTextBox.Visible = True
+    mTextBoxStr = vbNullString
+    txtTextBox = vbNullString
+    ' initialise status text box
+    mTxt = vbNullString
+    ' update filtered list
+    ParamChanged
+    ' refocus on control
+    If Me.txtTextBox.Visible Then Me.txtTextBox.SetFocus
+End Sub
+
+
+'+---------------------------------------------------------
+' DOUBLE CLICK RE-DIRECTION - ACTION - 'ADD A NEW CONTACT'
+'+---------------------------------------------------------
+
+Private Sub txtHighLight_DblClick(Cancel As Integer)
+    cmdAddContact_Click
+End Sub
+
+Private Sub ContactNumbersStr_DblClick(Cancel As Integer)
+    cmdAddContact_Click
+End Sub
+
+Private Sub FName_DblClick(Cancel As Integer)
+    cmdAddContact_Click
+End Sub
+
+Private Sub HRID_DblClick(Cancel As Integer)
+    cmdAddContact_Click
+End Sub
+
+
+
+
+'+---------------------------------------------------------
+' FORM
+'+---------------------------------------------------------
+
+
+Private Sub Form_Activate()
+    If Me.txtTextBox.Visible Then Me.txtTextBox.SetFocus
+End Sub
+
+Private Sub Form_Current()
+    ' this unbound hidden field lets us highlight the current selected row
+    Me.txtSelectedRecord = Me.HRID
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    cmdAddContact_Click
+End Sub
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyEscape Then
+        cmdCancel_Click
+        KeyCode = 0
+    End If
+    If KeyCode = vbKeyBack And FailedSelectLength = True Then
+        If Me.txtTextBox.Visible = False Then
+            FailedSelectLength = False
+            Me.lblFailedSelectLength.Visible = False
+            Me.lblNotification.Visible = False
+            Me.txtTextBox.Visible = True
+            mTxt = Me.txtTextBox.Value
+            ParamChanged
+            KeyCode = 0
+        Else
+            'do nothing pass - key on
+        End If
+        
+    End If
+End Sub
+
+Private Sub Form_Load()
+    Form_DynamicResize Me
+    ParamChanged
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+    ' initialise controls
+    ' hide message text
+    FailedSelectLength = False
+    Me.lblFailedSelectLength.Visible = False
+    Me.lblNotification.Visible = False
+    ' initialise search text box
+    Me.txtTextBox.Visible = True
+    mTextBoxStr = vbNullString
+    txtTextBox = vbNullString
+    ' initialise status text box
+    mTxt = vbNullString
+    ' update filtered list
+'    ParamChanged
+    ' refocus on control
+    If Me.txtTextBox.Visible Then Me.txtTextBox.SetFocus
+
+End Sub
+
+
+
+
+
+'+---------------------------------------------------------
+' PRIVATE ROUTINES
+'+---------------------------------------------------------
+
+Private Sub ParamChanged()
+    Dim v As Variant
+    Dim s As String
+    Dim s2 As String
+    Dim Msg As String
+    Dim rst As DAO.Recordset
+    Dim ctl As Access.Control
+    
+    On Error GoTo PROC_ERR
+
+    s2 = vbNullString
+    
+    ' MS SQL uses character % for wildcards
+    If Len(Trim(mTxt)) > 0 Then
+        s2 = "([FName] LIKE '%" + mTxt + "%')"
+    Else
+        s2 = "([FName] LIKE '%' OR [FName] IS NULL)"
+    End If
+    
+    ' Include / Exclude Archived HR
+    If (Me.chkboxToggledArchived <> True) Then
+        If Len(Nz(s2, vbNullString)) <> 0 Then
+            s2 = s2 + " AND [IsArchived] <> True "
+        Else
+            s2 = "[IsArchived] <> True "
+        End If
+    End If
+    
+    If Len(Nz(s2, vbNullString)) <> 0 Then
+        Me.Filter = s2
+        If Me.FilterOn <> True Then
+            Me.FilterOn = True
+        End If
+    Else
+        Me.FilterOn = False
+    End If
+    
+    Me.Requery
+    
+    Set rst = Me.RecordsetClone
+    If rst.RecordCount > 0 Then rst.MoveLast
+    If Not rst.EOF Then
+        Me.LabelBookingCount.Caption = "Found : " & CStr(rst.RecordCount)
+    Else
+        Me.LabelBookingCount.Caption = "(Found : 0)"
+        '        Me.txtTextBox.Value = ""
+        '        mTxt = ""
+    End If
+    Set rst = Nothing
+    
+PROC_EXIT:
+    Label72.Caption = "FILTER: " & s2
+    If Me.txtTextBox.Visible Then Me.txtTextBox.SetFocus
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        Msg = "DlgCustAddContact ParamChanged" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+End Sub
+
+
+
+Private Sub txtTextBox_Enter()
+    On Error GoTo PROC_ERR
+    Me.txtTextBox.SelLength = 0
+    Me.txtTextBox.SelStart = Len(Me.txtTextBox.Text)
+PROC_EXIT:
+    On Error Resume Next
+    
+    Exit Sub
+PROC_ERR:
+    ' error during select length
+    ' current state of form
+    ' -no search results - form grid is empty
+    ' -txtTextBox has ignored last character pushed to it
+    ' -txtTextBox has all text selected
+    ' -txtTextBox.Value = NULL
+    
+    ' enter new state and peek keyboard for user input...
+    FailedSelectLength = True
+    Me.lblFailedSelectLength.Top = Me.txtTextBox.Top
+    Me.lblFailedSelectLength.Left = Me.txtTextBox.Left
+    Me.lblFailedSelectLength.Width = Me.txtTextBox.Width
+    Me.lblFailedSelectLength.Height = Me.txtTextBox.Height
+    Me.lblFailedSelectLength.Caption = mTxt
+    Me.lblFailedSelectLength.Visible = True
+    Me.txtTextBox.Visible = False
+    Me.lblNotification.Visible = True
+End Sub
+
+Private Sub txtTextBox_KeyDown(KeyCode As Integer, Shift As Integer)
+    On Error GoTo PROC_ERR
+    If FailedSelectLength Then
+        ' All keycodes captured by Form_KeyDown routine
+        KeyCode = 0
+    Else
+        Select Case KeyCode
+        Case vbKeyReturn
+            ' refresh/re-query of grid
+            ParamChanged
+            KeyCode = 0
+        Case vbKeyBack
+            ' push end character
+            mTxt = Left(mTxt, Len(mTxt) - 1)
+            ParamChanged
+        Case 48 To 57, 65 To 90, 97 To 122
+            ' alpha-numeric characters
+            mTxt = mTxt & Chr(KeyCode)
+            ParamChanged
+        Case vbKeyNumpad0
+            ' alpha-numeric characters
+            mTxt = mTxt & Chr(KeyCode)
+            ParamChanged
+        Case Else
+            KeyCode = 0
+        End Select
+    End If
+        
+PROC_EXIT:
+    On Error Resume Next
+    
+    Exit Sub
+PROC_ERR:
+    ' do nothing
+End Sub

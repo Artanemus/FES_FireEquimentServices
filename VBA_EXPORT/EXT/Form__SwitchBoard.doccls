@@ -1,0 +1,119 @@
+﻿Option Compare Database
+Option Explicit
+
+
+
+Private Sub cmdBuildCustomOrder_Click()
+    Beep
+End Sub
+
+Private Sub cmdDeleteCust_Click()
+    mdlDelete.DeleteCustomer
+End Sub
+
+Private Sub cmdDeleteEquipment_Click()
+    mdlDelete.DeleteEquipment
+End Sub
+
+Private Sub cmdDeleteHR_Click()
+    mdlDelete.DeleteHR
+End Sub
+
+Private Sub cmdDeleteInspectOrder_Click()
+    mdlDelete.DeleteInspectionOrder
+End Sub
+
+Private Sub cmdDeleteSite_Click()
+    mdlDelete.DeleteSite
+End Sub
+
+Private Sub cmdDeleteSurveyOrder_Click()
+    mdlDelete.DeleteSurveyOrder
+End Sub
+
+Private Sub cmdEditGlobal_Click()
+    mdlNavigationCode.cmdNav_SwitchToGlobalForm
+End Sub
+
+Private Sub cmdFindEquipment_Click()
+    mdlNavigationCode.cmdNav_SwitchToEquipFindForm
+End Sub
+
+Private Sub cmdGotoEquipID_Click()
+    mdlGoto.GotoEquip
+End Sub
+
+Private Sub cmdReportCust_Click()
+    mdlReportCust.exeReportCust
+End Sub
+
+Private Sub cmdReportTech_Click()
+    mdlReportTech.exeReportTech
+End Sub
+
+Private Sub cmdReportTechSummary_Click()
+    mdlReportTechSummary.exeReportTechSummary
+End Sub
+
+Private Sub cmdSB_BrowseEquip_Click()
+    mdlNavigationCode.cmdNav_SwitchToEquipForm
+End Sub
+
+Private Sub cmdSB_NewEquipment_Click()
+    mdlNavigationCode.cmdNav_SwitchToEquipForm
+    mdlNavigationCode.cmdNav_NewEquip
+End Sub
+
+Private Sub cmdUndoUpdate_Click()
+    mdlDelete.UndoUpdate
+End Sub
+
+Private Sub cmdUpdateConnectionStr_Click()
+    ' Update connection string for SQLEXPRESS pass-through scripts
+    ' iterate over QUERY statck
+    Dim qd As DAO.QueryDef
+    
+    For Each qd In CurrentDb.QueryDefs
+        If qd.Type = dbQSQLPassThrough Then
+            qd.Connect = CurrentDb.TableDefs("dbo_CompanyInfo").Connect
+            Label359.Caption = qd.Connect
+        End If
+    Next qd
+    
+End Sub
+
+Private Sub cmdViewSystemLog_Click()
+    mdlLog.ViewLog
+End Sub
+
+Private Sub cmdEditCompanyInfo_Click()
+    mdlNavigationCode.cmdNav_SwitchToCompanyInfoForm
+End Sub
+
+Private Sub Form_Load()
+    Dim v As Variant
+
+    v = DLookup("[CompanyName]", "dbo_CompanyInfo", "[CompanyInfoID] = 1")
+    If Not IsNull(v) Then
+        Me.lblCompanyName.Caption = CStr(v)
+    Else
+        Me.lblCompanyName.Caption = "Fire and Equipment Services."
+    End If
+        
+End Sub
+
+Private Sub TabCtl202_Change()
+    Dim qd As DAO.QueryDef
+    
+    Label359.Caption = vbNullString
+    If TabCtl202.Value = 3 Then
+        ' update the current connection string used by any Pass-Through SQL
+        For Each qd In CurrentDb.QueryDefs
+            If qd.Type = dbQSQLPassThrough Then
+                Label359.Caption = qd.Connect
+                Exit For
+            End If
+        Next qd
+    End If
+    
+End Sub

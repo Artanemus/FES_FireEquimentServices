@@ -1,0 +1,14 @@
+﻿Option Compare Database
+Option Explicit
+
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the TIMESTAMP
+    Me![CreatedOn] = Now()
+    Me![IsArchived] = False
+End Sub
+
+Private Sub Form_BeforeUpdate(Cancel As Integer)
+    'cleanup the phone number
+    Me.ContactNum = mdlToolBox.CleanContactNum(Me.ContactNum)
+End Sub

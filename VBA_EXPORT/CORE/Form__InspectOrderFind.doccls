@@ -1,0 +1,352 @@
+﻿Option Compare Database
+Option Explicit
+
+Const MainFrm As String = "_InspectOrder"
+Const SubFrm As String = "SF_InspectionOrderFind"
+Const PKey As String = "[InspectionOrderID]"
+Const SearchFld As String = "[CustName]"
+Const ModuleName As String = "InspectionOrderFind"
+
+
+
+Private Sub cmdClearCompanyName_Click()
+    Me.edtCustName = Empty
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+Private Sub cmdClearSiteAddress_Click()
+    Me.edtSiteAddress = Empty
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+Private Sub edtCustName_Change()
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+' NOTES:
+' -------------------------------------------------------------------------------------
+' Process to deal with unbound dates is fully scripted here
+'
+
+Private Sub edtEndDate_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyReturn Or KeyCode = vbKeySeparator Or KeyCode = vbKeyTab Then
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+    End If
+End Sub
+
+Private Sub edtSiteAddress_Change()
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+Private Sub edtStartDate_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyReturn Or KeyCode = vbKeySeparator Or KeyCode = vbKeyTab Then
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+    End If
+End Sub
+
+' ================================================================
+' FORM
+' ================================================================
+Private Sub Form_Load()
+    Me.lblCompanyCode.Caption = mdlCompany.GetCompanyCode()
+'    Me.SortByCreatedON = False
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+Dim DT As Date
+
+    Me.ComboStatus = vbNullString
+    Me.ComboSuburb = vbNullString
+    Me.edtEndDate = vbNullString
+    Me.edtStartDate = vbNullString
+    If Me.edtStartDate.Visible Then Me.edtStartDate.SetFocus
+    
+End Sub
+
+Private Sub Form_Activate()
+    If Me.edtStartDate.Visible Then Me.edtStartDate.SetFocus
+End Sub
+
+Public Sub Child_Called_DlbClick(Cancel As Integer)
+    Form_DblClick Cancel
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    cmdGOTO_Click
+End Sub
+
+
+
+' ================================================================
+' NULL CONTROLS
+' ================================================================
+Private Sub cmdClearEndDate_Click()
+    Me.edtEndDate = vbNullString
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+    'If Me.edtEndDate.Visible Then Me.edtEndDate.SetFocus
+End Sub
+
+Private Sub cmdClearStartDate_Click()
+    Me.edtStartDate = vbNullString
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+    'If Me.edtStartDate.Visible Then Me.edtStartDate.SetFocus
+End Sub
+
+Private Sub cmdClearStatus_Click()
+    Me.ComboStatus = vbNullString
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+    'If Me.ComboStatus.Visible Then Me.ComboStatus.SetFocus
+End Sub
+
+Private Sub cmdClearSuburb_Click()
+    Me.ComboSuburb = vbNullString
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+    'If Me.ComboSuburb.Visible Then Me.ComboSuburb.SetFocus
+End Sub
+
+' ================================================================
+' SET DATE
+' ================================================================
+Private Sub cmdEndDate_Click()
+Dim v As Variant
+    v = mdlDateTime.InputDate("Enter Inspection Order ENDDATE", Me.edtStartDate)
+    If Nz(v, 0) <> 0 Then
+        Me.edtEndDate = v
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+    End If
+End Sub
+
+Private Sub cmdStartDate_Click()
+Dim v As Variant
+    v = mdlDateTime.InputDate("Enter Inspection Order STARTDATE", Me.edtStartDate)
+    If Nz(v, 0) <> 0 Then
+        Me.edtStartDate = v
+        ParamChanged
+        Me.Form(SubFrm).Form.CountRecords
+    End If
+End Sub
+
+' ================================================================
+' QUICK PICK CURRENT MONTH
+' ================================================================
+Private Sub cmdCurrMonth_Click()
+Dim DT As Date
+    ' Default settings for dates
+    DT = DateSerial(DatePart("yyyy", Date), DatePart("m", Date), 1)
+    Me.edtStartDate = DT
+    DT = DateSerial(DatePart("yyyy", Date), (DatePart("m", Date) + 1), 1)
+    Me.edtEndDate = DT
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+
+End Sub
+
+
+
+' ================================================================
+' ON CHANGE
+' ================================================================
+Private Sub ComboStatus_Change()
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+Private Sub ComboSuburb_Change()
+    ParamChanged
+    Me.Form(SubFrm).Form.CountRecords
+End Sub
+
+
+Private Sub cmdGOTO_Click()
+Dim strCriteria As String
+Dim rst As DAO.Recordset
+Dim v As Variant
+Dim Msg As String
+
+    On Error GoTo PROC_ERR
+    
+    v = Me.Form(SubFrm).Form!InspectionOrderID
+    If (Nz(v, 0) > 0) Then
+        If Not IsLoaded(MainFrm) Then
+            DoCmd.OpenForm MainFrm, acNormal
+        End If
+        Forms(MainFrm).FilterOn = False
+        Set rst = Forms(MainFrm).RecordsetClone
+        strCriteria = PKey & " = " & CStr(v)
+        rst.FindFirst strCriteria
+        If Not rst.NoMatch Then
+            Forms(MainFrm).Bookmark = rst.Bookmark
+            Forms(MainFrm).SetFocus
+            Exit Sub
+        Else
+            MsgBox "NoMatch :: Unable to bookmark ID.", , "Error finding booking..."
+        End If
+        Set rst = Nothing
+    Else
+        Beep
+    End If
+    
+PROC_EXIT:
+
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        Msg = "mdlCustFind cmdGOTO_Click" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+    
+End Sub
+
+Private Sub SetSF_FilterOff()
+    If Me.Form(SubFrm).Form.FilterOn Then
+        Me.Form(SubFrm).Form.FilterOn = False
+    End If
+End Sub
+
+Private Sub ParamChanged()
+    Dim s1 As String, s2 As String, s3 As String, s4 As String, s5 As String, s6 As String
+    Dim aFilterStr As String
+    Dim Msg As String
+    
+    ' variant - resolves NULL exceptions
+    Dim aSuburbStr As Variant
+    Dim aStatusStr As Variant
+    Dim aStartDTStr As Variant
+    Dim aEndDTStr As Variant
+    Dim aCustName As Variant
+    Dim aSiteAddress As Variant
+    
+
+    
+    On Error GoTo PROC_ERR
+    
+    
+    aFilterStr = vbNullString
+    s1 = vbNullString
+    s2 = vbNullString
+    s3 = vbNullString
+    s4 = vbNullString
+    s5 = vbNullString
+    s6 = vbNullString
+    
+
+    'Start DateTime
+    If (Me.edtStartDate Is Me.ActiveControl) Then
+        aStartDTStr = Me.edtStartDate.Text
+    Else
+        aStartDTStr = Me.edtStartDate.Value
+    End If
+    If (Len(Nz(aStartDTStr, vbNullString)) > 0) Then
+        If IsDate(aStartDTStr) Then
+            s1 = " [RequestedDT] >= #" & Format(aStartDTStr, "mm/dd/yyyy") & "# "
+        End If
+    End If
+    ' End DateTime
+    If (Me.edtEndDate Is Me.ActiveControl) Then
+        aEndDTStr = Me.edtEndDate.Text
+    Else
+        aEndDTStr = Me.edtEndDate.Value
+    End If
+    If (Len(Nz(aEndDTStr, vbNullString)) > 0) Then
+        If IsDate(aEndDTStr) Then
+            s2 = " AND [RequestedDT] < #" & Format(aEndDTStr, "mm/dd/yyyy") & "# "
+        End If
+    End If
+    ' Suburb
+    If (Me.ComboSuburb Is Me.ActiveControl) Then
+        aSuburbStr = Me.ComboSuburb.Text
+    Else
+        aSuburbStr = Me.ComboSuburb.Value
+    End If
+    If (Len(Nz(aSuburbStr, vbNullString)) > 0) Then
+        s3 = " AND [Suburb] LIKE '%" & aSuburbStr & "%'"
+    End If
+    ' Inspection Order Status
+    If (Me.ComboStatus Is Me.ActiveControl) Then
+        aStatusStr = Me.ComboStatus.Text
+    Else
+        aStatusStr = Me.ComboStatus.Value
+    End If
+    If (Len(Nz(aStatusStr, vbNullString)) > 0) Then
+        s4 = " AND [Caption] LIKE '%" & aStatusStr & "%'"
+    End If
+    ' Customer's Name
+    If (Me.edtCustName Is Me.ActiveControl) Then
+        aCustName = Me.edtCustName.Text
+    Else
+        aCustName = Me.edtCustName.Value
+    End If
+    If (Len(Nz(aCustName, vbNullString)) > 0) Then
+        s5 = " AND [CustName] LIKE '%" & aCustName & "%'"
+    End If
+    ' Site Address
+    If (Me.edtSiteAddress Is Me.ActiveControl) Then
+        aSiteAddress = Me.edtSiteAddress.Text
+    Else
+        aSiteAddress = Me.edtSiteAddress.Value
+    End If
+    If (Len(Nz(aSiteAddress, vbNullString)) > 0) Then
+        s5 = " AND [xAddress] LIKE '%" & aSiteAddress & "%'"
+    End If
+    
+    
+    aFilterStr = s1 & s2 & s3 & s4 & s5 & s6
+    
+    If (Len(Nz(aFilterStr, vbNullString)) = 0) Then
+        SetSF_FilterOff
+        Exit Sub
+    End If
+    
+    If Left(aFilterStr, 4) = " AND" Then
+        aFilterStr = Mid(aFilterStr, 5, Len(aFilterStr))
+    End If
+    
+'    If Me.SortByCreatedON = True Then
+'        Me.Form(SubFrm).Form.OrderBy = "[CreatedOn] DESC"
+'    Else
+'        Me.Form(SubFrm).Form.OrderBy = "[RequestedDT] DESC"
+'    End If
+    
+    Me.Form(SubFrm).Form.Filter = aFilterStr
+        
+    If Me.Form(SubFrm).Form.FilterOn = False Then
+        Me.Form(SubFrm).Form.FilterOn = True
+    End If
+    
+'    If Me.Form(SubFrm).Form.OrderByOn = False Then
+'        Me.Form(SubFrm).Form.OrderByOn = True
+'    End If
+        
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        Msg = ModuleName & " ParamChanged" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    Resume PROC_EXIT
+    
+    
+End Sub
+

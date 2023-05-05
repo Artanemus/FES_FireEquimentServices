@@ -136,9 +136,10 @@ __recovery/
 __astcache/
 
 # User folders
-**/ASSETS/**
-**/ACCDB/**
-**/RUBBERDUCK_EXPORT/**
+# **/ASSETS/**
+# **/ACCDB/**
+# **/RUBBERDUCK_EXPORT/**
+**/SNIPIT/**
 
 
 

@@ -1,0 +1,6 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub cmdGotoLink_Click()
+    mdlGoto.GotoCustSite Me.CustSiteID
+End Sub

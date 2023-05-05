@@ -1,0 +1,198 @@
+﻿Option Compare Database
+Option Explicit
+Private CompanyCodeStr As String
+
+Private dtYEAR As Date
+Private SwitchState As Integer
+Private qryDef As DAO.QueryDef
+Private dbs As DAO.Database
+
+
+Private Sub Address_DblClick(Cancel As Integer)
+    mdlGoto.GotoSite Me.SiteID
+End Sub
+
+Private Sub chkHideDisabledLinks_Click()
+    tcMonths_Change
+End Sub
+
+Private Sub cmdClear_Click()
+    comboInspectStatus = vbNullString
+    comboInspectStatus_Change
+End Sub
+
+Private Sub cmdCustTestResultBatchReport_Click()
+Dim DT As Date
+    DT = DateSerial(Me.Text48.Value, Me.tcMonths.Value + 1, 1)
+    mdlBatchPrint.BatchPrintCustRpt DT
+End Sub
+
+Private Sub cmdGotoCust_Click()
+    If Me!CustomerID > 0 Then
+        mdlGoto.GotoCust Me!CustomerID
+    End If
+End Sub
+
+Private Sub cmdGotoInspectionOrder_Click()
+    If Me.InspectionOrderID > 0 Then
+        mdlGoto.GotoInspectionOrder Me.InspectionOrderID
+    End If
+End Sub
+
+Private Sub cmdGotoSite_Click()
+    If Me.SiteID > 0 Then
+        mdlGoto.GotoSite Me.SiteID
+    End If
+End Sub
+
+Private Sub cmdSetToCurrMonth_Click()
+    'Set to current month ... same as form load routine
+    dtYEAR = Date
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
+    Me.tcMonths.Value = DatePart("m", dtYEAR) - 1
+    ' update recordset
+    tcMonths_Change
+End Sub
+
+Private Sub cmdTechFormBatchReport_Click()
+Dim DT As Date
+    DT = DateSerial(Me.Text48.Value, Me.tcMonths.Value + 1, 1)
+    mdlBatchPrint.BatchPrintRptTech DT
+End Sub
+
+Private Sub comboInspectStatus_Change()
+
+    ' TODO: place InspectionStatusID into qrySchedule as PARAMETER and the re-construct query.
+    
+    tcMonths_Change
+    
+'    If (Len(Nz(Me.comboInspectStatus, vbNullString)) > 0) Then
+'        Me.Form.Filter = "[InspectionStatusID] = " & CStr(Nz(Me.comboInspectStatus.Column(0), 0))
+'        If Not (qryDef Is Nothing) Then
+'            If Me.Form.FilterOn = False Then
+'                Me.Form.FilterOn = True
+'            End If
+'        End If
+'    Else
+'        If Me.Form.FilterOn = True Then
+'            Me.Form.FilterOn = False
+'        End If
+'        Me.Form.Filter = vbNullString
+'    End If
+    
+End Sub
+
+Private Sub CustName_DblClick(Cancel As Integer)
+    ' CustomerID
+    mdlGoto.GotoCust Me!CustomerID
+End Sub
+
+Private Sub Form_Close()
+    If Not (qryDef Is Nothing) Then qryDef.Close
+    If Not (Me.Recordset Is Nothing) Then Me.Recordset.Close
+    Set Me.Recordset = Nothing
+    Set qryDef = Nothing
+    Set dbs = Nothing
+    Me.Form.Filter = vbNullString
+End Sub
+
+Private Sub Form_DblClick(Cancel As Integer)
+    ' goto Inspection Order
+    mdlGoto.GotoInspectionOrder Me.InspectionOrderID
+End Sub
+
+Private Sub Form_Load()
+    ' Header information
+    CompanyCodeStr = mdlCompany.GetCompanyCode()
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+    
+    Set dbs = CurrentDb
+    ' Recordset is empty on creation - assign QUERY
+    Set qryDef = dbs.QueryDefs("qrySchedule")
+    
+    ' ON LOAD MOVE TO THE CURRENT YEAR - MONTH ...
+    cmdSetToCurrMonth_Click
+    ' Clear all search parameters
+    Me.Form.Filter = vbNullString
+    ' then call proc to update the SQL filter state and grid view
+    comboInspectStatus_Change
+    
+End Sub
+
+Private Sub InspectionOrderID_DblClick(Cancel As Integer)
+    mdlGoto.GotoInspectionOrder Me.InspectionOrderID
+End Sub
+
+Private Sub SiteID_DblClick(Cancel As Integer)
+    mdlGoto.GotoSite Me.SiteID
+End Sub
+
+Private Sub tcMonths_Change()
+Dim aPage As Page
+Dim dt1 As Date
+Dim dt2 As Date
+Dim i As Integer
+Dim aYear As Integer
+
+    Set aPage = Me.tcMonths.Pages.item(Me.tcMonths.Value)
+    If Not IsNull(aPage) Then
+        i = CInt(aPage.Tag)
+        aYear = DatePart("yyyy", dtYEAR)
+        dt1 = DateSerial(aYear, i, 1)
+        i = i + 1
+        If Me.tcMonths.Value = 11 Then
+            dt2 = DateSerial((aYear + 1), 1, 1)
+        Else
+            dt2 = DateSerial(aYear, i, 1)
+        End If
+        If Not (qryDef Is Nothing) Then
+            Set Me.Form.Recordset = Nothing
+            qryDef.Close
+            qryDef.Parameters("startDate").Value = dt1
+            qryDef.Parameters("endDate").Value = dt2
+            
+            ' 21/5/2021
+            '  DEFAULT IS TO SHOW ALL DISABLED CUSTSITES
+            '  This means all inspection orders are shown ....
+            ' ---------------------------------------------------------------------
+            qryDef.Parameters("HideDisabled").Value = Me.chkHideDisabledLinks.Value
+            ' ---------------------------------------------------------------------
+            
+            ' 15/5/2021 - filter on InspectionOrderStatusID
+            ' -----------------------------------------------------------
+            qryDef.Parameters("status").Value = Nz(Me.comboInspectStatus.Column(0), 0)
+            ' -----------------------------------------------------------
+            
+            Set Me.Form.Recordset = qryDef.OpenRecordset(dbOpenSnapshot)
+        End If
+        'Me.Requery
+    End If
+End Sub
+
+Private Sub cmdFWD_Click()
+    'increment the date and requery
+    dtYEAR = DateAdd("yyyy", 1, dtYEAR)
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
+    ' calling here will update the forms filter
+    tcMonths_Change
+End Sub
+
+Private Sub cmdREV_Click()
+    'increment the date and requery
+    dtYEAR = DateAdd("yyyy", -1, dtYEAR)
+    Me.Text48.Value = Format(dtYEAR, "YYYY")
+    ' calling here will update the forms filter
+    tcMonths_Change
+End Sub
+
+
+
+Private Sub Text73_DblClick(Cancel As Integer)
+Dim Results As Boolean
+    If Nz(Me.[InspectionOrderID], 0) > 0 Then
+        Results = mdlInspection.SetInspectOrderStatus(Me.[InspectionOrderID])
+        If Results = True Then
+            Me.Requery
+        End If
+    End If
+End Sub

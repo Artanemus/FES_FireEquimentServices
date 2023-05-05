@@ -1,0 +1,33 @@
+﻿'@Folder "TECH"
+Option Compare Database
+Option Explicit
+
+
+' HOW TO REFERENCE SUB-REPORTS
+'    If Me.Report("rICMSCore").Report.CurrentView = 6 Then
+'        s = "([Arrival] >= #" & Format(mDateSeedS, "mm/dd/yyyy") & _
+'        "# AND [Arrival] <= #" & Format(mDateSeedE, "mm/dd/yyyy hh:nn") & "#) "
+'    End If
+'
+'    If Me.Report("rICMSCore").Report.CurrentView = 6 Then
+'        Me.Report("rICMSCore").Report.Filter = s & _
+'        " AND " & _
+'        " (( (tblCust.ClientGroupID)=1 Or (tblCust.ClientGroupID)=2 Or (tblCust.ClientGroupID)=3 Or " & _
+'        " (tblCust.ClientGroupID)=4 Or (tblCust.ClientGroupID)=5 Or (tblCust.ClientGroupID)=6 Or " & _
+'        " (tblCust.ClientGroupID)=7 Or (tblCust.ClientGroupID)=19 )) " & _
+'        " AND ([AttendeeCount] > 0)"
+'        Me.Report("rICMSCore").Report.FilterOn = True
+'    End If
+'
+'
+'    If Me.Report("rICMSNonCore").Report.CurrentView = 6 Then
+'        Me.Report("rICMSNonCore").Report.Filter = s & _
+'        " AND " & _
+'        "(( (tblCust.ClientGroupID)=8 Or (tblCust.ClientGroupID)=9 Or (tblCust.ClientGroupID)=10 Or " & _
+'        "(tblCust.ClientGroupID)=11 Or (tblCust.ClientGroupID)=12 Or (tblCust.ClientGroupID)=13 Or " & _
+'        "(tblCust.ClientGroupID)=14 Or (tblCust.ClientGroupID)=15 Or (tblCust.ClientGroupID)=16 Or " & _
+'        "(tblCust.ClientGroupID)=17 Or (tblCust.ClientGroupID)=18)) " & _
+'        " AND ([AttendeeCount] > 0)"
+'        Me.Report("rICMSNonCore").Report.FilterOn = True
+'    End If
+

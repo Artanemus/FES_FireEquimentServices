@@ -1,0 +1,135 @@
+﻿Option Compare Database
+Option Explicit
+
+Private mTextBoxStr As Variant
+
+Private Sub Form_Load()
+    lMsg.Visible = False
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+Dim v As Variant
+    mTextBoxStr = vbNullString
+    mdlDelete.ReturnValue = Null
+    
+    'OPEN ARGUMENTS
+    If Len(Me.OpenArgs) > 0 Then
+        ' CAPTION STRING
+        v = mdlOpenArgs.AssertParseOpenArgs(Me.OpenArgs, 0)
+        If Nz(v, 0) > 0 Then
+            Me.Caption = CStr(v)
+        End If
+    Else
+        Me.Caption = "DELETE"
+    End If
+    
+End Sub
+
+Private Sub cmdCancel_Click()
+    mdlDelete.ReturnValue = 0
+    Me.Visible = False
+End Sub
+
+Private Sub txtTextBox_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyReturn Then
+        cmdGotoBtn_Click
+        KeyCode = 0
+    End If
+End Sub
+
+Private Sub txtTextBox_Change()
+    Dim i As Long
+    Dim ctl As Access.Control
+    On Error GoTo ERR_1
+    i = 0
+    Set ctl = Me.ActiveControl
+    If Not (ctl Is Nothing) Then
+        If (Me.txtTextBox Is ctl) Then
+            mTextBoxStr = Me.txtTextBox.Text
+            i = Me.txtTextBox.SelStart
+            If IsNull(mTextBoxStr) Then mTextBoxStr = Me.txtTextBox.Value
+        Else
+            mTextBoxStr = Me.txtTextBox.Value
+            i = Len(mTextBoxStr)
+        End If
+    Else
+        mTextBoxStr = Me.txtTextBox.Value
+        i = Len(mTextBoxStr)
+    End If
+ERR_2:
+    On Error GoTo PROC_ERR
+    Set ctl = Nothing
+    ParamChanged
+    Me.txtTextBox.SetFocus
+    Set ctl = Me.ActiveControl
+    If Not (ctl Is Nothing) Then
+        If (Me.txtTextBox Is ctl) Then
+            Me.txtTextBox.SelStart = i
+            Me.txtTextBox.SelLength = 0
+        End If
+    End If
+PROC_EXIT:
+    Set ctl = Nothing
+    Exit Sub
+ERR_1:
+    mTextBoxStr = Me.txtTextBox.Value
+    i = Len(Nz(mTextBoxStr, 0))
+    GoTo ERR_2
+PROC_ERR:
+    Set ctl = Nothing
+    ' do nothing
+End Sub
+
+Private Function ParamChanged() As Long
+    Dim v As Variant
+'    Dim s As String
+    ParamChanged = 0
+    If IsNull(mTextBoxStr) Then
+        lMsg.Caption = "Enter a ID."
+        lMsg.Visible = True
+        Exit Function
+    End If
+'    s = CStr(mTextBoxStr)
+'    If IsNumeric(Trim(s)) Then
+'        v = DLookup("[HRID]", "dbo_HR", "[HRID] = " & Trim(s))
+'        If IsNull(v) Then
+'            lMsg.Caption = "The HR ID doesn't exist."
+'            lMsg.Visible = True
+'            Exit Function
+'        End If
+'    Else
+'        lMsg.Caption = "Not a valid number."
+'        lMsg.Visible = True
+'        Exit Function
+'    End If
+
+    If Not IsNumeric(Trim(CStr(mTextBoxStr))) Then
+        lMsg.Caption = "Not a valid number."
+        lMsg.Visible = True
+        Exit Function
+    End If
+    
+    ParamChanged = CLng(Trim(CStr(mTextBoxStr)))
+    
+    ' no errors ... assert visibility
+    lMsg.Visible = False
+End Function
+
+Private Sub cmdGotoBtn_Click()
+    Dim v As Variant
+    v = ParamChanged
+    If (v > 0) Then
+        ' return the booking ID
+        mdlDelete.ReturnValue = v
+        Me.Visible = False
+    Else
+        Beep
+    End If
+End Sub
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyEscape Then
+        cmdCancel_Click
+        KeyCode = 0
+    End If
+End Sub

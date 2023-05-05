@@ -1,0 +1,314 @@
+﻿Option Compare Database
+Option Explicit
+Const ModuleName As String = "_Site"
+Const PKey As String = "[SiteID]"
+Private CompanyCodeStr As String
+
+Private Sub cmdClearPostcode_Click()
+    Dim lngPK As Long
+    Dim intResponse As Integer
+    Dim cCode As String
+    
+    If Nz(Me.[SiteID], 0) <> 0 Then
+        lngPK = Me.SiteID
+        If Nz(Me.[PostCodeID], 0) <> 0 Then
+            cCode = mdlCompany.GetCompanyCode
+            intResponse = MsgBox("Do you want to clear the postcode information " & _
+                                 vbCrLf & "for the current selected Site", _
+                                 vbYesNo Or vbQuestion Or vbDefaultButton2, _
+                                 cCode & " - Clear Postcode Information")
+           
+            If intResponse = vbYes Then
+                Me.[PostCodeID] = Null
+                Me.Requery
+        
+                'mdlToolBox.RequeryFormAndKeepCurrSelectedRecord Me.Form
+                '-------------------------------------------------
+                '                With Me.RecordsetClone
+                '                    .FindFirst "[SiteID]=" & lngPK
+                '                    If Not .NoMatch Then
+                '                        If Me.Dirty Then
+                '                            Me.Dirty = False
+                '                        End If
+                '                        Me.Bookmark = .Bookmark
+                '                    End If
+                '                End With
+            End If
+        Else
+            Beep
+        End If
+    Else
+        Beep
+    End If
+End Sub
+
+
+Public Sub ExtendedParam(SubFormName As String, KeyName As String)
+    Dim v As Variant
+    Dim pkID As Long
+    Dim rtn As Variant
+
+    ' extended parameters for the station
+    ' this includes - hydrant commission date
+    ' hose reel commission date
+    ' fire extingisher expire date
+    
+    ' PKey is [StationID] or [StationID]
+    
+    If Nz(Me.[SiteID], 0) = 0 Then
+        Exit Sub
+    End If
+    
+    If Me.Dirty Then
+        Me.Dirty = False
+    End If
+    
+    If Len(SubFormName) > 0 Then
+        If Nz(Me.Form(SubFormName).Form!SiteID, 0) = 0 Then
+            Exit Sub
+        End If
+    
+        If Me.Form(SubFormName).Form.Dirty Then
+            Me.Form(SubFormName).Form.Dirty = False
+        End If
+    
+        pkID = Nz(Me.Form(SubFormName).Form.Controls(KeyName), 0)
+    
+        If (pkID = 0) Then
+            Exit Sub
+        End If
+        
+        v = Nz(Me.Form(SubFormName).Form.Controls("[EquipmentID]"), 0)
+        
+'        If InStr(1, SubFormName, "Equip", vbTextCompare) > 0 Then
+'            v = DLookup("[EquipmentID]", "dbo_Station", PKey & " = " & CStr(pkID))
+'        Else
+'            v = DLookup("[EquipmentID]", "dbo_Station", PKey & " = " & CStr(pkID))
+'        End If
+        
+        
+        If Nz(v, 0) > 0 Then
+            v = DLookup("[EquipTypeID]", "dbo_Equipment", "[EquipmentID] = " & CStr(v))
+        End If
+        
+        If Nz(v, 0) > 0 Then
+            Select Case v
+            Case 1                               ' hydrant
+                mdlSite.SetHydrantCommissionDate pkID
+                If Nz(mdlSite.ReturnValue, 0) > 0 Then
+                    Me.Form(SubFormName).Form.Refresh
+                End If
+            Case 3 To 8                          ' fire extingisher
+                mdlSite.SetExtingisherCommissionDate pkID
+                If Nz(mdlSite.ReturnValue, 0) > 0 Then
+                    Me.Form(SubFormName).Form.Refresh
+                End If
+            Case 9                               ' hose reel
+                mdlSite.SetHoseReelCommissionDate pkID
+                If Nz(mdlSite.ReturnValue, 0) > 0 Then
+                    Me.Form(SubFormName).Form.Refresh
+                End If
+            ' Case 10 to 12 ' lights and electrical
+            Case Else
+                Beep
+            End Select
+        Else
+            Beep
+        End If
+        
+        
+    End If
+    
+    
+
+End Sub
+
+Private Sub cmdExtendedParamEquip_Click()
+'    ExtendedParam "[SF_Site_Portable]", "[StationID]"
+End Sub
+
+Private Sub cmdGetPostcode_Click()
+    Dim aPostCodeID As Variant
+    Dim Msg As String
+    Dim DoExit As Boolean
+    Dim cCode As String
+    
+    aPostCodeID = Null
+    
+    On Error GoTo PROC_ERR
+    
+    ' test for NULL site address
+    If Me.NewRecord Then
+        ' obtain the SiteID
+        If Me.Dirty Then
+            Me.Dirty = False
+        End If
+'        'Me.SetFocus Me.Address
+'        If Len(Nz(Me![Address], "")) = 0 Then
+'            cCode = mdlCompany.GetCompanyCode
+'            MsgBox "An address must be given before a postcode." & vbCrLf & _
+'                   "can be assigned", _
+'                   vbOKOnly Or vbInformation Or vbDefaultButton1, _
+'                   cCode & " - Missing Address."
+'            GoTo PROC_EXIT
+'        End If
+    End If
+    
+    If Nz(Me![SiteID], 0) <> 0 Then
+        aPostCodeID = mdlPicker.PickPostcode()
+        If (Nz(aPostCodeID, 0) <> 0) Then
+            ' fill out the values in SF_Cust_Address
+            Me.[PostCodeID] = aPostCodeID
+            If Me.Dirty Then
+                Me.Dirty = False
+            End If
+        End If
+    End If
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        Msg = ModuleName & " cmdGetPostcode_Click" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    
+    Resume PROC_EXIT
+End Sub
+
+Private Sub cmdGetSuburb_Click()
+    Dim aPostCodeID As Variant
+    Dim Msg As String
+    Dim cCode As String
+    
+    aPostCodeID = Null
+    
+    On Error GoTo PROC_ERR
+    
+    ' test for NULL site address
+    If Me.NewRecord Then
+        ' obtain the SiteID
+        If Me.Dirty Then
+            Me.Dirty = False
+        End If
+'        'Me.SetFocus Me.Address
+'        If Len(Nz(Me![Address], "")) = 0 Then
+'            cCode = mdlCompany.GetCompanyCode
+'            MsgBox "An address must be given before a suburb." & vbCrLf & _
+'                    "can be assigned", _
+'                    vbOKOnly Or vbInformation Or vbDefaultButton1, _
+'                    cCode & " - Missing Suburb."
+'            GoTo PROC_EXIT
+'        End If
+    End If
+    
+    If Nz(Me![SiteID], 0) <> 0 Then
+        aPostCodeID = mdlPicker.PickSuburb()
+        If (Nz(aPostCodeID, 0) <> 0) Then
+            ' fill out the values in SF_Cust_Address
+            Me.[PostCodeID] = aPostCodeID
+            If Me.Dirty Then
+                Me.Dirty = False
+            End If
+        End If
+    End If
+    
+PROC_EXIT:
+    On Error Resume Next
+    Exit Sub
+
+PROC_ERR:
+    ' display the system error
+    If err.Number <> 0 Then
+        Msg = ModuleName & " cmdGetSuburb_Click" & vbCrLf & _
+              "Error # " & CStr(err.Number) & " was generated by " & err.Source & vbCrLf & err.Description
+        MsgBox Msg, , "Error", err.HelpFile, err.HelpContext
+    End If
+    
+    Resume PROC_EXIT
+End Sub
+
+
+Private Sub cmdGotoSiteID_Click()
+    mdlGoto.GotoSite
+End Sub
+
+Private Sub cmdNavigateToggleFilter_Click()
+    mdlNavigationCode.cmdNav_ToggleFilter
+End Sub
+
+Private Sub cmdNewCustomer_Click()
+    mdlNavigationCode.cmdNav_NewSite
+End Sub
+
+Private Sub cmdNavigateSearch_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteFindForm
+End Sub
+
+Private Sub cmdNavigateFirst_Click()
+    mdlNavigationCode.cmdNav_First
+End Sub
+
+Private Sub cmdNavigateLast_Click()
+    mdlNavigationCode.cmdNav_Last
+End Sub
+
+Private Sub cmdNavigateNext_Click()
+    mdlNavigationCode.cmdNav_Next
+End Sub
+
+Private Sub cmdNavigatePrev_Click()
+    mdlNavigationCode.cmdNav_Prev
+End Sub
+
+
+Private Sub Form_BeforeInsert(Cancel As Integer)
+    ' set the TIMESTAMP
+    Me![CreatedOn] = Now()
+    Me![IsArchived] = False
+End Sub
+
+Private Sub Form_Current()
+    ' assert enabled states of sub-forms
+    TabCtl0_Change
+End Sub
+
+Private Sub Form_Load()
+    CompanyCodeStr = mdlCompany.GetCompanyCode()
+    Me.lblCompanyCode.Caption = CompanyCodeStr
+    
+    ' assign the default filter
+    Me.Filter = "[IsArchived] <> True"
+
+End Sub
+
+Private Sub TabCtl0_Change()
+
+    If Me.Dirty Then Me.Dirty = False
+        
+    Select Case Me.TabCtl0.Value
+    Case 0
+    Case 1
+        If Nz(Me.SiteID, 0) = 0 Then
+            Me.Form!SF_Site_Portable.Enabled = False
+            Me.Form!SF_Site_Portable.GridlineColor = 4678655
+        Else
+            Me.Form!SF_Site_Portable.Enabled = True
+            Me.Form!SF_Site_Portable.GridlineColor = 10921638
+        End If
+    Case 2
+        If Nz(Me.SiteID, 0) = 0 Then
+            Me.Form!SF_Site_Electrical.Enabled = False
+            Me.Form!SF_Site_Electrical.GridlineColor = 4678655
+        Else
+            Me.Form!SF_Site_Electrical.Enabled = True
+            Me.Form!SF_Site_Electrical.GridlineColor = 10921638
+        End If
+    Case 3
+    End Select
+End Sub
+

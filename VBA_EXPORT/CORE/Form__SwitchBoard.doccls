@@ -1,0 +1,153 @@
+﻿Option Compare Database
+Option Explicit
+
+Private Sub cmd_BrowseInspectOrders_Click()
+    mdlNavigationCode.cmdNav_SwitchToInspectionOrder
+End Sub
+
+Private Sub cmdBuildCustomOrder_Click()
+    Beep
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Private Sub cmdFindInspectionOrder_Click()
+    mdlNavigationCode.cmdNav_SwitchToInspectOrderFindForm
+End Sub
+
+Private Sub cmdFindSite_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteFindForm
+End Sub
+
+Private Sub cmdFindCustomer_Click()
+    mdlNavigationCode.cmdNav_SwitchToCustFindForm
+End Sub
+
+Private Sub cmdFindHR_Click()
+    mdlNavigationCode.cmdNav_SwitchToHRFindForm
+End Sub
+
+Private Sub cmdFindSiteSurvey_Click()
+    mdlNavigationCode.cmdNav_SwitchToSurveyFindForm
+End Sub
+
+' keep first lower hyphen in param name
+Private Sub cmdGoto_InspectID_Click()
+    mdlGoto.GotoInspectionOrder
+End Sub
+
+Private Sub cmdGotoCustCode_Click()
+    mdlGoto.GotoCustCode
+End Sub
+
+Private Sub cmdGotoCustID_Click()
+    mdlGoto.GotoCust
+End Sub
+
+
+
+Private Sub cmdGotoHRID_Click()
+    mdlGoto.GotoHR
+End Sub
+
+Private Sub cmdGotoSiteID_Click()
+    mdlGoto.GotoSite
+End Sub
+
+Private Sub cmdGotoSurveyID_Click()
+    mdlGoto.GotoSurveyOrder
+End Sub
+
+Private Sub cmdSB_BrowseCustomer_Click()
+    mdlNavigationCode.cmdNav_SwitchToCustomerForm
+End Sub
+
+
+Private Sub cmdSB_BrowseHR_Click()
+    mdlNavigationCode.cmdNav_SwitchToHRForm
+End Sub
+
+Private Sub cmdSB_BrowseInspectSchedule_Click()
+    mdlNavigationCode.cmdNav_SwitchToInpectScheduleForm
+End Sub
+
+Private Sub cmdSB_BrowseSites_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteForm
+End Sub
+
+Private Sub cmdSB_BrowseSiteSurvey_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteSurveyForm
+End Sub
+
+Private Sub cmdSB_NewCust_Click()
+    mdlNavigationCode.cmdNav_SwitchToCustomerForm
+    mdlNavigationCode.cmdNav_NewCust
+End Sub
+
+
+
+Private Sub cmdSB_NewHR_Click()
+    mdlNavigationCode.cmdNav_SwitchToHRForm
+    mdlNavigationCode.cmdNav_NewHR
+End Sub
+
+Private Sub cmdSB_NewSite_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteForm
+    mdlNavigationCode.cmdNav_NewSite
+End Sub
+
+Private Sub cmdSB_NewSiteSurvey_Click()
+    mdlNavigationCode.cmdNav_SwitchToSiteSurveyForm
+    mdlNavigationCode.cmdNav_NewSurvey
+End Sub
+
+
+
+Private Sub cmdUPDATEInspectionOrders_Click()
+    ' update inspection orders
+    mdlUpdate.Update_Main
+End Sub
+
+Private Sub cmdViewCustDuplicity_Click()
+    mdlCust.ViewCustDuplicity
+End Sub
+
+Private Sub cmdViewSiteDuplicity_Click()
+    mdlSite.ViewSiteDuplicity
+End Sub
+
+
+
+
+
+
+Private Sub cmdViewHRDuplicity_Click()
+    mdlHR.ViewHRDuplicity
+End Sub
+
+Private Sub Form_Load()
+    Dim v As Variant
+
+    v = DLookup("[CompanyName]", "dbo_CompanyInfo", "[CompanyInfoID] = 1")
+    If Not IsNull(v) Then
+        Me.lblCompanyName.Caption = CStr(v)
+    Else
+        Me.lblCompanyName.Caption = "Fire and Equipment Services."
+    End If
+        
+End Sub
+
+
