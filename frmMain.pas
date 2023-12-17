@@ -152,6 +152,23 @@ type
     vImageListMenu: TVirtualImageList;
     FileExit1: TFileExit;
     FileConnect: TAction;
+    vImageListBug: TVirtualImageList;
+    SpeedButton1: TSpeedButton;
+    BalloonHint1: TBalloonHint;
+    Button33: TButton;
+    Label45: TLabel;
+    Button34: TButton;
+    Label46: TLabel;
+    Button35: TButton;
+    Label47: TLabel;
+    Button36: TButton;
+    Label48: TLabel;
+    ToolsOptions: TAction;
+    ToolsSystemLog: TAction;
+    ToolsCompanySetup: TAction;
+    Bevel2: TBevel;
+    Label49: TLabel;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -164,5 +181,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TMain.FormCreate(Sender: TObject);
+begin
+   Application.ShowHint := true;
+end;
 
 end.

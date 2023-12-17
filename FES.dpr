@@ -5,7 +5,10 @@ uses
   frmMain in 'frmMain.pas' {Main},
   Vcl.Themes,
   Vcl.Styles,
-  frmInspectSchedule in 'frmInspectSchedule.pas' {InspectSchedule};
+  frmInspectSchedule in 'frmInspectSchedule.pas' {InspectSchedule},
+  dlgCompanySetup in 'dlgCompanySetup.pas' {CompanySetup},
+  dlgCustBatchInspectRpt in 'dlgCustBatchInspectRpt.pas' {CustBatchInspectRpt},
+  pickInspectStatus in 'pickInspectStatus.pas' {InspectStatus};
 
 {$R *.res}
 

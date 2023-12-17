@@ -11,6 +11,7 @@ object Main: TMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poMainFormCenter
+  OnCreate = FormCreate
   TextHeight = 21
   object pnlHeader: TPanel
     Left = 0
@@ -20,8 +21,7 @@ object Main: TMain
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 40
-    ExplicitWidth = 843
+    ExplicitWidth = 1293
     object lblHeaderTitle: TLabel
       Left = 14
       Top = 0
@@ -60,8 +60,8 @@ object Main: TMain
     Width = 1295
     Height = 19
     Panels = <>
-    ExplicitTop = 429
-    ExplicitWidth = 843
+    ExplicitTop = 886
+    ExplicitWidth = 1293
   end
   object PageControlEquipment: TPageControl
     Left = 0
@@ -71,9 +71,8 @@ object Main: TMain
     ActivePage = TabSheetSurvey
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 137
-    ExplicitWidth = 843
-    ExplicitHeight = 292
+    ExplicitWidth = 1293
+    ExplicitHeight = 758
     object TabSheetSurvey: TTabSheet
       Caption = 'Survey'
       ImageIndex = 2
@@ -105,8 +104,8 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 835
-        ExplicitHeight = 256
+        ExplicitWidth = 1285
+        ExplicitHeight = 722
         DesignSize = (
           1287
           725)
@@ -294,8 +293,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 837
-        ExplicitHeight = 259
         DesignSize = (
           1287
           725)
@@ -379,7 +376,7 @@ object Main: TMain
             WordWrap = True
           end
           object Button1: TButton
-            Left = 42
+            Left = 45
             Top = 38
             Width = 65
             Height = 58
@@ -401,7 +398,7 @@ object Main: TMain
             TabOrder = 1
           end
           object Button3: TButton
-            Left = 152
+            Left = 155
             Top = 38
             Width = 65
             Height = 58
@@ -412,7 +409,7 @@ object Main: TMain
             TabOrder = 2
           end
           object Button4: TButton
-            Left = 264
+            Left = 265
             Top = 38
             Width = 65
             Height = 58
@@ -423,7 +420,7 @@ object Main: TMain
             TabOrder = 3
           end
           object Button5: TButton
-            Left = 376
+            Left = 375
             Top = 38
             Width = 65
             Height = 58
@@ -450,13 +447,13 @@ object Main: TMain
           BevelOuter = bvNone
           TabOrder = 1
           object Label7: TLabel
-            Left = 25
+            Left = 17
             Top = 102
-            Width = 104
-            Height = 65
+            Width = 128
+            Height = 67
             Alignment = taCenter
             AutoSize = False
-            Caption = 'Report Name'
+            Caption = 'Technicians Inspection Orders DETAILED'
             WordWrap = True
           end
           object Label8: TLabel
@@ -466,8 +463,18 @@ object Main: TMain
             Height = 21
             Caption = 'INSPECTION REPORTS'
           end
+          object Label45: TLabel
+            Left = 169
+            Top = 102
+            Width = 128
+            Height = 67
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Technicians Inspection Orders SUMMARY'
+            WordWrap = True
+          end
           object Button6: TButton
-            Left = 42
+            Left = 49
             Top = 38
             Width = 65
             Height = 58
@@ -476,6 +483,17 @@ object Main: TMain
             ImageName = 'print'
             Images = vImageListBtns
             TabOrder = 0
+          end
+          object Button33: TButton
+            Left = 202
+            Top = 38
+            Width = 65
+            Height = 58
+            ImageAlignment = iaCenter
+            ImageIndex = 6
+            ImageName = 'print'
+            Images = vImageListBtns
+            TabOrder = 1
           end
         end
       end
@@ -512,8 +530,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 837
-        ExplicitHeight = 259
         DesignSize = (
           1287
           725)
@@ -701,8 +717,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 837
-        ExplicitHeight = 259
         DesignSize = (
           1287
           725)
@@ -728,7 +742,7 @@ object Main: TMain
             Height = 65
             Alignment = taCenter
             AutoSize = False
-            Caption = 'Report Name'
+            Caption = 'Customer Inspection Report'
             WordWrap = True
           end
           object Label14: TLabel
@@ -737,6 +751,21 @@ object Main: TMain
             Width = 150
             Height = 21
             Caption = 'CUSTOMER REPORTS'
+          end
+          object SpeedButton1: TSpeedButton
+            Left = 113
+            Top = 35
+            Width = 32
+            Height = 32
+            Hint = 
+              'Create customer inspection reports for a specified date range. P' +
+              'repares an email draft for Outlook with a prepared note and atta' +
+              'chment.'
+            CustomHint = BalloonHint1
+            ImageIndex = 1
+            ImageName = 'info'
+            Images = vImageListBug
+            Flat = True
           end
           object Button9: TButton
             Left = 42
@@ -911,8 +940,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 837
-        ExplicitHeight = 259
         DesignSize = (
           1287
           725)
@@ -1100,8 +1127,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 837
-        ExplicitHeight = 259
         DesignSize = (
           1287
           725)
@@ -1110,7 +1135,7 @@ object Main: TMain
           Left = 10
           Top = 229
           Width = 1267
-          Height = 199
+          Height = 252
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -1120,14 +1145,19 @@ object Main: TMain
           BevelKind = bkFlat
           BevelOuter = bvNone
           TabOrder = 0
+          object Bevel2: TBevel
+            Left = 17
+            Top = 35
+            Width = 624
+            Height = 182
+          end
           object Label17: TLabel
-            Left = 25
-            Top = 102
-            Width = 104
-            Height = 65
+            Left = 71
+            Top = 142
+            Width = 80
+            Height = 42
             Alignment = taCenter
-            AutoSize = False
-            Caption = 'Report Name'
+            Caption = 'FX life cycle MAJOR.'
             WordWrap = True
           end
           object Label18: TLabel
@@ -1137,9 +1167,49 @@ object Main: TMain
             Height = 21
             Caption = 'EQUIPMENT REPORTS'
           end
+          object Label46: TLabel
+            Left = 215
+            Top = 142
+            Width = 75
+            Height = 63
+            Alignment = taCenter
+            Caption = 'HYDRANT life cycle MAJOR.'
+            WordWrap = True
+          end
+          object Label47: TLabel
+            Left = 360
+            Top = 142
+            Width = 75
+            Height = 63
+            Alignment = taCenter
+            Caption = 'HYDRANT life cycle MINOR.'
+            WordWrap = True
+          end
+          object Label48: TLabel
+            Left = 511
+            Top = 142
+            Width = 68
+            Height = 63
+            Alignment = taCenter
+            Caption = 'PUMPSET life cycle MAJOR.'
+            WordWrap = True
+          end
+          object Label49: TLabel
+            Left = 43
+            Top = 46
+            Width = 168
+            Height = 21
+            Caption = 'Technician'#39's stock check.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsUnderline]
+            ParentFont = False
+          end
           object Button11: TButton
-            Left = 42
-            Top = 38
+            Left = 82
+            Top = 78
             Width = 65
             Height = 58
             ImageAlignment = iaCenter
@@ -1147,6 +1217,39 @@ object Main: TMain
             ImageName = 'print'
             Images = vImageListBtns
             TabOrder = 0
+          end
+          object Button34: TButton
+            Left = 225
+            Top = 78
+            Width = 65
+            Height = 58
+            ImageAlignment = iaCenter
+            ImageIndex = 6
+            ImageName = 'print'
+            Images = vImageListBtns
+            TabOrder = 1
+          end
+          object Button35: TButton
+            Left = 368
+            Top = 78
+            Width = 65
+            Height = 58
+            ImageAlignment = iaCenter
+            ImageIndex = 6
+            ImageName = 'print'
+            Images = vImageListBtns
+            TabOrder = 2
+          end
+          object Button36: TButton
+            Left = 511
+            Top = 78
+            Width = 65
+            Height = 58
+            ImageAlignment = iaCenter
+            ImageIndex = 6
+            ImageName = 'print'
+            Images = vImageListBtns
+            TabOrder = 3
           end
         end
         object Panel11: TPanel
@@ -1273,13 +1376,14 @@ object Main: TMain
     ColorMap.BtnSelectedFont = clBlack
     ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -21
     Font.Name = 'Segoe UI'
     Font.Style = []
     HorzMargin = 10
     Spacing = 10
     VertMargin = 4
+    ExplicitWidth = 1293
   end
   object ImageCollectionMain: TImageCollection
     Images = <
@@ -4989,9 +5093,112 @@ object Main: TMain
               D9CA42D6339045566D6C7A066CB29585AC67208BACDAD8F40CD8642B0B59E719
               F80614A370317476AC0F0000000049454E44AE426082}
           end>
+      end
+      item
+        Name = 'settings'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE90000050A494441546843ED9967885E451486
+              9FFCB0A1D8B00B62C512638D8A820D457F58B120C608B14431063576C50AFEB0
+              6045442C08160425B110095151C1883D6AD428180BA282151B5650E75DE686B3
+              6767E6CEB77BBF6F0DE4C0B27B67CE9C99774E9DB31358C669C2327E7E960330
+              1ABC1938A752A3B7F6C05B14D9A5061E038EAC04F024704425EFC000BC03EC50
+              79A8777BE01D08803581AF80552A01FC0A6C0E7C5BC99F65EBCA84760A26F196
+              DBE56AF77DA5FBDE1D787D1000CE041E047E2A6C761430DBCD6F0B7C18C7B603
+              DE77F3C7018F1464AE064C05EE2C816CD3C034E03EE0D360B373803B804F1202
+              2F0CE6739D19FF01D818F8238EAD1C4D6C2DC37371E0B91B10AF25AD3B311E7E
+              22301DB82707A204606DE0696057B758377D3DF01AB01F20D3D06F4B32A75DDC
+              D8DBC08E6E4C7E232DCC0ABFA525697B86E359041C98F39712802B006FC756F6
+              0B898337F30AA9322B4B0A9D87656EB2244B4B746117A5D6E600EC0CBC08AC5A
+              B2BFC2DC2DF1562D8BC6CE1EA5BCDF81FD8157FDFA1C00D9BDECBF57D20672F8
+              DB330BA515C9CD69A2B49F7CF0E81A00CA908F3BC63F8199C00919B391AFC8E4
+              46DC50E644936340D82D312F537B2268FF06407E68690AF0B01DF01AD0B70EE1
+              054B98228DE850E02463E37701A7F7AAAAC83F1F3828FEAD7029EDBD14BFAF8A
+              01C28A96432BE7FCDB0C7A00174487B18B942D1551BE7087DC3084C6D35A1CBD
+              06970E2A93FB2EC1FC0AB0871BBF1CB826056053E0BD84E37E1FD569E37CDBC1
+              5604D68F3FFF84D0F84DFCF9AB6DA1993F36461E1FC6E5D0AAB99688D76AE0F8
+              B8C0C7EA46E6FDC079999BB2E7DA3B26A8ADDD613F072E031EA800A190796D86
+              EF6540A5FBA31E80BE85F6D2440C6F64BD11938D92588A5276EBF9945BC49722
+              15783716CA721DFC266BCEB930AAC4217F48D16FD1F11A676B7894FEA5A51ADA
+              32940B1F3BC6BD42F0780A5065EB49FE776E73EB76B2948915ABF572DA2C2170
+              03E06B33AE84B718D8A4E6F4A1A44865EA75A39F781132151DDE079121BEB662
+              6E8D98136CADF3372027B5A4B09B33AB1426058675121372F215CCB84A0C65E0
+              2CB501D0C2E75DF252A49AE4249E52AA1833BBAB78FBC0CDF9824F25F8F65D03
+              D026AA952CFD6F012895AB7CB626F463F00D5BD70B483F4D48A5CDCF392D944C
+              48758FA2D14689C572389B39FBE9C47A4C9D01A8EC18412900BA75D53E276750
+              F7338CCE0B717EF5CCBECA1FCA01C3B4E1011C039C9FA83F1A99FD4E647A47DF
+              165F60291CD28292D9526D5800CA8E3A7CEE1133A85242A1FB92DC0B2C6A4020
+              86B2B905B05248E18A30DB38E8E355CC9D158128695AFA281673430D036F426A
+              63F862AB544EEB1D90AB6B4AE1DBCEE5CA6965F5371309EF54E0DE4640CA89E7
+              8686D3216EF7F178D0A4DED0CF85B7FA01F66C2900FB86B8AF146E693C9E94EA
+              41C9AC2D1D1C5B3D4BC7727940459C6CB057EAE7A35E8D8611A13D0760AB10CA
+              168487F77ABD2288FC5DB7551448F68915EFB023953271E9552421836C6C651F
+              4125006AAE3E9B486AB6B5987B81D5B61675118DB672ADC585B116FB25650D6D
+              E574F3CA2A3577D59D5038B5EDF39AE6EE33B1ABF1993B986FEECAEE65FF496A
+              03A04535ED75359C1E723BB4B5D7537E624574D25EAFF5E15439DDF60F8E6109
+              A97623CF57A3811AD92AAFBF74CFC1B6757B026A5C8D89BA02A043E8A9A97F48
+              D490CA932D429F29E99835021A9E2E01A8217B78E5E6AD8FF54A39AD5D895A39
+              4D38ACEDFFAB4C5070183375A981311F663402960318CDAD75B9E63FA7231540
+              7FDBB9E20000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'description'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000001BB494441546843ED993F4A05311087
+              BF7709AF60E1112CD423580A1616A2828585206AE11F2C2C845758080A161682
+              9D47D04358E8193C84BE0157D6B0BB99246B5E56679BF7607F93992F934C36C9
+              88813FA381C7CFBF01B806E681B91E33B6023CA4B6A7C9C047AA930EFB55E03E
+              A57D1FC039B09FE24061BB06DC29748D121FC02B301BDB7880DD3A701BA0FF96
+              FA00DCE1731AE3A466B3002CB6B4B105C85C0B7A62004E823CFC143F75008872
+              1BB80A69BF3400897D07B8D442940820B1EF02630D44A90012FB1E70E1832819
+              40623F04A494B73EA50348E047C0591BC1100024F6A549F57A6E823000DF2473
+              DE37AD21D562299D29FFE5F7D8B12B26031A5E813480AAA79ABE85523E252C03
+              6E0FE4AE429681DFC840DBF7BDA6B745E32E50D9AB50EA9ED91DC606504FBDA6
+              8C0E3E03DAB1AED5651F42DAC0B43A03089D03DA9ED5EA2C03A119187C153280
+              865D5BD60D4DEAFEC0B5B7491C3A89B5E551ABB30CFCF90CD4CF71DA868546D3
+              35A47AAB422F3DDF4C6AE7415DF73EB9F498893D1B952B9F8D18AF3DDADC009B
+              B1006297BAD2A6B2749E9CF88E552AE77246BF9CE9C6527CBE018FC0818F5E0B
+              E06B676AEF0D606A5DFFE5F8133C04A231A942F5DD0000000049454E44AE4260
+              82}
+          end>
+      end
+      item
+        Name = 'settings_applications'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE90000028E494441546843ED99CBAB884118C6
+              7FE72FB0D0715B1DA55C8E2CDC57A25C7674166C1485283658882CB010596043
+              118AB26121762E4556EE0BB99662E59252FE02BEA7E6AB3167E6BB1DF3CDF94E
+              DF6CE79D799F67DECBBC33EF001D1F031DC74F4F20B505AB5A606522A08FCAF4
+              9611B8008C0083651B459AFF09DC027685F62F22F02712A8A6DB7AB186089C00
+              0E36D51469DD49E090BB7788C007607624204DB7FD054CAE4AC0759F634DB58E
+              71DD1167FD2AE09FC00E59C047E0E818C1D45D2E7D3D81FCD4E442BD056AFA50
+              72177A0A2C35A09F01CBBA44603AF01E986440FF06E66637EAB71A24925A40B5
+              D3C3B2145842A615029B8159A65E799DE568013F052C09807B0E1C30B97C81A9
+              B33E01D73DF2AD1078030C1BE55F8119155DC4967D0BCC4F41600B70B522E032
+              B1ADC0354728BA05E40E8B0B906D021E9BF915C08D02D9171EB78B4E6008380C
+              ECF000AB5AA268E925E038F0A56D0BE4FA5603F72DE51B803B81D35E0FDCB6E6
+              D6000F02B2D12D90EBDD9DBDD8CE592014C8A17CAFFB41019C8F3DC0F9D404F6
+              6617D6190BC434E04700D454E0BB35B70F389B9AC05AE0AE0542C17B33006AA3
+              13CCEB807BA908C81DF4D8766B76E1A913C4AA74F579E0BA5DF418789905EBC2
+              82D4A86056AAD5D0CD6C07AFBBEC15B0A8ED2C24FF3D5D40A0CED47E278EB436
+              BA05A4E433A0FB40437F3855FF8F6C59E5FF991EB6AD10D806CC31412B779907
+              5C0696078EFF09B01D7867DC4A41AD1F902BA90884DCA433E5748840E71F3422
+              D6E927659D0C14926D2588FF07D09E80EF0426E4D7624C7709EDDDF86FD47EAC
+              A700EED3A9DB7B8A3B11AA1A551DEE1C2FC80D8E8BBE56D3846D31E587AF5693
+              9A7CA9BA351FCDA7D9A8D6520EB0AC4B39CEBC68349C9E406A13F516486D81BF
+              B60CCF31E999D4450000000049454E44AE426082}
+          end>
       end>
     Left = 680
-    Top = 8
   end
   object vImageListBtns: TVirtualImageList
     Images = <
@@ -5038,8 +5245,8 @@ object Main: TMain
     ImageCollection = ImageCollectionMain
     Width = 48
     Height = 48
-    Left = 792
-    Top = 8
+    Left = 584
+    Top = 64
   end
   object ActionManagerSwitchBoard: TActionManager
     ActionBars = <
@@ -5049,6 +5256,7 @@ object Main: TMain
             Items = <
               item
                 Action = FileConnect
+                Caption = '&Connect to Database'
                 ImageIndex = 9
                 ImageName = 'link_off'
               end
@@ -5244,6 +5452,29 @@ object Main: TMain
                 ImageName = 'fiber_new'
               end>
             Caption = '&Equipment'
+          end
+          item
+            Items = <
+              item
+                Action = ToolsCompanySetup
+                Caption = '&Company Setup'
+                ImageIndex = 12
+                ImageName = 'settings'
+              end
+              item
+                Action = ToolsOptions
+                Caption = '&Options'
+                ImageIndex = 14
+                ImageName = 'settings_applications'
+              end
+              item
+                Action = ToolsSystemLog
+                Caption = '&System Log'
+                ImageIndex = 13
+                ImageName = 'description'
+              end>
+            Caption = 'T&ools'
+            ImageName = 'open_in_browser'
           end>
         ActionBar = ActionMainMenuBar1
       end>
@@ -5419,6 +5650,24 @@ object Main: TMain
       Hint = 'Exit|Quits the application'
       ImageIndex = 7
     end
+    object ToolsCompanySetup: TAction
+      Category = 'Tools'
+      Caption = 'Company Setup'
+      ImageIndex = 12
+      ImageName = 'settings'
+    end
+    object ToolsOptions: TAction
+      Category = 'Tools'
+      Caption = 'Options'
+      ImageIndex = 14
+      ImageName = 'settings_applications'
+    end
+    object ToolsSystemLog: TAction
+      Category = 'Tools'
+      Caption = 'System Log'
+      ImageIndex = 13
+      ImageName = 'description'
+    end
   end
   object vImageListMenu: TVirtualImageList
     Images = <
@@ -5481,11 +5730,63 @@ object Main: TMain
         CollectionIndex = 61
         CollectionName = 'link'
         Name = 'link'
+      end
+      item
+        CollectionIndex = 62
+        CollectionName = 'settings'
+        Name = 'settings'
+      end
+      item
+        CollectionIndex = 63
+        CollectionName = 'description'
+        Name = 'description'
+      end
+      item
+        CollectionIndex = 64
+        CollectionName = 'settings_applications'
+        Name = 'settings_applications'
       end>
     ImageCollection = ImageCollectionMain
     Width = 32
     Height = 32
-    Left = 528
-    Top = 16
+    Left = 680
+    Top = 64
+  end
+  object vImageListBug: TVirtualImageList
+    Images = <
+      item
+        CollectionIndex = 21
+        CollectionName = 'help'
+        Name = 'help'
+      end
+      item
+        CollectionIndex = 23
+        CollectionName = 'info'
+        Name = 'info'
+      end
+      item
+        CollectionIndex = 51
+        CollectionName = 'error'
+        Name = 'error'
+      end
+      item
+        CollectionIndex = 52
+        CollectionName = 'warning'
+        Name = 'warning'
+      end
+      item
+        CollectionIndex = 54
+        CollectionName = 'report'
+        Name = 'report'
+      end>
+    ImageCollection = ImageCollectionMain
+    Width = 24
+    Height = 24
+    Left = 768
+    Top = 64
+  end
+  object BalloonHint1: TBalloonHint
+    Left = 958
+    Top = 61
   end
 end

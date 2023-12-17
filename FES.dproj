@@ -114,6 +114,18 @@
             <Form>InspectSchedule</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="dlgCompanySetup.pas">
+            <Form>CompanySetup</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dlgCustBatchInspectRpt.pas">
+            <Form>CustBatchInspectRpt</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="pickInspectStatus.pas">
+            <Form>InspectStatus</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
