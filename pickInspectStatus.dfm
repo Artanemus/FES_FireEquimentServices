@@ -11,6 +11,8 @@ object InspectStatus: TInspectStatus
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 21
   object CheckListBox1: TCheckListBox
     Left = 0
@@ -20,10 +22,8 @@ object InspectStatus: TInspectStatus
     Align = alClient
     ItemHeight = 21
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 236
-    ExplicitHeight = 345
+    ExplicitWidth = 246
+    ExplicitHeight = 352
   end
   object Panel1: TPanel
     Left = 0
@@ -35,7 +35,8 @@ object InspectStatus: TInspectStatus
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 414
+    ExplicitTop = 352
+    ExplicitWidth = 246
     object btnOk: TButton
       Left = 88
       Top = 7
@@ -43,17 +44,19 @@ object InspectStatus: TInspectStatus
       Height = 25
       Caption = 'OK'
       TabOrder = 0
+      OnClick = btnOkClick
     end
   end
-  object qryIInspectionStatus: TFDQuery
+  object qryInspectionStatus: TFDQuery
     ActiveStoredUsage = [auDesignTime]
-    ConnectionName = 'MSSQL_FES'
+    Connection = FES.fesConnection
     SQL.Strings = (
       'SELECT TOP (1000) [InspectionStatusID]'
       '      ,[Caption]'
       '      ,[Description]'
       '      ,[StackOrder]'
-      '  FROM [FES].[dbo].[InspectionStatus]')
+      '  FROM [FES].[dbo].[InspectionStatus]'
+      '  ORDER BY StackOrder')
     Left = 104
     Top = 152
   end
