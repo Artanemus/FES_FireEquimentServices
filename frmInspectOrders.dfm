@@ -1,0 +1,846 @@
+object InspectOrders: TInspectOrders
+  Left = 0
+  Top = 0
+  Caption = 'InspectOrders'
+  ClientHeight = 829
+  ClientWidth = 1245
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 21
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1245
+    Height = 153
+    Align = alTop
+    BevelEdges = [beBottom]
+    BevelKind = bkFlat
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitTop = -6
+    ExplicitWidth = 1179
+    object Label2: TLabel
+      Left = 55
+      Top = 47
+      Width = 50
+      Height = 21
+      Caption = 'Order#'
+    end
+    object Label3: TLabel
+      Left = 143
+      Top = 47
+      Width = 106
+      Height = 21
+      Caption = 'Service Interval'
+    end
+    object Label4: TLabel
+      Left = 288
+      Top = 47
+      Width = 36
+      Height = 21
+      Caption = 'Level'
+    end
+    object DBText1: TDBText
+      Left = 40
+      Top = 6
+      Width = 65
+      Height = 62
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object DBText2: TDBText
+      Left = 161
+      Top = 6
+      Width = 65
+      Height = 62
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object DBText3: TDBText
+      Left = 280
+      Top = 6
+      Width = 65
+      Height = 62
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 400
+      Top = 6
+      Width = 217
+      Height = 38
+      Caption = 'Build Service Stations'
+      ImageIndex = 2
+      ImageName = 'build'
+      Images = VirtualImageList1
+      Margin = 10
+    end
+    object Label7: TLabel
+      Left = 863
+      Top = 50
+      Width = 128
+      Height = 67
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Technicians Inspection Orders DETAILED'
+      WordWrap = True
+    end
+    object Label45: TLabel
+      Left = 997
+      Top = 50
+      Width = 128
+      Height = 67
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Technicians Inspection Orders SUMMARY'
+      WordWrap = True
+    end
+    object SpeedButton2: TSpeedButton
+      Left = 623
+      Top = 6
+      Width = 217
+      Height = 38
+      Caption = 'Goto Customer'
+      ImageIndex = 3
+      ImageName = 'bubble'
+      Images = VirtualImageList1
+      Margin = 10
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 623
+      Top = 50
+      Width = 217
+      Height = 38
+      Caption = 'Goto Site'
+      ImageIndex = 3
+      ImageName = 'bubble'
+      Images = VirtualImageList1
+      Margin = 10
+    end
+    object SpeedButton4: TSpeedButton
+      Left = 623
+      Top = 94
+      Width = 217
+      Height = 38
+      Caption = 'Goto Inspection Order'
+      ImageIndex = 3
+      ImageName = 'bubble'
+      Images = VirtualImageList1
+      Margin = 10
+    end
+    object SpeedButton7: TSpeedButton
+      Left = 400
+      Top = 50
+      Width = 217
+      Height = 38
+      Caption = 'COMPLETED'
+      ImageIndex = 6
+      ImageName = 'done_all'
+      Images = VirtualImageList1
+      Margin = 10
+    end
+    object Button6: TButton
+      Left = 913
+      Top = 12
+      Width = 32
+      Height = 32
+      ImageAlignment = iaCenter
+      ImageIndex = 1
+      ImageName = 'print'
+      Images = VirtualImageList1
+      TabOrder = 0
+    end
+    object Button33: TButton
+      Left = 1047
+      Top = 12
+      Width = 32
+      Height = 32
+      ImageAlignment = iaCenter
+      ImageIndex = 1
+      ImageName = 'print'
+      Images = VirtualImageList1
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 760
+    Width = 1245
+    Height = 69
+    Align = alBottom
+    BevelEdges = [beTop]
+    BevelKind = bkFlat
+    BevelOuter = bvNone
+    TabOrder = 1
+    ExplicitWidth = 1354
+    object DBNavigator1: TDBNavigator
+      Left = 322
+      Top = 16
+      Width = 710
+      Height = 36
+      TabOrder = 0
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 153
+    Width = 1245
+    Height = 607
+    ActivePage = TabSheet1
+    Align = alClient
+    TabOrder = 2
+    ExplicitTop = 113
+    ExplicitWidth = 1354
+    ExplicitHeight = 647
+    object TabSheet1: TTabSheet
+      Caption = 'General'
+      object Label5: TLabel
+        Left = 95
+        Top = 16
+        Width = 42
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'LINK#'
+      end
+      object Label6: TLabel
+        Left = 60
+        Top = 48
+        Width = 77
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Customer#'
+      end
+      object Label8: TLabel
+        Left = 102
+        Top = 86
+        Width = 35
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Site#'
+      end
+      object Label9: TLabel
+        Left = 59
+        Top = 118
+        Width = 79
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Created On'
+      end
+      object DBText4: TDBText
+        Left = 144
+        Top = 118
+        Width = 65
+        Height = 17
+      end
+      object Label10: TLabel
+        Left = 95
+        Top = 198
+        Width = 42
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Status'
+      end
+      object Label11: TLabel
+        Left = 40
+        Top = 230
+        Width = 97
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Requested for'
+      end
+      object Label12: TLabel
+        Left = 37
+        Top = 265
+        Width = 101
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Completed On'
+      end
+      object Label13: TLabel
+        Left = 101
+        Top = 303
+        Width = 36
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Level'
+      end
+      object Label14: TLabel
+        Left = 65
+        Top = 335
+        Width = 71
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Technician'
+      end
+      object SpeedButton5: TSpeedButton
+        Left = 336
+        Top = 230
+        Width = 32
+        Height = 32
+        ImageIndex = 5
+        ImageName = 'backspace'
+        Images = VirtualImageList1
+        Flat = True
+      end
+      object SpeedButton6: TSpeedButton
+        Left = 336
+        Top = 262
+        Width = 32
+        Height = 32
+        ImageIndex = 5
+        ImageName = 'backspace'
+        Images = VirtualImageList1
+        Flat = True
+      end
+      object Label15: TLabel
+        Left = 67
+        Top = 370
+        Width = 71
+        Height = 21
+        Alignment = taRightJustify
+        Caption = 'Technician'
+      end
+      object DBEdit1: TDBEdit
+        Left = 143
+        Top = 13
+        Width = 63
+        Height = 29
+        TabOrder = 0
+      end
+      object DBEdit2: TDBEdit
+        Left = 143
+        Top = 48
+        Width = 63
+        Height = 29
+        TabOrder = 1
+      end
+      object DBEdit3: TDBEdit
+        Left = 143
+        Top = 83
+        Width = 63
+        Height = 29
+        TabOrder = 2
+      end
+      object DBEdit4: TDBEdit
+        Left = 212
+        Top = 48
+        Width = 458
+        Height = 29
+        TabOrder = 3
+      end
+      object DBEdit5: TDBEdit
+        Left = 212
+        Top = 83
+        Width = 458
+        Height = 29
+        TabOrder = 4
+      end
+      object DBComboBox1: TDBComboBox
+        Left = 143
+        Top = 195
+        Width = 145
+        Height = 29
+        TabOrder = 5
+      end
+      object DateTimePicker1: TDateTimePicker
+        Left = 144
+        Top = 230
+        Width = 186
+        Height = 29
+        Date = 45278.000000000000000000
+        Time = 0.602155023145314800
+        TabOrder = 6
+      end
+      object DateTimePicker2: TDateTimePicker
+        Left = 144
+        Top = 265
+        Width = 186
+        Height = 29
+        Date = 45278.000000000000000000
+        Time = 0.602155023145314800
+        TabOrder = 7
+      end
+      object DBEdit6: TDBEdit
+        Left = 143
+        Top = 300
+        Width = 42
+        Height = 29
+        TabOrder = 8
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 142
+        Top = 335
+        Width = 226
+        Height = 29
+        TabOrder = 9
+      end
+      object DBMemo1: TDBMemo
+        Left = 144
+        Top = 370
+        Width = 526
+        Height = 191
+        TabOrder = 10
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Link'
+      ImageIndex = 1
+      object Shape1: TShape
+        Left = 416
+        Top = 136
+        Width = 17
+        Height = 113
+      end
+      object Shape2: TShape
+        Left = 328
+        Top = 248
+        Width = 201
+        Height = 17
+      end
+      object DBGrid1: TDBGrid
+        Left = 268
+        Top = 24
+        Width = 320
+        Height = 120
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+      object DBGrid2: TDBGrid
+        Left = 28
+        Top = 216
+        Width = 320
+        Height = 120
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+      object DBGrid3: TDBGrid
+        Left = 496
+        Top = 216
+        Width = 320
+        Height = 120
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Portable'
+      ImageIndex = 2
+      object Label16: TLabel
+        Left = 3
+        Top = 3
+        Width = 319
+        Height = 21
+        Caption = 'Technician'#39's summary notes for site'#39's portable'
+      end
+      object Label17: TLabel
+        Left = 3
+        Top = 141
+        Width = 201
+        Height = 21
+        Caption = 'Check list for site'#39's portables.'
+      end
+      object SpeedButton8: TSpeedButton
+        Left = 862
+        Top = 3
+        Width = 217
+        Height = 38
+        Caption = 'Build Site Portables'
+        ImageIndex = 2
+        ImageName = 'build'
+        Images = VirtualImageList1
+        Margin = 10
+      end
+      object Label1: TLabel
+        Left = 1021
+        Top = 168
+        Width = 57
+        Height = 21
+        Caption = 'Station#'
+      end
+      object Label18: TLabel
+        Left = 974
+        Top = 195
+        Width = 104
+        Height = 21
+        Caption = 'Commissioned'
+      end
+      object Label19: TLabel
+        Left = 951
+        Top = 222
+        Width = 127
+        Height = 21
+        Caption = 'Last Major Service'
+      end
+      object Label20: TLabel
+        Left = 951
+        Top = 249
+        Width = 128
+        Height = 21
+        Caption = 'Last Minor Service'
+      end
+      object DBMemo2: TDBMemo
+        Left = 3
+        Top = 30
+        Width = 646
+        Height = 105
+        TabOrder = 0
+      end
+      object DBGrid4: TDBGrid
+        Left = 3
+        Top = 168
+        Width = 894
+        Height = 377
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Electrical'
+      ImageIndex = 3
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'Water Base'
+      ImageIndex = 4
+    end
+    object TabSheet6: TTabSheet
+      Caption = 'Structual'
+      ImageIndex = 5
+    end
+  end
+  object ImageCollection1: TImageCollection
+    Images = <
+      item
+        Name = 'search'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000003E7494441546843ED996BC88D5914C7
+              7F6FB90FB9E45E8C5B94E432D2C4D414C61794A2318348F181DC721D93299798
+              865CCA255308113393314C514C343E8C669272CB6486322EE5525226940FEC7F
+              EDC3E369EFE7B29FF376CE1BAB4E6F9D77AFFF5AFFBDF65E7BAD756AA8E35253
+              C7FDE73D814A47F09D8E40576020D005E801F402AE0337805BC0BFC0B9DA8E50
+              4804C602E300FD6D94E2E051E007FBA9152E7908B407F6019F0578F23B30CF90
+              BE14A09BA89295C000E014D0B2A00353EC26148479A39E8580CEB7CE73923C01
+              CEDB3BD12C65ED746057B918A411680DDC011A3A0CEA82EEB017F542E4FFFD81
+              41C0546088C7D1DEC0DFE5209144A01EF00B30DA61E827E3C017191CD80ECC70
+              AC3B6D888F029E67C008BE030B81F50EED31C0AF390C77B3A935AEB208D89003
+              C7B93429027F388EC01C606B805165AEDF627A67CD779F0460BDA5E22330CC66
+              9DE8E243C0E7050CEEB6F7220A311CD0710A161F81B5C09218AA764BBB162ABA
+              D08A6A54D6015F85024ACF47E067FBD296B0FF075A012F0A18AB0F3C32F7AA69
+              04E3B07DD583617D042E027D23A86539AF3602D1D4AA97B95FB0F70911780A34
+              8E006F0216143164753702F32338CF802645707D115035D929027C109858C490
+              D53D004C88E0DC033A14C1F5113869C23D2202FC8F2D978BD892EE35A06704E4
+              4F607011501F01D70BAABAFFBF02C63E3469F4664CFF47E0CB0298DE2C34CBF1
+              602D35F742E935545C2FBBEE84BE0F165F04742EAF022D62C84301D5F679A52D
+              7017507D1515D543C7F38245D72795123B816931F087809CC92B3AEB1F97FBF8
+              082F89C04853161F73787AD976650F32B0D08EEF31FDC424C7DACE66836E67C0
+              485C92D60FAC36AFEF320FC264D3CCEF4F401F0F2819E8058FCB4AF3C58AA2CE
+              A745A0847F045009ED124D20F49AAA1B539DA37A49930ABDE2DD531CFC065853
+              94445A044AF87B01F5B3E51615722AE882252B01195067A523112A2F3D774E25
+              8A4A9520C9434006F4E8CC3435FCA739ACE9127F6B875E6A211B3874E7025B72
+              60BE5E9A974049512951994544D4324627112A99AFD88F065B2A4B4AA2ACF418
+              F8C0E1AC36E6FBBC244209C4EDB4B144EE3BCA85F85A4D38B4AE793948948B40
+              DE8D5309ADBA4A639BB8CC06B66505AC1401F9A763A7EAD4554E6B0CB9390B89
+              4A12907F1A556A28A657392E99B253A509C8691DA3BFEC1D8A9358EC994D15CE
+              4259A29B674D3BE08CA769FADA8CF1BFF3815543044ABE7534DDD909A08FC359
+              6FD9514D04E4B7FA708D2D35208ECB726055FCCB6A2320FFD4BA6A2EF551CC59
+              67055B8D04E4B72A590DBD4AB3296FF95DAD0444423F1A2A129AC97A7B876A26
+              2012FA2144BDB957AA9D406A2A7E4F20758B6A79419D8FC02B6B468A31E8B67D
+              770000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'print'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000001E3494441546843ED98BF2E444114C6
+              7FFB02A240143AA252F00644A191A848745E8006B5D58950A0904844497801D1
+              F000122A055E4034849E9D646C4E263B3BE7BA77EEBA766E37996FCE39DFF7CD
+              9D7F352AFED52A5E3F8940A71DEC3A07BE4A525C2DAC1A680B4F04940EAA8555
+              03FFAB039B4A4543B00D07A016560DF4386008D443D505FACDF844402BA2BB0A
+              2507EC148C3285C68049601C18B61699B6FC6EB4D60570BEB80FC03D700BDCB5
+              8AE1FB89A78133A0AFA002F386F90456812337502B02CBC07EDE8C91C62F0017
+              32B64B6004788A94BCA8B083C0CB4F3097C036B05E54A648717681351F814B60
+              46247E06B680E348C584C2CE0287C090009A8563CA47E01DE811E003602594A5
+              C0FE5E6000781431CF8179D1FE9035BA5328C646A5E5B708EC01FD8DE55BAADC
+              F6A8F197089C004B82ED84DD032A43C0ACF33B96C02B300ABC35DA95216076E3
+              39C0FC0757C0A925531902BE7F2511901716F7D0A55D61B2E2E421B150073AF1
+              2A919B8054CF3DB76755568B77EFDADEFB42681FD0262C1BD7ACBBEB09C47A56
+              09395A9803B12EF5BF26101A18E3B097DE8542AACBFEE4400BB5D214CA338562
+              3D6CA91F9DD540CBB21367A1B602270259E65F06AC5A5835D026BFCE50441E68
+              F3DD2714242B8150BCD2FB1381D225771256DE816FB7276D316F53DB48000000
+              0049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'build'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000004AF494441546843ED9907A825351440
+              CFB2EA82A888051541ACD84545504445040B62C75EC0B2D8C02E360415C10E36
+              141B288A7DEDD8602D8862EF8ABD21F68662C39E03992566336FDEBCFFE6BDFF
+              612F3C76279349EE496E6EC99FC6149769535C7FE6018C7B0727BA03F3012B02
+              4B02DF02DFC57F47C63508C0B6C06EC086C0CAC0FC056D2F076E059EE89AA40D
+              804A1F1A94DAA28552CF0127028FB7F8A655D736000E2CC46DAD6680DF0077AD
+              1388B6002588D780E7818D80357BC06972EEC850651080128400FB01DF000702
+              E7D768B94C30C32F874930284009E249606FE05360B57888D7C9947D04D80EF8
+              7D5810BD004E03CE6898283F132A68DB0FF13B77E2F86C8C2B80C3BA06D801B8
+              274C72FA0010F703BB007F44251F06B64A14F6502F37AC7851B703D7479B76DE
+              41202E058E8C4A2F0F3C032C9540E85ACF1BC62E9400164D4CA09AA309627A74
+              AFAEBCF23EB04AA2E049C0D9C9F353C0265D01AC0BBC5C18DCF320482E8B44E5
+              B74E5EBC09AC953CEF09DC9C3CBF15BE59A32B809D80BB6A06CF21748B378520
+              B579D63FEFB71EF052D2E72B60E9AE004E00CE4D06CFBD51A59C26E2593180A5
+              720C7051D6B620F04BD2F627B0405700FB03D726839F02FC9D4109B123A0B9A5
+              7200705D41B1C50B5E67223168CE14A5415CD1A713256E07760F07FBA8C2CA56
+              DD7E0404BFBB6655D70EAED5942395CE00CCEDBF4E664A3DCA4CE0EA4C914F00
+              57FEB11E2661F4BD2F79FF22B0415726E4B81F0553D07F57723470717CD82306
+              B75563BA700EF04A83320F8658B04DD2E710E0AA2E01F4427AA3542C5E3E481A
+              ACC43EEC4389DC85FAC92CC085F8A78FEF7B76A9B3439331AB29CDA912933453
+              804144F3CA5DAD8B24841E6960E97590F6056EC846FE3E9A82E9739338F6BF49
+              A71284E74208F3A381A4C91368F7554E934E609CD03BBD9DF977FBE8ADFC7986
+              F4F57F35403C10217E1E84A009C0311F0A6E354D13F2793C071629266BFE164A
+              3A681E3E5799A9AF4A3B61C6EA4EE88E5B493F000E68342EE541FD4CF62BB044
+              66262588D9114233ED5BFA057040018CCAA56B94A6097F0AF163D950DCA46652
+              82B0CD9DB034ED4BDA0038A0AED39AD79F895C499CDC7B21772D1557D6EF5333
+              2941E8FD84E8AB766E0B902A641ABD58FCF9FF4AAAEB9333C3013E358330C2AF
+              1E1C436526CEFF68C1C55A2F08F159D3364C04A0696CDF9F059C9C755429D3EB
+              CA4C66444791C709AB3883A0A94AAD740DE0C4BA5C53F45454CA7B22EB026561
+              E0DEC24EBC1077A236E28F0240052F008ECB204C4B36033E8FED9AE31D0508AB
+              43CDE9BDD2368C0AC0B92F044C0A537907D832DE25D96E95E6D5E5A6593F5371
+              210C9CFF93510238F125E10AFE884C873780ED433DF1716C37DF1242134BC53A
+              5BD82FD2C6510338F765A1DE383C53CE747CD724DB5D2942AC9FF59BEB62611C
+              00EA7465B0FD8333E52CFAF70AD793EFC676DDAD3B91DE6E785E0C8873645C00
+              2A704DB0FD83328857A3EBD4D68DFC7930ACCADB4901A0125E1E584BA7F23A70
+              674179FB6C9CD5EB93E2AF94E93566EE64AA6773A87D62AC18AB17AA53F0C678
+              355F7AAFD7F16F0FDE7CCF25E33C03B932B7445F9FB61BBC54FED93AF2C904A0
+              8EC7023B032BC4436EF16F9CA895C906D04BD7E2BB7900AD976CC81F4CF91DF8
+              0FD081DD31ABD4906C0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'bubble'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE900000472494441546843ED995B88565514C7
+              7F833E7843C9104B9F347B515FD4EC22062569662A5E5FD4474D09CA04451123
+              C30AB120CD0B463EDA4B8258E13551512BC3AC400D211389D442F3929722823C
+              FF619FD8B367EFB3CFFECE37330C7C1B0E03337BAFF5FFAFB5F65E9769A293AF
+              A64E8E9F06818EF660C303C603BD81A78071C018E001EBD3961BD6F7157008F8
+              1AF8B3AA07AB7AE04960053001E89E08E6AF8CEC01602D7022F1ECFFDB6B25D0
+              D30017F8AEB52A37E7FE352444E46EAAAC5A084C04DE0146A42A8BECFF1E5809
+              EC4B919B4A6021B035A240A171C1FAB47DB0F5C5426D11F0615912290456036F
+              04045F057698EF4844F933C06CF3F50BEC7D33FBBDF445575902CF015F04A4BD
+              0EAC07EE44B5B5DCD00B780D581338371E3818935986C063C0C980A057818D31
+              2591BFBF027C10D8331AF8B6E87C8C805E986F80911E218F02E72B82CF8F0F01
+              7EF2C8D2C57EBAE8758A11908BDFF7087E08F8BD4EE07331FD81DF3C32DF0214
+              A6DE5544E04163FD479C93CF9B045467FCCDE29410F73B829527E4056FB22B22
+              E07B759601EFB505724BE652E05D47C7A7C0349FDE2202A79CD8BF6EDEF25B6D
+              4CA08FC9217D2D3D7F67B9E1E1ECD5BAE9EA0E11F0BD3C1F6797769E23406FFA
+              E11A0915196F7B76A9E73A72A703BBCA12D0DBBCCAD9FC22B0A79D084C02763B
+              BA946B969425702C4B2263ADCD2A0F7A782CDD561E90AA7B4E857BDC5CE61630
+              426E3C939505C3AC9D6781E101022261AFFFA0B955CD7FCE7264E57B634F7829
+              0C212197800116AACF81A989B13E14F824005EA262043E03A6583A2F0303CB86
+              90EBBE0DA66E29CBC1075EC59E8AB8B21E50CC2F8E8571C80A2ACCD4B4E46B1D
+              B0BC247A1FF89DC069A79A8D79A01201D5F3832CC0DB80052508F8C0EBE99B61
+              C0DBE5788C40A51052DA7EC2022C0BCE8C10F08117089D5339E066F618814A97
+              58A9DBBEB46A529E2D20E003AF775C96FFC79C4B2550E919FD0898EF005651A7
+              D072970FFC5E035E2540BE5208F8F28BF71E86DCF8B669B06DB0FA9D9B9D7DE0
+              554D2A6CDC09430A81CDC0CB8EA5344C702BD5E05BAC89C3778E802B4E6EF081
+              57DB29F0B73D9E2A4B40ADA63C6DF7CBAA04D483B41A84155D240D9DD497E64B
+              77206FD87DE0356D13F8561563E21D9097DD3EB9A672FA256BBC11032F6202AF
+              923BB4DC92C337BDF0F5C735373402A2865A0D4691E58F1AF0D74AE489A22DA1
+              BEB8E69652CA64B522F05F1AF055FBE3503F5CB9A9CF2DE68B794D971536BADC
+              5596AF0FCEE5BD101B35C6B2A104F9C06BD4A232F9D70AC8D53AAA3C71FBDF5C
+              64A911638C800FBC865C02FF8BD1F438A052638BF942AF500E4CDDD69C6CE221
+              EBDA7DAF6D8BBA8C167DE0951B1436178D36BD4E7A3EEDA571A0FD0F8D6E89C3
+              DD5223C55C61C8033EF03F18CBFF6C0E4F06D4E8D46BC9389A7E178E125D6565
+              E742AAE565797BFCA7DA4473A2AA4B06D9643EBDF9492B760794FE15EFFACE79
+              24AB3E51BCEA1EA42E595C1ED470F88FD4C3B110B2E5299C7E8C281865FA57BD
+              E7EED7C5B913CA2B2A0D924225A43FE6815A0DD36EE71A04DACDD401450D0F74
+              B407EE03D9BCEB31836277DD0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'arrow_drop_down_circle'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE900000469494441546843ED994BA8565514C7
+              7F7720A8031D682A66EA40D41C680E348C201DA8A5A2944FC841F99858A0062A
+              4243415428056D52A903031F6518BEAA4106A25403B5413E70908FC4E7A0061A
+              38A8F3977D2EFB6EF6EB7CE73B172FDC059B6F70F65A7BFDF7633DFE5F073D5C
+              3A7AB8FFF4023027381898012C06460303ADA1297F5BE34FE008F013F0B0EE0D
+              A87B022B81F966B4E2CB7780C697AD284BA75500B38B1D5D0FE8B71DF27D7162
+              9F02FAAD245501BC006C05B4F34D884E6233F020D7781500D381CF813109E3B7
+              0B80B700FD6A484698F192F98D99B80EAC06CEE480C805B006D8133178A70076
+              00F80AF83DB1F044E05D6039303C32F703E0B314881C006F03470386E4EC5EE3
+              78D588A2C825202B0AFB02E59377806F632052005E06FE08185028FC10B89FDA
+              A5C4F721C06E13827D53270097433662000600A780D73CCAEB805D351D77D5D7
+              023B3D36CF016F01FFF8D68B01F822106D52A75617D77F1E038A4EABAA00507C
+              3FED519805FC58D7C384FECCE2D47FF0CC79D3972742BB29E7DD24B503D8D8B0
+              F3A5F9EDC006672D253981E8223E004A52BA3EB65C2C6A973742F7B001507A7F
+              3F03AF38B6758DBA941D3E0027CDA3B1759B78B429DCBE47ADA032C756740128
+              A4DD732C2B494D6A47E598F2D8F9AE3C71C993EC86DAA1DB05F0BE494CB62DDD
+              C74D15176FD7F46D9E77A7C4B7AF5CC005F035B0D0595DBB9F2A0FDAE5B06B47
+              195AA760CB37C0A210805F8129D6ECBF328AAFA69C2FEDAA207CD15AE437606A
+              08C05560AC3559805E0D78A8D353646A8728E2F812986CFF623B0C5C03C68500
+              DC05F4484A5121A5822A247D8083893931802A1297014F239334470565290A32
+              C342009E007DADC9AA4DD479C5A43F70089857F1288E1745DAD2E2913E4EE8A9
+              5353182FE55FA05F2E00297F94E19812CFE10A2DA6B2EA92CCC4F889B3895100
+              EE1552C9AC85726490611BC44EC4446C84D88B473946CDC6687ED615721FF1F9
+              40391D5A5BEF47A1F8F5C084B32604BAC9328645E5F4346B42F411BB6154214C
+              7D6C1551C8D3C3EB0C754659B61510149AAB88FA6BF5D4A544C3A8EEB17D5C52
+              6A259189DC1288C966D50BC679915A55C497C8BA5C6B3713CB7981B0A5D55242
+              EC45D94B6BE7C53654155F29A1372910CFC405A002CAE564EA1473E3CD3A57AA
+              7A5EF4C9A1624EDC542781E02BA78F79A8C2E7A59C160DB9C0DE8CDC8646C59C
+              5ABDBA0C44EE41A8AC57EBEAD22D590D8D16F1B594557242AEA3A179BE6092DD
+              52CA68A8A9EF8EAB14A2572A35F502D1A3691501D06B5716F491B94DD02B213A
+              45E157E49A97B14E915462A455BBF84434CB96CC822CF62654087EECA1514A1D
+              D55641A63A05404662CCB4E896FD35C9DDF73CF449E97C92A1CE01206331865A
+              DF9BA0D793CCB42F13C78E5A4CB51EB68FECB5F554AC95E386F930CAF4B52AF4
+              ECFED6B79EDE9DE27D90914E25B2D47D5583D1E45F4C6AA0BC4CB4CFB1DC2BE4
+              EAF6D83FF95C203A09F148E2EF5B115185E279BAFD6F56D759D52E73CD1899F8
+              A3FB66C13D9D30A3766DD5EA156A65B71BD1E905D0C8B65630FA3FFF52D63103
+              71ED470000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'backspace'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE900000259494441546843ED983D6856311486
+              9F8A9B74111D954EB520B5631D95769082204A5DDA599D1D04271D050747954E
+              15275BE8E2AAB8087670D34117E72222B8D441D0BE90C025CDBDF7BBC909127A
+              B37C1F2427F77DCE3939F999A2F23655B97E4680FF1DC131026304323D30A650
+              C38197329D19337FD737676E04568175600938D1F7B184FEEFC00E70BBCD3607
+              40E25F25884A35896A4D05B8E63C932A26C5EE11703F344C013805BC05E65354
+              64D87C01E62C009E02778289F6806703C4FD7563E540FDF78EF4FFFDEF8360CE
+              430E1F1A8135E06544E8F50229F5F000CE146006F8089C0C001E03F706787FD2
+              A1E600F2BC22D06CBBC0C50E45AA545B3D8ADBC69802DC029E478468217F6A11
+              A8122B71373B207C2916A4C6359B19C0F9169182DAE811EFBB6310E13E124298
+              017C001603A1DBCEBB31FD37DC06772CE86C42B46D82CD312600B149F6DD42FE
+              DD91DB2B0E223C5EF83489EDE06194B201E475793F6CCBC09B094AC96507A18D
+              AFAFC5522C1BE047A4643E01EEF6A969F4AB42C9DB673A6CDA16791640AC647E
+              05CE0D10EF872E3888D9886D57853ADA007256D5292480528BF80F70BCA3C4FA
+              AEAC14EA9A24B78C0A601398EE813001D0374A6C64578017C0E90E0833805247
+              093D022812671DC46B771E5284D5CC003459A9C39CD69922F1F3E0A87E15D025
+              DE740D34235CEA38AD7DE217F02D4827D30868EEEA2F3482A8FA4AE9236C71A9
+              9FF444627A27F61FADFE594520553F6CF94854FDB4D88450FD5629BC3069620F
+              18F719785FEA7177808E724387BECC95539238F30890E83833B3310266AE4C9C
+              688C40A2E3CCCCAA8FC03F65EE8C31198766BA0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'done_all'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000001F7494441546843ED98B14A04311040
+              DFF90BFE8536D6F67E8282602158081682205808A26021088285602128080AEA
+              EFE8C758B9818DC45C363BBB93643D88A59BCCBE3793BB99DC8C05FF9B2D383F
+              5560EA0AD60AD40A2833508F903281EAEDB502EA142A03FC870A6CB60EEF1197
+              1560AB797EEEAF995AC0C0BFB55006302461E0CD9A55E0C2979852C085B789F5
+              255C78BBE68FC4540221785F22043F27318540327863535A20297C6981E4F025
+              05B2C09712C8065F42202BBC46600DF86EBAE357A47B66878F0998EFE02EB875
+              E0A915308D27B4AE087C97806D201F81D96303780596DBCC7FB6338A2B510C3E
+              24E0773FB76D7781F912666EB1039A7BC2EC9820EAB0D221D56D645D815D896D
+              E02510BC4F220BBC5F0169667680E70112D9E02547C8E5742BB10B3C0A24CC51
+              3223B23439D293F3BB2E340B495FB6073C0824A4F106C3F77D8DDA4B841FD8AD
+              C43E701F91308F247146C1F7353269E60E80BB0E09F36F73938A2561347C9F80
+              792E9538046E852473D742E1BEE032C97D402A7104DCF4C024859754C0F24825
+              8E81EB0E89E4F04304861CA713E0CA93C8023F542026E1039E0297AD4436F831
+              0221892EC03360A9D930F76394E643EBEF957C8843EF8B4DAC29F97A638D15B0
+              95885D687A5F9E62814620C5FBD531AA803A85CA00B502CA04AAB7D70AA853A8
+              0C502BA04CA07AFB0F25418C31B03250180000000049454E44AE426082}
+          end>
+      end>
+    Left = 544
+    Top = 304
+  end
+  object VirtualImageList1: TVirtualImageList
+    Images = <
+      item
+        CollectionIndex = 0
+        CollectionName = 'search'
+        Name = 'search'
+      end
+      item
+        CollectionIndex = 1
+        CollectionName = 'print'
+        Name = 'print'
+      end
+      item
+        CollectionIndex = 2
+        CollectionName = 'build'
+        Name = 'build'
+      end
+      item
+        CollectionIndex = 3
+        CollectionName = 'bubble'
+        Name = 'bubble'
+      end
+      item
+        CollectionIndex = 4
+        CollectionName = 'arrow_drop_down_circle'
+        Name = 'arrow_drop_down_circle'
+      end
+      item
+        CollectionIndex = 5
+        CollectionName = 'backspace'
+        Name = 'backspace'
+      end
+      item
+        CollectionIndex = 6
+        CollectionName = 'done_all'
+        Name = 'done_all'
+      end>
+    ImageCollection = ImageCollection1
+    Width = 32
+    Height = 32
+    Left = 632
+    Top = 304
+  end
+end

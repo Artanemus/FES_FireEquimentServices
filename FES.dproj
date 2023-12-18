@@ -131,6 +131,18 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="dlgUpdateInspectOrders.pas">
+            <Form>UpdateInspectOrders</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dlgFindInspectOrders.pas">
+            <Form>FindInspectOrders</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="frmInspectOrders.pas">
+            <Form>InspectOrders</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -10,8 +10,6 @@ uses
 
 type
   TCustBatchInspectRpt = class(TForm)
-    Panel1: TPanel;
-    Label1: TLabel;
     Panel2: TPanel;
     Label2: TLabel;
     DBComboBox1: TDBComboBox;
@@ -43,6 +41,8 @@ type
     SpeedButton1: TSpeedButton;
     DateTimePicker1: TDateTimePicker;
     DateTimePicker2: TDateTimePicker;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

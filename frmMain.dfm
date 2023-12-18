@@ -15,7 +15,7 @@ object Main: TMain
   TextHeight = 21
   object pnlHeader: TPanel
     Left = 0
-    Top = 31
+    Top = 48
     Width = 1295
     Height = 97
     Align = alTop
@@ -65,14 +65,14 @@ object Main: TMain
   end
   object PageControlEquipment: TPageControl
     Left = 0
-    Top = 128
+    Top = 145
     Width = 1295
-    Height = 761
-    ActivePage = TabSheetSurvey
+    Height = 744
+    ActivePage = TabSheetInspections
     Align = alClient
     TabOrder = 2
     ExplicitWidth = 1293
-    ExplicitHeight = 758
+    ExplicitHeight = 741
     object TabSheetSurvey: TTabSheet
       Caption = 'Survey'
       ImageIndex = 2
@@ -80,7 +80,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = Panel2
@@ -105,10 +105,10 @@ object Main: TMain
         BevelOuter = bvNone
         TabOrder = 0
         ExplicitWidth = 1285
-        ExplicitHeight = 722
+        ExplicitHeight = 705
         DesignSize = (
           1287
-          725)
+          708)
         object Panel2: TPanel
           AlignWithMargins = True
           Left = 10
@@ -269,7 +269,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = pnlInspectionOrders
@@ -295,7 +295,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          725)
+          708)
         object pnlInspectionOrders: TPanel
           AlignWithMargins = True
           Left = 10
@@ -505,7 +505,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = Panel3
@@ -532,7 +532,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          725)
+          708)
         object Panel3: TPanel
           AlignWithMargins = True
           Left = 10
@@ -693,7 +693,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = Panel4
@@ -719,7 +719,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          725)
+          708)
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 10
@@ -916,7 +916,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = Panel5
@@ -942,7 +942,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          725)
+          708)
         object Panel5: TPanel
           AlignWithMargins = True
           Left = 10
@@ -1103,7 +1103,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 725
+        Height = 708
         ControlCollection = <
           item
             Control = Panel6
@@ -1129,7 +1129,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          725)
+          708)
         object Panel6: TPanel
           AlignWithMargins = True
           Left = 10
@@ -1366,7 +1366,7 @@ object Main: TMain
     Left = 0
     Top = 0
     Width = 1295
-    Height = 31
+    Height = 48
     UseSystemFont = False
     ActionManager = ActionManagerSwitchBoard
     Caption = 'ActionMainMenuBar1'
@@ -5474,6 +5474,7 @@ object Main: TMain
                 ImageName = 'description'
               end>
             Caption = 'T&ools'
+            ImageIndex = 0
             ImageName = 'open_in_browser'
           end>
         ActionBar = ActionMainMenuBar1

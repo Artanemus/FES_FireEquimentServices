@@ -9,7 +9,10 @@ uses
   dlgCompanySetup in 'dlgCompanySetup.pas' {CompanySetup},
   dlgCustBatchInspectRpt in 'dlgCustBatchInspectRpt.pas' {CustBatchInspectRpt},
   pickInspectStatus in 'pickInspectStatus.pas' {InspectStatus},
-  dmFES in 'dmFES.pas' {FES: TDataModule};
+  dmFES in 'dmFES.pas' {FES: TDataModule},
+  dlgUpdateInspectOrders in 'dlgUpdateInspectOrders.pas' {UpdateInspectOrders},
+  dlgFindInspectOrders in 'dlgFindInspectOrders.pas' {FindInspectOrders},
+  frmInspectOrders in 'frmInspectOrders.pas' {InspectOrders};
 
 {$R *.res}
 
