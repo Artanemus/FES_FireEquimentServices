@@ -27,7 +27,7 @@ object CompanySetup: TCompanySetup
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 626
+    ExplicitWidth = 694
     object Label1: TLabel
       Left = 70
       Top = 4
@@ -57,12 +57,12 @@ object CompanySetup: TCompanySetup
     Top = 57
     Width = 696
     Height = 612
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
     OnChanging = PageControl1Changing
-    ExplicitWidth = 626
-    ExplicitHeight = 346
+    ExplicitWidth = 694
+    ExplicitHeight = 609
     object TabSheet1: TTabSheet
       Caption = 'Details'
       object Bevel1: TBevel
@@ -471,13 +471,13 @@ object CompanySetup: TCompanySetup
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 392
-    ExplicitWidth = 626
+    ExplicitTop = 666
+    ExplicitWidth = 694
     DesignSize = (
       696
       52)
     object btnClose: TButton
-      Left = 584
+      Left = 582
       Top = 6
       Width = 97
       Height = 35
@@ -485,6 +485,7 @@ object CompanySetup: TCompanySetup
       Caption = 'btnClose'
       TabOrder = 0
       OnClick = btnCloseClick
+      ExplicitLeft = 580
     end
   end
   object SavePictureDialog1: TSavePictureDialog

@@ -15,7 +15,7 @@ object Main: TMain
   TextHeight = 21
   object pnlHeader: TPanel
     Left = 0
-    Top = 48
+    Top = 31
     Width = 1295
     Height = 97
     Align = alTop
@@ -65,14 +65,14 @@ object Main: TMain
   end
   object PageControlEquipment: TPageControl
     Left = 0
-    Top = 145
+    Top = 128
     Width = 1295
-    Height = 744
-    ActivePage = TabSheetInspections
+    Height = 761
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     ExplicitWidth = 1293
-    ExplicitHeight = 741
+    ExplicitHeight = 758
     object TabSheetSurvey: TTabSheet
       Caption = 'Survey'
       ImageIndex = 2
@@ -80,7 +80,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = Panel2
@@ -104,11 +104,9 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1285
-        ExplicitHeight = 705
         DesignSize = (
           1287
-          708)
+          725)
         object Panel2: TPanel
           AlignWithMargins = True
           Left = 10
@@ -141,16 +139,15 @@ object Main: TMain
             Height = 21
             Caption = 'SURVEY REPORTS'
           end
-          object Button7: TButton
+          object SpeedButton31: TSpeedButton
             Left = 42
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 35
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
           end
         end
         object Panel7: TPanel
@@ -169,8 +166,8 @@ object Main: TMain
           BevelOuter = bvNone
           TabOrder = 1
           object Label19: TLabel
-            Left = 473
-            Top = 110
+            Left = 472
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -186,8 +183,8 @@ object Main: TMain
             Caption = 'SURVEY REPORTS'
           end
           object Label21: TLabel
-            Left = 17
-            Top = 110
+            Left = 16
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -196,8 +193,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label22: TLabel
-            Left = 127
-            Top = 110
+            Left = 128
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -206,8 +203,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label23: TLabel
-            Left = 237
-            Top = 110
+            Left = 240
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -215,50 +212,45 @@ object Main: TMain
             Caption = 'Goto Survey Order ID'
             WordWrap = True
           end
-          object Button12: TButton
-            Left = 490
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 7
-            ImageName = 'fiber_new'
-            Images = vImageListBtns
-            TabOrder = 0
-          end
-          object Button13: TButton
-            Left = 34
-            Top = 46
-            Width = 65
-            Height = 58
-            Action = SurveyFind
-            ImageAlignment = iaCenter
+          object SpeedButton27: TSpeedButton
+            Left = 40
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 3
+            ImageName = 'search'
             Images = vImageListBtns
-            TabOrder = 1
-            WordWrap = True
           end
-          object Button14: TButton
-            Left = 146
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton28: TSpeedButton
+            Left = 152
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 1
             ImageName = 'open_in_browser'
             Images = vImageListBtns
-            TabOrder = 2
           end
-          object Button15: TButton
-            Left = 258
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton29: TSpeedButton
+            Left = 264
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 3
+          end
+          object SpeedButton30: TSpeedButton
+            Left = 496
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
+            ImageIndex = 7
+            ImageName = 'fiber_new'
+            Images = vImageListBtns
           end
         end
       end
@@ -269,7 +261,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = pnlInspectionOrders
@@ -295,7 +287,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          708)
+          725)
         object pnlInspectionOrders: TPanel
           AlignWithMargins = True
           Left = 10
@@ -312,8 +304,8 @@ object Main: TMain
           BevelOuter = bvNone
           TabOrder = 0
           object Label1: TLabel
-            Left = 25
-            Top = 102
+            Left = 24
+            Top = 104
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -340,14 +332,14 @@ object Main: TMain
           end
           object Bevel1: TBevel
             Left = 633
-            Top = 35
+            Top = 24
             Width = 104
-            Height = 142
+            Height = 153
             Shape = bsFrame
           end
           object Label4: TLabel
-            Left = 135
-            Top = 102
+            Left = 136
+            Top = 104
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -356,8 +348,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label5: TLabel
-            Left = 245
-            Top = 102
+            Left = 248
+            Top = 104
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -366,8 +358,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label6: TLabel
-            Left = 355
-            Top = 102
+            Left = 352
+            Top = 104
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -375,60 +367,60 @@ object Main: TMain
             Caption = 'Goto Inspection Order ID'
             WordWrap = True
           end
-          object Button1: TButton
-            Left = 45
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 4
-            ImageName = 'calendar_today'
+          object SpeedButton22: TSpeedButton
+            Left = 48
+            Top = 40
+            Width = 60
+            Height = 60
+            Action = InspectSchedule
+            AllowAllUp = True
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
-          object Button2: TButton
-            Left = 650
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 2
-            ImageName = 'update'
+          object SpeedButton23: TSpeedButton
+            Left = 376
+            Top = 40
+            Width = 60
+            Height = 60
+            Action = InspectGotoOrderID
+            AllowAllUp = True
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button3: TButton
-            Left = 155
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 3
-            ImageName = 'search'
+          object SpeedButton24: TSpeedButton
+            Left = 264
+            Top = 40
+            Width = 60
+            Height = 60
+            Action = InspectBrowseOrders
+            AllowAllUp = True
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button4: TButton
-            Left = 265
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 1
-            ImageName = 'open_in_browser'
+          object SpeedButton25: TSpeedButton
+            Left = 160
+            Top = 40
+            Width = 60
+            Height = 60
+            Action = InspectFindOrder
+            AllowAllUp = True
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
           end
-          object Button5: TButton
-            Left = 375
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 5
-            ImageName = 'bubble'
+          object SpeedButton26: TSpeedButton
+            Left = 658
+            Top = 36
+            Width = 60
+            Height = 60
+            Action = InspectUpdateOrders
+            AllowAllUp = True
             Images = vImageListBtns
-            TabOrder = 4
+            Margin = 6
+            Spacing = 10
           end
         end
         object Panel1: TPanel
@@ -473,27 +465,29 @@ object Main: TMain
             Caption = 'Technicians Inspection Orders SUMMARY'
             WordWrap = True
           end
-          object Button6: TButton
+          object SpeedButton32: TSpeedButton
             Left = 49
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 36
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
-          object Button33: TButton
+          object SpeedButton33: TSpeedButton
             Left = 202
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 36
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
         end
       end
@@ -505,7 +499,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = Panel3
@@ -532,7 +526,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          708)
+          725)
         object Panel3: TPanel
           AlignWithMargins = True
           Left = 10
@@ -565,16 +559,17 @@ object Main: TMain
             Height = 21
             Caption = 'SITE REPORTS'
           end
-          object Button8: TButton
+          object SpeedButton34: TSpeedButton
             Left = 42
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 35
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
         end
         object Panel8: TPanel
@@ -610,8 +605,8 @@ object Main: TMain
             Caption = 'SITES'
           end
           object Label26: TLabel
-            Left = 17
-            Top = 110
+            Left = 16
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -620,8 +615,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label27: TLabel
-            Left = 127
-            Top = 110
+            Left = 128
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -630,8 +625,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label28: TLabel
-            Left = 237
-            Top = 110
+            Left = 240
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -639,49 +634,53 @@ object Main: TMain
             Caption = 'Goto Site ID'
             WordWrap = True
           end
-          object Button16: TButton
-            Left = 490
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 7
-            ImageName = 'fiber_new'
-            Images = vImageListBtns
-            TabOrder = 0
-          end
-          object Button17: TButton
-            Left = 34
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton18: TSpeedButton
+            Left = 48
+            Top = 40
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 3
             ImageName = 'search'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button18: TButton
-            Left = 146
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton19: TSpeedButton
+            Left = 152
+            Top = 40
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 1
             ImageName = 'open_in_browser'
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button19: TButton
-            Left = 258
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton20: TSpeedButton
+            Left = 256
+            Top = 40
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
+          end
+          object SpeedButton21: TSpeedButton
+            Left = 498
+            Top = 35
+            Width = 60
+            Height = 60
+            AllowAllUp = True
+            ImageIndex = 7
+            ImageName = 'fiber_new'
+            Images = vImageListBtns
+            Margin = 6
+            Spacing = 10
           end
         end
       end
@@ -693,7 +692,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = Panel4
@@ -719,7 +718,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          708)
+          725)
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 10
@@ -767,16 +766,17 @@ object Main: TMain
             Images = vImageListBug
             Flat = True
           end
-          object Button9: TButton
-            Left = 42
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton35: TSpeedButton
+            Left = 47
+            Top = 36
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
         end
         object Panel9: TPanel
@@ -812,8 +812,8 @@ object Main: TMain
             Caption = 'CUSTOMER DATA'
           end
           object Label31: TLabel
-            Left = 25
-            Top = 110
+            Left = 24
+            Top = 112
             Width = 82
             Height = 65
             Alignment = taCenter
@@ -823,7 +823,7 @@ object Main: TMain
           end
           object Label32: TLabel
             Left = 136
-            Top = 110
+            Top = 112
             Width = 89
             Height = 65
             Alignment = taCenter
@@ -832,8 +832,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label33: TLabel
-            Left = 237
-            Top = 110
+            Left = 240
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -842,8 +842,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label44: TLabel
-            Left = 347
-            Top = 110
+            Left = 344
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -851,60 +851,65 @@ object Main: TMain
             Caption = 'Goto Customer CODE'
             WordWrap = True
           end
-          object Button20: TButton
-            Left = 610
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 7
-            ImageName = 'fiber_new'
-            Images = vImageListBtns
-            TabOrder = 0
-          end
-          object Button21: TButton
-            Left = 34
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton13: TSpeedButton
+            Left = 40
+            Top = 32
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 3
             ImageName = 'search'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button22: TButton
-            Left = 146
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton14: TSpeedButton
+            Left = 144
+            Top = 32
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 1
             ImageName = 'open_in_browser'
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button23: TButton
-            Left = 258
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton15: TSpeedButton
+            Left = 248
+            Top = 32
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
           end
-          object Button32: TButton
+          object SpeedButton16: TSpeedButton
+            Left = 618
+            Top = 35
+            Width = 60
+            Height = 60
+            AllowAllUp = True
+            ImageIndex = 7
+            ImageName = 'fiber_new'
+            Images = vImageListBtns
+            Margin = 6
+            Spacing = 10
+          end
+          object SpeedButton17: TSpeedButton
             Left = 368
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 32
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 4
+            Margin = 6
+            Spacing = 10
           end
         end
       end
@@ -916,7 +921,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = Panel5
@@ -942,7 +947,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          708)
+          725)
         object Panel5: TPanel
           AlignWithMargins = True
           Left = 10
@@ -975,16 +980,17 @@ object Main: TMain
             Height = 21
             Caption = 'HR REPORTS'
           end
-          object Button10: TButton
-            Left = 42
-            Top = 38
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton36: TSpeedButton
+            Left = 48
+            Top = 36
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
         end
         object Panel10: TPanel
@@ -1003,12 +1009,11 @@ object Main: TMain
           BevelOuter = bvNone
           TabOrder = 1
           object Label34: TLabel
-            Left = 473
-            Top = 110
-            Width = 104
-            Height = 65
+            Left = 481
+            Top = 118
+            Width = 85
+            Height = 43
             Alignment = taCenter
-            AutoSize = False
             Caption = 'Create New HR'
             WordWrap = True
           end
@@ -1020,78 +1025,79 @@ object Main: TMain
             Caption = 'HUMAN RESOURCE'
           end
           object Label36: TLabel
-            Left = 17
-            Top = 110
-            Width = 104
-            Height = 65
+            Left = 48
+            Top = 122
+            Width = 55
+            Height = 21
             Alignment = taCenter
-            AutoSize = False
             Caption = 'Find HR'
             WordWrap = True
           end
           object Label37: TLabel
-            Left = 127
-            Top = 110
-            Width = 104
-            Height = 65
+            Left = 144
+            Top = 122
+            Width = 83
+            Height = 21
             Alignment = taCenter
-            AutoSize = False
             Caption = 'Browse HRs'
             WordWrap = True
           end
           object Label38: TLabel
-            Left = 237
-            Top = 110
-            Width = 104
-            Height = 65
+            Left = 246
+            Top = 122
+            Width = 78
+            Height = 21
             Alignment = taCenter
-            AutoSize = False
             Caption = 'Goto HR ID'
             WordWrap = True
           end
-          object Button24: TButton
-            Left = 490
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 7
-            ImageName = 'fiber_new'
-            Images = vImageListBtns
-            TabOrder = 0
-          end
-          object Button25: TButton
-            Left = 34
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton9: TSpeedButton
+            Left = 48
+            Top = 56
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 3
             ImageName = 'search'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button26: TButton
-            Left = 146
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton10: TSpeedButton
+            Left = 152
+            Top = 56
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 1
             ImageName = 'open_in_browser'
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button27: TButton
-            Left = 258
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton11: TSpeedButton
+            Left = 256
+            Top = 56
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
+          end
+          object SpeedButton12: TSpeedButton
+            Left = 504
+            Top = 52
+            Width = 60
+            Height = 60
+            AllowAllUp = True
+            ImageIndex = 7
+            ImageName = 'fiber_new'
+            Images = vImageListBtns
+            Margin = 6
+            Spacing = 10
           end
         end
       end
@@ -1103,7 +1109,7 @@ object Main: TMain
         Left = 0
         Top = 0
         Width = 1287
-        Height = 708
+        Height = 725
         ControlCollection = <
           item
             Control = Panel6
@@ -1129,7 +1135,7 @@ object Main: TMain
         TabOrder = 0
         DesignSize = (
           1287
-          708)
+          725)
         object Panel6: TPanel
           AlignWithMargins = True
           Left = 10
@@ -1207,49 +1213,53 @@ object Main: TMain
             Font.Style = [fsUnderline]
             ParentFont = False
           end
-          object Button11: TButton
-            Left = 82
-            Top = 78
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton37: TSpeedButton
+            Left = 71
+            Top = 76
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 0
+            Margin = 6
+            Spacing = 10
           end
-          object Button34: TButton
-            Left = 225
-            Top = 78
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton38: TSpeedButton
+            Left = 215
+            Top = 76
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button35: TButton
-            Left = 368
-            Top = 78
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton39: TSpeedButton
+            Left = 360
+            Top = 76
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button36: TButton
+          object SpeedButton40: TSpeedButton
             Left = 511
-            Top = 78
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+            Top = 76
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 6
             ImageName = 'print'
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
           end
         end
         object Panel11: TPanel
@@ -1268,8 +1278,8 @@ object Main: TMain
           BevelOuter = bvNone
           TabOrder = 1
           object Label39: TLabel
-            Left = 473
-            Top = 110
+            Left = 472
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -1285,8 +1295,8 @@ object Main: TMain
             Caption = 'EQUIPMENT'
           end
           object Label41: TLabel
-            Left = 17
-            Top = 110
+            Left = 16
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -1295,8 +1305,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label42: TLabel
-            Left = 127
-            Top = 110
+            Left = 128
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -1305,8 +1315,8 @@ object Main: TMain
             WordWrap = True
           end
           object Label43: TLabel
-            Left = 237
-            Top = 110
+            Left = 240
+            Top = 112
             Width = 104
             Height = 65
             Alignment = taCenter
@@ -1314,50 +1324,173 @@ object Main: TMain
             Caption = 'Goto Equipment ID'
             WordWrap = True
           end
-          object Button28: TButton
-            Left = 490
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
-            ImageIndex = 7
-            ImageName = 'fiber_new'
-            Images = vImageListBtns
-            TabOrder = 0
-          end
-          object Button29: TButton
-            Left = 34
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton5: TSpeedButton
+            Left = 40
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 3
             ImageName = 'search'
             Images = vImageListBtns
-            TabOrder = 1
+            Margin = 6
+            Spacing = 10
           end
-          object Button30: TButton
-            Left = 146
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton6: TSpeedButton
+            Left = 144
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 1
             ImageName = 'open_in_browser'
             Images = vImageListBtns
-            TabOrder = 2
+            Margin = 6
+            Spacing = 10
           end
-          object Button31: TButton
-            Left = 258
-            Top = 46
-            Width = 65
-            Height = 58
-            ImageAlignment = iaCenter
+          object SpeedButton7: TSpeedButton
+            Left = 248
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
             ImageIndex = 5
             ImageName = 'bubble'
             Images = vImageListBtns
-            TabOrder = 3
+            Margin = 6
+            Spacing = 10
           end
+          object SpeedButton8: TSpeedButton
+            Left = 496
+            Top = 48
+            Width = 60
+            Height = 60
+            AllowAllUp = True
+            ImageIndex = 7
+            ImageName = 'fiber_new'
+            Images = vImageListBtns
+            Margin = 6
+            Spacing = 10
+          end
+        end
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'LINK'
+      ImageIndex = 6
+      DesignSize = (
+        1287
+        725)
+      object Panel12: TPanel
+        AlignWithMargins = True
+        Left = 18
+        Top = 20
+        Width = 1267
+        Height = 199
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Anchors = []
+        BevelEdges = [beBottom]
+        BevelKind = bkFlat
+        BevelOuter = bvNone
+        TabOrder = 0
+        ExplicitLeft = 17
+        object Label50: TLabel
+          Left = 472
+          Top = 112
+          Width = 104
+          Height = 65
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Create New Link'
+          WordWrap = True
+        end
+        object Label51: TLabel
+          Left = 17
+          Top = 8
+          Width = 42
+          Height = 21
+          Caption = 'LINKS'
+        end
+        object Label52: TLabel
+          Left = 16
+          Top = 112
+          Width = 104
+          Height = 65
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Find Link'
+          WordWrap = True
+        end
+        object Label53: TLabel
+          Left = 128
+          Top = 112
+          Width = 104
+          Height = 65
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Browse Links'
+          WordWrap = True
+        end
+        object Label54: TLabel
+          Left = 240
+          Top = 112
+          Width = 104
+          Height = 65
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Goto Link ID'
+          WordWrap = True
+        end
+        object sbtnFind01: TSpeedButton
+          Left = 40
+          Top = 48
+          Width = 60
+          Height = 60
+          AllowAllUp = True
+          ImageIndex = 3
+          ImageName = 'search'
+          Images = vImageListBtns
+          Margin = 6
+          Spacing = 10
+        end
+        object SpeedButton2: TSpeedButton
+          Left = 144
+          Top = 48
+          Width = 60
+          Height = 60
+          AllowAllUp = True
+          ImageIndex = 1
+          ImageName = 'open_in_browser'
+          Images = vImageListBtns
+          Margin = 6
+          Spacing = 10
+        end
+        object SpeedButton3: TSpeedButton
+          Left = 248
+          Top = 48
+          Width = 60
+          Height = 60
+          AllowAllUp = True
+          ImageIndex = 5
+          ImageName = 'bubble'
+          Images = vImageListBtns
+          Margin = 6
+          Spacing = 10
+        end
+        object SpeedButton4: TSpeedButton
+          Left = 496
+          Top = 48
+          Width = 60
+          Height = 60
+          AllowAllUp = True
+          ImageIndex = 7
+          ImageName = 'fiber_new'
+          Images = vImageListBtns
+          Margin = 6
+          Spacing = 10
         end
       end
     end
@@ -1366,7 +1499,7 @@ object Main: TMain
     Left = 0
     Top = 0
     Width = 1295
-    Height = 48
+    Height = 31
     UseSystemFont = False
     ActionManager = ActionManagerSwitchBoard
     Caption = 'ActionMainMenuBar1'
@@ -5456,6 +5589,34 @@ object Main: TMain
           item
             Items = <
               item
+                Action = LinkFind
+                Caption = '&Find Link'
+                ImageIndex = 2
+                ImageName = 'search'
+              end
+              item
+                Action = LinkBrowse
+                Caption = '&Browse Links'
+                ImageIndex = 0
+                ImageName = 'open_in_browser'
+              end
+              item
+                Action = LinkGotoID
+                Caption = '&Goto Link ID'
+                ImageIndex = 4
+                ImageName = 'bubble'
+              end
+              item
+                Action = LinkNew
+                Caption = '&Create New Link'
+                ImageIndex = 6
+                ImageName = 'fiber_new'
+              end>
+            Caption = '&Link'
+          end
+          item
+            Items = <
+              item
                 Action = ToolsCompanySetup
                 Caption = '&Company Setup'
                 ImageIndex = 12
@@ -5474,8 +5635,22 @@ object Main: TMain
                 ImageName = 'description'
               end>
             Caption = 'T&ools'
-            ImageIndex = 0
-            ImageName = 'open_in_browser'
+          end
+          item
+            Items = <
+              item
+                Action = HelpAbout
+                Caption = '&About Fire Equipment Services'
+                ImageIndex = 15
+                ImageName = 'info'
+              end
+              item
+                Action = HelpWebSite
+                Caption = '&FES Help'
+                ImageIndex = 16
+                ImageName = 'help'
+              end>
+            Caption = 'Hel&p'
           end>
         ActionBar = ActionMainMenuBar1
       end>
@@ -5669,6 +5844,42 @@ object Main: TMain
       ImageIndex = 13
       ImageName = 'description'
     end
+    object LinkFind: TAction
+      Category = 'Link'
+      Caption = 'Find Link'
+      ImageIndex = 2
+      ImageName = 'search'
+    end
+    object LinkBrowse: TAction
+      Category = 'Link'
+      Caption = 'Browse Links'
+      ImageIndex = 0
+      ImageName = 'open_in_browser'
+    end
+    object LinkGotoID: TAction
+      Category = 'Link'
+      Caption = 'Goto Link ID'
+      ImageIndex = 4
+      ImageName = 'bubble'
+    end
+    object LinkNew: TAction
+      Category = 'Link'
+      Caption = 'Create New Link'
+      ImageIndex = 6
+      ImageName = 'fiber_new'
+    end
+    object HelpAbout: TAction
+      Category = 'Help'
+      Caption = 'About Fire Equipment Services'
+      ImageIndex = 15
+      ImageName = 'info'
+    end
+    object HelpWebSite: TAction
+      Category = 'Help'
+      Caption = 'FES Help'
+      ImageIndex = 16
+      ImageName = 'help'
+    end
   end
   object vImageListMenu: TVirtualImageList
     Images = <
@@ -5746,6 +5957,16 @@ object Main: TMain
         CollectionIndex = 64
         CollectionName = 'settings_applications'
         Name = 'settings_applications'
+      end
+      item
+        CollectionIndex = 23
+        CollectionName = 'info'
+        Name = 'info'
+      end
+      item
+        CollectionIndex = 21
+        CollectionName = 'help'
+        Name = 'help'
       end>
     ImageCollection = ImageCollectionMain
     Width = 32

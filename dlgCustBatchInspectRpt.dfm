@@ -157,7 +157,7 @@ object CustBatchInspectRpt: TCustBatchInspectRpt
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 687
+    ExplicitTop = 642
     ExplicitWidth = 624
     object Button5: TButton
       Left = 228

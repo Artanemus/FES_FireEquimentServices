@@ -3,8 +3,8 @@ object InspectStatus: TInspectStatus
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'Pick Inspection Status'
-  ClientHeight = 407
-  ClientWidth = 252
+  ClientHeight = 257
+  ClientWidth = 165
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,18 +17,22 @@ object InspectStatus: TInspectStatus
   object CheckListBox1: TCheckListBox
     Left = 0
     Top = 0
-    Width = 252
-    Height = 366
+    Width = 165
+    Height = 216
     Align = alClient
     ItemHeight = 21
+    Items.Strings = (
+      'Action'
+      'Completed'
+      'Cancelled')
     TabOrder = 0
     ExplicitWidth = 246
     ExplicitHeight = 352
   end
   object Panel1: TPanel
     Left = 0
-    Top = 366
-    Width = 252
+    Top = 216
+    Width = 165
     Height = 41
     Align = alBottom
     BevelEdges = [beTop]
@@ -38,7 +42,7 @@ object InspectStatus: TInspectStatus
     ExplicitTop = 352
     ExplicitWidth = 246
     object btnOk: TButton
-      Left = 88
+      Left = 45
       Top = 7
       Width = 75
       Height = 25
@@ -49,6 +53,7 @@ object InspectStatus: TInspectStatus
   end
   object qryInspectionStatus: TFDQuery
     ActiveStoredUsage = [auDesignTime]
+    Active = True
     Connection = FES.fesConnection
     SQL.Strings = (
       'SELECT TOP (1000) [InspectionStatusID]'
@@ -57,7 +62,7 @@ object InspectStatus: TInspectStatus
       '      ,[StackOrder]'
       '  FROM [FES].[dbo].[InspectionStatus]'
       '  ORDER BY StackOrder')
-    Left = 104
-    Top = 152
+    Left = 72
+    Top = 80
   end
 end
