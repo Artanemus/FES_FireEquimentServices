@@ -19,7 +19,8 @@ uses
   pickPostcode in 'pickPostcode.pas' {Postcode},
   pickSuburb in 'pickSuburb.pas' {Suburb},
   dlgOptions in 'dlgOptions.pas' {Options},
-  unitSMTP in 'unitSMTP.pas';
+  unitSMTP in 'unitSMTP.pas',
+  frmEquipment in 'frmEquipment.pas' {Equipment};
 
 {$R *.res}
 

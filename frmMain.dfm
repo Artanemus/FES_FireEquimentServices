@@ -68,7 +68,7 @@ object Main: TMain
     Top = 128
     Width = 1295
     Height = 761
-    ActivePage = TabSheet1
+    ActivePage = TabSheet6
     Align = alClient
     TabOrder = 2
     ExplicitWidth = 1293
@@ -374,6 +374,7 @@ object Main: TMain
             Height = 60
             Action = InspectSchedule
             AllowAllUp = True
+            ImageName = 'search'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -385,6 +386,7 @@ object Main: TMain
             Height = 60
             Action = InspectGotoOrderID
             AllowAllUp = True
+            ImageName = 'calendar_today'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -396,6 +398,7 @@ object Main: TMain
             Height = 60
             Action = InspectBrowseOrders
             AllowAllUp = True
+            ImageName = 'more_vert'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -407,6 +410,7 @@ object Main: TMain
             Height = 60
             Action = InspectFindOrder
             AllowAllUp = True
+            ImageName = 'update'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -418,6 +422,7 @@ object Main: TMain
             Height = 60
             Action = InspectUpdateOrders
             AllowAllUp = True
+            ImageName = 'open_in_browser'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -1012,7 +1017,7 @@ object Main: TMain
             Left = 481
             Top = 118
             Width = 85
-            Height = 43
+            Height = 42
             Alignment = taCenter
             Caption = 'Create New HR'
             WordWrap = True
@@ -1384,7 +1389,7 @@ object Main: TMain
       object Panel12: TPanel
         AlignWithMargins = True
         Left = 18
-        Top = 20
+        Top = 19
         Width = 1267
         Height = 199
         Margins.Left = 10

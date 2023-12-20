@@ -168,6 +168,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="unitSMTP.pas"/>
+        <DCCReference Include="frmEquipment.pas">
+            <Form>Equipment</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
