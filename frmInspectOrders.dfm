@@ -1,7 +1,7 @@
 object InspectOrders: TInspectOrders
   Left = 0
   Top = 0
-  Caption = 'InspectOrders'
+  Caption = 'FES Browse Inspection Orders'
   ClientHeight = 829
   ClientWidth = 1245
   Color = clBtnFace
@@ -21,8 +21,7 @@ object InspectOrders: TInspectOrders
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = -6
-    ExplicitWidth = 1179
+    ExplicitWidth = 1243
     object Label2: TLabel
       Left = 55
       Top = 47
@@ -188,7 +187,8 @@ object InspectOrders: TInspectOrders
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1354
+    ExplicitTop = 757
+    ExplicitWidth = 1243
     object DBNavigator1: TDBNavigator
       Left = 322
       Top = 16
@@ -205,9 +205,8 @@ object InspectOrders: TInspectOrders
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 113
-    ExplicitWidth = 1354
-    ExplicitHeight = 647
+    ExplicitWidth = 1243
+    ExplicitHeight = 604
     object TabSheet1: TTabSheet
       Caption = 'General'
       object Label5: TLabel

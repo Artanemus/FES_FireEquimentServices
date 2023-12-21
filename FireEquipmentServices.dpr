@@ -20,7 +20,8 @@ uses
   pickSuburb in 'pickSuburb.pas' {Suburb},
   dlgOptions in 'dlgOptions.pas' {Options},
   unitSMTP in 'unitSMTP.pas',
-  frmEquipment in 'frmEquipment.pas' {Equipment};
+  frmEquipment in 'frmEquipment.pas' {Equipment},
+  frmBrowseLinks in 'frmBrowseLinks.pas' {BrowseLinks};
 
 {$R *.res}
 

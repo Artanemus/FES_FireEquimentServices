@@ -68,7 +68,7 @@ object Main: TMain
     Top = 128
     Width = 1295
     Height = 761
-    ActivePage = TabSheet6
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     ExplicitWidth = 1293
@@ -398,7 +398,6 @@ object Main: TMain
             Height = 60
             Action = InspectBrowseOrders
             AllowAllUp = True
-            ImageName = 'more_vert'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -1138,6 +1137,8 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1285
+        ExplicitHeight = 722
         DesignSize = (
           1287
           725)
@@ -1401,7 +1402,6 @@ object Main: TMain
         BevelKind = bkFlat
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 17
         object Label50: TLabel
           Left = 472
           Top = 112
