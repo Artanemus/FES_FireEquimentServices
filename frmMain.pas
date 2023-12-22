@@ -8,7 +8,8 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.ComCtrls,
   Vcl.BaseImageCollection, Vcl.ImageCollection, Vcl.VirtualImage, Vcl.WinXCtrls,
   Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.StdActns;
+  Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.StdActns, dmFES,
+  dlgInspectOrdersFind;
 
 type
   TMain = class(TForm)
@@ -163,7 +164,7 @@ type
     SpeedButton22: TSpeedButton;
     SpeedButton23: TSpeedButton;
     SpeedButton24: TSpeedButton;
-    SpeedButton25: TSpeedButton;
+    sbtnInspectOrdersFind: TSpeedButton;
     SpeedButton26: TSpeedButton;
     SpeedButton27: TSpeedButton;
     SpeedButton28: TSpeedButton;
@@ -185,7 +186,11 @@ type
     LinkNew: TAction;
     HelpAbout: TAction;
     HelpWebSite: TAction;
+    TabSheet2: TTabSheet;
+    Label55: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure InspectFindOrderExecute(Sender: TObject);
+    procedure InspectFindOrderUpdate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -203,6 +208,31 @@ procedure TMain.FormCreate(Sender: TObject);
 begin
    Application.ShowHint := true;
 
+end;
+
+procedure TMain.InspectFindOrderExecute(Sender: TObject);
+var
+dlg: TFindInspectOrders;
+dlgresults: TModalResult;
+begin
+  dlg := TFindInspectOrders.Create(Self);
+  if dlg.qryFindInspectOrder.Active then
+  begin
+    if IsPositiveResult(dlg.ShowModal) then
+    begin
+      // Test for form InspectOrders and open
+      // locate record
+      ;
+    end;
+  end;
+  dlg.Free;
+end;
+
+procedure TMain.InspectFindOrderUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled := false;
+  if FES.fesConnection.Connected then
+    TAction(Sender).Enabled := true;
 end;
 
 end.

@@ -5,7 +5,6 @@ object FES: TFES
     Params.Strings = (
       'ConnectionDef=MSSQL_FES'
       'User_Name=Ben')
-    ConnectedStoredUsage = [auDesignTime]
     Connected = True
     LoginPrompt = False
     Left = 88

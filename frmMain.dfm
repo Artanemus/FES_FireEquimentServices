@@ -68,7 +68,7 @@ object Main: TMain
     Top = 128
     Width = 1295
     Height = 761
-    ActivePage = TabSheet1
+    ActivePage = TabSheetInspections
     Align = alClient
     TabOrder = 2
     ExplicitWidth = 1293
@@ -374,7 +374,6 @@ object Main: TMain
             Height = 60
             Action = InspectSchedule
             AllowAllUp = True
-            ImageName = 'search'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -386,14 +385,13 @@ object Main: TMain
             Height = 60
             Action = InspectGotoOrderID
             AllowAllUp = True
-            ImageName = 'calendar_today'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
           end
           object SpeedButton24: TSpeedButton
-            Left = 264
-            Top = 40
+            Left = 272
+            Top = 38
             Width = 60
             Height = 60
             Action = InspectBrowseOrders
@@ -402,14 +400,13 @@ object Main: TMain
             Margin = 6
             Spacing = 10
           end
-          object SpeedButton25: TSpeedButton
+          object sbtnInspectOrdersFind: TSpeedButton
             Left = 160
             Top = 40
             Width = 60
             Height = 60
             Action = InspectFindOrder
             AllowAllUp = True
-            ImageName = 'update'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -421,7 +418,6 @@ object Main: TMain
             Height = 60
             Action = InspectUpdateOrders
             AllowAllUp = True
-            ImageName = 'open_in_browser'
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
@@ -1137,8 +1133,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1285
-        ExplicitHeight = 722
         DesignSize = (
           1287
           725)
@@ -1390,7 +1384,7 @@ object Main: TMain
       object Panel12: TPanel
         AlignWithMargins = True
         Left = 18
-        Top = 19
+        Top = 18
         Width = 1267
         Height = 199
         Margins.Left = 10
@@ -1497,6 +1491,17 @@ object Main: TMain
           Margin = 6
           Spacing = 10
         end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Planner'
+      ImageIndex = 7
+      object Label55: TLabel
+        Left = 48
+        Top = 24
+        Width = 218
+        Height = 21
+        Caption = 'TMS Planner (frame) goes here.'
       end
     end
   end
@@ -5698,6 +5703,8 @@ object Main: TMain
       Caption = 'Find Order'
       ImageIndex = 2
       ImageName = 'search'
+      OnExecute = InspectFindOrderExecute
+      OnUpdate = InspectFindOrderUpdate
     end
     object InspectBrowseOrders: TAction
       Category = 'Inspection'

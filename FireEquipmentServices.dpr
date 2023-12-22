@@ -10,8 +10,8 @@ uses
   dlgCustBatchInspectRpt in 'dlgCustBatchInspectRpt.pas' {CustBatchInspectRpt},
   pickInspectStatus in 'pickInspectStatus.pas' {InspectStatus},
   dmFES in 'dmFES.pas' {FES: TDataModule},
-  dlgUpdateInspectOrders in 'dlgUpdateInspectOrders.pas' {UpdateInspectOrders},
-  dlgFindInspectOrders in 'dlgFindInspectOrders.pas' {FindInspectOrders},
+  dlgInspectOrdersUpdate in 'dlgInspectOrdersUpdate.pas' {UpdateInspectOrders},
+  dlgInspectOrdersFind in 'dlgInspectOrdersFind.pas' {FindInspectOrders},
   frmInspectOrders in 'frmInspectOrders.pas' {InspectOrders},
   frmCustomer in 'frmCustomer.pas' {Customer},
   pickCustomerFilter in 'pickCustomerFilter.pas' {CustomerFilter},
@@ -21,7 +21,8 @@ uses
   dlgOptions in 'dlgOptions.pas' {Options},
   unitSMTP in 'unitSMTP.pas',
   frmEquipment in 'frmEquipment.pas' {Equipment},
-  frmBrowseLinks in 'frmBrowseLinks.pas' {BrowseLinks};
+  frmBrowseLinks in 'frmBrowseLinks.pas' {BrowseLinks},
+  frameFESPlanner in 'frameFESPlanner.pas' {FESPlanner: TFrame};
 
 {$R *.res}
 
