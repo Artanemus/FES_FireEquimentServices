@@ -228,10 +228,6 @@ object FESPlanner: TFESPlanner
       88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
       888887F8F8222208888888776888208888888887777778888888}
     Version = '3.4.6.0'
-    ExplicitLeft = -222
-    ExplicitTop = -42
-    ExplicitWidth = 1287
-    ExplicitHeight = 725
     TMSStyle = 0
   end
   object qryInspectionOrders: TFDQuery
@@ -300,6 +296,6 @@ object FESPlanner: TFESPlanner
     Month = 12
     Year = 2023
     Left = 520
-    Top = 432
+    Top = 400
   end
 end

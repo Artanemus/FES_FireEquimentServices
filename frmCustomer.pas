@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, dmFES,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Buttons, System.ImageList, Vcl.ImgList,
   Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Mask, Vcl.DBCGrids;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Mask, Vcl.DBCGrids, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TCustomer = class(TForm)
@@ -76,6 +79,21 @@ type
     SpeedButton17: TSpeedButton;
     SpeedButton19: TSpeedButton;
     SpeedButton20: TSpeedButton;
+    qryCustomer: TFDQuery;
+    dsCustomer: TDataSource;
+    qryCustomerCustomerID: TFDAutoIncField;
+    qryCustomerCustName: TWideStringField;
+    qryCustomerCustCode: TWideStringField;
+    qryCustomerMYOBID: TIntegerField;
+    qryCustomerNote: TMemoField;
+    qryCustomerCreatedBy: TIntegerField;
+    qryCustomerCreatedOn: TSQLTimeStampField;
+    qryCustomerModifiedBy: TIntegerField;
+    qryCustomerModifiedOn: TSQLTimeStampField;
+    qryCustomerIsArchived: TBooleanField;
+    procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
+        Boolean);
+    procedure qryCustomerNoteSetText(Sender: TField; const Text: string);
   private
     { Private declarations }
   public
@@ -88,5 +106,20 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TCustomer.qryCustomerNoteGetText(Sender: TField; var Text: string;
+    DisplayText: Boolean);
+begin
+  //
+  if DisplayText then
+  begin
+    Text := Sender.AsString;
+  end;
+end;
+
+procedure TCustomer.qryCustomerNoteSetText(Sender: TField; const Text: string);
+begin
+  Sender.AsString := Text;
+end;
 
 end.

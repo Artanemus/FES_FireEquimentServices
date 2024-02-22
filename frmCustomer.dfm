@@ -108,7 +108,7 @@ object Customer: TCustomer
     Top = 57
     Width = 1285
     Height = 821
-    ActivePage = TabSheet4
+    ActivePage = TabSheet7
     Align = alClient
     TabOrder = 1
     ExplicitWidth = 1283
@@ -170,6 +170,8 @@ object Customer: TCustomer
         Width = 104
         Height = 17
         Caption = 'Is Archived'
+        DataField = 'IsArchived'
+        DataSource = dsCustomer
         TabOrder = 1
       end
       object DBEdit1: TDBEdit
@@ -177,6 +179,8 @@ object Customer: TCustomer
         Top = 36
         Width = 448
         Height = 29
+        DataField = 'CustName'
+        DataSource = dsCustomer
         TabOrder = 2
       end
       object DBGrid1: TDBGrid
@@ -196,6 +200,8 @@ object Customer: TCustomer
         Top = 80
         Width = 122
         Height = 29
+        DataField = 'CustCode'
+        DataSource = dsCustomer
         TabOrder = 4
       end
       object DBMemo1: TDBMemo
@@ -939,5 +945,78 @@ object Customer: TCustomer
     Height = 32
     Left = 976
     Top = 88
+  end
+  object qryCustomer: TFDQuery
+    Active = True
+    Connection = FES.fesConnection
+    SQL.Strings = (
+      'SELECT '
+      #9#9' [CustomerID]'
+      #9#9',[CustName]'
+      #9#9',[CustCode]'
+      #9#9',[MYOBID]'
+      #9#9',[Note]'
+      #9#9',[CreatedBy]'
+      #9#9',[CreatedOn]'
+      #9#9',[ModifiedBy]'
+      #9#9',[ModifiedOn]'
+      #9#9',[IsArchived]'
+      'FROM [IDFES].[dbo].[Customer] '
+      ';')
+    Left = 972
+    Top = 161
+    object qryCustomerCustomerID: TFDAutoIncField
+      FieldName = 'CustomerID'
+      Origin = 'CustomerID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryCustomerCustName: TWideStringField
+      FieldName = 'CustName'
+      Origin = 'CustName'
+      Size = 64
+    end
+    object qryCustomerCustCode: TWideStringField
+      FieldName = 'CustCode'
+      Origin = 'CustCode'
+      Size = 8
+    end
+    object qryCustomerMYOBID: TIntegerField
+      FieldName = 'MYOBID'
+      Origin = 'MYOBID'
+    end
+    object qryCustomerNote: TMemoField
+      FieldName = 'Note'
+      Origin = 'Note'
+      OnGetText = qryCustomerNoteGetText
+      OnSetText = qryCustomerNoteSetText
+      BlobType = ftMemo
+    end
+    object qryCustomerCreatedBy: TIntegerField
+      FieldName = 'CreatedBy'
+      Origin = 'CreatedBy'
+    end
+    object qryCustomerCreatedOn: TSQLTimeStampField
+      FieldName = 'CreatedOn'
+      Origin = 'CreatedOn'
+    end
+    object qryCustomerModifiedBy: TIntegerField
+      FieldName = 'ModifiedBy'
+      Origin = 'ModifiedBy'
+    end
+    object qryCustomerModifiedOn: TSQLTimeStampField
+      FieldName = 'ModifiedOn'
+      Origin = 'ModifiedOn'
+    end
+    object qryCustomerIsArchived: TBooleanField
+      FieldName = 'IsArchived'
+      Origin = 'IsArchived'
+      Required = True
+    end
+  end
+  object dsCustomer: TDataSource
+    DataSet = qryCustomer
+    Left = 1056
+    Top = 160
   end
 end
