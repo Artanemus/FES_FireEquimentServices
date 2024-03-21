@@ -3,7 +3,8 @@ unit frmMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  System.UITypes, Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.ComCtrls,
   Vcl.BaseImageCollection, Vcl.ImageCollection, Vcl.VirtualImage, Vcl.WinXCtrls,
@@ -153,7 +154,7 @@ type
     SpeedButton11: TSpeedButton;
     SpeedButton12: TSpeedButton;
     SpeedButton13: TSpeedButton;
-    SpeedButton14: TSpeedButton;
+    spdbtnBrowseCust: TSpeedButton;
     SpeedButton15: TSpeedButton;
     SpeedButton16: TSpeedButton;
     SpeedButton17: TSpeedButton;
@@ -191,6 +192,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure InspectFindOrderExecute(Sender: TObject);
     procedure InspectFindOrderUpdate(Sender: TObject);
+    procedure spdbtnBrowseCustClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -204,6 +206,8 @@ implementation
 
 {$R *.dfm}
 
+uses frmCustomer;
+
 procedure TMain.FormCreate(Sender: TObject);
 begin
    Application.ShowHint := true;
@@ -213,7 +217,7 @@ end;
 procedure TMain.InspectFindOrderExecute(Sender: TObject);
 var
 dlg: TFindInspectOrders;
-dlgresults: TModalResult;
+// mr: TModalResult;
 begin
   dlg := TFindInspectOrders.Create(Self);
   if dlg.qryFindInspectOrder.Active then
@@ -233,6 +237,15 @@ begin
   TAction(Sender).Enabled := false;
   if FES.fesConnection.Connected then
     TAction(Sender).Enabled := true;
+end;
+
+procedure TMain.spdbtnBrowseCustClick(Sender: TObject);
+var
+dlg: TCustomer;
+begin
+  dlg := TCustomer.Create(self);
+  dlg.ShowModal;
+  dlg.Free
 end;
 
 end.

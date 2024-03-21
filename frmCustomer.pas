@@ -3,14 +3,16 @@ unit frmCustomer;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, dmFES,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Buttons, System.ImageList, Vcl.ImgList,
   Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection, Data.DB,
   Vcl.Grids, Vcl.DBGrids, Vcl.Mask, Vcl.DBCGrids, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  dmFES, dmCustomerData;
 
 type
   TCustomer = class(TForm)
@@ -25,18 +27,18 @@ type
     TabSheet7: TTabSheet;
     Panel2: TPanel;
     DBNavigator1: TDBNavigator;
-    DBText1: TDBText;
-    DBText2: TDBText;
+    dbtxtCustomerID: TDBText;
+    dbtxtCustName: TDBText;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    DBCheckBox1: TDBCheckBox;
+    dbchkboxIsArchived: TDBCheckBox;
     Label1: TLabel;
-    DBEdit1: TDBEdit;
+    dbedtCustName: TDBEdit;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
-    SpeedButton3: TSpeedButton;
+    dbedtCustCode: TDBEdit;
+    spdbtnGenerateCustCode: TSpeedButton;
     Label3: TLabel;
     DBMemo1: TDBMemo;
     DBGrid1: TDBGrid;
@@ -79,18 +81,6 @@ type
     SpeedButton17: TSpeedButton;
     SpeedButton19: TSpeedButton;
     SpeedButton20: TSpeedButton;
-    qryCustomer: TFDQuery;
-    dsCustomer: TDataSource;
-    qryCustomerCustomerID: TFDAutoIncField;
-    qryCustomerCustName: TWideStringField;
-    qryCustomerCustCode: TWideStringField;
-    qryCustomerMYOBID: TIntegerField;
-    qryCustomerNote: TMemoField;
-    qryCustomerCreatedBy: TIntegerField;
-    qryCustomerCreatedOn: TSQLTimeStampField;
-    qryCustomerModifiedBy: TIntegerField;
-    qryCustomerModifiedOn: TSQLTimeStampField;
-    qryCustomerIsArchived: TBooleanField;
     procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
         Boolean);
     procedure qryCustomerNoteSetText(Sender: TField; const Text: string);

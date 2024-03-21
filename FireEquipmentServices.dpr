@@ -22,7 +22,8 @@ uses
   unitSMTP in 'unitSMTP.pas',
   frmEquipment in 'frmEquipment.pas' {Equipment},
   frmBrowseLinks in 'frmBrowseLinks.pas' {BrowseLinks},
-  frameFESPlanner in 'frameFESPlanner.pas' {FESPlanner: TFrame};
+  frameFESPlanner in 'frameFESPlanner.pas' {FESPlanner: TFrame},
+  dmCustomerData in 'dmCustomerData.pas' {CustomerData: TDataModule};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   TStyleManager.TrySetStyle('Iceberg Classico');
   Application.CreateForm(TMain, Main);
   Application.CreateForm(TFES, FES);
+  Application.CreateForm(TCustomerData, CustomerData);
   Application.Run;
 end.

@@ -285,8 +285,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1285
-        ExplicitHeight = 722
         DesignSize = (
           1287
           725)
@@ -723,8 +721,6 @@ object Main: TMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1285
-        ExplicitHeight = 722
         DesignSize = (
           1287
           725)
@@ -872,7 +868,7 @@ object Main: TMain
             Margin = 6
             Spacing = 10
           end
-          object SpeedButton14: TSpeedButton
+          object spdbtnBrowseCust: TSpeedButton
             Left = 144
             Top = 32
             Width = 60
@@ -883,6 +879,7 @@ object Main: TMain
             Images = vImageListBtns
             Margin = 6
             Spacing = 10
+            OnClick = spdbtnBrowseCustClick
           end
           object SpeedButton15: TSpeedButton
             Left = 248
@@ -1405,6 +1402,7 @@ object Main: TMain
         BevelKind = bkFlat
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitLeft = 17
         object Label50: TLabel
           Left = 472
           Top = 112

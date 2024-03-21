@@ -22,12 +22,14 @@ object Customer: TCustomer
     BevelOuter = bvNone
     TabOrder = 0
     ExplicitWidth = 1283
-    object DBText1: TDBText
+    object dbtxtCustomerID: TDBText
       Left = 16
       Top = 16
       Width = 81
       Height = 30
       Alignment = taRightJustify
+      DataField = 'CustomerID'
+      DataSource = CustomerData.dsCustomer
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -21
@@ -35,12 +37,14 @@ object Customer: TCustomer
       Font.Style = []
       ParentFont = False
     end
-    object DBText2: TDBText
+    object dbtxtCustName: TDBText
       Left = 104
       Top = 16
-      Width = 74
+      Width = 246
       Height = 30
       AutoSize = True
+      DataField = 'CustName'
+      DataSource = CustomerData.dsCustomer
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -21
@@ -108,11 +112,9 @@ object Customer: TCustomer
     Top = 57
     Width = 1285
     Height = 821
-    ActivePage = TabSheet7
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 1283
-    ExplicitHeight = 818
     object TabSheet1: TTabSheet
       Caption = 'Customer Details'
       object Label2: TLabel
@@ -132,20 +134,20 @@ object Customer: TCustomer
         Caption = 'Business/Company Name'
       end
       object Label4: TLabel
-        Left = 832
-        Top = 200
+        Left = 209
+        Top = 438
         Width = 212
         Height = 21
         Caption = 'Customer'#39's Business Numbers'
       end
       object Label3: TLabel
-        Left = 209
-        Top = 200
+        Left = 146
+        Top = 154
         Width = 41
         Height = 21
         Caption = 'Notes'
       end
-      object SpeedButton3: TSpeedButton
+      object spdbtnGenerateCustCode: TSpeedButton
         Left = 337
         Top = 75
         Width = 120
@@ -157,37 +159,39 @@ object Customer: TCustomer
         Margin = 4
       end
       object DBNavigator2: TDBNavigator
-        Left = 1207
-        Top = 235
+        Left = 727
+        Top = 465
         Width = 36
         Height = 270
+        DataSource = CustomerData.dsCustContactNum
         Kind = dbnVertical
         TabOrder = 0
       end
-      object DBCheckBox1: TDBCheckBox
+      object dbchkboxIsArchived: TDBCheckBox
         Left = 209
         Top = 128
         Width = 104
         Height = 17
         Caption = 'Is Archived'
         DataField = 'IsArchived'
-        DataSource = dsCustomer
+        DataSource = CustomerData.dsCustomer
         TabOrder = 1
       end
-      object DBEdit1: TDBEdit
+      object dbedtCustName: TDBEdit
         Left = 209
         Top = 36
-        Width = 448
+        Width = 960
         Height = 29
         DataField = 'CustName'
-        DataSource = dsCustomer
+        DataSource = CustomerData.dsCustomer
         TabOrder = 2
       end
       object DBGrid1: TDBGrid
-        Left = 832
-        Top = 235
-        Width = 369
+        Left = 209
+        Top = 465
+        Width = 512
         Height = 270
+        DataSource = CustomerData.dsCustContactNum
         TabOrder = 3
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -195,20 +199,22 @@ object Customer: TCustomer
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
       end
-      object DBEdit2: TDBEdit
+      object dbedtCustCode: TDBEdit
         Left = 209
         Top = 80
         Width = 122
         Height = 29
         DataField = 'CustCode'
-        DataSource = dsCustomer
+        DataSource = CustomerData.dsCustomer
         TabOrder = 4
       end
       object DBMemo1: TDBMemo
         Left = 209
-        Top = 232
-        Width = 448
+        Top = 151
+        Width = 960
         Height = 273
+        DataField = 'Note'
+        DataSource = CustomerData.dsCustomer
         TabOrder = 5
       end
     end
@@ -890,7 +896,7 @@ object Customer: TCustomer
               BA8AB231A699E7B70000000049454E44AE426082}
           end>
       end>
-    Left = 1072
+    Left = 1056
     Top = 88
   end
   object VirtualImageList1: TVirtualImageList
@@ -943,80 +949,7 @@ object Customer: TCustomer
     ImageCollection = ImageCollection1
     Width = 32
     Height = 32
-    Left = 976
+    Left = 952
     Top = 88
-  end
-  object qryCustomer: TFDQuery
-    Active = True
-    Connection = FES.fesConnection
-    SQL.Strings = (
-      'SELECT '
-      #9#9' [CustomerID]'
-      #9#9',[CustName]'
-      #9#9',[CustCode]'
-      #9#9',[MYOBID]'
-      #9#9',[Note]'
-      #9#9',[CreatedBy]'
-      #9#9',[CreatedOn]'
-      #9#9',[ModifiedBy]'
-      #9#9',[ModifiedOn]'
-      #9#9',[IsArchived]'
-      'FROM [IDFES].[dbo].[Customer] '
-      ';')
-    Left = 972
-    Top = 161
-    object qryCustomerCustomerID: TFDAutoIncField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object qryCustomerCustName: TWideStringField
-      FieldName = 'CustName'
-      Origin = 'CustName'
-      Size = 64
-    end
-    object qryCustomerCustCode: TWideStringField
-      FieldName = 'CustCode'
-      Origin = 'CustCode'
-      Size = 8
-    end
-    object qryCustomerMYOBID: TIntegerField
-      FieldName = 'MYOBID'
-      Origin = 'MYOBID'
-    end
-    object qryCustomerNote: TMemoField
-      FieldName = 'Note'
-      Origin = 'Note'
-      OnGetText = qryCustomerNoteGetText
-      OnSetText = qryCustomerNoteSetText
-      BlobType = ftMemo
-    end
-    object qryCustomerCreatedBy: TIntegerField
-      FieldName = 'CreatedBy'
-      Origin = 'CreatedBy'
-    end
-    object qryCustomerCreatedOn: TSQLTimeStampField
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustomerModifiedBy: TIntegerField
-      FieldName = 'ModifiedBy'
-      Origin = 'ModifiedBy'
-    end
-    object qryCustomerModifiedOn: TSQLTimeStampField
-      FieldName = 'ModifiedOn'
-      Origin = 'ModifiedOn'
-    end
-    object qryCustomerIsArchived: TBooleanField
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-  end
-  object dsCustomer: TDataSource
-    DataSet = qryCustomer
-    Left = 1056
-    Top = 160
   end
 end
