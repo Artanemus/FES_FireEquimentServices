@@ -12,7 +12,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  dmFES, dmCustomerData;
+  dmFES, dmCustomerData, System.Actions, Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dlgCustFilter, unitFESDefines;
 
 type
   TCustomer = class(TForm)
@@ -44,7 +45,7 @@ type
     DBGrid1: TDBGrid;
     Label4: TLabel;
     DBNavigator2: TDBNavigator;
-    SpeedButton5: TSpeedButton;
+    spdbtnFilter: TSpeedButton;
     SpeedButton4: TSpeedButton;
     DBCtrlGrid1: TDBCtrlGrid;
     Label5: TLabel;
@@ -81,11 +82,25 @@ type
     SpeedButton17: TSpeedButton;
     SpeedButton19: TSpeedButton;
     SpeedButton20: TSpeedButton;
-    procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
-        Boolean);
-    procedure qryCustomerNoteSetText(Sender: TField; const Text: string);
+    SpeedButton3: TSpeedButton;
+    actnmanCustomer: TActionManager;
+    actnGenerateCustCode: TAction;
+    actnFilterSelect: TAction;
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure actnFilterSelectExecute(Sender: TObject);
+    procedure actnGenerateCustCodeExecute(Sender: TObject);
   private
     { Private declarations }
+    fFilterDlg: TCustFilter;
+    fHideArchived: Boolean;
+    fHideInActive: Boolean;
+    fHideTBA: Boolean;
+
+  protected
+    procedure FilterDlgUpdated(var Msg: TMessage); message FES_FILTERUPDATED;
+    procedure FilterDlgDeactivated(var Msg: TMessage); message FES_FILTERDEACTIVATED;
+
   public
     { Public declarations }
   end;
@@ -97,19 +112,88 @@ implementation
 
 {$R *.dfm}
 
-procedure TCustomer.qryCustomerNoteGetText(Sender: TField; var Text: string;
-    DisplayText: Boolean);
+uses unitFEStools;
+
+
+procedure TCustomer.FormDestroy(Sender: TObject);
 begin
-  //
-  if DisplayText then
-  begin
-    Text := Sender.AsString;
+//  WritePreferences;
+  if assigned(fFilterDlg) then fFilterDlg.Free;
+end;
+
+procedure TCustomer.FilterDlgDeactivated(var Msg: TMessage);
+begin
+  if assigned(fFilterDlg) then FreeAndNil(fFilterDlg);
+end;
+
+procedure TCustomer.FilterDlgUpdated(var Msg: TMessage);
+var
+  CopyData: PCopyDataStruct;
+  FilterState: PFilterState;
+begin
+  if Msg.LParam = 0 then exit;
+  try
+    begin
+      CopyData := PCopyDataStruct(Msg.LParam);
+      FilterState := PFilterState(CopyData^.lpData);
+      // access the fields of the record
+      fHideArchived := FilterState^.HideArchived;
+      fHideInActive := FilterState^.HideInActive;
+//      fHideTBA := FilterState^.HideTBA;
+//      fDateStart := FilterState^.DateStart;
+//      fDateEnd := FilterState^.DateEnd;
+    end
+  finally
+    begin
+//      CustomerData.UpdateCustFilter(fID, fHideArchived, fHideInActive,
+//        fHideTBA, fDateStart, fDateEnd);
+
+      actnFilterSelect.Caption := 'Filter (' +
+        IntToStr(CustomerData.dsCustomer.DataSet.RecordCount) + ')';
+    end;
   end;
 end;
 
-procedure TCustomer.qryCustomerNoteSetText(Sender: TField; const Text: string);
+procedure TCustomer.FormCreate(Sender: TObject);
 begin
-  Sender.AsString := Text;
+  fFilterDlg := nil;
 end;
+
+procedure TCustomer.actnFilterSelectExecute(Sender: TObject);
+var
+  aRect: TRect;
+begin
+  // double tap on btnFilter
+
+  if assigned(fFilterDlg) then
+  begin
+    FreeAndNil(fFilterDlg);
+    exit;
+  end;
+
+//  WritePreferences;
+
+  fFilterDlg := TCustFilter.Create(Self);
+  fFilterDlg.Position := poDesigned;
+  aRect := spdbtnFilter.ClientToScreen(spdbtnFilter.ClientRect);
+  fFilterDlg.Left := aRect.Left;
+  fFilterDlg.Top := aRect.Bottom + 1;
+  fFilterDlg.Show;
+end;
+
+procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
+var
+s: string;
+begin
+  if Assigned(CustomerData) and CustomerData.dsCustomer.DataSet.Active then
+  begin
+    s := GenerateCustomerCode(CustomerData.dsCustomer.DataSet.FieldByName('CustName').AsString);
+    if CustomerData.dsCustomer.DataSet.State = dsBrowse then
+      CustomerData.dsCustomer.DataSet.Edit;
+    CustomerData.dsCustomer.DataSet.FieldByName('CustCode').AsString := s;
+  end;
+end;
+
+
 
 end.

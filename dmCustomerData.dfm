@@ -80,6 +80,9 @@ object CustomerData: TCustomerData
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
     Connection = FES.fesConnection
+    FormatOptions.AssignedValues = [fvFmtDisplayDateTime, fvFmtDisplayDate]
+    FormatOptions.FmtDisplayDateTime = 'dd/mm/yyyy'
+    FormatOptions.FmtDisplayDate = 'dd/mm/yyyy'
     SQL.Strings = (
       'USE [IDFES]'
       ';'

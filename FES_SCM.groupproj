@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{54FEC770-C969-4000-B795-3644382610C3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="FireEquipmentServices.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\SCM_SwimClubMeet-R\SwimClubMeet.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FireEquipmentServices">
+        <MSBuild Projects="FireEquipmentServices.dproj"/>
+    </Target>
+    <Target Name="FireEquipmentServices:Clean">
+        <MSBuild Projects="FireEquipmentServices.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FireEquipmentServices:Make">
+        <MSBuild Projects="FireEquipmentServices.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SwimClubMeet">
+        <MSBuild Projects="..\SCM_SwimClubMeet-R\SwimClubMeet.dproj"/>
+    </Target>
+    <Target Name="SwimClubMeet:Clean">
+        <MSBuild Projects="..\SCM_SwimClubMeet-R\SwimClubMeet.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SwimClubMeet:Make">
+        <MSBuild Projects="..\SCM_SwimClubMeet-R\SwimClubMeet.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FireEquipmentServices;SwimClubMeet"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FireEquipmentServices:Clean;SwimClubMeet:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FireEquipmentServices:Make;SwimClubMeet:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

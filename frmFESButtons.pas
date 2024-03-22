@@ -1,4 +1,4 @@
-unit frmMain;
+unit frmFESButtons;
 
 interface
 
@@ -13,13 +13,13 @@ uses
   dlgInspectOrdersFind;
 
 type
-  TMain = class(TForm)
+  TFESButtons = class(TForm)
     pnlHeader: TPanel;
     lblHeaderTitle: TLabel;
     vimageLogo: TVirtualImage;
     lblCompanyName: TLabel;
     StatusBar1: TStatusBar;
-    ImageCollectionMain: TImageCollection;
+    imgcollectSwitchBoard: TImageCollection;
     PageControlEquipment: TPageControl;
     TabSheetInspections: TTabSheet;
     TabSheetCustomers: TTabSheet;
@@ -91,8 +91,7 @@ type
     Label42: TLabel;
     Label43: TLabel;
     Label44: TLabel;
-    ActionMainMenuBar1: TActionMainMenuBar;
-    ActionManagerSwitchBoard: TActionManager;
+    actnmanSwitchBoard: TActionManager;
     SurveyFind: TAction;
     SurveyBrowse: TAction;
     SurveyGotoID: TAction;
@@ -119,7 +118,6 @@ type
     EquipBrowse: TAction;
     EquipGotoID: TAction;
     EquipNew: TAction;
-    vImageListMenu: TVirtualImageList;
     FileExit1: TFileExit;
     FileConnect: TAction;
     vImageListBug: TVirtualImageList;
@@ -200,7 +198,7 @@ type
   end;
 
 var
-  Main: TMain;
+  FESButtons: TFESButtons;
 
 implementation
 
@@ -208,13 +206,13 @@ implementation
 
 uses frmCustomer;
 
-procedure TMain.FormCreate(Sender: TObject);
+procedure TFESButtons.FormCreate(Sender: TObject);
 begin
    Application.ShowHint := true;
 
 end;
 
-procedure TMain.InspectFindOrderExecute(Sender: TObject);
+procedure TFESButtons.InspectFindOrderExecute(Sender: TObject);
 var
 dlg: TFindInspectOrders;
 // mr: TModalResult;
@@ -232,14 +230,14 @@ begin
   dlg.Free;
 end;
 
-procedure TMain.InspectFindOrderUpdate(Sender: TObject);
+procedure TFESButtons.InspectFindOrderUpdate(Sender: TObject);
 begin
   TAction(Sender).Enabled := false;
   if FES.fesConnection.Connected then
     TAction(Sender).Enabled := true;
 end;
 
-procedure TMain.spdbtnBrowseCustClick(Sender: TObject);
+procedure TFESButtons.spdbtnBrowseCustClick(Sender: TObject);
 var
 dlg: TCustomer;
 begin

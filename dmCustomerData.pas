@@ -61,7 +61,6 @@ FormatSettings: TFormatSettings;
 begin
   // Get the current locale format settings
   FormatSettings := TFormatSettings.Create;
-
   // Format the local time as a string using the short date format
   Text := FormatDateTime(FormatSettings.ShortDateFormat, Sender.AsDateTime);
 end;

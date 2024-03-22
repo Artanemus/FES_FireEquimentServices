@@ -2,7 +2,7 @@ program FireEquipmentServices;
 
 uses
   Vcl.Forms,
-  frmMain in 'frmMain.pas' {Main},
+  frmFESMain in 'frmFESMain.pas' {FESMain},
   Vcl.Themes,
   Vcl.Styles,
   frmInspectSchedule in 'frmInspectSchedule.pas' {InspectSchedule},
@@ -23,7 +23,12 @@ uses
   frmEquipment in 'frmEquipment.pas' {Equipment},
   frmBrowseLinks in 'frmBrowseLinks.pas' {BrowseLinks},
   frameFESPlanner in 'frameFESPlanner.pas' {FESPlanner: TFrame},
-  dmCustomerData in 'dmCustomerData.pas' {CustomerData: TDataModule};
+  dmCustomerData in 'dmCustomerData.pas' {CustomerData: TDataModule},
+  frmFESButtons in 'frmFESButtons.pas' {FESButtons},
+  unitFEStools in 'unitFEStools.pas',
+  dlgCustFilter in 'dlgCustFilter.pas' {CustFilter},
+  unitFESDefines in 'unitFESDefines.pas',
+  unitFESutility in 'unitFESutility.pas';
 
 {$R *.res}
 
@@ -31,7 +36,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Iceberg Classico');
-  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TFESMain, FESMain);
   Application.CreateForm(TFES, FES);
   Application.CreateForm(TCustomerData, CustomerData);
   Application.Run;

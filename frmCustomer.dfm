@@ -10,6 +10,8 @@ object Customer: TCustomer
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
@@ -53,7 +55,7 @@ object Customer: TCustomer
       ParentFont = False
     end
     object SpeedButton1: TSpeedButton
-      Left = 1064
+      Left = 944
       Top = 8
       Width = 93
       Height = 38
@@ -64,7 +66,7 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton2: TSpeedButton
-      Left = 1168
+      Left = 1048
       Top = 8
       Width = 93
       Height = 38
@@ -74,10 +76,10 @@ object Customer: TCustomer
       Images = VirtualImageList1
       Margin = 4
     end
-    object SpeedButton5: TSpeedButton
-      Left = 920
+    object spdbtnFilter: TSpeedButton
+      Left = 552
       Top = 8
-      Width = 93
+      Width = 121
       Height = 38
       Caption = 'FILTER'
       ImageIndex = 2
@@ -86,7 +88,7 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton4: TSpeedButton
-      Left = 1016
+      Left = 679
       Top = 8
       Width = 42
       Height = 38
@@ -96,13 +98,24 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton12: TSpeedButton
-      Left = 821
+      Left = 845
       Top = 8
       Width = 93
       Height = 38
       Caption = 'FIND'
       ImageIndex = 6
       ImageName = 'search'
+      Images = VirtualImageList1
+      Margin = 4
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 1147
+      Top = 8
+      Width = 93
+      Height = 38
+      Caption = 'SYNC'
+      ImageIndex = 9
+      ImageName = 'Sync'
       Images = VirtualImageList1
       Margin = 4
     end
@@ -115,6 +128,8 @@ object Customer: TCustomer
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 1283
+    ExplicitHeight = 818
     object TabSheet1: TTabSheet
       Caption = 'Customer Details'
       object Label2: TLabel
@@ -152,9 +167,8 @@ object Customer: TCustomer
         Top = 75
         Width = 120
         Height = 38
+        Action = actnGenerateCustCode
         Caption = 'Generate'
-        ImageIndex = 1
-        ImageName = 'pin'
         Images = VirtualImageList1
         Margin = 4
       end
@@ -562,13 +576,12 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 875
-    ExplicitWidth = 1283
     object DBNavigator1: TDBNavigator
       Left = 288
       Top = 16
       Width = 710
       Height = 36
+      DataSource = CustomerData.dsCustomer
       TabOrder = 0
     end
   end
@@ -895,6 +908,37 @@ object Customer: TCustomer
               57D715C05F4E66F052AA334005E17EBFB48AEA0E90DC5FEF019253F486159E01
               BA8AB231A699E7B70000000049454E44AE426082}
           end>
+      end
+      item
+        Name = 'Sync'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000002A8494441546843ED98EB71D5400C46
+              BF54405201A48240054005241524540054005410A8005241E800A820A102A002
+              A00232676637A3ECD896B43663EE8CF5EF5EEF6A75F45AD97BDA71D9DB71FBB5
+              01AC1DC12D025B04667A604BA10E077E91F438B8EFABA427536B978A0087BC96
+              F45612064EC97F057026E9D478E9E92E017C2CC65B6FF7025C4B62EFEF606ADD
+              2EEB4DA1D6F83F925E4AE27F4FC652E893A4136F73FBBC07A0359EBC7F97F09E
+              05B868A288EEE719882C005E7A660EE0B088D7AD4D1680B47920E98359F0BE44
+              33C49101A060ED413DC663540BC0EF37A58B55A31F49A22E5CC900FC9074BF68
+              246D38B4478600D063A3CB1AA2E34A14C07AFF6709BBAB7C64C118C0BE249C74
+              AFEC0B45380A60BD1F523C413706C0169B4AA410A9342911006ED9CF450BED92
+              A24BF76B6305D144074203C03956D05DA37038F0FCCEE20880F54AAA4378DE1B
+              796EDBB45B6B11007AFC8B4C5E761A5EB71D4BBA2C3F1619E6A67276A6AD83DB
+              1F4ABA2A4FDC3A8844C0E6E4C1CCFC8F02FF350B276D8C00849545AD73D6D14E
+              7F99A6C1EF518900D816EA768505206CD7DBC91AB097A6DBF52211B057FCAB32
+              792EE0E85115B6EBB9E74500AC4786BA0297126F65086346763A6D496CCABA2F
+              4811005B541CD6D6412A679DD0A567AE0800674E4D8A4B02A467AE280069F2DD
+              78CF0E744B01F04A7A6E52B1CE4B93418B02A0C4CE445C6EE42735B10440F7CB
+              520600080C3E2A2E01A2BE84D769D5EDDB03EE6C8DFF268971222459000A9AD9
+              A8427008BFEBD7B30C00BA1812499D7ADB623CBAC2E37A1600838720AAB7A200
+              789D2F7936CFD3C673680F4085A0DFDB2F14FC1F01B03553C1BB8C8F022CFA2D
+              B3297A2E3E9A43F7E51789C0BF00C0E05986D7D0AD01400D858BD46B4511004F
+              C7AACF378055DD3FA38DAE6DF7EDF95B0AAD1D8A2D026B47E006AE729D31BCFD
+              6DDE0000000049454E44AE426082}
+          end>
       end>
     Left = 1056
     Top = 88
@@ -945,11 +989,34 @@ object Customer: TCustomer
         CollectionIndex = 8
         CollectionName = 'link_off'
         Name = 'link_off'
+      end
+      item
+        CollectionIndex = 9
+        CollectionName = 'Sync'
+        Name = 'Sync'
       end>
     ImageCollection = ImageCollection1
     Width = 32
     Height = 32
     Left = 952
     Top = 88
+  end
+  object actnmanCustomer: TActionManager
+    Images = VirtualImageList1
+    Left = 996
+    Top = 177
+    StyleName = 'Platform Default'
+    object actnGenerateCustCode: TAction
+      Caption = 'Generate Customer Code'
+      ImageIndex = 1
+      ImageName = 'pin'
+      OnExecute = actnGenerateCustCodeExecute
+    end
+    object actnFilterSelect: TAction
+      Caption = 'Filter'
+      ImageIndex = 2
+      ImageName = 'arrow_drop_down_circle'
+      OnExecute = actnFilterSelectExecute
+    end
   end
 end
