@@ -28,7 +28,8 @@ uses
   unitFEStools in 'unitFEStools.pas',
   dlgCustFilter in 'dlgCustFilter.pas' {CustFilter},
   unitFESDefines in 'unitFESDefines.pas',
-  unitFESutility in 'unitFESutility.pas';
+  unitFESutility in 'unitFESutility.pas',
+  unitFESHelpers in 'unitFESHelpers.pas';
 
 {$R *.res}
 

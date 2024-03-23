@@ -59,7 +59,6 @@ type
     DBText4: TDBText;
     DBText5: TDBText;
     DBNavigator3: TDBNavigator;
-    DBComboBox1: TDBComboBox;
     SpeedButton6: TSpeedButton;
     SpeedButton7: TSpeedButton;
     SpeedButton8: TSpeedButton;
@@ -86,16 +85,20 @@ type
     actnmanCustomer: TActionManager;
     actnGenerateCustCode: TAction;
     actnFilterSelect: TAction;
+    DBCheckBox1: TDBCheckBox;
+    DBCheckBox3: TDBCheckBox;
+    DBCmbBoxAddressType: TDBComboBox;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnFilterSelectExecute(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
+    procedure DBCmbBoxAddressTypeChange(Sender: TObject);
   private
     { Private declarations }
     fFilterDlg: TCustFilter;
     fHideArchived: Boolean;
     fHideInActive: Boolean;
-    fHideTBA: Boolean;
+//    fHideLinked: Boolean;
 
   protected
     procedure FilterDlgUpdated(var Msg: TMessage); message FES_FILTERUPDATED;
@@ -157,6 +160,19 @@ end;
 procedure TCustomer.FormCreate(Sender: TObject);
 begin
   fFilterDlg := nil;
+  // assign the list items for field AddressTypeID in TDBCtrlGrid
+  DBCmbBoxAddressType.Clear;
+  {TODO -oBSA -cGeneral : Check DB up and running}
+  if Assigned(CustomerData) and CustomerData.dsCustomer.DataSet.Active then
+  begin
+    CustomerData.dsAddressType.DataSet.First;
+    while not CustomerData.dsAddressType.DataSet.Eof do
+    begin
+      DBCmbBoxAddressType.Items.Add(CustomerData.dsAddressType.DataSet.FieldByName('AliasCust').AsString);
+      CustomerData.dsAddressType.DataSet.Next;
+    end;
+  end;
+
 end;
 
 procedure TCustomer.actnFilterSelectExecute(Sender: TObject);
@@ -194,6 +210,29 @@ begin
   end;
 end;
 
-
+procedure TCustomer.DBCmbBoxAddressTypeChange(Sender: TObject);
+//var
+//  s: string;
+//  SearchOptions: TLocateOptions;
+//  result: boolean;
+begin
+//  if DBCtrlGrid1.DataSource.DataSet.State = dsEdit then
+//  begin
+//    s := DBCmbBoxAddressType.Text;
+//    s := DBCmbBoxAddressType.Items[DBCmbBoxAddressType.ItemIndex];
+//    result := false;
+//    SearchOptions := [];
+//    if CustomerData.dsAddressType.DataSet.Active then
+//    begin
+//        result := CustomerData.dsAddressType.DataSet.Locate('AliasCust', s, SearchOptions);
+//        if result then
+//        begin
+//          DBCtrlGrid1.DataSource.DataSet.FieldByName('AddressTypeID').AsInteger :=
+//          CustomerData.dsAddressType.DataSet.FieldByName('AddressTypeID').AsInteger;
+//        end;
+//
+//    end;
+//  end;
+end;
 
 end.

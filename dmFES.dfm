@@ -4,8 +4,8 @@ object FES: TFES
   object fesConnection: TFDConnection
     Params.Strings = (
       'ConnectionDef=MSSQL_FES'
-      'User_Name=Ben')
-    Connected = True
+      'User_Name=Ben'
+      'ApplicationName=FireEquipmentServices')
     LoginPrompt = False
     Left = 88
     Top = 48

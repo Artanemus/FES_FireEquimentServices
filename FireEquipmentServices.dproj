@@ -200,6 +200,7 @@
         </DCCReference>
         <DCCReference Include="unitFESDefines.pas"/>
         <DCCReference Include="unitFESutility.pas"/>
+        <DCCReference Include="unitFESHelpers.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

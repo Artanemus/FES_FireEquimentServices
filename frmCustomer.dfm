@@ -81,9 +81,8 @@ object Customer: TCustomer
       Top = 8
       Width = 121
       Height = 38
+      Action = actnFilterSelect
       Caption = 'FILTER'
-      ImageIndex = 2
-      ImageName = 'arrow_drop_down_circle'
       Images = VirtualImageList1
       Margin = 4
     end
@@ -125,11 +124,9 @@ object Customer: TCustomer
     Top = 57
     Width = 1285
     Height = 821
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 1283
-    ExplicitHeight = 818
     object TabSheet1: TTabSheet
       Caption = 'Customer Details'
       object Label2: TLabel
@@ -156,11 +153,12 @@ object Customer: TCustomer
         Caption = 'Customer'#39's Business Numbers'
       end
       object Label3: TLabel
-        Left = 146
-        Top = 154
-        Width = 41
+        Left = 60
+        Top = 151
+        Width = 143
         Height = 21
-        Caption = 'Notes'
+        Alignment = taRightJustify
+        Caption = 'Internal Office Notes'
       end
       object spdbtnGenerateCustCode: TSpeedButton
         Left = 337
@@ -231,6 +229,15 @@ object Customer: TCustomer
         DataSource = CustomerData.dsCustomer
         TabOrder = 5
       end
+      object DBCheckBox1: TDBCheckBox
+        Left = 319
+        Top = 128
+        Width = 104
+        Height = 17
+        Caption = 'Is In-Active'
+        DataSource = CustomerData.dsCustomer
+        TabOrder = 6
+      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Business Address'
@@ -261,6 +268,7 @@ object Customer: TCustomer
         Top = 32
         Width = 657
         Height = 729
+        DataSource = CustomerData.dsCustAdress
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -279,24 +287,24 @@ object Customer: TCustomer
           Caption = 'Address'
         end
         object Label6: TLabel
-          Left = 167
-          Top = 107
+          Left = 52
+          Top = 95
           Width = 81
           Height = 18
           Alignment = taRightJustify
           Caption = 'City/Suburb'
         end
         object Label7: TLabel
-          Left = 181
-          Top = 131
+          Left = 66
+          Top = 119
           Width = 67
           Height = 18
           Alignment = taRightJustify
           Caption = 'Postcode'
         end
         object Label8: TLabel
-          Left = 211
-          Top = 155
+          Left = 96
+          Top = 143
           Width = 37
           Height = 18
           Alignment = taRightJustify
@@ -304,50 +312,60 @@ object Customer: TCustomer
         end
         object Label9: TLabel
           Left = 37
-          Top = 195
+          Top = 203
           Width = 96
           Height = 18
           Alignment = taRightJustify
           Caption = 'Address Type'
         end
         object DBText3: TDBText
-          Left = 267
-          Top = 107
-          Width = 354
+          Left = 152
+          Top = 95
+          Width = 457
           Height = 17
+          DataField = 'Suburb'
+          DataSource = CustomerData.dsCustAdress
         end
         object DBText4: TDBText
-          Left = 267
-          Top = 131
+          Left = 152
+          Top = 119
           Width = 65
           Height = 17
+          DataField = 'PostCode'
+          DataSource = CustomerData.dsCustAdress
         end
         object DBText5: TDBText
-          Left = 267
-          Top = 155
+          Left = 152
+          Top = 143
           Width = 65
           Height = 17
+          DataField = 'State'
+          DataSource = CustomerData.dsCustAdress
         end
         object Label10: TLabel
-          Left = 397
-          Top = 155
+          Left = 98
+          Top = 167
           Width = 35
           Height = 18
           Alignment = taRightJustify
           Caption = 'Zone'
         end
         object DBText6: TDBText
-          Left = 438
-          Top = 155
-          Width = 65
+          Left = 152
+          Top = 166
+          Width = 457
           Height = 17
+          DataField = 'Zone'
+          DataSource = CustomerData.dsCustAdress
         end
         object DBCheckBox2: TDBCheckBox
-          Left = 512
-          Top = 200
+          Left = 397
+          Top = 204
           Width = 97
           Height = 17
           Caption = 'Is Archived'
+          DataField = 'IsArchived'
+          DataSource = CustomerData.dsCustAdress
           TabOrder = 0
         end
         object DBMemo2: TDBMemo
@@ -355,14 +373,28 @@ object Customer: TCustomer
           Top = 13
           Width = 457
           Height = 76
+          DataField = 'Address'
+          DataSource = CustomerData.dsCustAdress
           TabOrder = 1
         end
-        object DBComboBox1: TDBComboBox
-          Left = 152
-          Top = 192
-          Width = 185
-          Height = 26
+        object DBCheckBox3: TDBCheckBox
+          Left = 500
+          Top = 204
+          Width = 97
+          Height = 17
+          Caption = 'Is In-Active'
+          DataSource = CustomerData.dsCustAdress
           TabOrder = 2
+        end
+        object DBCmbBoxAddressType: TDBComboBox
+          Left = 152
+          Top = 200
+          Width = 209
+          Height = 26
+          DataField = 'luAddressType'
+          DataSource = CustomerData.dsCustAdress
+          TabOrder = 3
+          OnChange = DBCmbBoxAddressTypeChange
         end
       end
       object DBNavigator3: TDBNavigator
@@ -380,8 +412,9 @@ object Customer: TCustomer
       object DBGrid2: TDBGrid
         Left = 32
         Top = 40
-        Width = 425
+        Width = 777
         Height = 465
+        DataSource = CustomerData.dsCustEmails
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -390,7 +423,7 @@ object Customer: TCustomer
         TitleFont.Style = []
       end
       object DBNavigator4: TDBNavigator
-        Left = 471
+        Left = 1199
         Top = 40
         Width = 50
         Height = 460
@@ -576,6 +609,8 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 875
+    ExplicitWidth = 1283
     object DBNavigator1: TDBNavigator
       Left = 288
       Top = 16

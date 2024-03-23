@@ -1,10 +1,11 @@
 object CustFilter: TCustFilter
   Left = 0
   Top = 0
+  AutoSize = True
   BorderStyle = bsNone
   Caption = 'Filter Members'
-  ClientHeight = 173
-  ClientWidth = 260
+  ClientHeight = 209
+  ClientWidth = 255
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,10 +19,10 @@ object CustFilter: TCustFilter
   OnShow = FormShow
   TextHeight = 21
   object btngrpFilter: TButtonGroup
-    Left = -3
-    Top = 8
+    Left = 0
+    Top = 0
     Width = 255
-    Height = 161
+    Height = 209
     ButtonHeight = 34
     ButtonOptions = [gboFullSize, gboShowCaptions]
     Images = filterImageList32x32
@@ -33,7 +34,13 @@ object CustFilter: TCustFilter
         Action = actnHideInActive
       end
       item
-        Action = actnHideTBA
+        Action = actnHideLinked
+      end
+      item
+        Action = actnFilterFrom
+      end
+      item
+        Action = actnFilterTo
       end
       item
         Action = actnClear
@@ -216,12 +223,22 @@ object CustFilter: TCustFilter
       OnExecute = actnHideInActiveExecute
       OnUpdate = actnHideInActiveUpdate
     end
-    object actnHideTBA: TAction
-      Caption = 'Hide TBA'
+    object actnHideLinked: TAction
+      Caption = 'Hide Linked'
       ImageIndex = 1
       ImageName = 'UnChecked'
-      OnExecute = actnHideTBAExecute
-      OnUpdate = actnHideTBAUpdate
+      OnExecute = actnHideLinkedExecute
+      OnUpdate = actnHideLinkedUpdate
+    end
+    object actnFilterFrom: TAction
+      Caption = 'From: (1/1/1970)'
+      ImageIndex = 1
+      ImageName = 'UnChecked'
+    end
+    object actnFilterTo: TAction
+      Caption = 'To: (Today)'
+      ImageIndex = 1
+      ImageName = 'UnChecked'
     end
     object actnClose: TAction
       Caption = 'Close'

@@ -26,9 +26,11 @@ type
     filterActionManager: TActionManager;
     actnHideArchived: TAction;
     actnHideInActive: TAction;
-    actnHideTBA: TAction;
+    actnHideLinked: TAction;
     actnClose: TAction;
     actnClear: TAction;
+    actnFilterFrom: TAction;
+    actnFilterTo: TAction;
     procedure actnClearExecute(Sender: TObject);
     procedure actnClearUpdate(Sender: TObject);
     procedure actnCloseExecute(Sender: TObject);
@@ -36,8 +38,8 @@ type
     procedure actnHideArchivedUpdate(Sender: TObject);
     procedure actnHideInActiveExecute(Sender: TObject);
     procedure actnHideInActiveUpdate(Sender: TObject);
-    procedure actnHideTBAExecute(Sender: TObject);
-    procedure actnHideTBAUpdate(Sender: TObject);
+    procedure actnHideLinkedExecute(Sender: TObject);
+    procedure actnHideLinkedUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -71,14 +73,14 @@ procedure TCustFilter.actnClearExecute(Sender: TObject);
 begin
   actnHideArchived.Checked := false;
   actnHideInActive.Checked := false;
-  actnHideTBA.Checked := false;
+  actnHideLinked.Checked := false;
   SetIconDisplayState;
   SendFilterDataPacket;
 end;
 
 procedure TCustFilter.actnClearUpdate(Sender: TObject);
 begin
-  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideTBA.Checked
+  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideLinked.Checked
   then TAction(Sender).ImageName := 'filter_alt'
   else TAction(Sender).ImageName := 'filter_alt_off';
 end;
@@ -115,14 +117,14 @@ begin
   else TAction(Sender).ImageName := 'UnChecked';
 end;
 
-procedure TCustFilter.actnHideTBAExecute(Sender: TObject);
+procedure TCustFilter.actnHideLinkedExecute(Sender: TObject);
 begin
   TAction(Sender).Checked := not TAction(Sender).Checked;
   SetIconDisplayState;
   SendFilterDataPacket;
 end;
 
-procedure TCustFilter.actnHideTBAUpdate(Sender: TObject);
+procedure TCustFilter.actnHideLinkedUpdate(Sender: TObject);
 begin
   if TAction(Sender).Checked then TAction(Sender).ImageName := 'Checked'
   else TAction(Sender).ImageName := 'UnChecked';
@@ -132,7 +134,7 @@ procedure TCustFilter.FormCreate(Sender: TObject);
 begin
   actnHideArchived.Checked := false;
   actnHideInActive.Checked := false;
-  actnHideTBA.Checked := false;
+  actnHideLinked.Checked := false;
 end;
 
 procedure TCustFilter.FormDeactivate(Sender: TObject);
@@ -171,7 +173,7 @@ begin
     'HideArchived', false);
   actnHideInActive.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideInActive', false);
-  actnHideTBA.Checked := iFile.ReadBool(INIFILE_SECTION,
+  actnHideLinked.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideNonSwimmer', false);
   iFile.Free;
 end;
@@ -184,7 +186,7 @@ begin
   // fill record
   fFilterState.HideArchived := actnHideArchived.Checked;
   fFilterState.HideInActive := actnHideInActive.Checked;
-  fFilterState.HideNonSwimmer := actnHideTBA.Checked;
+  fFilterState.HideNonSwimmer := actnHideLinked.Checked;
   Buffer := TMemoryStream.Create;
   try
     // fill memory stream
@@ -209,9 +211,9 @@ begin
   else actnHideArchived.ImageName := 'UnChecked';
   if actnHideInActive.Checked then actnHideInActive.ImageName := 'Checked'
   else actnHideInActive.ImageName := 'UnChecked';
-  if actnHideTBA.Checked then actnHideTBA.ImageName := 'Checked'
-  else actnHideTBA.ImageName := 'UnChecked';
-  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideTBA.Checked
+  if actnHideLinked.Checked then actnHideLinked.ImageName := 'Checked'
+  else actnHideLinked.ImageName := 'UnChecked';
+  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideLinked.Checked
   then actnClear.ImageName := 'filter_alt'
   else actnClear.ImageName := 'filter_alt_off';
 end;
@@ -226,8 +228,8 @@ begin
   iFile := TIniFile.Create(iniFileName);
   iFile.WriteBool(INIFILE_SECTION, 'HideArchived', actnHideArchived.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'HideInActive', actnHideInActive.Checked);
-  iFile.WriteBool(INIFILE_SECTION, 'HideNonSwimmer',
-    actnHideTBA.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'HideLinked',
+    actnHideLinked.Checked);
   iFile.Free;
 end;
 
