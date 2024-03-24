@@ -1,6 +1,6 @@
 object CustomerData: TCustomerData
   Height = 480
-  Width = 1154
+  Width = 1430
   object qryCustomer: TFDQuery
     Active = True
     Connection = FES.fesConnection
@@ -93,7 +93,6 @@ object CustomerData: TCustomerData
       '      ,[ContactNum]'
       '      ,[CreatedOn]'
       '      ,[IsArchived]'
-      '      ,[SortList]'
       '      ,[ContactNumTypeID]'
       '  FROM [dbo].[CustContactNum]'
       ''
@@ -142,11 +141,6 @@ object CustomerData: TCustomerData
       ReadOnly = True
       OnGetText = qryCustContactNumCreatedOnGetText
     end
-    object qryCustContactNumSortList: TIntegerField
-      FieldName = 'SortList'
-      Origin = 'SortList'
-      Visible = False
-    end
     object qryCustContactNumContactNumTypeID: TIntegerField
       FieldName = 'ContactNumTypeID'
       Origin = 'ContactNumTypeID'
@@ -194,7 +188,6 @@ object CustomerData: TCustomerData
       #9#9',[Address]'
       #9#9',[CreatedOn]'
       #9#9',[IsArchived]'
-      #9#9',[SortList]'
       '    ,PostCode'
       '    ,Suburb'
       '    ,State'
@@ -237,10 +230,6 @@ object CustomerData: TCustomerData
       FieldName = 'IsArchived'
       Origin = 'IsArchived'
       Required = True
-    end
-    object qryCustAddressSortList: TIntegerField
-      FieldName = 'SortList'
-      Origin = 'SortList'
     end
     object qryCustAddressluAddressType: TStringField
       FieldKind = fkLookup
@@ -305,6 +294,8 @@ object CustomerData: TCustomerData
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
     Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.CustEmail'
+    UpdateOptions.KeyFields = 'CustEmailID'
     SQL.Strings = (
       '  SELECT '
       #9#9' [CustEmailID]'
@@ -312,7 +303,6 @@ object CustomerData: TCustomerData
       #9#9',[Email]'
       #9#9',[CreatedOn]'
       #9#9',[IsArchived]'
-      #9#9',[SortList]'
       #9#9',[EmailTypeID]'
       'FROM [IDFES].[dbo].[CustEmail] ')
     Left = 816
@@ -345,11 +335,6 @@ object CustomerData: TCustomerData
       FieldName = 'IsArchived'
       Origin = 'IsArchived'
       Required = True
-    end
-    object qryCustEmailsSortList: TIntegerField
-      FieldName = 'SortList'
-      Origin = 'SortList'
-      Visible = False
     end
     object qryCustEmailsEmailTypeID: TIntegerField
       FieldName = 'EmailTypeID'
@@ -392,5 +377,94 @@ object CustomerData: TCustomerData
       '  WHERE [IsArchived] = 0 AND [UsedByCust] = 1')
     Left = 816
     Top = 232
+  end
+  object qryCustSite: TFDQuery
+    Active = True
+    IndexFieldNames = 'CustomerID'
+    MasterSource = dsCustomer
+    MasterFields = 'CustomerID'
+    Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.CustSite'
+    UpdateOptions.KeyFields = 'CustSiteID'
+    SQL.Strings = (
+      ' SELECT TOP (1000) [CustSiteID]'
+      '      ,[CustomerID]'
+      '      ,[SiteID]'
+      '      ,[CreatedOn]'
+      '      ,[IsArchived]'
+      '      ,[IsEnabled]'
+      '      ,[SiteContactID]'
+      '      ,[Note]'
+      '      ,[SeedDate]'
+      '      ,[SeedLevel]'
+      '      ,[DoReseed]'
+      '  FROM [IDFES].[dbo].[CustSite]')
+    Left = 1096
+    Top = 144
+    object qryCustSiteCustSiteID: TFDAutoIncField
+      FieldName = 'CustSiteID'
+      Origin = 'CustSiteID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+    object qryCustSiteCustomerID: TIntegerField
+      FieldName = 'CustomerID'
+      Origin = 'CustomerID'
+      Required = True
+      Visible = False
+    end
+    object qryCustSiteSiteID: TIntegerField
+      FieldName = 'SiteID'
+      Origin = 'SiteID'
+      Required = True
+      Visible = False
+    end
+    object qryCustSiteCreatedOn: TSQLTimeStampField
+      FieldName = 'CreatedOn'
+      Origin = 'CreatedOn'
+      Visible = False
+    end
+    object qryCustSiteIsArchived: TBooleanField
+      FieldName = 'IsArchived'
+      Origin = 'IsArchived'
+      Required = True
+    end
+    object qryCustSiteIsEnabled: TBooleanField
+      FieldName = 'IsEnabled'
+      Origin = 'IsEnabled'
+      Required = True
+    end
+    object qryCustSiteSiteContactID: TIntegerField
+      FieldName = 'SiteContactID'
+      Origin = 'SiteContactID'
+      Visible = False
+    end
+    object qryCustSiteNote: TMemoField
+      FieldName = 'Note'
+      Origin = 'Note'
+      BlobType = ftMemo
+    end
+    object qryCustSiteSeedDate: TSQLTimeStampField
+      FieldName = 'SeedDate'
+      Origin = 'SeedDate'
+      Visible = False
+    end
+    object qryCustSiteSeedLevel: TIntegerField
+      FieldName = 'SeedLevel'
+      Origin = 'SeedLevel'
+      Visible = False
+    end
+    object qryCustSiteDoReseed: TBooleanField
+      FieldName = 'DoReseed'
+      Origin = 'DoReseed'
+      Required = True
+      Visible = False
+    end
+  end
+  object dsCustSite: TDataSource
+    DataSet = qryCustSite
+    Left = 1176
+    Top = 144
   end
 end

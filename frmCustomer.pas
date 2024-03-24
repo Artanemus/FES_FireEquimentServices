@@ -13,7 +13,8 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   dmFES, dmCustomerData, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dlgCustFilter, unitFESDefines;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dlgCustFilter, unitFESDefines,
+  Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus;
 
 type
   TCustomer = class(TForm)
@@ -88,6 +89,17 @@ type
     DBCheckBox1: TDBCheckBox;
     DBCheckBox3: TDBCheckBox;
     DBCmbBoxAddressType: TDBComboBox;
+    ActionMainMenuBar1: TActionMainMenuBar;
+    actnFind: TAction;
+    actnGotoID: TAction;
+    actnGotoCustCode: TAction;
+    actnClearFilter: TAction;
+    actnGotoSite: TAction;
+    actnGotoSiteContact: TAction;
+    actnCreateSurveyOrder: TAction;
+    actnEnableLink: TAction;
+    actnDisableLink: TAction;
+    actnLinkCustToSite: TAction;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnFilterSelectExecute(Sender: TObject);

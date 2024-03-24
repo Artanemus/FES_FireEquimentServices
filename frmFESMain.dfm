@@ -12,6 +12,7 @@ object FESMain: TFESMain
   Font.Style = []
   Position = poMainFormCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 21
   object pnlHeader: TPanel
     Left = 0
@@ -21,6 +22,7 @@ object FESMain: TFESMain
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1293
     object vimageLogo: TVirtualImage
       Left = 14
       Top = 6
@@ -54,6 +56,7 @@ object FESMain: TFESMain
     Top = 0
     Width = 1295
     Height = 31
+    UseSystemFont = False
     ActionManager = actnmanMain
     Caption = 'ActionMainMenuBar1'
     Color = clMenuBar
@@ -62,7 +65,7 @@ object FESMain: TFESMain
     ColorMap.BtnSelectedFont = clBlack
     ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -79,10 +82,6 @@ object FESMain: TFESMain
     Align = alClient
     Caption = 'frameFESPlanner'
     TabOrder = 3
-    ExplicitLeft = 416
-    ExplicitTop = 135
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     inline TFESPlanner1: TFESPlanner
       Left = 1
       Top = 1
@@ -90,10 +89,15 @@ object FESMain: TFESMain
       Height = 790
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = -48
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 1293
+      ExplicitHeight = 790
       inherited DBPlanner1: TDBPlanner
         Width = 1293
         Height = 790
+        ExplicitWidth = 1291
+        ExplicitHeight = 787
         TMSStyle = 0
       end
     end
@@ -3992,6 +3996,7 @@ object FESMain: TFESMain
               end
               item
                 Action = InspectProcessOrders
+                Caption = '&Process Orders'
                 ImageIndex = 1
                 ImageName = 'update'
               end>

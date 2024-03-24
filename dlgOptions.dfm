@@ -22,19 +22,20 @@ object Options: TOptions
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 541
-    ExplicitWidth = 744
+    ExplicitTop = 523
+    ExplicitWidth = 847
     DesignSize = (
       849
       47)
     object Button1: TButton
-      Left = 753
+      Left = 749
       Top = 9
       Width = 75
       Height = 28
       Anchors = [akTop, akRight]
       Caption = 'Close'
       TabOrder = 0
+      ExplicitLeft = 747
     end
   end
   object PageControl1: TPageControl
@@ -45,9 +46,8 @@ object Options: TOptions
     ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 65
-    ExplicitWidth = 746
-    ExplicitHeight = 479
+    ExplicitWidth = 847
+    ExplicitHeight = 523
     object TabSheet1: TTabSheet
       Caption = 'Inspection Globals'
       object Label3: TLabel
@@ -144,8 +144,8 @@ object Options: TOptions
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 738
-        ExplicitHeight = 475
+        ExplicitWidth = 839
+        ExplicitHeight = 487
         DesignSize = (
           841
           490)
@@ -249,8 +249,8 @@ object Options: TOptions
           object Label14: TLabel
             Left = 328
             Top = 2
-            Width = 73
-            Height = 63
+            Width = 71
+            Height = 42
             Alignment = taCenter
             Caption = 'Minor Life Cycle'
             Font.Charset = DEFAULT_CHARSET
@@ -264,8 +264,8 @@ object Options: TOptions
           object Label15: TLabel
             Left = 424
             Top = 2
-            Width = 81
-            Height = 63
+            Width = 74
+            Height = 42
             Alignment = taCenter
             Caption = 'Major Life Cycle'
             Font.Charset = DEFAULT_CHARSET
@@ -309,7 +309,7 @@ object Options: TOptions
           object Label18: TLabel
             Left = 713
             Top = -1
-            Width = 72
+            Width = 63
             Height = 42
             Alignment = taCenter
             Caption = 'Core Group ID'
@@ -520,7 +520,6 @@ object Options: TOptions
     Top = 416
   end
   object qryEquipmentType: TFDQuery
-    Active = True
     IndexFieldNames = 'EquipTypeID'
     Connection = FES.fesConnection
     UpdateOptions.UpdateTableName = 'IDFES..EquipType'
@@ -528,13 +527,12 @@ object Options: TOptions
     SQL.Strings = (
       'SELECT [EquipTypeID]'
       '      ,[Caption]'
-      '      ,[ShortCaption]'
-      '      ,[MinorLifeCycle]'
-      '      ,[MajorLifeCycle]'
-      '      ,[NumOfLevels]'
-      '      ,[ServiceInterval]'
-      '      ,[CoreGroupID]'
-      '  FROM [FES].[dbo].[EquipType]')
+      '      ,[MinorInterval]'
+      '      ,[MajorInterval]'
+      '      ,[EnableRules]'
+      '      ,[RuleMinorLevel]'
+      '      ,[RuleMajorLevel]'
+      '  FROM [dbo].[EquipType]')
     Left = 80
     Top = 416
     object qryEquipmentTypeEquipTypeID: TFDAutoIncField

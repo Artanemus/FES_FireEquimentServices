@@ -22,6 +22,7 @@ object FindInspectOrders: TFindInspectOrders
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1500
     object Label5: TLabel
       Left = 505
       Top = 74
@@ -200,7 +201,8 @@ object FindInspectOrders: TFindInspectOrders
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 796
+    ExplicitTop = 787
+    ExplicitWidth = 1500
     DesignSize = (
       1502
       55)
@@ -238,7 +240,7 @@ object FindInspectOrders: TFindInspectOrders
       Margin = 10
     end
     object btnClose: TButton
-      Left = 1413
+      Left = 1407
       Top = 4
       Width = 75
       Height = 37
@@ -247,6 +249,7 @@ object FindInspectOrders: TFindInspectOrders
       Caption = 'Close'
       ModalResult = 2
       TabOrder = 0
+      ExplicitLeft = 1405
     end
   end
   object DBGrid1: TDBGrid
@@ -279,12 +282,6 @@ object FindInspectOrders: TFindInspectOrders
       item
         Expanded = False
         FieldName = 'Caption'
-        Title.Alignment = taCenter
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ServiceInterval'
         Title.Alignment = taCenter
         Visible = True
       end
@@ -698,7 +695,6 @@ object FindInspectOrders: TFindInspectOrders
   end
   object qryFindInspectOrder: TFDQuery
     ActiveStoredUsage = [auDesignTime]
-    Active = True
     Connection = FES.fesConnection
     SQL.Strings = (
       'USE IDFES'
@@ -729,8 +725,7 @@ object FindInspectOrders: TFindInspectOrders
       
         '       REPLACE(REPLACE([Address], CHAR(10), '#39#39'), CHAR(13), '#39#39') A' +
         'S xAddress,'
-      '       dbo.InspectionOrder.CreatedOn,'
-      '       dbo.InspectionOrder.ServiceInterval'
+      '       dbo.InspectionOrder.CreatedOn'
       'FROM dbo.InspectionOrder'
       '    LEFT JOIN dbo.InspectionStatus'
       
@@ -855,13 +850,6 @@ object FindInspectOrders: TFindInspectOrders
       FieldName = 'CreatedOn'
       Origin = 'CreatedOn'
       DisplayFormat = 'dd/mm/yy HH:NN'
-    end
-    object qryFindInspectOrderServiceInterval: TFloatField
-      Alignment = taCenter
-      DisplayLabel = 'S.I.'
-      DisplayWidth = 3
-      FieldName = 'ServiceInterval'
-      Origin = 'ServiceInterval'
     end
   end
   object dsFindInspectOrder: TDataSource

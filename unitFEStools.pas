@@ -2,7 +2,7 @@ unit unitFEStools;
 
 interface
 uses
-  System.Classes;
+  System.Classes, System.SysUtils;
 
   function GenerateCustomerCode(const CustomerName: string): string;
 

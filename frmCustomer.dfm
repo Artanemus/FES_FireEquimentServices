@@ -3,7 +3,7 @@ object Customer: TCustomer
   Top = 0
   Caption = 'FES Customer'
   ClientHeight = 947
-  ClientWidth = 1285
+  ClientWidth = 891
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,19 +15,20 @@ object Customer: TCustomer
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
-    Top = 0
-    Width = 1285
+    Top = 29
+    Width = 891
     Height = 57
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitTop = 0
     ExplicitWidth = 1283
     object dbtxtCustomerID: TDBText
       Left = 16
-      Top = 16
-      Width = 81
+      Top = 6
+      Width = 65
       Height = 30
       Alignment = taRightJustify
       DataField = 'CustomerID'
@@ -40,8 +41,8 @@ object Customer: TCustomer
       ParentFont = False
     end
     object dbtxtCustName: TDBText
-      Left = 104
-      Top = 16
+      Left = 87
+      Top = 6
       Width = 246
       Height = 30
       AutoSize = True
@@ -55,8 +56,8 @@ object Customer: TCustomer
       ParentFont = False
     end
     object SpeedButton1: TSpeedButton
-      Left = 944
-      Top = 8
+      Left = 581
+      Top = 6
       Width = 93
       Height = 38
       Caption = 'IDENT'
@@ -66,8 +67,8 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton2: TSpeedButton
-      Left = 1048
-      Top = 8
+      Left = 685
+      Top = 6
       Width = 93
       Height = 38
       Caption = 'CODE'
@@ -77,8 +78,8 @@ object Customer: TCustomer
       Margin = 4
     end
     object spdbtnFilter: TSpeedButton
-      Left = 552
-      Top = 8
+      Left = 309
+      Top = 4
       Width = 121
       Height = 38
       Action = actnFilterSelect
@@ -87,8 +88,8 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton4: TSpeedButton
-      Left = 679
-      Top = 8
+      Left = 436
+      Top = 4
       Width = 42
       Height = 38
       ImageIndex = 5
@@ -97,8 +98,8 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton12: TSpeedButton
-      Left = 845
-      Top = 8
+      Left = 482
+      Top = 6
       Width = 93
       Height = 38
       Caption = 'FIND'
@@ -108,8 +109,8 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton3: TSpeedButton
-      Left = 1147
-      Top = 8
+      Left = 784
+      Top = 6
       Width = 93
       Height = 38
       Caption = 'SYNC'
@@ -121,47 +122,53 @@ object Customer: TCustomer
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 57
-    Width = 1285
-    Height = 821
-    ActivePage = TabSheet3
+    Top = 86
+    Width = 891
+    Height = 792
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 1
+    ExplicitTop = 57
+    ExplicitWidth = 1283
+    ExplicitHeight = 818
     object TabSheet1: TTabSheet
       Caption = 'Customer Details'
+      DesignSize = (
+        883
+        756)
       object Label2: TLabel
-        Left = 90
-        Top = 83
+        Left = 3
+        Top = 59
         Width = 113
         Height = 21
         Alignment = taRightJustify
         Caption = 'Customer CODE'
       end
       object Label1: TLabel
-        Left = 24
-        Top = 39
+        Left = 3
+        Top = 3
         Width = 179
         Height = 21
         Alignment = taRightJustify
         Caption = 'Business/Company Name'
       end
       object Label4: TLabel
-        Left = 209
+        Left = 3
         Top = 438
         Width = 212
         Height = 21
         Caption = 'Customer'#39's Business Numbers'
       end
       object Label3: TLabel
-        Left = 60
-        Top = 151
+        Left = 3
+        Top = 138
         Width = 143
         Height = 21
         Alignment = taRightJustify
         Caption = 'Internal Office Notes'
       end
       object spdbtnGenerateCustCode: TSpeedButton
-        Left = 337
+        Left = 131
         Top = 75
         Width = 120
         Height = 38
@@ -171,7 +178,7 @@ object Customer: TCustomer
         Margin = 4
       end
       object DBNavigator2: TDBNavigator
-        Left = 727
+        Left = 521
         Top = 465
         Width = 36
         Height = 270
@@ -180,8 +187,8 @@ object Customer: TCustomer
         TabOrder = 0
       end
       object dbchkboxIsArchived: TDBCheckBox
-        Left = 209
-        Top = 128
+        Left = 3
+        Top = 115
         Width = 104
         Height = 17
         Caption = 'Is Archived'
@@ -190,16 +197,18 @@ object Customer: TCustomer
         TabOrder = 1
       end
       object dbedtCustName: TDBEdit
-        Left = 209
-        Top = 36
-        Width = 960
+        Left = 3
+        Top = 24
+        Width = 872
         Height = 29
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 2
+        ExplicitWidth = 960
       end
       object DBGrid1: TDBGrid
-        Left = 209
+        Left = 3
         Top = 465
         Width = 512
         Height = 270
@@ -212,7 +221,7 @@ object Customer: TCustomer
         TitleFont.Style = []
       end
       object dbedtCustCode: TDBEdit
-        Left = 209
+        Left = 3
         Top = 80
         Width = 122
         Height = 29
@@ -221,17 +230,19 @@ object Customer: TCustomer
         TabOrder = 4
       end
       object DBMemo1: TDBMemo
-        Left = 209
-        Top = 151
-        Width = 960
+        Left = 3
+        Top = 165
+        Width = 872
         Height = 273
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 5
+        ExplicitWidth = 960
       end
       object DBCheckBox1: TDBCheckBox
-        Left = 319
-        Top = 128
+        Left = 113
+        Top = 115
         Width = 104
         Height = 17
         Caption = 'Is In-Active'
@@ -398,8 +409,8 @@ object Customer: TCustomer
         end
       end
       object DBNavigator3: TDBNavigator
-        Left = 887
-        Top = 32
+        Left = 24
+        Top = 160
         Width = 50
         Height = 490
         Kind = dbnVertical
@@ -423,8 +434,8 @@ object Customer: TCustomer
         TitleFont.Style = []
       end
       object DBNavigator4: TDBNavigator
-        Left = 1199
-        Top = 40
+        Left = 815
+        Top = 45
         Width = 50
         Height = 460
         Kind = dbnVertical
@@ -494,6 +505,7 @@ object Customer: TCustomer
         Top = 40
         Width = 537
         Height = 460
+        DataSource = CustomerData.dsCustSite
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -602,7 +614,7 @@ object Customer: TCustomer
   object Panel2: TPanel
     Left = 0
     Top = 878
-    Width = 1285
+    Width = 891
     Height = 69
     Align = alBottom
     BevelEdges = [beTop]
@@ -611,14 +623,40 @@ object Customer: TCustomer
     TabOrder = 2
     ExplicitTop = 875
     ExplicitWidth = 1283
+    DesignSize = (
+      891
+      67)
     object DBNavigator1: TDBNavigator
-      Left = 288
+      Left = 15
       Top = 16
-      Width = 710
+      Width = 850
       Height = 36
       DataSource = CustomerData.dsCustomer
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
+      ExplicitWidth = 810
     end
+  end
+  object ActionMainMenuBar1: TActionMainMenuBar
+    Left = 0
+    Top = 0
+    Width = 891
+    Height = 29
+    ActionManager = actnmanCustomer
+    Caption = 'ActionMainMenuBar1'
+    Color = clMenuBar
+    ColorMap.DisabledFontColor = 7171437
+    ColorMap.HighlightColor = clWhite
+    ColorMap.BtnSelectedFont = clBlack
+    ColorMap.UnusedColor = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    Spacing = 0
+    ExplicitLeft = 8
+    ExplicitWidth = 1285
   end
   object ImageCollection1: TImageCollection
     Images = <
@@ -975,8 +1013,8 @@ object Customer: TCustomer
               6DDE0000000049454E44AE426082}
           end>
       end>
-    Left = 1056
-    Top = 88
+    Left = 144
+    Top = 808
   end
   object VirtualImageList1: TVirtualImageList
     Images = <
@@ -1033,25 +1071,83 @@ object Customer: TCustomer
     ImageCollection = ImageCollection1
     Width = 32
     Height = 32
-    Left = 952
-    Top = 88
+    Left = 40
+    Top = 808
   end
   object actnmanCustomer: TActionManager
     Images = VirtualImageList1
-    Left = 996
-    Top = 177
+    Left = 268
+    Top = 809
     StyleName = 'Platform Default'
+    object actnFilterSelect: TAction
+      Category = 'Tools'
+      Caption = 'Filter'
+      ImageIndex = 2
+      ImageName = 'arrow_drop_down_circle'
+      OnExecute = actnFilterSelectExecute
+    end
+    object actnClearFilter: TAction
+      Category = 'Tools'
+      Caption = 'Clear All Filters'
+      ImageIndex = 5
+      ImageName = 'filter_alt_off'
+    end
     object actnGenerateCustCode: TAction
+      Category = 'Tools'
       Caption = 'Generate Customer Code'
       ImageIndex = 1
       ImageName = 'pin'
       OnExecute = actnGenerateCustCodeExecute
     end
-    object actnFilterSelect: TAction
-      Caption = 'Filter'
-      ImageIndex = 2
-      ImageName = 'arrow_drop_down_circle'
-      OnExecute = actnFilterSelectExecute
+    object actnFind: TAction
+      Category = 'Search'
+      Caption = 'Find Customer'
+      ImageIndex = 6
+      ImageName = 'search'
+    end
+    object actnGotoID: TAction
+      Category = 'Search'
+      Caption = 'Goto Customer ID'
+      ImageIndex = 0
+      ImageName = 'bubble'
+    end
+    object actnGotoCustCode: TAction
+      Category = 'Search'
+      Caption = 'Goto Customer Code'
+      ImageIndex = 0
+      ImageName = 'bubble'
+    end
+    object actnGotoSite: TAction
+      Category = 'Site'
+      Caption = 'Goto Site'
+      ImageIndex = 0
+      ImageName = 'bubble'
+    end
+    object actnGotoSiteContact: TAction
+      Category = 'Site'
+      Caption = 'Goto Contact for Site'
+      ImageIndex = 0
+      ImageName = 'bubble'
+    end
+    object actnEnableLink: TAction
+      Category = 'Site'
+      Caption = 'Enable Link to Site'
+      ImageIndex = 7
+      ImageName = 'link'
+    end
+    object actnDisableLink: TAction
+      Category = 'Site'
+      Caption = 'Disable Link to Site'
+      ImageIndex = 8
+      ImageName = 'link_off'
+    end
+    object actnCreateSurveyOrder: TAction
+      Category = 'Site'
+      Caption = 'Create Survey Order for Site'
+    end
+    object actnLinkCustToSite: TAction
+      Category = 'Site'
+      Caption = 'Create a Link To Site'
     end
   end
 end

@@ -29,7 +29,6 @@ type
     qryCustContactNumContactNum: TWideStringField;
     qryCustContactNumCreatedOn: TSQLTimeStampField;
     qryCustContactNumIsArchived: TBooleanField;
-    qryCustContactNumSortList: TIntegerField;
     qryCustContactNumContactNumTypeID: TIntegerField;
     tblContactNumType: TFDTable;
     dsContactNumType: TDataSource;
@@ -45,7 +44,6 @@ type
     qryCustAddressAddress: TWideStringField;
     qryCustAddressCreatedOn: TSQLTimeStampField;
     qryCustAddressIsArchived: TBooleanField;
-    qryCustAddressSortList: TIntegerField;
     qryCustAddressluAddressType: TStringField;
     qryCustAddressPostCode: TIntegerField;
     qryCustAddressSuburb: TWideStringField;
@@ -59,10 +57,22 @@ type
     qryCustEmailsEmail: TWideStringField;
     qryCustEmailsCreatedOn: TSQLTimeStampField;
     qryCustEmailsIsArchived: TBooleanField;
-    qryCustEmailsSortList: TIntegerField;
     qryCustEmailsEmailTypeID: TIntegerField;
     qryCustEmailsluEmailType: TStringField;
     qryEmailType: TFDQuery;
+    qryCustSite: TFDQuery;
+    dsCustSite: TDataSource;
+    qryCustSiteCustSiteID: TFDAutoIncField;
+    qryCustSiteCustomerID: TIntegerField;
+    qryCustSiteSiteID: TIntegerField;
+    qryCustSiteCreatedOn: TSQLTimeStampField;
+    qryCustSiteIsArchived: TBooleanField;
+    qryCustSiteIsEnabled: TBooleanField;
+    qryCustSiteSiteContactID: TIntegerField;
+    qryCustSiteNote: TMemoField;
+    qryCustSiteSeedDate: TSQLTimeStampField;
+    qryCustSiteSeedLevel: TIntegerField;
+    qryCustSiteDoReseed: TBooleanField;
     procedure qryCustContactNumCreatedOnGetText(Sender: TField; var Text: string;
         DisplayText: Boolean);
     procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:

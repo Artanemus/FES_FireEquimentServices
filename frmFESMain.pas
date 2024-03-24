@@ -13,7 +13,8 @@ uses
   Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.StdActns,
   // SCM datamodules
   dmFES,
-  dmCustomerData, frameFESPlanner
+  dmCustomerData, frameFESPlanner,
+  frmCustomer
   ;
 
 type
@@ -66,6 +67,7 @@ type
     HelpWebSite: TAction;
     Panel1: TPanel;
     TFESPlanner1: TFESPlanner;
+    procedure FormDestroy(Sender: TObject);
     procedure CustBrowseExecute(Sender: TObject);
     procedure CustBrowseUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -79,20 +81,25 @@ type
 
 var
   FESMain: TFESMain;
+  FESCust: TCustomer;
 
 implementation
 
 {$R *.dfm}
 
-uses frmCustomer, dlgInspectOrdersFind;
+uses dlgInspectOrdersFind;
+
+procedure TFESMain.FormDestroy(Sender: TObject);
+begin
+  if Assigned(FESCust) then FreeAndNil(FESCust)
+
+end;
 
 procedure TFESMain.CustBrowseExecute(Sender: TObject);
-var
-dlg: TCustomer;
 begin
-  dlg := TCustomer.Create(Self);
-  dlg.ShowModal;
-  dlg.Free;
+  if not Assigned(FESCust) then
+    FESCust := TCustomer.Create(Self);
+  FESCust.Show;
 end;
 
 procedure TFESMain.CustBrowseUpdate(Sender: TObject);
@@ -105,6 +112,7 @@ end;
 procedure TFESMain.FormCreate(Sender: TObject);
 begin
    Application.ShowHint := true;
+   FESCust := nil;
 end;
 
 procedure TFESMain.InspectFindOrderExecute(Sender: TObject);

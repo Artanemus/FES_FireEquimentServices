@@ -232,7 +232,6 @@ object FESPlanner: TFESPlanner
   end
   object qryInspectionOrders: TFDQuery
     ActiveStoredUsage = [auDesignTime]
-    Active = True
     Connection = FES.fesConnection
     SQL.Strings = (
       'SELECT dbo.InspectionOrder.InspectionOrderID,'
@@ -259,8 +258,7 @@ object FESPlanner: TFESPlanner
       
         '       REPLACE(REPLACE([Address], CHAR(10), '#39#39'), CHAR(13), '#39#39') A' +
         'S xAddress,'
-      '       dbo.InspectionOrder.CreatedOn,'
-      '       dbo.InspectionOrder.ServiceInterval'
+      '       dbo.InspectionOrder.CreatedOn'
       'FROM dbo.InspectionOrder'
       '    LEFT JOIN dbo.InspectionStatus'
       

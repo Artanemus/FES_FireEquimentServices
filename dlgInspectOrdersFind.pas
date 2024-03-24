@@ -57,7 +57,6 @@ type
     qryFindInspectOrderLinkStatus: TStringField;
     qryFindInspectOrderxAddress: TWideStringField;
     qryFindInspectOrderCreatedOn: TSQLTimeStampField;
-    qryFindInspectOrderServiceInterval: TFloatField;
     sbtnGotoCustomer: TSpeedButton;
     sbtnGotoSite: TSpeedButton;
     sbtnGotoInspectOrder: TSpeedButton;
