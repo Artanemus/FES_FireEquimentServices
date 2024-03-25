@@ -73,6 +73,20 @@ type
     qryCustSiteSeedDate: TSQLTimeStampField;
     qryCustSiteSeedLevel: TIntegerField;
     qryCustSiteDoReseed: TBooleanField;
+    qryCustSiteSiteAddrStr: TWideStringField;
+    qryCustContact: TFDQuery;
+    dsCustContact: TDataSource;
+    qryCustContactCustContactID: TFDAutoIncField;
+    qryCustContactCustomerID: TIntegerField;
+    qryCustContactHRID: TIntegerField;
+    qryCustContactCreatedOn: TSQLTimeStampField;
+    qryCustContactFName: TWideStringField;
+    qryCustContactContactTypeStr: TWideStringField;
+    qryCustContactCaption: TWideStringField;
+    qryCustContactIsArchived: TBooleanField;
+    qryCustContactSortList: TIntegerField;
+    qryCustContactContactTypeID: TIntegerField;
+    procedure DataModuleCreate(Sender: TObject);
     procedure qryCustContactNumCreatedOnGetText(Sender: TField; var Text: string;
         DisplayText: Boolean);
     procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
@@ -92,6 +106,30 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TCustomerData.DataModuleCreate(Sender: TObject);
+var
+  i: Integer;
+begin
+  if Assigned(FES) and FES.fesConnection.Connected then
+  begin
+    // Assert all queries are active
+    qryCustomer.Active := true; // parent
+    for i := 0 to Self.ComponentCount - 1 do
+    begin
+      if Self.Components[i] is TFDQuery then
+        if (Self.Components[i].Tag = 1) then  // child
+          TFDQuery(Self.Components[i]).Active := True;
+    end;
+    for i := 0 to Self.ComponentCount - 1 do
+    begin
+      if Self.Components[i] is TFDQuery then
+        if (Self.Components[i].Tag = 2) then  // sub-child
+          TFDQuery(Self.Components[i]).Active := True;
+    end;
+    tblContactNumType.Active := True; // sub-child TFDTable
+  end;
+end;
 
 procedure TCustomerData.qryCustContactNumCreatedOnGetText(Sender: TField; var
     Text: string; DisplayText: Boolean);

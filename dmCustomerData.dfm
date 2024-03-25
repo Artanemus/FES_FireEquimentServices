@@ -1,4 +1,5 @@
 object CustomerData: TCustomerData
+  OnCreate = DataModuleCreate
   Height = 480
   Width = 1430
   object qryCustomer: TFDQuery
@@ -27,6 +28,7 @@ object CustomerData: TCustomerData
       Origin = 'CustomerID'
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
+      DisplayFormat = '00000'
     end
     object qryCustomerCustName: TWideStringField
       FieldName = 'CustName'
@@ -77,6 +79,7 @@ object CustomerData: TCustomerData
     Top = 24
   end
   object qryCustContactNum: TFDQuery
+    Tag = 1
     Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
@@ -97,8 +100,8 @@ object CustomerData: TCustomerData
       '  FROM [dbo].[CustContactNum]'
       ''
       ';')
-    Left = 216
-    Top = 136
+    Left = 48
+    Top = 128
     object qryCustContactNumCustContactNumID: TFDAutoIncField
       FieldName = 'CustContactNumID'
       Origin = 'CustContactNumID'
@@ -149,10 +152,11 @@ object CustomerData: TCustomerData
   end
   object dsCustContactNum: TDataSource
     DataSet = qryCustContactNum
-    Left = 344
-    Top = 136
+    Left = 176
+    Top = 128
   end
   object tblContactNumType: TFDTable
+    Tag = 2
     Active = True
     IndexFieldNames = 'ContactNumTypeID'
     Connection = FES.fesConnection
@@ -162,15 +166,16 @@ object CustomerData: TCustomerData
     UpdateOptions.EnableInsert = False
     UpdateOptions.EnableUpdate = False
     TableName = 'IDFES..ContactNumType'
-    Left = 216
-    Top = 232
+    Left = 48
+    Top = 224
   end
   object dsContactNumType: TDataSource
     DataSet = tblContactNumType
-    Left = 344
-    Top = 232
+    Left = 176
+    Top = 224
   end
   object qryCustAddress: TFDQuery
+    Tag = 1
     Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
@@ -197,8 +202,8 @@ object CustomerData: TCustomerData
         'INNER JOIN [dbo].[PostCode] ON [CustAddress].[PostcodeID] = [Pos' +
         'tCode].[PostcodeID] '
       '; ')
-    Left = 512
-    Top = 144
+    Left = 304
+    Top = 136
     object qryCustAddressCustAddressID: TFDAutoIncField
       FieldName = 'CustAddressID'
       Origin = 'CustAddressID'
@@ -262,15 +267,16 @@ object CustomerData: TCustomerData
   end
   object dsCustAdress: TDataSource
     DataSet = qryCustAddress
-    Left = 632
-    Top = 144
+    Left = 392
+    Top = 136
   end
   object dsAddressType: TDataSource
     DataSet = qryAddressType
-    Left = 632
-    Top = 232
+    Left = 392
+    Top = 224
   end
   object qryAddressType: TFDQuery
+    Tag = 2
     Active = True
     Connection = FES.fesConnection
     SQL.Strings = (
@@ -285,10 +291,11 @@ object CustomerData: TCustomerData
       #9#9',[IsArchived]'
       'FROM [IDFES].[dbo].[AddressType] '
       'WHERE UsedByCust = 1 AND IsArchived = 0; -- AND IsActive = 1;')
-    Left = 512
-    Top = 232
+    Left = 304
+    Top = 224
   end
   object qryCustEmails: TFDQuery
+    Tag = 1
     Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
@@ -305,8 +312,8 @@ object CustomerData: TCustomerData
       #9#9',[IsArchived]'
       #9#9',[EmailTypeID]'
       'FROM [IDFES].[dbo].[CustEmail] ')
-    Left = 816
-    Top = 144
+    Left = 504
+    Top = 136
     object qryCustEmailsCustEmailID: TFDAutoIncField
       FieldName = 'CustEmailID'
       Origin = 'CustEmailID'
@@ -354,15 +361,16 @@ object CustomerData: TCustomerData
   end
   object dsCustEmails: TDataSource
     DataSet = qryCustEmails
-    Left = 928
-    Top = 144
+    Left = 592
+    Top = 136
   end
   object dsEmailType: TDataSource
     DataSet = qryEmailType
-    Left = 928
-    Top = 232
+    Left = 592
+    Top = 224
   end
   object qryEmailType: TFDQuery
+    Tag = 2
     Active = True
     Connection = FES.fesConnection
     SQL.Strings = (
@@ -375,32 +383,42 @@ object CustomerData: TCustomerData
       '      ,[IsArchived]'
       '  FROM [IDFES].[dbo].[EmailType]'
       '  WHERE [IsArchived] = 0 AND [UsedByCust] = 1')
-    Left = 816
-    Top = 232
+    Left = 504
+    Top = 224
   end
   object qryCustSite: TFDQuery
+    Tag = 1
     Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
     Connection = FES.fesConnection
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
     UpdateOptions.UpdateTableName = 'IDFES.dbo.CustSite'
     UpdateOptions.KeyFields = 'CustSiteID'
     SQL.Strings = (
       ' SELECT TOP (1000) [CustSiteID]'
       '      ,[CustomerID]'
-      '      ,[SiteID]'
-      '      ,[CreatedOn]'
-      '      ,[IsArchived]'
-      '      ,[IsEnabled]'
+      '      ,[CustSite].[SiteID]'
+      '      ,[CustSite].[CreatedOn]'
+      '      ,[CustSite].[IsArchived]'
+      '      ,[CustSite].[IsEnabled]'
       '      ,[SiteContactID]'
-      '      ,[Note]'
+      '      ,[CustSite].[Note]'
       '      ,[SeedDate]'
       '      ,[SeedLevel]'
       '      ,[DoReseed]'
-      '  FROM [IDFES].[dbo].[CustSite]')
-    Left = 1096
-    Top = 144
+      '--      ,[Site].Address'
+      
+        '      , [dbo].GetSiteAddrSingleLine(CustSite.SiteID,1) AS SiteAd' +
+        'drStr '
+      '  FROM [IDFES].[dbo].[CustSite]'
+      '  INNER JOIN dbo.Site ON CustSite.SiteID = Site.SiteID')
+    Left = 696
+    Top = 136
     object qryCustSiteCustSiteID: TFDAutoIncField
       FieldName = 'CustSiteID'
       Origin = 'CustSiteID'
@@ -419,6 +437,13 @@ object CustomerData: TCustomerData
       Origin = 'SiteID'
       Required = True
       Visible = False
+    end
+    object qryCustSiteSiteAddrStr: TWideStringField
+      DisplayWidth = 60
+      FieldName = 'SiteAddrStr'
+      Origin = 'SiteAddrStr'
+      ReadOnly = True
+      Size = 100
     end
     object qryCustSiteCreatedOn: TSQLTimeStampField
       FieldName = 'CreatedOn'
@@ -464,7 +489,107 @@ object CustomerData: TCustomerData
   end
   object dsCustSite: TDataSource
     DataSet = qryCustSite
-    Left = 1176
-    Top = 144
+    Left = 776
+    Top = 136
+  end
+  object qryCustContact: TFDQuery
+    Tag = 1
+    Active = True
+    IndexFieldNames = 'CustomerID'
+    MasterSource = dsCustomer
+    MasterFields = 'CustomerID'
+    Connection = FES.fesConnection
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.CustContact'
+    UpdateOptions.KeyFields = 'CustContactID'
+    SQL.Strings = (
+      'SELECT [CustContactID]'
+      '     , [CustContact].[CustomerID]'
+      '     , [CustContact].[HRID]'
+      '     , [CustContact].[CreatedOn]'
+      '     , CONCAT(hr.FirstName, '#39' '#39', UPPER(hr.LastName)) AS FName'
+      '     , ContactType.AliasCust AS ContactTypeStr'
+      '     , [CustContact].[Caption]'
+      '     , [CustContact].[IsArchived]'
+      '     , [CustContact].[SortList]'
+      '     , [CustContact].[ContactTypeID]'
+      'FROM [IDFES].[dbo].[CustContact]'
+      '    INNER JOIN HR'
+      '        ON CustContact.HRID = HR.HRID'
+      '    LEFT JOIN ContactType'
+      '        ON CustContact.ContactTypeID = ContactType.ContactTypeID')
+    Left = 888
+    Top = 136
+    object qryCustContactCustContactID: TFDAutoIncField
+      FieldName = 'CustContactID'
+      Origin = 'CustContactID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+    object qryCustContactCustomerID: TIntegerField
+      FieldName = 'CustomerID'
+      Origin = 'CustomerID'
+      Required = True
+      Visible = False
+    end
+    object qryCustContactHRID: TIntegerField
+      FieldName = 'HRID'
+      Origin = 'HRID'
+      Required = True
+      Visible = False
+    end
+    object qryCustContactCreatedOn: TSQLTimeStampField
+      DisplayLabel = 'Created On'
+      DisplayWidth = 10
+      FieldName = 'CreatedOn'
+      Origin = 'CreatedOn'
+    end
+    object qryCustContactFName: TWideStringField
+      DisplayWidth = 26
+      FieldName = 'FName'
+      Origin = 'FName'
+      ReadOnly = True
+      Required = True
+      Size = 513
+    end
+    object qryCustContactContactTypeStr: TWideStringField
+      DisplayLabel = 'Contact Type'
+      DisplayWidth = 16
+      FieldName = 'ContactTypeStr'
+      Origin = 'ContactTypeStr'
+      Size = 50
+    end
+    object qryCustContactCaption: TWideStringField
+      DisplayLabel = 'Notes'
+      DisplayWidth = 28
+      FieldName = 'Caption'
+      Origin = 'Caption'
+      Size = 128
+    end
+    object qryCustContactIsArchived: TBooleanField
+      DisplayLabel = 'Archived'
+      FieldName = 'IsArchived'
+      Origin = 'IsArchived'
+      Required = True
+    end
+    object qryCustContactSortList: TIntegerField
+      FieldName = 'SortList'
+      Origin = 'SortList'
+      Visible = False
+    end
+    object qryCustContactContactTypeID: TIntegerField
+      FieldName = 'ContactTypeID'
+      Origin = 'ContactTypeID'
+      Visible = False
+    end
+  end
+  object dsCustContact: TDataSource
+    DataSet = qryCustContact
+    Left = 968
+    Top = 136
   end
 end
