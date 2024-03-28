@@ -1,0 +1,15 @@
+SELECT 
+		 [SurveyOrderID]
+		,[SurveyOrder].[CreatedOn]
+		,[RequestedDT]
+		,[SurveyedOn]
+		,[CompletedDT]
+		,[SurveyOrder].[IsArchived]
+		,[SurveyStatusID]
+		,[HRID]
+		,[CustSiteID]
+		,[CustomerID]
+		,[SurveyOrder].[SiteID]
+        ,[Site].[Address]
+FROM [IDFES].[dbo].[SurveyOrder] 
+INNER JOIN [dbo].[Site] ON [SurveyOrder].SiteID =  Site.SiteID

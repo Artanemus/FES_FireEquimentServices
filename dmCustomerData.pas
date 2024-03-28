@@ -86,12 +86,52 @@ type
     qryCustContactIsArchived: TBooleanField;
     qryCustContactSortList: TIntegerField;
     qryCustContactContactTypeID: TIntegerField;
+    qryCustAddressAddrTypeStr: TWideStringField;
+    qryCustAddressPCSuburbStr: TWideStringField;
+    qryCustInspect: TFDQuery;
+    dsCustInspect: TDataSource;
+    qryCustInspectInspectionOrderID: TFDAutoIncField;
+    qryCustInspectCreatedOn: TSQLTimeStampField;
+    qryCustInspectRequestedDT: TSQLTimeStampField;
+    qryCustInspectInspectedOn: TSQLTimeStampField;
+    qryCustInspectCompletedDT: TSQLTimeStampField;
+    qryCustInspectServiceInterval: TFloatField;
+    qryCustInspectLevelNum: TIntegerField;
+    qryCustInspectNote: TWideStringField;
+    qryCustInspectNotePortable: TWideStringField;
+    qryCustInspectNoteElectrical: TWideStringField;
+    qryCustInspectNoteWaterBase: TWideStringField;
+    qryCustInspectNoteStructual: TWideStringField;
+    qryCustInspectInspectionStatusID: TIntegerField;
+    qryCustInspectHRID: TIntegerField;
+    qryCustInspectCustSiteID: TIntegerField;
+    qryCustInspectCustomerID: TIntegerField;
+    qryCustInspectSiteID: TIntegerField;
+    qryCustInspectAddress: TWideStringField;
+    qryCustInspectInspectStatusStr: TWideStringField;
+    qryCustSurvey: TFDQuery;
+    dsCustSurvey: TDataSource;
+    qryCustSurveySurveyOrderID: TFDAutoIncField;
+    qryCustSurveyCreatedOn: TSQLTimeStampField;
+    qryCustSurveyRequestedDT: TSQLTimeStampField;
+    qryCustSurveySurveyedOn: TSQLTimeStampField;
+    qryCustSurveyCompletedDT: TSQLTimeStampField;
+    qryCustSurveyIsArchived: TBooleanField;
+    qryCustSurveySurveyStatusID: TIntegerField;
+    qryCustSurveyHRID: TIntegerField;
+    qryCustSurveyCustSiteID: TIntegerField;
+    qryCustSurveyCustomerID: TIntegerField;
+    qryCustSurveySiteID: TIntegerField;
+    qryCustSurveyAddress: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure qryCustContactNumCreatedOnGetText(Sender: TField; var Text: string;
         DisplayText: Boolean);
     procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
         Boolean);
     procedure qryCustomerNoteSetText(Sender: TField; const Text: string);
+    procedure qryCustSiteNoteGetText(Sender: TField; var Text: string; DisplayText:
+        Boolean);
+    procedure qryCustSiteNoteSetText(Sender: TField; const Text: string);
   private
     { Private declarations }
   public
@@ -149,6 +189,18 @@ begin
 end;
 
 procedure TCustomerData.qryCustomerNoteSetText(Sender: TField; const Text:
+    string);
+begin
+  Sender.AsString := Text;
+end;
+
+procedure TCustomerData.qryCustSiteNoteGetText(Sender: TField; var Text:
+    string; DisplayText: Boolean);
+begin
+  Text := Sender.AsString;
+end;
+
+procedure TCustomerData.qryCustSiteNoteSetText(Sender: TField; const Text:
     string);
 begin
   Sender.AsString := Text;
