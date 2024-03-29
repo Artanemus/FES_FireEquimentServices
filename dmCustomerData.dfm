@@ -176,141 +176,38 @@ object CustomerData: TCustomerData
   end
   object qryCustAddress: TFDQuery
     Tag = 1
+    Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
     Connection = FES.fesConnection
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
     UpdateOptions.UpdateTableName = 'IDFES..CustAddress'
     SQL.Strings = (
       '-- USE IDFES;'
       ''
       'SELECT '
-      #9#9' [CustAddressID]'
-      #9#9',[CustomerID]'
-      #9#9',[CustAddress].[AddressTypeID]'
-      #9#9',[CustAddress].[PostcodeID]'
-      #9#9',[Address]'
-      #9#9',[CreatedOn]'
-      #9#9',[CustAddress].[IsArchived]'
-      '    ,PostCode'
-      '    ,Suburb'
-      '    ,State'
-      '    ,Zone'
+      '    [CustAddressID]'
+      '    ,[CustomerID]'
+      '    ,[CustAddress].[IsArchived]'
       '    ,[AddressType].AliasCust AS AddrTypeStr'
-      
-        '    , CONCAT(PostCode, '#39' '#39', Suburb, '#39' '#39',State, '#39' - ('#39',Zone,'#39')'#39') ' +
-        'AS PCSuburbStr'
+      '    ,[PostCode].[Zone] '
+      '    ,dbo.GetCustAddrMultiLine([CustomerID]) AS AddressStr'
       'FROM [dbo].[CustAddress]'
+      'INNER JOIN [dbo].[PostCode] '
+      '      ON [CustAddress].[PostcodeID] = [PostCode].[PostcodeID] '
+      'INNER JOIN [dbo].[AddressType] '
       
-        'INNER JOIN [dbo].[PostCode] ON [CustAddress].[PostcodeID] = [Pos' +
-        'tCode].[PostcodeID] '
-      
-        'INNER JOIN [dbo].[AddressType] ON [CustAddress].[AddressTypeID] ' +
-        '= [AddressType].[AddressTypeID] '
+        '      ON [CustAddress].[AddressTypeID] = [AddressType].[AddressT' +
+        'ypeID] '
       '; ')
     Left = 304
     Top = 136
-    object qryCustAddressCustAddressID: TFDAutoIncField
-      FieldName = 'CustAddressID'
-      Origin = 'CustAddressID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object qryCustAddressCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-    end
-    object qryCustAddressAddressTypeID: TIntegerField
-      FieldName = 'AddressTypeID'
-      Origin = 'AddressTypeID'
-    end
-    object qryCustAddressPostcodeID: TIntegerField
-      FieldName = 'PostcodeID'
-      Origin = 'PostcodeID'
-    end
-    object qryCustAddressAddress: TWideStringField
-      FieldName = 'Address'
-      Origin = 'Address'
-      Size = 200
-    end
-    object qryCustAddressCreatedOn: TSQLTimeStampField
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustAddressIsArchived: TBooleanField
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustAddressluAddressType: TStringField
-      FieldKind = fkLookup
-      FieldName = 'luAddressType'
-      LookupDataSet = qryAddressType
-      LookupKeyFields = 'AddressTypeID'
-      LookupResultField = 'AliasCust'
-      KeyFields = 'AddressTypeID'
-      Lookup = True
-    end
-    object qryCustAddressPostCode: TIntegerField
-      FieldName = 'PostCode'
-      Origin = 'PostCode'
-    end
-    object qryCustAddressSuburb: TWideStringField
-      FieldName = 'Suburb'
-      Origin = 'Suburb'
-      Size = 50
-    end
-    object qryCustAddressState: TWideStringField
-      FieldName = 'State'
-      Origin = 'State'
-      Size = 50
-    end
-    object qryCustAddressZone: TWideStringField
-      FieldName = 'Zone'
-      Origin = 'Zone'
-      Size = 50
-    end
-    object qryCustAddressAddrTypeStr: TWideStringField
-      FieldName = 'AddrTypeStr'
-      Origin = 'AddrTypeStr'
-      Size = 50
-    end
-    object qryCustAddressPCSuburbStr: TWideStringField
-      FieldName = 'PCSuburbStr'
-      Origin = 'PCSuburbStr'
-      ReadOnly = True
-      Required = True
-      Size = 169
-    end
   end
   object dsCustAdress: TDataSource
     DataSet = qryCustAddress
     Left = 392
     Top = 136
-  end
-  object dsAddressType: TDataSource
-    DataSet = qryAddressType
-    Left = 392
-    Top = 224
-  end
-  object qryAddressType: TFDQuery
-    Tag = 2
-    Active = True
-    Connection = FES.fesConnection
-    SQL.Strings = (
-      '-- USE IDFES;'
-      'SELECT '
-      #9#9' [AddressTypeID]'
-      #9#9',[Caption]'
-      #9#9',[UsedByHR]'
-      #9#9',[AliasHR]'
-      #9#9',[UsedByCust]'
-      #9#9',[AliasCust]'
-      #9#9',[IsArchived]'
-      'FROM [IDFES].[dbo].[AddressType] '
-      'WHERE UsedByCust = 1 AND IsArchived = 0; -- AND IsActive = 1;')
-    Left = 304
-    Top = 224
   end
   object qryCustEmails: TFDQuery
     Tag = 1

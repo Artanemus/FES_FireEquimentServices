@@ -111,8 +111,9 @@ end;
 
 procedure TFESMain.FormCreate(Sender: TObject);
 begin
-   Application.ShowHint := true;
-   FESCust := nil;
+  // enable hints
+  Application.ShowHint := true;
+  FESCust := nil;
 end;
 
 procedure TFESMain.InspectFindOrderExecute(Sender: TObject);

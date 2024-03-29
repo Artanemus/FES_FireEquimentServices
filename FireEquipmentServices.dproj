@@ -201,6 +201,11 @@
         <DCCReference Include="unitFESDefines.pas"/>
         <DCCReference Include="unitFESutility.pas"/>
         <DCCReference Include="unitFESHelpers.pas"/>
+        <DCCReference Include="frameFESCustAddress.pas">
+            <Form>FESCustAddress</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -3,7 +3,7 @@ object Customer: TCustomer
   Top = 0
   Caption = 'FES Customer'
   ClientHeight = 889
-  ClientWidth = 903
+  ClientWidth = 815
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,15 +16,17 @@ object Customer: TCustomer
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 903
+    Width = 815
     Height = 86
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 29
     ExplicitWidth = 901
+    DesignSize = (
+      815
+      84)
     object dbtxtCustomerID: TDBText
       Left = 16
       Top = 6
@@ -111,32 +113,32 @@ object Customer: TCustomer
       Margin = 4
     end
     object SpeedButton3: TSpeedButton
-      Left = 482
+      Left = 710
       Top = 42
       Width = 93
       Height = 38
+      Anchors = [akTop, akRight]
       Caption = 'SYNC'
       ImageIndex = 9
       ImageName = 'Sync'
       Images = VirtualImageList1
       Margin = 4
+      ExplicitLeft = 800
     end
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 86
-    Width = 903
+    Width = 815
     Height = 734
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 115
-    ExplicitWidth = 901
-    ExplicitHeight = 759
+    ExplicitWidth = 903
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
-        895
+        807
         698)
       object Label2: TLabel
         Left = 3
@@ -166,6 +168,7 @@ object Customer: TCustomer
         Top = 75
         Width = 120
         Height = 38
+        Hint = 'Auto-Generate a customer code using  '
         Caption = 'Generate'
         ImageIndex = 1
         ImageName = 'pin'
@@ -186,12 +189,13 @@ object Customer: TCustomer
       object dbedtCustName: TDBEdit
         Left = 3
         Top = 24
-        Width = 880
+        Width = 788
         Height = 29
         Anchors = [akLeft, akTop, akRight]
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 1
+        ExplicitWidth = 876
       end
       object dbedtCustCode: TDBEdit
         Left = 3
@@ -205,12 +209,13 @@ object Customer: TCustomer
       object DBMemo1: TDBMemo
         Left = 3
         Top = 165
-        Width = 880
+        Width = 788
         Height = 273
         Anchors = [akLeft, akTop, akRight]
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 3
+        ExplicitWidth = 876
       end
       object DBCheckBox1: TDBCheckBox
         Left = 113
@@ -229,7 +234,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -248,106 +253,43 @@ object Customer: TCustomer
     object TabSheet2: TTabSheet
       Caption = 'Business Address'
       ImageIndex = 1
-      object cntrlistBusinessAddress: TControlList
+      inline FESCustAddress1: TFESCustAddress
         AlignWithMargins = True
         Left = 10
-        Top = 1
-        Width = 875
-        Height = 687
+        Top = 10
+        Width = 787
+        Height = 678
         Margins.Left = 10
-        Margins.Top = 1
+        Margins.Top = 10
         Margins.Right = 10
         Margins.Bottom = 10
         Align = alClient
-        ItemHeight = 100
-        ItemMargins.Left = 0
-        ItemMargins.Top = 0
-        ItemMargins.Right = 0
-        ItemMargins.Bottom = 0
-        ItemSelectionOptions.SelectedColorAlpha = 240
-        ItemSelectionOptions.FocusedColorAlpha = 255
-        ItemSelectionOptions.SelectedFontColor = clHighlightText
-        ItemSelectionOptions.FocusedFontColor = clHighlightText
-        ItemSelectionOptions.UseFontColorForLabels = True
-        ParentColor = False
-        PopupMenu = pumenuAddress
         TabOrder = 0
-        ExplicitHeight = 715
-        object lblBusinessAddress: TLabel
-          Left = 8
-          Top = 29
-          Width = 561
-          Height = 68
-          AutoSize = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-        end
-        object ControlListButton1: TControlListButton
-          Left = 824
-          Top = 9
-          Width = 34
-          Height = 34
-          Action = actnpuEdit
-          Anchors = [akTop, akRight]
-          Images = VirtualImageList1
-          Margin = 0
-          LinkHotColor = clHighlight
-        end
-        object VirtualImage1: TVirtualImage
-          Left = 784
-          Top = 9
-          Width = 34
-          Height = 34
-          Hint = 'Is InActive'
-          Anchors = [akTop, akRight]
-          ImageCollection = ImageCollection1
-          ImageWidth = 0
-          ImageHeight = 0
-          ImageIndex = 4
-          ImageName = 'filter_alt'
-        end
-        object VirtualImage2: TVirtualImage
-          Left = 744
-          Top = 9
-          Width = 34
-          Height = 34
-          Hint = 'Is Archived'
-          Anchors = [akTop, akRight]
-          ImageCollection = ImageCollection1
-          ImageWidth = 0
-          ImageHeight = 0
-          ImageIndex = 5
-          ImageName = 'filter_alt_off'
-        end
-        object lblPostcodeSuburb: TLabel
-          Left = 496
-          Top = 72
-          Width = 361
-          Height = 21
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          AutoSize = False
-          Caption = 'lblPostcodeSuburb'
-          WordWrap = True
-        end
-        object lblAddressType: TLabel
-          Left = 8
-          Top = 2
-          Width = 116
-          Height = 21
-          Caption = 'lblAddressType'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentFont = False
+        ExplicitLeft = 80
+        ExplicitTop = 88
+        inherited ctrllistCustBusNum: TControlList
+          Width = 787
+          Height = 678
+          ExplicitWidth = 625
+          inherited ctrllistbtnEdit: TControlListButton
+            Left = 744
+            ExplicitLeft = 771
+          end
+          inherited ctrllistbtnPin: TControlListButton
+            Left = 706
+            ExplicitLeft = 733
+          end
+          inherited lblAddress: TLabel
+            Width = 526
+            ExplicitWidth = 553
+          end
+          inherited lblZone: TLabel
+            Left = 528
+            Width = 248
+            AutoSize = False
+            ExplicitLeft = 528
+            ExplicitWidth = 248
+          end
         end
       end
     end
@@ -358,7 +300,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -381,7 +323,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -404,7 +346,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -428,7 +370,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -451,7 +393,7 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 875
+        Width = 787
         Height = 678
         Margins.Left = 10
         Margins.Top = 10
@@ -471,26 +413,29 @@ object Customer: TCustomer
   object Panel2: TPanel
     Left = 0
     Top = 820
-    Width = 903
+    Width = 815
     Height = 69
     Align = alBottom
     BevelEdges = [beTop]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 874
+    ExplicitTop = 817
     ExplicitWidth = 901
-    DesignSize = (
-      903
-      67)
     object DBNavigator1: TDBNavigator
-      Left = 15
-      Top = 16
-      Width = 840
-      Height = 36
+      AlignWithMargins = True
+      Left = 10
+      Top = 10
+      Width = 795
+      Height = 47
+      Margins.Left = 10
+      Margins.Top = 10
+      Margins.Right = 10
+      Margins.Bottom = 10
       DataSource = CustomerData.dsCustomer
-      Anchors = [akLeft, akTop, akRight]
+      Align = alClient
       TabOrder = 0
+      ExplicitWidth = 881
     end
   end
   object ImageCollection1: TImageCollection
@@ -995,6 +940,36 @@ object Customer: TCustomer
               3C883F640482A872A27B644620EC11F80FD4919C3180B038370000000049454E
               44AE426082}
           end>
+      end
+      item
+        Name = 'archive'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE90000027F494441546843ED99314CD64014C7
+              7F1F8B0B83244C8A0C98386B22BB46160D0913848940A2893A31100C0BCA8626
+              0E2EE080D1C409080309919848747780D94417948904071727E84BDA2FA5DEF5
+              AED7F6DAC6DEF27D69EFBDF7FFDDBBBB5E5F3B34BC751AAE9F16A0EA0C66CD40
+              3F7019E82B49F809F00B38B6F59F05E02D306DEB3867BF77C08C8D0F5B800FC0
+              5D1B8705F6D905EE99FCD9003C04564D8E4ABAFF08789DE6DB04700BF85C9238
+              5BB7B7812FBACE6900578103A037612C8B6CCD36BAA2DF2974B7EFE8BFFC4A7B
+              106E1271B33FC075E0BB2AA60EE002B0038C288C645ECAFC2CA3C93A93F5966C
+              9F8051E06FF2860EE03930AF7024D7BE96A13CE6731878A18821D79ED8005C04
+              643FAE6393E7CFEFB830550664BEEDD7513D70235C975D792A803AEC3CBAF1FB
+              6747FA6F0096822179E6795A49BCA78998CE1968011CB2577906924710497F96
+              563940743C88449BCE5D49B816203E222E8BB87119180B9E94DB31EA34807160
+              D3B020BC4E21797A7F0C012642613A800D4000A45F1A8437809BC01630180A17
+              51224E0510898F063F0DC21B802A9040C828C79BEADA3A30A9994ADE0024BE2A
+              9869CF7F0F4CA574F20A9015E20D70BF4E8B38D2629309A9703C36A54793552F
+              87B9348857C11BD5AC85785D46BD00E882BF04E62CC5570E9014B01C54141632
+              88AF054024A20758CC28BE36000EBABB26DEB7D13C6255B62D407C545C8ED379
+              33527806F20A72B177AA4A0CE92AC12E0A0AB6918AF98FB84FD57BAA54A6A5D3
+              A58283E7757704C8E09EAB50EB5EB4ABFC2AA303557EAD49AB14DC0156806B79
+              872EA7FDB7F0F0B7A7F2632A75C8741A00AEE414E16A7E181CBB7FAA3E6C440E
+              4D00AE81BDD9B500DE865A13A8F1193803B5B9AE31BA8CC7DE0000000049454E
+              44AE426082}
+          end>
       end>
     Left = 168
     Top = 816
@@ -1090,7 +1065,7 @@ object Customer: TCustomer
     object actnpuInsert: TAction
       Category = 'PopupMenu'
       Caption = 'Insert'
-      ShortCut = 16429
+      ShortCut = 8237
     end
     object actnpuDelete: TAction
       Category = 'PopupMenu'
@@ -1178,8 +1153,8 @@ object Customer: TCustomer
   end
   object pumenuContacts: TPopupMenu
     Images = VirtualImageList1
-    Left = 724
-    Top = 707
+    Left = 636
+    Top = 435
     object Insert1: TMenuItem
       Action = actnpuInsert
     end
@@ -1207,68 +1182,6 @@ object Customer: TCustomer
     end
     object Find2: TMenuItem
       Action = actnpuFindContact
-    end
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 340
-    Top = 437
-    object LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      GridControl = cntrlistBusinessAddress
-      Columns = <>
-    end
-    object LinkPropertyToFieldCaption: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'Address'
-      Component = lblBusinessAddress
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption2: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'AddrTypeStr'
-      Component = lblAddressType
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption3: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'PCSuburbStr'
-      Component = lblPostcodeSuburb
-      ComponentProperty = 'Caption'
-    end
-  end
-  object BindSourceDB2: TBindSourceDB
-    DataSet = CustomerData.qryCustAddress
-    ScopeMappings = <>
-    Left = 464
-    Top = 440
-  end
-  object pumenuAddress: TPopupMenu
-    Images = VirtualImageList1
-    Left = 724
-    Top = 643
-    object MenuItem1: TMenuItem
-      Action = actnpuInsert
-    end
-    object MenuItem2: TMenuItem
-      Action = actnpuDelete
-    end
-    object MenuItem3: TMenuItem
-      Action = actnpuEdit
-    end
-    object MenuItem6: TMenuItem
-      Action = actpuRefresh
-    end
-    object MenuItem7: TMenuItem
-      Caption = '-'
-    end
-    object actnFilterAddress: TMenuItem
-      Caption = 'Filter...'
     end
   end
 end

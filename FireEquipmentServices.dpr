@@ -29,7 +29,8 @@ uses
   dlgCustFilter in 'dlgCustFilter.pas' {CustFilter},
   unitFESDefines in 'unitFESDefines.pas',
   unitFESutility in 'unitFESutility.pas',
-  unitFESHelpers in 'unitFESHelpers.pas';
+  unitFESHelpers in 'unitFESHelpers.pas',
+  frameFESCustAddress in 'frameFESCustAddress.pas' {FESCustAddress: TFrame};
 
 {$R *.res}
 

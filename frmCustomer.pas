@@ -17,7 +17,8 @@ uses
   Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.ControlList,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
-  Data.Bind.Grid, Data.Bind.DBScope, Vcl.VirtualImage;
+  Data.Bind.Grid, Data.Bind.DBScope, Vcl.VirtualImage,
+  frameFESCustAddress;
 
 type
   TCustomer = class(TForm)
@@ -83,28 +84,9 @@ type
     actnpuPostcode: TAction;
     actnSuburb: TAction;
     actnpuClearPostcodeSuburb: TAction;
-    cntrlistBusinessAddress: TControlList;
-    lblBusinessAddress: TLabel;
-    ControlListButton1: TControlListButton;
-    BindingsList1: TBindingsList;
-    BindSourceDB2: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource;
-    LinkPropertyToFieldCaption: TLinkPropertyToField;
-    VirtualImage1: TVirtualImage;
-    VirtualImage2: TVirtualImage;
-    lblPostcodeSuburb: TLabel;
-    lblAddressType: TLabel;
-    LinkPropertyToFieldCaption2: TLinkPropertyToField;
-    LinkPropertyToFieldCaption3: TLinkPropertyToField;
-    pumenuAddress: TPopupMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
-    actnFilterAddress: TMenuItem;
     actnpuGotoInspectOrder: TAction;
     DBGrid6: TDBGrid;
+    FESCustAddress1: TFESCustAddress;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnFilterSelectExecute(Sender: TObject);
@@ -219,14 +201,16 @@ end;
 
 procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
 var
-s: string;
+  s: string;
 begin
-  if Assigned(CustomerData) and CustomerData.dsCustomer.DataSet.Active then
+  if assigned(CustomerData) and CustomerData.dsCustomer.DataSet.Active then
   begin
-    s := GenerateCustomerCode(CustomerData.dsCustomer.DataSet.FieldByName('CustName').AsString);
+    s := GenerateReadableCustomerCode
+      (CustomerData.dsCustomer.DataSet.FieldByName('CustName').AsString);
     if CustomerData.dsCustomer.DataSet.State = dsBrowse then
-      CustomerData.dsCustomer.DataSet.Edit;
-    CustomerData.dsCustomer.DataSet.FieldByName('CustCode').AsString := s;
+        CustomerData.dsCustomer.DataSet.Edit;
+    if CustomerData.dsCustomer.DataSet.State = dsEdit then
+        CustomerData.dsCustomer.DataSet.FieldByName('CustCode').AsString := s;
   end;
 end;
 
