@@ -18,7 +18,7 @@ uses
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
   Data.Bind.Grid, Data.Bind.DBScope, Vcl.VirtualImage,
-  frameFESCustAddress;
+  frameFESCustAddress, Vcl.TitleBarCtrls, Vcl.WinXPanels;
 
 type
   TCustomer = class(TForm)
@@ -37,8 +37,6 @@ type
     dbtxtCustName: TDBText;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     dbchkboxIsArchived: TDBCheckBox;
     Label1: TLabel;
     dbedtCustName: TDBEdit;
@@ -48,14 +46,10 @@ type
     Label3: TLabel;
     DBMemo1: TDBMemo;
     DBGrid1: TDBGrid;
-    spdbtnFilter: TSpeedButton;
-    SpeedButton4: TSpeedButton;
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     DBGrid4: TDBGrid;
     DBGrid5: TDBGrid;
-    SpeedButton12: TSpeedButton;
-    SpeedButton3: TSpeedButton;
     DBCheckBox1: TDBCheckBox;
     TabSheet8: TTabSheet;
     actnmanCustomer: TActionManager;
@@ -87,11 +81,18 @@ type
     actnpuGotoInspectOrder: TAction;
     DBGrid6: TDBGrid;
     FESCustAddress1: TFESCustAddress;
+    TitleBarPanel1: TTitleBarPanel;
+    vimgSetFilters: TVirtualImage;
+    vimgToggleFilters: TVirtualImage;
+    vimgFindCustomer: TVirtualImage;
+    vimgGotoID: TVirtualImage;
+    VirtualImage5: TVirtualImage;
+    vimgGotoCode: TVirtualImage;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure actnFilterSelectExecute(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
     procedure DBCmbBoxAddressTypeChange(Sender: TObject);
+    procedure vimgSetFiltersClick(Sender: TObject);
   private
     { Private declarations }
     fFilterDlg: TCustFilter;
@@ -119,13 +120,17 @@ uses unitFEStools;
 
 procedure TCustomer.FormDestroy(Sender: TObject);
 begin
-//  WritePreferences;
+  //  WritePreferences;
   if assigned(fFilterDlg) then fFilterDlg.Free;
 end;
 
 procedure TCustomer.FilterDlgDeactivated(var Msg: TMessage);
 begin
-  if assigned(fFilterDlg) then FreeAndNil(fFilterDlg);
+  if assigned(fFilterDlg) then
+  begin
+      fFilterDlg.Hide;
+      FreeAndNil(fFilterDlg);
+  end;
 end;
 
 procedure TCustomer.FilterDlgUpdated(var Msg: TMessage);
@@ -159,6 +164,10 @@ end;
 procedure TCustomer.FormCreate(Sender: TObject);
 begin
   fFilterDlg := nil;
+  CustomTitleBar.Enabled := true;
+  CustomTitleBar.Height := 40;
+
+
   {
   // assign the list items for field AddressTypeID in TDBCtrlGrid
   DBCmbBoxAddressType.Clear;
@@ -175,28 +184,6 @@ begin
     end;
   end;
   }
-end;
-
-procedure TCustomer.actnFilterSelectExecute(Sender: TObject);
-var
-  aRect: TRect;
-begin
-  // double tap on btnFilter
-
-  if assigned(fFilterDlg) then
-  begin
-    FreeAndNil(fFilterDlg);
-    exit;
-  end;
-
-//  WritePreferences;
-
-  fFilterDlg := TCustFilter.Create(Self);
-  fFilterDlg.Position := poDesigned;
-  aRect := spdbtnFilter.ClientToScreen(spdbtnFilter.ClientRect);
-  fFilterDlg.Left := aRect.Left;
-  fFilterDlg.Top := aRect.Bottom + 1;
-  fFilterDlg.Show;
 end;
 
 procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
@@ -237,6 +224,21 @@ begin
 //
 //    end;
 //  end;
+end;
+
+procedure TCustomer.vimgSetFiltersClick(Sender: TObject);
+var
+  aRect: TRect;
+begin
+  if not assigned(fFilterDlg) then
+  begin
+    fFilterDlg := TCustFilter.Create(Self);
+    fFilterDlg.Position := poDesigned;
+    aRect := vimgSetFilters.ClientToScreen(vimgSetFilters.ClientRect);
+    fFilterDlg.Left := aRect.Left;
+    fFilterDlg.Top := aRect.Bottom + 1;
+    fFilterDlg.Show;
+  end;
 end;
 
 

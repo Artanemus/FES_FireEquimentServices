@@ -1,6 +1,7 @@
 object FESMain: TFESMain
   Left = 0
   Top = 0
+  Hint = 'A form hint'
   Caption = 'FES  v0.0.0.0'
   ClientHeight = 908
   ClientWidth = 1295
@@ -18,25 +19,27 @@ object FESMain: TFESMain
     Left = 0
     Top = 31
     Width = 1295
-    Height = 66
+    Height = 42
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1293
     object vimageLogo: TVirtualImage
       Left = 14
       Top = 6
-      Width = 50
-      Height = 50
+      Width = 32
+      Height = 32
+      Hint = 'Generic Logo used by FES'
       ImageCollection = imgcollectMain
       ImageWidth = 0
       ImageHeight = 0
       ImageIndex = 0
       ImageName = 'FES_512x512'
+      ParentShowHint = False
+      ShowHint = True
     end
     object lblCompanyName: TLabel
-      Left = 70
-      Top = 20
+      Left = 52
+      Top = 12
       Width = 113
       Height = 21
       Caption = 'Company Name'
@@ -76,17 +79,19 @@ object FESMain: TFESMain
   end
   object Panel1: TPanel
     Left = 0
-    Top = 97
+    Top = 73
     Width = 1295
-    Height = 792
+    Height = 816
     Align = alClient
     Caption = 'frameFESPlanner'
     TabOrder = 3
+    ExplicitTop = 97
+    ExplicitHeight = 792
     inline TFESPlanner1: TFESPlanner
       Left = 1
       Top = 1
       Width = 1293
-      Height = 790
+      Height = 814
       Align = alClient
       TabOrder = 0
       ExplicitLeft = 1
@@ -95,7 +100,8 @@ object FESMain: TFESMain
       ExplicitHeight = 790
       inherited DBPlanner1: TDBPlanner
         Width = 1293
-        Height = 790
+        Height = 814
+        Hint = 'TDBPlanner Hint string'
         ExplicitWidth = 1291
         ExplicitHeight = 787
         TMSStyle = 0
@@ -4284,6 +4290,7 @@ object FESMain: TFESMain
     object CustBrowse: TAction
       Category = 'Customer'
       Caption = 'Browse for Customer'
+      Hint = 'View Customers | View, edit, create, delete and find customers. '
       ImageIndex = 0
       ImageName = 'open_in_browser'
       OnExecute = CustBrowseExecute

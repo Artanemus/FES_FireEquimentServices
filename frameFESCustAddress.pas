@@ -9,7 +9,7 @@ uses
   Vcl.ImgList, Vcl.VirtualImageList, dmCustomerData, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Grid, Data.Bind.DBScope,
-  Vcl.StdCtrls, Data.DB;
+  Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Vcl.WinXPanels;
 
 type
   TFESCustAddress = class(TFrame)
@@ -35,6 +35,7 @@ type
     LinkPropertyToFieldCaption: TLinkPropertyToField;
     LinkPropertyToFieldCaption2: TLinkPropertyToField;
     LinkPropertyToFieldCaption3: TLinkPropertyToField;
+    StackPanel1: TStackPanel;
     procedure ctrllistbtnEditClick(Sender: TObject);
     procedure ctrllistbtnPinClick(Sender: TObject);
     procedure ctrllistCustBusNumBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;

@@ -8,7 +8,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection,
   Vcl.StdCtrls, Vcl.ButtonGroup, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, unitFESDefines;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, unitFESDefines,
+  Vcl.VirtualImage, Vcl.ComCtrls;
   //, SCMUtility, SCMDefines;
 
 type
@@ -16,7 +17,9 @@ type
   TFilterState = record
     HideArchived: Boolean;
     HideInactive: Boolean;
-    HideNonSwimmer: Boolean;
+    HideLinked:Boolean;
+    StartDT:TDateTime;
+    EndDT:TDateTime;
   end;
 
   TCustFilter = class(TForm)
@@ -31,15 +34,13 @@ type
     actnClear: TAction;
     actnFilterFrom: TAction;
     actnFilterTo: TAction;
+    dtpStart: TDateTimePicker;
+    dtpEnd: TDateTimePicker;
     procedure actnClearExecute(Sender: TObject);
     procedure actnClearUpdate(Sender: TObject);
     procedure actnCloseExecute(Sender: TObject);
-    procedure actnHideArchivedExecute(Sender: TObject);
-    procedure actnHideArchivedUpdate(Sender: TObject);
-    procedure actnHideInActiveExecute(Sender: TObject);
-    procedure actnHideInActiveUpdate(Sender: TObject);
-    procedure actnHideLinkedExecute(Sender: TObject);
-    procedure actnHideLinkedUpdate(Sender: TObject);
+    procedure actnGenericExecute(Sender: TObject);
+    procedure actnGenericUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -67,7 +68,7 @@ implementation
 
 {$R *.dfm}
 
-Uses IniFiles, unitFESutility;
+Uses IniFiles, unitFESutility, system.DateUtils;
 
 procedure TCustFilter.actnClearExecute(Sender: TObject);
 begin
@@ -91,40 +92,14 @@ begin
   ModalResult := mrOK;
 end;
 
-procedure TCustFilter.actnHideArchivedExecute(Sender: TObject);
+procedure TCustFilter.actnGenericExecute(Sender: TObject);
 begin
   TAction(Sender).Checked := not TAction(Sender).Checked;
   SetIconDisplayState;
   SendFilterDataPacket;
 end;
 
-procedure TCustFilter.actnHideArchivedUpdate(Sender: TObject);
-begin
-  if TAction(Sender).Checked then TAction(Sender).ImageName := 'Checked'
-  else TAction(Sender).ImageName := 'UnChecked';
-end;
-
-procedure TCustFilter.actnHideInActiveExecute(Sender: TObject);
-begin
-  TAction(Sender).Checked := not TAction(Sender).Checked;
-  SetIconDisplayState;
-  SendFilterDataPacket;
-end;
-
-procedure TCustFilter.actnHideInActiveUpdate(Sender: TObject);
-begin
-  if TAction(Sender).Checked then TAction(Sender).ImageName := 'Checked'
-  else TAction(Sender).ImageName := 'UnChecked';
-end;
-
-procedure TCustFilter.actnHideLinkedExecute(Sender: TObject);
-begin
-  TAction(Sender).Checked := not TAction(Sender).Checked;
-  SetIconDisplayState;
-  SendFilterDataPacket;
-end;
-
-procedure TCustFilter.actnHideLinkedUpdate(Sender: TObject);
+procedure TCustFilter.actnGenericUpdate(Sender: TObject);
 begin
   if TAction(Sender).Checked then TAction(Sender).ImageName := 'Checked'
   else TAction(Sender).ImageName := 'UnChecked';
@@ -174,7 +149,15 @@ begin
   actnHideInActive.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideInActive', false);
   actnHideLinked.Checked := iFile.ReadBool(INIFILE_SECTION,
-    'HideNonSwimmer', false);
+    'HideLinked', false);
+  actnFilterFrom.Checked := iFile.ReadBool(INIFILE_SECTION,
+    'FilterFrom', false);
+  actnFilterTo.Checked := iFile.ReadBool(INIFILE_SECTION,
+    'FilterTo', false);
+
+
+  dtpStart.Date := iFile.ReadDate(INIFILE_SECTION,'StartDT', Today);
+  dtpEnd.Date := iFile.ReadDate(INIFILE_SECTION,'EndDT', Today);
   iFile.Free;
 end;
 
@@ -186,7 +169,9 @@ begin
   // fill record
   fFilterState.HideArchived := actnHideArchived.Checked;
   fFilterState.HideInActive := actnHideInActive.Checked;
-  fFilterState.HideNonSwimmer := actnHideLinked.Checked;
+  fFilterState.HideLinked := actnHideLinked.Checked;
+  fFilterState.StartDT := dtpStart.DateTime;
+  fFilterState.EndDT := dtpStart.DateTime;
   Buffer := TMemoryStream.Create;
   try
     // fill memory stream
@@ -213,7 +198,13 @@ begin
   else actnHideInActive.ImageName := 'UnChecked';
   if actnHideLinked.Checked then actnHideLinked.ImageName := 'Checked'
   else actnHideLinked.ImageName := 'UnChecked';
-  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideLinked.Checked
+  if actnFilterFrom.Checked then actnFilterFrom.ImageName := 'Checked'
+  else actnFilterFrom.ImageName := 'UnChecked';
+  if actnFilterTo.Checked then actnFilterTo.ImageName := 'Checked'
+  else actnFilterTo.ImageName := 'UnChecked';
+
+  if actnHideArchived.Checked or actnHideInActive.Checked or
+    actnHideLinked.Checked or actnFilterFrom.Checked or actnFilterTo.Checked
   then actnClear.ImageName := 'filter_alt'
   else actnClear.ImageName := 'filter_alt_off';
 end;
@@ -223,13 +214,16 @@ var
   iFile: TIniFile;
   iniFileName: string;
 begin
-  iniFileName := unitFESUtility.GetFESPreferenceFileName;
+  iniFileName := unitFESutility.GetFESPreferenceFileName;
   if not FileExists(iniFileName) then exit;
   iFile := TIniFile.Create(iniFileName);
   iFile.WriteBool(INIFILE_SECTION, 'HideArchived', actnHideArchived.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'HideInActive', actnHideInActive.Checked);
-  iFile.WriteBool(INIFILE_SECTION, 'HideLinked',
-    actnHideLinked.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'HideLinked', actnHideLinked.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'FilterFrom', actnFilterFrom.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'FilterTo', actnFilterTo.Checked);
+  iFile.WriteDate(INIFILE_SECTION, 'StartDT', dtpStart.Date);
+  iFile.WriteDate(INIFILE_SECTION, 'EndDT', dtpEnd.Date);
   iFile.Free;
 end;
 

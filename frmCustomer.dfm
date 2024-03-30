@@ -2,31 +2,45 @@ object Customer: TCustomer
   Left = 0
   Top = 0
   Caption = 'FES Customer'
-  ClientHeight = 889
+  ClientHeight = 674
   ClientWidth = 815
   Color = clBtnFace
+  CustomTitleBar.Control = TitleBarPanel1
+  CustomTitleBar.Height = 40
+  CustomTitleBar.SystemHeight = False
+  CustomTitleBar.BackgroundColor = 4552068
+  CustomTitleBar.ForegroundColor = clWhite
+  CustomTitleBar.InactiveBackgroundColor = clWhite
+  CustomTitleBar.InactiveForegroundColor = 10066329
+  CustomTitleBar.ButtonForegroundColor = clWhite
+  CustomTitleBar.ButtonBackgroundColor = 4552068
+  CustomTitleBar.ButtonHoverForegroundColor = 65793
+  CustomTitleBar.ButtonHoverBackgroundColor = 5541793
+  CustomTitleBar.ButtonPressedForegroundColor = 65793
+  CustomTitleBar.ButtonPressedBackgroundColor = 8170169
+  CustomTitleBar.ButtonInactiveForegroundColor = 10066329
+  CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  FormStyle = fsStayOnTop
+  GlassFrame.Top = 40
+  StyleElements = [seFont, seClient]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
-    Top = 0
+    Top = 39
     Width = 815
-    Height = 86
+    Height = 42
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 901
-    DesignSize = (
-      815
-      84)
     object dbtxtCustomerID: TDBText
       Left = 16
       Top = 6
@@ -57,89 +71,22 @@ object Customer: TCustomer
       Font.Style = []
       ParentFont = False
     end
-    object SpeedButton1: TSpeedButton
-      Left = 279
-      Top = 42
-      Width = 93
-      Height = 38
-      Caption = 'IDENT'
-      ImageIndex = 0
-      ImageName = 'bubble'
-      Images = VirtualImageList1
-      Margin = 4
-    end
-    object SpeedButton2: TSpeedButton
-      Left = 383
-      Top = 42
-      Width = 93
-      Height = 38
-      Caption = 'CODE'
-      ImageIndex = 0
-      ImageName = 'bubble'
-      Images = VirtualImageList1
-      Margin = 4
-    end
-    object spdbtnFilter: TSpeedButton
-      Left = 7
-      Top = 42
-      Width = 121
-      Height = 38
-      Caption = 'FILTER'
-      ImageIndex = 2
-      ImageName = 'arrow_drop_down_circle'
-      Images = VirtualImageList1
-      Margin = 4
-      OnClick = actnFilterSelectExecute
-    end
-    object SpeedButton4: TSpeedButton
-      Left = 134
-      Top = 42
-      Width = 42
-      Height = 38
-      ImageIndex = 5
-      ImageName = 'filter_alt_off'
-      Images = VirtualImageList1
-      Margin = 4
-    end
-    object SpeedButton12: TSpeedButton
-      Left = 180
-      Top = 42
-      Width = 93
-      Height = 38
-      Caption = 'FIND'
-      ImageIndex = 6
-      ImageName = 'search'
-      Images = VirtualImageList1
-      Margin = 4
-    end
-    object SpeedButton3: TSpeedButton
-      Left = 710
-      Top = 42
-      Width = 93
-      Height = 38
-      Anchors = [akTop, akRight]
-      Caption = 'SYNC'
-      ImageIndex = 9
-      ImageName = 'Sync'
-      Images = VirtualImageList1
-      Margin = 4
-      ExplicitLeft = 800
-    end
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 86
+    Top = 81
     Width = 815
-    Height = 734
-    ActivePage = TabSheet2
+    Height = 524
+    ActivePage = TabSheet7
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 903
+    ExplicitTop = 118
+    ExplicitHeight = 702
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
         807
-        698)
+        488)
       object Label2: TLabel
         Left = 3
         Top = 59
@@ -189,13 +136,12 @@ object Customer: TCustomer
       object dbedtCustName: TDBEdit
         Left = 3
         Top = 24
-        Width = 788
+        Width = 786
         Height = 29
         Anchors = [akLeft, akTop, akRight]
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 1
-        ExplicitWidth = 876
       end
       object dbedtCustCode: TDBEdit
         Left = 3
@@ -209,13 +155,12 @@ object Customer: TCustomer
       object DBMemo1: TDBMemo
         Left = 3
         Top = 165
-        Width = 788
+        Width = 786
         Height = 273
         Anchors = [akLeft, akTop, akRight]
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 3
-        ExplicitWidth = 876
       end
       object DBCheckBox1: TDBCheckBox
         Left = 113
@@ -235,7 +180,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -258,19 +203,23 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
         Margins.Bottom = 10
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 80
-        ExplicitTop = 88
+        ExplicitLeft = 10
+        ExplicitTop = 10
+        ExplicitWidth = 787
+        ExplicitHeight = 646
         inherited ctrllistCustBusNum: TControlList
           Width = 787
-          Height = 678
-          ExplicitWidth = 625
+          Height = 436
+          ExplicitTop = 32
+          ExplicitWidth = 787
+          ExplicitHeight = 614
           inherited ctrllistbtnEdit: TControlListButton
             Left = 744
             ExplicitLeft = 771
@@ -291,6 +240,10 @@ object Customer: TCustomer
             ExplicitWidth = 248
           end
         end
+        inherited StackPanel1: TStackPanel
+          Width = 787
+          ExplicitWidth = 787
+        end
       end
     end
     object TabSheet3: TTabSheet
@@ -301,7 +254,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -324,7 +277,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -347,7 +300,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -371,7 +324,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -394,7 +347,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 678
+        Height = 468
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -412,7 +365,7 @@ object Customer: TCustomer
   end
   object Panel2: TPanel
     Left = 0
-    Top = 820
+    Top = 605
     Width = 815
     Height = 69
     Align = alBottom
@@ -420,8 +373,7 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 817
-    ExplicitWidth = 901
+    ExplicitTop = 820
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
@@ -435,7 +387,127 @@ object Customer: TCustomer
       DataSource = CustomerData.dsCustomer
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 881
+    end
+  end
+  object TitleBarPanel1: TTitleBarPanel
+    Left = 0
+    Top = 0
+    Width = 815
+    Height = 39
+    CustomButtons = <>
+    object vimgSetFilters: TVirtualImage
+      Left = 473
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Set Filters'
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 2
+      ImageName = 'arrow_drop_down_circle'
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = vimgSetFiltersClick
+      ExplicitLeft = 267
+      ExplicitTop = 2
+      ExplicitHeight = 30
+    end
+    object vimgToggleFilters: TVirtualImage
+      Left = 505
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Toggle Filters ON/OFF'
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 4
+      ImageName = 'filter_alt'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 305
+      ExplicitTop = 2
+      ExplicitHeight = 30
+    end
+    object vimgFindCustomer: TVirtualImage
+      Left = 537
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Find a customer'
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 6
+      ImageName = 'search'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 343
+      ExplicitTop = 2
+      ExplicitHeight = 30
+    end
+    object vimgGotoID: TVirtualImage
+      Left = 601
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Goto customer'#39's ID'
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 0
+      ImageName = 'bubble'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 381
+      ExplicitTop = 2
+      ExplicitHeight = 30
+    end
+    object VirtualImage5: TVirtualImage
+      AlignWithMargins = True
+      Left = 633
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Syncronize and refresh.'
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 150
+      Margins.Bottom = 0
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 9
+      ImageName = 'Sync'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 419
+      ExplicitTop = 3
+      ExplicitHeight = 30
+    end
+    object vimgGotoCode: TVirtualImage
+      Left = 569
+      Top = 0
+      Width = 32
+      Height = 39
+      Hint = 'Goto customer'#39's CODE'
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 0
+      ImageName = 'bubble'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 381
+      ExplicitTop = 2
+      ExplicitHeight = 30
     end
   end
   object ImageCollection1: TImageCollection

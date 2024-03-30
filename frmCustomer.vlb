@@ -13,9 +13,6 @@ Coordinates=989,474,114,36
 [ImageCollection1]
 Coordinates=989,529,114,36
 
-[SpeedButton12]
-Coordinates=907,678,103,36
-
 [CustomerData.dsCustContact]
 Coordinates=99,888,185,36
 
@@ -61,9 +58,6 @@ Coordinates=303,678,77,36
 [dbedtCustCode]
 Coordinates=189,678,104,36
 
-[spdbtnFilter]
-Coordinates=97,678,82,36
-
 [CustomerData.qryCustContact]
 Coordinates=389,10,189,278
 
@@ -88,14 +82,8 @@ Coordinates=915,342,55,58
 [Label1]
 Coordinates=852,342,53,58
 
-[SpeedButton4]
-Coordinates=754,632,96,36
-
 [CustomerData.qryCustSite]
 Coordinates=10,10,167,322
-
-[SpeedButton3]
-Coordinates=648,632,96,36
 
 [CustomerData.qryCustomer]
 Coordinates=588,10,174,278
@@ -108,9 +96,6 @@ Coordinates=561,632,77,36
 
 [DBGrid5]
 Coordinates=381,632,64,36
-
-[SpeedButton1]
-Coordinates=275,632,96,36
 
 [Label3]
 Coordinates=789,342,53,58
@@ -133,9 +118,6 @@ Coordinates=515,1112,181,36
 [CustomerData.qryCustAddress]
 Coordinates=591,30,192,36
 Visible=False
-
-[SpeedButton2]
-Coordinates=10,632,96,36
 
 [CustomerData.qryCustContactNum]
 Coordinates=961,10,216,212
@@ -237,7 +219,7 @@ Coordinates=347,1472,47,36
 Coordinates=198,1472,148,36
 
 []
-Coordinates=1630,310,152,58
+Coordinates=648,632,96,36
 LayerNames=NewLayer0
 Visible=True
 

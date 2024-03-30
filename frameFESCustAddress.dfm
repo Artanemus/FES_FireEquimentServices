@@ -6,9 +6,9 @@ object FESCustAddress: TFESCustAddress
   TabOrder = 0
   object ctrllistCustBusNum: TControlList
     Left = 0
-    Top = 0
+    Top = 32
     Width = 619
-    Height = 480
+    Height = 448
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -26,7 +26,8 @@ object FESCustAddress: TFESCustAddress
     PopupMenu = pumenuCustBusNum
     TabOrder = 0
     OnBeforeDrawItem = ctrllistCustBusNumBeforeDrawItem
-    ExplicitWidth = 640
+    ExplicitTop = 0
+    ExplicitHeight = 480
     object ctrllistbtnEdit: TControlListButton
       Left = 579
       Top = 8
@@ -88,6 +89,16 @@ object FESCustAddress: TFESCustAddress
       Anchors = [akTop, akRight]
       Caption = 'Forest Lake - Oxley'
     end
+  end
+  object StackPanel1: TStackPanel
+    Left = 0
+    Top = 0
+    Width = 619
+    Height = 32
+    Align = alTop
+    BevelOuter = bvNone
+    ControlCollection = <>
+    TabOrder = 1
   end
   object imgcollCustBusNum: TImageCollection
     Images = <

@@ -5,13 +5,14 @@ object CustFilter: TCustFilter
   BorderStyle = bsNone
   Caption = 'Filter Members'
   ClientHeight = 209
-  ClientWidth = 255
+  ClientWidth = 193
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  FormStyle = fsStayOnTop
   KeyPreview = True
   OnCreate = FormCreate
   OnDeactivate = FormDeactivate
@@ -21,7 +22,7 @@ object CustFilter: TCustFilter
   object btngrpFilter: TButtonGroup
     Left = 0
     Top = 0
-    Width = 255
+    Width = 193
     Height = 209
     ButtonHeight = 34
     ButtonOptions = [gboFullSize, gboShowCaptions]
@@ -46,6 +47,24 @@ object CustFilter: TCustFilter
         Action = actnClear
       end>
     TabOrder = 0
+  end
+  object dtpStart: TDateTimePicker
+    Left = 80
+    Top = 106
+    Width = 110
+    Height = 29
+    Date = 45381.000000000000000000
+    Time = 0.593101122685766300
+    TabOrder = 1
+  end
+  object dtpEnd: TDateTimePicker
+    Left = 80
+    Top = 141
+    Width = 110
+    Height = 29
+    Date = 45381.000000000000000000
+    Time = 0.593101122685766300
+    TabOrder = 2
   end
   object filterImageCollection: TImageCollection
     Images = <
@@ -168,8 +187,8 @@ object CustFilter: TCustFilter
               A3B20000000049454E44AE426082}
           end>
       end>
-    Left = 176
-    Top = 48
+    Left = 72
+    Top = 64
   end
   object filterImageList32x32: TVirtualImageList
     Images = <
@@ -201,50 +220,48 @@ object CustFilter: TCustFilter
     ImageCollection = filterImageCollection
     Width = 32
     Height = 32
-    Left = 56
-    Top = 48
+    Left = 72
+    Top = 120
   end
   object filterActionManager: TActionManager
     Images = filterImageList32x32
-    Left = 128
-    Top = 24
+    Left = 72
+    Top = 8
     StyleName = 'Platform Default'
     object actnHideArchived: TAction
       Caption = 'Hide Archived'
       ImageIndex = 1
       ImageName = 'UnChecked'
-      OnExecute = actnHideArchivedExecute
-      OnUpdate = actnHideArchivedUpdate
+      OnExecute = actnGenericExecute
+      OnUpdate = actnGenericUpdate
     end
     object actnHideInActive: TAction
       Caption = 'Hide In-Active'
       ImageIndex = 1
       ImageName = 'UnChecked'
-      OnExecute = actnHideInActiveExecute
-      OnUpdate = actnHideInActiveUpdate
+      OnExecute = actnGenericExecute
+      OnUpdate = actnGenericUpdate
     end
     object actnHideLinked: TAction
       Caption = 'Hide Linked'
       ImageIndex = 1
       ImageName = 'UnChecked'
-      OnExecute = actnHideLinkedExecute
-      OnUpdate = actnHideLinkedUpdate
+      OnExecute = actnGenericExecute
+      OnUpdate = actnGenericUpdate
     end
     object actnFilterFrom: TAction
-      Caption = 'From: (1/1/1970)'
+      Caption = 'From'
       ImageIndex = 1
       ImageName = 'UnChecked'
+      OnExecute = actnGenericExecute
+      OnUpdate = actnGenericUpdate
     end
     object actnFilterTo: TAction
-      Caption = 'To: (Today)'
+      Caption = 'To'
       ImageIndex = 1
       ImageName = 'UnChecked'
-    end
-    object actnClose: TAction
-      Caption = 'Close'
-      ImageIndex = 2
-      ImageName = 'Exit'
-      OnExecute = actnCloseExecute
+      OnExecute = actnGenericExecute
+      OnUpdate = actnGenericUpdate
     end
     object actnClear: TAction
       Caption = 'Clear All Filters'
@@ -252,6 +269,12 @@ object CustFilter: TCustFilter
       ImageName = 'filter_alt'
       OnExecute = actnClearExecute
       OnUpdate = actnClearUpdate
+    end
+    object actnClose: TAction
+      Caption = 'Close'
+      ImageIndex = 2
+      ImageName = 'Exit'
+      OnExecute = actnCloseExecute
     end
   end
 end
