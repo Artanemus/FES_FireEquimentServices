@@ -4,9 +4,6 @@ Coordinates=10,724,64,36
 [TabSheet2]
 Coordinates=1020,678,77,36
 
-[CustomerData.dsContactNumType]
-Coordinates=487,232,214,36
-
 [VirtualImageList1]
 Coordinates=989,474,114,36
 
@@ -15,12 +12,6 @@ Coordinates=989,529,114,36
 
 [CustomerData.dsCustContact]
 Coordinates=99,888,185,36
-
-[DBGrid2]
-Coordinates=833,678,64,36
-
-[CustomerData.dsCustContactNum]
-Coordinates=739,463,212,36
 
 [actnmanCustomer]
 Coordinates=989,694,119,36
@@ -36,9 +27,6 @@ Coordinates=298,564,55,58
 
 [DBCheckBox1]
 Coordinates=638,678,98,36
-
-[CustomerData.tblContactNumType]
-Coordinates=1070,880,214,212
 
 [DBGrid3]
 Coordinates=564,678,64,36
@@ -88,9 +76,6 @@ Coordinates=10,10,167,322
 [CustomerData.qryCustomer]
 Coordinates=588,10,174,278
 
-[CustomerData.qryEmailType]
-Coordinates=772,10,179,212
-
 [TabSheet7]
 Coordinates=561,632,77,36
 
@@ -103,24 +88,15 @@ Coordinates=789,342,53,58
 [DBMemo1]
 Coordinates=190,632,75,36
 
-[DBGrid1]
-Coordinates=116,632,64,36
-
-[CustomerData.dsEmailType]
-Coordinates=739,925,175,36
-
 [CustomerData.qryCustEmails]
-Coordinates=10,342,184,212
+Coordinates=398,362,184,212
 
 [CustomerData.dsCustAdress]
 Coordinates=515,1112,181,36
 
 [CustomerData.qryCustAddress]
-Coordinates=591,30,192,36
+Coordinates=793,40,192,36
 Visible=False
-
-[CustomerData.qryCustContactNum]
-Coordinates=961,10,216,212
 
 [Label2]
 Coordinates=235,564,53,58
@@ -152,23 +128,11 @@ Coordinates=109,1472,75,33
 [actnpuGotoContact]
 Coordinates=1146,870,125,36
 
-[Delete1]
-Coordinates=1146,925,59,36
-
-[Refresh1]
-Coordinates=1146,980,67,36
-
 [actnpuInsert]
 Coordinates=1146,1035,85,36
 
-[pumenuContacts]
-Coordinates=1146,1090,111,36
-
 [actnpuDelete]
 Coordinates=1146,1145,90,36
-
-[Edit2]
-Coordinates=0,555,44,36
 
 [actnpuEdit]
 Coordinates=1146,1200,75,36
@@ -179,9 +143,6 @@ Coordinates=1321,56,179,36
 [actnpuPost]
 Coordinates=1146,1255,79,36
 
-[Cncel1]
-Coordinates=1146,1310,55,36
-
 [actnpuToggleLink]
 Coordinates=1146,1365,116,36
 
@@ -190,12 +151,6 @@ Coordinates=1146,1420,123,36
 
 [actnpuCancel]
 Coordinates=1127,1472,93,36
-
-[Find2]
-Coordinates=1078,1472,47,36
-
-[N4]
-Coordinates=940,1472,40,36
 
 [actnSuburb]
 Coordinates=722,1472,80,36
@@ -206,20 +161,11 @@ Coordinates=623,1472,91,36
 [actnpuPostcode]
 Coordinates=514,1472,107,36
 
-[Goto2]
-Coordinates=455,1472,49,36
-
-[Insert1]
-Coordinates=396,1472,54,36
-
-[Post1]
-Coordinates=347,1472,47,36
-
 [actnpuGotoSiteContact]
 Coordinates=198,1472,148,36
 
 []
-Coordinates=648,632,96,36
+Coordinates=833,678,64,36
 LayerNames=NewLayer0
 Visible=True
 
@@ -247,5 +193,11 @@ ActiveLayerNames=
 EditingLayerName=NewLayer0
 
 [CustomerData.]
-Coordinates=850,890,194,212
+Coordinates=772,10,179,212
+
+[CustomerData.qryCustNum]
+Coordinates=1413,30,216,212
+
+[CustomerData.dsCustNum]
+Coordinates=739,463,212,36
 

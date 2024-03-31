@@ -1,13 +1,13 @@
-object FESCustAddress: TFESCustAddress
+object FESCustEmail: TFESCustEmail
   Left = 0
   Top = 0
-  Width = 629
+  Width = 640
   Height = 480
   TabOrder = 0
   object StackPanel1: TStackPanel
     Left = 0
     Top = 0
-    Width = 629
+    Width = 640
     Height = 32
     Align = alTop
     BevelOuter = bvNone
@@ -22,7 +22,7 @@ object FESCustAddress: TFESCustAddress
       Width = 32
       Height = 32
       Hint = 'Toggle visibility of un-pinned items.'
-      ImageCollection = imgcollCustAddress
+      ImageCollection = imgcollCustEmail
       ImageWidth = 0
       ImageHeight = 0
       ImageIndex = 9
@@ -35,11 +35,11 @@ object FESCustAddress: TFESCustAddress
   object RelativePanel1: TRelativePanel
     Left = 0
     Top = 32
-    Width = 629
+    Width = 640
     Height = 448
     ControlCollection = <
       item
-        Control = ctrllistCustAddress
+        Control = ctrllistCustEmail
         AlignBottomWithPanel = True
         AlignHorizontalCenterWithPanel = True
         AlignLeftWithPanel = True
@@ -50,17 +50,22 @@ object FESCustAddress: TFESCustAddress
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    object ctrllistCustAddress: TControlList
+    DesignSize = (
+      640
+      448)
+    object ctrllistCustEmail: TControlList
       Left = 0
       Top = 0
-      Width = 629
+      Width = 640
       Height = 448
+      Anchors = []
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      ItemCount = 1
+      ItemCount = 2
+      ItemHeight = 40
       ItemIndex = 0
       ItemMargins.Left = 0
       ItemMargins.Top = 0
@@ -68,59 +73,15 @@ object FESCustAddress: TFESCustAddress
       ItemMargins.Bottom = 0
       ParentColor = False
       ParentFont = False
-      PopupMenu = pumenuCustAddress
+      PopupMenu = pumenuCustEmail
       TabOrder = 0
-      OnBeforeDrawItem = ctrllistCustAddressBeforeDrawItem
-      object ctrllistbtnEdit: TControlListButton
-        Left = 589
+      OnBeforeDrawItem = ctrllistCustEmailBeforeDrawItem
+      object lblEmailType: TLabel
+        Left = 7
         Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnEditClick
-        ExplicitLeft = 600
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 551
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnPinClick
-        ExplicitLeft = 562
-      end
-      object lblAddress: TLabel
-        Left = 128
-        Top = 8
-        Width = 355
-        Height = 57
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = False
-        Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-      end
-      object lblAddressType: TLabel
-        Left = 8
-        Top = 8
-        Width = 60
+        Width = 150
         Height = 21
-        Caption = 'Business'
+        Caption = 'Accounts Department'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -128,14 +89,28 @@ object FESCustAddress: TFESCustAddress
         Font.Style = []
         ParentFont = False
       end
-      object lblZone: TLabel
-        Left = 510
-        Top = 46
-        Width = 111
+      object lblEmail: TLabel
+        Left = 172
+        Top = 8
+        Width = 197
+        Height = 21
+        Caption = 'admin@cooperpg.com.au'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        StyleElements = [seClient, seBorder]
+      end
+      object lblCreatedOn: TLabel
+        Left = 483
+        Top = 12
+        Width = 66
         Height = 17
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
-        Caption = 'Forest Lake - Oxley'
+        Caption = '15/06/2021'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -143,9 +118,34 @@ object FESCustAddress: TFESCustAddress
         Font.Style = []
         ParentFont = False
       end
+      object ctrllistbtnPin: TControlListButton
+        Left = 555
+        Top = 4
+        Width = 32
+        Height = 32
+        Anchors = [akTop, akRight]
+        Images = vimglistCustEmail
+        ImageIndex = 0
+        ImageName = 'pin'
+        LinkHotColor = clHighlight
+        Style = clbkToolButton
+        OnClick = ctrllistbtnPinClick
+      end
+      object ctrllistbtnEdit: TControlListButton
+        Left = 593
+        Top = 4
+        Width = 32
+        Height = 32
+        Anchors = [akTop, akRight]
+        Images = vimglistCustEmail
+        ImageIndex = 2
+        ImageName = 'Edit'
+        LinkHotColor = clHighlight
+        Style = clbkToolButton
+      end
     end
   end
-  object imgcollCustAddress: TImageCollection
+  object imgcollCustEmail: TImageCollection
     Images = <
       item
         Name = 'pin'
@@ -459,7 +459,7 @@ object FESCustAddress: TFESCustAddress
     Left = 312
     Top = 152
   end
-  object vimglistCustAddress: TVirtualImageList
+  object vimglistCustEmail: TVirtualImageList
     Images = <
       item
         CollectionIndex = 0
@@ -501,16 +501,16 @@ object FESCustAddress: TFESCustAddress
         CollectionName = 'Refresh'
         Name = 'Refresh'
       end>
-    ImageCollection = imgcollCustAddress
+    ImageCollection = imgcollCustEmail
     Width = 32
     Height = 32
     Left = 312
     Top = 208
   end
-  object pumenuCustAddress: TPopupMenu
-    Images = vimglistCustAddress
+  object pumenuCustEmail: TPopupMenu
+    Images = vimglistCustEmail
     Left = 312
-    Top = 272
+    Top = 264
     object puEdit: TMenuItem
       Caption = 'Edit'
       ImageIndex = 2
@@ -537,6 +537,10 @@ object FESCustAddress: TFESCustAddress
       ImageIndex = 0
       ImageName = 'pin'
     end
+    object puCopy: TMenuItem
+      Caption = 'Copy'
+      ShortCut = 16451
+    end
     object puFilter: TMenuItem
       Caption = 'Filter'
       ImageIndex = 6
@@ -549,43 +553,43 @@ object FESCustAddress: TFESCustAddress
       ShortCut = 123
     end
   end
-  object bindlistCustAddress: TBindingsList
+  object bindsrcCustEmail: TBindSourceDB
+    DataSet = CustomerData.qryCustEmails
+    ScopeMappings = <>
+    Left = 144
+    Top = 160
+  end
+  object bindListCustEmail: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 128
-    Top = 176
-    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+    Left = 144
+    Top = 224
+    object LinkPropertyToField1: TLinkPropertyToField
       Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      GridControl = ctrllistCustAddress
+      DataSource = bindsrcCustEmail
+      FieldName = 'EmailTypeStr'
+      Component = lblEmailType
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField2: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustEmail
+      FieldName = 'Email'
+      Component = lblEmail
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField3: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustEmail
+      FieldName = 'ShortDateStr'
+      Component = lblCreatedOn
+      ComponentProperty = 'Caption'
+    end
+    object LinkGridToDataSourcebindsrcCustEmail: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustEmail
+      GridControl = ctrllistCustEmail
       Columns = <>
     end
-    object LinkPropertyToFieldCaption: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'Zone'
-      Component = lblZone
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption2: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'AddressStr'
-      Component = lblAddress
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption3: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'AddrTypeStr'
-      Component = lblAddressType
-      ComponentProperty = 'Caption'
-    end
-  end
-  object bindsrcCustAddress: TBindSourceDB
-    DataSet = CustomerData.qryCustAddress
-    ScopeMappings = <>
-    Left = 128
-    Top = 240
   end
 end

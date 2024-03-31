@@ -1,9 +1,6 @@
 ﻿[(TMenuItem)]
 Coordinates=340,105,75,33
 
-[imgcollCustBusNum]
-Coordinates=187,1,115,33
-
 [puDelete]
 Coordinates=34,70,57,33
 
@@ -13,14 +10,8 @@ Coordinates=206,105,65,33
 [puInsert]
 Coordinates=187,141,54,33
 
-[pumenuCustBusNum]
-Coordinates=340,1,119,33
-
 [N1]
 Coordinates=138,141,40,33
-
-[vimglistCustBusNum]
-Coordinates=340,53,118,33
 
 [ctrllistbtnEdit]
 Coordinates=90,60,80,33
@@ -52,30 +43,17 @@ Coordinates=530,1160,164,231
 [CustomerData.qryCustInspect]
 Coordinates=497,197,162,393
 
-[BindSourceDB1]
-Coordinates=220,10,148,177
-LayerNames=NewLayer0
-
 [CustomerData.dsContactNumType]
 Coordinates=924,1,184,33
 
 [CustomerData.dsCustEmails]
 Coordinates=699,785,155,33
 
-[CustomerData.dsEmailType]
-Coordinates=21,1053,151,33
-
-[CustomerData.qryEmailType]
-Coordinates=180,1053,155,177
-
 [CustomerData.qryCustSurvey]
 Coordinates=309,748,160,267
 
 [CustomerData.dsCustAdress]
 Coordinates=218,264,157,33
-
-[BindingsList1]
-Coordinates=103,62,82,33
 
 [CustomerData.dsCustSite]
 Coordinates=58,193,141,33
@@ -110,11 +88,6 @@ Coordinates=11,748,147,33
 [CustomerData.tblContactNumType]
 Coordinates=699,1,185,177
 
-[ctrllistCustBusNum]
-Coordinates=20,110,110,51
-Visible=True
-LayerNames=NewLayer0
-
 [lblAddressType]
 Coordinates=50,200,91,51
 LayerNames=NewLayer0
@@ -134,5 +107,26 @@ ActiveLayerNames=NewLayer0
 EditingLayerName=NewLayer0
 
 [CustomerData.]
-Coordinates=699,197,168,177
+Coordinates=180,1053,155,177
+
+[pumenuCustAddress]
+Coordinates=340,1,119,33
+
+[vimglistCustAddress]
+Coordinates=340,53,118,33
+
+[ctrllistCustAddress]
+Coordinates=20,110,110,51
+Visible=True
+LayerNames=NewLayer0
+
+[imgcollCustAddress]
+Coordinates=187,1,115,33
+
+[bindsrcCustAddress]
+Coordinates=220,10,148,177
+LayerNames=NewLayer0
+
+[bindlistCustAddress]
+Coordinates=103,62,82,33
 

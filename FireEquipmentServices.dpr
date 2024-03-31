@@ -30,7 +30,9 @@ uses
   unitFESDefines in 'unitFESDefines.pas',
   unitFESutility in 'unitFESutility.pas',
   unitFESHelpers in 'unitFESHelpers.pas',
-  frameFESCustAddress in 'frameFESCustAddress.pas' {FESCustAddress: TFrame};
+  frameFESCustAddress in 'frameFESCustAddress.pas' {FESCustAddress: TFrame},
+  frameFESCustNumber in 'frameFESCustNumber.pas' {FESCustNumber: TFrame},
+  frameFESCustEmail in 'frameFESCustEmail.pas' {FESCustEmail: TFrame};
 
 {$R *.res}
 

@@ -22,30 +22,12 @@ type
     qryCustomerModifiedOn: TSQLTimeStampField;
     qryCustomerIsArchived: TBooleanField;
     dsCustomer: TDataSource;
-    qryCustContactNum: TFDQuery;
-    dsCustContactNum: TDataSource;
-    qryCustContactNumCustContactNumID: TFDAutoIncField;
-    qryCustContactNumCustomerID: TIntegerField;
-    qryCustContactNumContactNum: TWideStringField;
-    qryCustContactNumCreatedOn: TSQLTimeStampField;
-    qryCustContactNumIsArchived: TBooleanField;
-    qryCustContactNumContactNumTypeID: TIntegerField;
-    tblContactNumType: TFDTable;
-    dsContactNumType: TDataSource;
-    qryCustContactNumluContactNumType: TStringField;
+    qryCustNum: TFDQuery;
+    dsCustNum: TDataSource;
     qryCustAddress: TFDQuery;
     dsCustAdress: TDataSource;
     qryCustEmails: TFDQuery;
     dsCustEmails: TDataSource;
-    dsEmailType: TDataSource;
-    qryCustEmailsCustEmailID: TFDAutoIncField;
-    qryCustEmailsCustomerID: TIntegerField;
-    qryCustEmailsEmail: TWideStringField;
-    qryCustEmailsCreatedOn: TSQLTimeStampField;
-    qryCustEmailsIsArchived: TBooleanField;
-    qryCustEmailsEmailTypeID: TIntegerField;
-    qryCustEmailsluEmailType: TStringField;
-    qryEmailType: TFDQuery;
     qryCustSite: TFDQuery;
     dsCustSite: TDataSource;
     qryCustSiteCustSiteID: TFDAutoIncField;
@@ -108,7 +90,7 @@ type
     qryCustSurveySiteID: TIntegerField;
     qryCustSurveyAddress: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
-    procedure qryCustContactNumCreatedOnGetText(Sender: TField; var Text: string;
+    procedure qryCustNumCreatedOnGetText(Sender: TField; var Text: string;
         DisplayText: Boolean);
     procedure qryCustomerNoteGetText(Sender: TField; var Text: string; DisplayText:
         Boolean);
@@ -151,11 +133,10 @@ begin
         if (Self.Components[i].Tag = 2) then  // sub-child
           TFDQuery(Self.Components[i]).Active := True;
     end;
-    tblContactNumType.Active := True; // sub-child TFDTable
   end;
 end;
 
-procedure TCustomerData.qryCustContactNumCreatedOnGetText(Sender: TField; var
+procedure TCustomerData.qryCustNumCreatedOnGetText(Sender: TField; var
     Text: string; DisplayText: Boolean);
 var
 FormatSettings: TFormatSettings;

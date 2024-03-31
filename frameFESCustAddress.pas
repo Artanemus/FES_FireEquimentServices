@@ -9,16 +9,17 @@ uses
   Vcl.ImgList, Vcl.VirtualImageList, dmCustomerData, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Grid, Data.Bind.DBScope,
-  Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Vcl.WinXPanels;
+  Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.VirtualImage,
+  Vcl.WinXCtrls;
 
 type
   TFESCustAddress = class(TFrame)
-    imgcollCustBusNum: TImageCollection;
-    ctrllistCustBusNum: TControlList;
+    imgcollCustAddress: TImageCollection;
+    ctrllistCustAddress: TControlList;
     ctrllistbtnEdit: TControlListButton;
     ctrllistbtnPin: TControlListButton;
-    vimglistCustBusNum: TVirtualImageList;
-    pumenuCustBusNum: TPopupMenu;
+    vimglistCustAddress: TVirtualImageList;
+    pumenuCustAddress: TPopupMenu;
     puInsert: TMenuItem;
     puEdit: TMenuItem;
     puDelete: TMenuItem;
@@ -26,8 +27,8 @@ type
     puRefresh: TMenuItem;
     puPin: TMenuItem;
     puFilter: TMenuItem;
-    BindingsList1: TBindingsList;
-    BindSourceDB1: TBindSourceDB;
+    bindlistCustAddress: TBindingsList;
+    bindsrcCustAddress: TBindSourceDB;
     LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     lblAddress: TLabel;
     lblAddressType: TLabel;
@@ -36,14 +37,19 @@ type
     LinkPropertyToFieldCaption2: TLinkPropertyToField;
     LinkPropertyToFieldCaption3: TLinkPropertyToField;
     StackPanel1: TStackPanel;
+    vimgHideUnPinned: TVirtualImage;
+    RelativePanel1: TRelativePanel;
     procedure ctrllistbtnEditClick(Sender: TObject);
     procedure ctrllistbtnPinClick(Sender: TObject);
-    procedure ctrllistCustBusNumBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+    procedure ctrllistCustAddressBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);
+    procedure vimgHideUnPinnedClick(Sender: TObject);
   private
     { Private declarations }
+    fHideUnPinned: Boolean;
   public
     { Public declarations }
+    property HideUnPinned: boolean read FHideUnpinned write FHideUnpinned;
   end;
 
 implementation
@@ -59,30 +65,48 @@ procedure TFESCustAddress.ctrllistbtnPinClick(Sender: TObject);
 var
   b: boolean;
 begin
-  with BindSourceDB1.DataSet do
+  with bindsrcCustAddress.DataSet do
   begin
     b := FieldByName('IsArchived').AsBoolean;
     b := not b;
-    if (BindSourceDB1.DataSet.State <> dsEdit) then
-      BindSourceDB1.DataSet.Edit;
-    if (BindSourceDB1.DataSet.State = dsEdit) then
+    if (State = dsBrowse) then  Edit;
+    if (State = dsEdit) then
     begin
-      BindSourceDB1.DataSet.FieldByName('IsArchived').AsBoolean := b;
-      BindSourceDB1.DataSet.Post;
+      FieldByName('IsArchived').AsBoolean := b;
+      Post;
     end;
   end;
 end;
 
-procedure TFESCustAddress.ctrllistCustBusNumBeforeDrawItem(AIndex: Integer; ACanvas:
+procedure TFESCustAddress.ctrllistCustAddressBeforeDrawItem(AIndex: Integer; ACanvas:
     TCanvas; ARect: TRect; AState: TOwnerDrawState);
 var
   b: boolean;
 begin
-  with BindSourceDB1.DataSet do
+  with bindsrcCustAddress.DataSet do
   begin
     b := FieldByName('IsArchived').AsBoolean;
     if b then ctrllistbtnPin.ImageIndex := 1
     else ctrllistbtnPin.ImageIndex := 0;
+  end;
+end;
+
+procedure TFESCustAddress.vimgHideUnPinnedClick(Sender: TObject);
+begin
+  fHideUnPinned := not fHideUnPinned;
+  with bindsrcCustAddress.DataSet do
+  begin
+    if fHideUnPinned then
+    begin
+      vimgHideUnPinned.ImageIndex := 8;
+      Filter := '[IsArchived] IS NULL OR [IsArchived] <> true';
+      if not Filtered then Filtered := true;
+    end
+    else
+    begin
+      vimgHideUnPinned.ImageIndex := 9;
+      if Filtered then Filtered := false;
+    end;
   end;
 end;
 

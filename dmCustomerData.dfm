@@ -78,7 +78,7 @@ object CustomerData: TCustomerData
     Left = 624
     Top = 24
   end
-  object qryCustContactNum: TFDQuery
+  object qryCustNum: TFDQuery
     Tag = 1
     Active = True
     IndexFieldNames = 'CustomerID'
@@ -91,88 +91,29 @@ object CustomerData: TCustomerData
     SQL.Strings = (
       '-- USE [IDFES];'
       ''
-      'SELECT [CustContactNumID]'
-      '      ,[CustomerID]'
-      '      ,[ContactNum]'
-      '      ,[CreatedOn]'
-      '      ,[IsArchived]'
-      '      ,[ContactNumTypeID]'
-      '  FROM [dbo].[CustContactNum]'
+      'SELECT [CustNumberID]'
+      '      ,[CustNumber].[CustomerID]'
+      '      ,[CustNumber].[Number]'
+      '      ,[CustNumber].[CreatedOn]'
+      '      ,[CustNumber].[IsArchived]'
+      '      ,[CustNumber].[NumberTypeID]'
+      '      ,[NumberType].AliasCust AS NumberTypeStr'
+      
+        '      ,CONVERT(VARCHAR(10), [CustNumber].[CreatedOn], 103) AS Sh' +
+        'ortDateStr  -- dd/MM/yyyy format'
+      '  FROM [dbo].[CustNumber]'
+      
+        'LEFT JOIN [dbo].[NumberType] ON  [CustNumber].[NumberTypeID] = [' +
+        'NumberType].[NumberTypeID]'
       ''
       ';')
     Left = 48
     Top = 128
-    object qryCustContactNumCustContactNumID: TFDAutoIncField
-      FieldName = 'CustContactNumID'
-      Origin = 'CustContactNumID'
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustContactNumCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Visible = False
-    end
-    object qryCustContactNumContactNum: TWideStringField
-      DisplayWidth = 16
-      FieldName = 'ContactNum'
-      Origin = 'ContactNum'
-      Size = 16
-    end
-    object qryCustContactNumIsArchived: TBooleanField
-      DisplayLabel = 'Archived'
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustContactNumluContactNumType: TStringField
-      DisplayLabel = 'Contact Type'
-      FieldKind = fkLookup
-      FieldName = 'luContactNumType'
-      LookupDataSet = tblContactNumType
-      LookupKeyFields = 'ContactNumTypeID'
-      LookupResultField = 'Caption'
-      KeyFields = 'ContactNumTypeID'
-      Size = 14
-      Lookup = True
-    end
-    object qryCustContactNumCreatedOn: TSQLTimeStampField
-      DisplayLabel = 'Created On'
-      DisplayWidth = 10
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-      ReadOnly = True
-      OnGetText = qryCustContactNumCreatedOnGetText
-    end
-    object qryCustContactNumContactNumTypeID: TIntegerField
-      FieldName = 'ContactNumTypeID'
-      Origin = 'ContactNumTypeID'
-      Visible = False
-    end
   end
-  object dsCustContactNum: TDataSource
-    DataSet = qryCustContactNum
-    Left = 176
+  object dsCustNum: TDataSource
+    DataSet = qryCustNum
+    Left = 112
     Top = 128
-  end
-  object tblContactNumType: TFDTable
-    Tag = 2
-    Active = True
-    IndexFieldNames = 'ContactNumTypeID'
-    Connection = FES.fesConnection
-    ResourceOptions.AssignedValues = [rvEscapeExpand]
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
-    UpdateOptions.EnableDelete = False
-    UpdateOptions.EnableInsert = False
-    UpdateOptions.EnableUpdate = False
-    TableName = 'IDFES..ContactNumType'
-    Left = 48
-    Top = 224
-  end
-  object dsContactNumType: TDataSource
-    DataSet = tblContactNumType
-    Left = 176
-    Top = 224
   end
   object qryCustAddress: TFDQuery
     Tag = 1
@@ -201,13 +142,13 @@ object CustomerData: TCustomerData
         '      ON [CustAddress].[AddressTypeID] = [AddressType].[AddressT' +
         'ypeID] '
       '; ')
-    Left = 304
-    Top = 136
+    Left = 240
+    Top = 128
   end
   object dsCustAdress: TDataSource
     DataSet = qryCustAddress
-    Left = 392
-    Top = 136
+    Left = 312
+    Top = 128
   end
   object qryCustEmails: TFDQuery
     Tag = 1
@@ -215,91 +156,34 @@ object CustomerData: TCustomerData
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
+    DetailFields = 'CustomerID'
     Connection = FES.fesConnection
     UpdateOptions.UpdateTableName = 'IDFES.dbo.CustEmail'
     UpdateOptions.KeyFields = 'CustEmailID'
     SQL.Strings = (
       '  SELECT '
       #9#9' [CustEmailID]'
-      #9#9',[CustomerID]'
-      #9#9',[Email]'
-      #9#9',[CreatedOn]'
-      #9#9',[IsArchived]'
-      #9#9',[EmailTypeID]'
-      'FROM [IDFES].[dbo].[CustEmail] ')
-    Left = 488
-    Top = 136
-    object qryCustEmailsCustEmailID: TFDAutoIncField
-      FieldName = 'CustEmailID'
-      Origin = 'CustEmailID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustEmailsCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Visible = False
-    end
-    object qryCustEmailsEmail: TWideStringField
-      DisplayWidth = 40
-      FieldName = 'Email'
-      Origin = 'Email'
-      Size = 128
-    end
-    object qryCustEmailsCreatedOn: TSQLTimeStampField
-      DisplayLabel = 'Created On'
-      DisplayWidth = 10
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustEmailsIsArchived: TBooleanField
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustEmailsEmailTypeID: TIntegerField
-      FieldName = 'EmailTypeID'
-      Origin = 'EmailTypeID'
-      Visible = False
-    end
-    object qryCustEmailsluEmailType: TStringField
-      DisplayLabel = 'Email Type'
-      FieldKind = fkLookup
-      FieldName = 'luEmailType'
-      LookupDataSet = qryEmailType
-      LookupKeyFields = 'EmailTypeID'
-      LookupResultField = 'AliasCust'
-      KeyFields = 'EmailTypeID'
-      Lookup = True
-    end
+      #9#9',[CustEmail].[CustomerID]'
+      #9#9',[CustEmail].[Email]'
+      #9#9',[CustEmail].[CreatedOn]'
+      #9#9',[CustEmail].[IsArchived]'
+      #9#9',[CustEmail].[EmailTypeID]'
+      '    ,[EmailType].AliasCust AS EmailTypeStr'
+      
+        '      ,CONVERT(VARCHAR(10), [CustEmail].[CreatedOn], 103) AS Sho' +
+        'rtDateStr  -- dd/MM/yyyy format'
+      '    '
+      'FROM [IDFES].[dbo].[CustEmail] '
+      
+        'LEFT JOIN  EmailType ON [CustEmail].EmailTypeID = EmailType.Emai' +
+        'lTypeID')
+    Left = 432
+    Top = 128
   end
   object dsCustEmails: TDataSource
     DataSet = qryCustEmails
-    Left = 576
-    Top = 136
-  end
-  object dsEmailType: TDataSource
-    DataSet = qryEmailType
-    Left = 592
-    Top = 224
-  end
-  object qryEmailType: TFDQuery
-    Tag = 2
-    Active = True
-    Connection = FES.fesConnection
-    SQL.Strings = (
-      'SELECT [EmailTypeID]'
-      '      ,[Caption]'
-      '      ,[UsedByHR]'
-      '      ,[AliasHR]'
-      '      ,[UsedByCust]'
-      '      ,[AliasCust]'
-      '      ,[IsArchived]'
-      '  FROM [IDFES].[dbo].[EmailType]'
-      '  WHERE [IsArchived] = 0 AND [UsedByCust] = 1')
     Left = 504
-    Top = 224
+    Top = 128
   end
   object qryCustSite: TFDQuery
     Tag = 1

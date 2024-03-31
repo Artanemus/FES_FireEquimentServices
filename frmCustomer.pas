@@ -18,7 +18,8 @@ uses
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
   Data.Bind.Grid, Data.Bind.DBScope, Vcl.VirtualImage,
-  frameFESCustAddress, Vcl.TitleBarCtrls, Vcl.WinXPanels;
+  frameFESCustAddress, Vcl.TitleBarCtrls, Vcl.WinXPanels, frameFESCustNumber,
+  frameFESCustEmail;
 
 type
   TCustomer = class(TForm)
@@ -45,8 +46,6 @@ type
     spdbtnGenerateCustCode: TSpeedButton;
     Label3: TLabel;
     DBMemo1: TDBMemo;
-    DBGrid1: TDBGrid;
-    DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     DBGrid4: TDBGrid;
     DBGrid5: TDBGrid;
@@ -54,16 +53,6 @@ type
     TabSheet8: TTabSheet;
     actnmanCustomer: TActionManager;
     actnFilterSelect: TAction;
-    pumenuContacts: TPopupMenu;
-    Insert1: TMenuItem;
-    Delete1: TMenuItem;
-    Edit2: TMenuItem;
-    Post1: TMenuItem;
-    Cncel1: TMenuItem;
-    Refresh1: TMenuItem;
-    N4: TMenuItem;
-    Goto2: TMenuItem;
-    Find2: TMenuItem;
     actnpuInsert: TAction;
     actnpuDelete: TAction;
     actnpuEdit: TAction;
@@ -80,7 +69,6 @@ type
     actnpuClearPostcodeSuburb: TAction;
     actnpuGotoInspectOrder: TAction;
     DBGrid6: TDBGrid;
-    FESCustAddress1: TFESCustAddress;
     TitleBarPanel1: TTitleBarPanel;
     vimgSetFilters: TVirtualImage;
     vimgToggleFilters: TVirtualImage;
@@ -88,17 +76,15 @@ type
     vimgGotoID: TVirtualImage;
     VirtualImage5: TVirtualImage;
     vimgGotoCode: TVirtualImage;
+    FESCustAddress1: TFESCustAddress;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
-    procedure DBCmbBoxAddressTypeChange(Sender: TObject);
     procedure vimgSetFiltersClick(Sender: TObject);
   private
     { Private declarations }
     fFilterDlg: TCustFilter;
-    fHideArchived: Boolean;
-    fHideInActive: Boolean;
-//    fHideLinked: Boolean;
+    FCustFilterState: TFilterState;
 
   protected
     procedure FilterDlgUpdated(var Msg: TMessage); message FES_FILTERUPDATED;
@@ -143,17 +129,17 @@ begin
     begin
       CopyData := PCopyDataStruct(Msg.LParam);
       FilterState := PFilterState(CopyData^.lpData);
-      // access the fields of the record
-      fHideArchived := FilterState^.HideArchived;
-      fHideInActive := FilterState^.HideInActive;
-//      fHideTBA := FilterState^.HideTBA;
-//      fDateStart := FilterState^.DateStart;
-//      fDateEnd := FilterState^.DateEnd;
+      // store record data...
+      fCustFilterState.HideArchived := FilterState^.HideArchived;
+      fCustFilterState.HideInActive := FilterState^.HideInActive;
+      fCustFilterState.HideLinked := FilterState^.HideLinked;
+      fCustFilterState.StartDT := FilterState^.StartDT;
+      fCustFilterState.EndDT := FilterState^.EndDT;
     end
   finally
     begin
 //      CustomerData.UpdateCustFilter(fID, fHideArchived, fHideInActive,
-//        fHideTBA, fDateStart, fDateEnd);
+//        fHideLinked, fStartDT, fEndDT);
 
       actnFilterSelect.Caption := 'Filter (' +
         IntToStr(CustomerData.dsCustomer.DataSet.RecordCount) + ')';
@@ -163,27 +149,9 @@ end;
 
 procedure TCustomer.FormCreate(Sender: TObject);
 begin
-  fFilterDlg := nil;
-  CustomTitleBar.Enabled := true;
-  CustomTitleBar.Height := 40;
-
-
-  {
-  // assign the list items for field AddressTypeID in TDBCtrlGrid
-  DBCmbBoxAddressType.Clear;
-  }
-  {TODO -oBSA -cGeneral : Check DB up and running}
-  {
-  if Assigned(CustomerData) and CustomerData.dsCustomer.DataSet.Active then
-  begin
-    CustomerData.dsAddressType.DataSet.First;
-    while not CustomerData.dsAddressType.DataSet.Eof do
-    begin
-      DBCmbBoxAddressType.Items.Add(CustomerData.dsAddressType.DataSet.FieldByName('AliasCust').AsString);
-      CustomerData.dsAddressType.DataSet.Next;
-    end;
-  end;
-  }
+  fFilterDlg := nil; // Select filters for customer records
+  CustomTitleBar.Enabled := true; // GlassFrame.Top = TitleBar.Height
+//  FESCustAddress1.HideUnPinned := false;
 end;
 
 procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
@@ -199,31 +167,6 @@ begin
     if CustomerData.dsCustomer.DataSet.State = dsEdit then
         CustomerData.dsCustomer.DataSet.FieldByName('CustCode').AsString := s;
   end;
-end;
-
-procedure TCustomer.DBCmbBoxAddressTypeChange(Sender: TObject);
-//var
-//  s: string;
-//  SearchOptions: TLocateOptions;
-//  result: boolean;
-begin
-//  if DBCtrlGrid1.DataSource.DataSet.State = dsEdit then
-//  begin
-//    s := DBCmbBoxAddressType.Text;
-//    s := DBCmbBoxAddressType.Items[DBCmbBoxAddressType.ItemIndex];
-//    result := false;
-//    SearchOptions := [];
-//    if CustomerData.dsAddressType.DataSet.Active then
-//    begin
-//        result := CustomerData.dsAddressType.DataSet.Locate('AliasCust', s, SearchOptions);
-//        if result then
-//        begin
-//          DBCtrlGrid1.DataSource.DataSet.FieldByName('AddressTypeID').AsInteger :=
-//          CustomerData.dsAddressType.DataSet.FieldByName('AddressTypeID').AsInteger;
-//        end;
-//
-//    end;
-//  end;
 end;
 
 procedure TCustomer.vimgSetFiltersClick(Sender: TObject);

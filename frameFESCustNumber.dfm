@@ -1,13 +1,126 @@
-object FESCustAddress: TFESCustAddress
+object FESCustNumber: TFESCustNumber
   Left = 0
   Top = 0
-  Width = 629
+  Width = 598
   Height = 480
   TabOrder = 0
+  object RelativePanel1: TRelativePanel
+    Left = 0
+    Top = 32
+    Width = 598
+    Height = 448
+    ControlCollection = <
+      item
+        Control = ctrllistCustNum
+        AlignBottomWithPanel = True
+        AlignHorizontalCenterWithPanel = True
+        AlignLeftWithPanel = True
+        AlignRightWithPanel = True
+        AlignTopWithPanel = True
+        AlignVerticalCenterWithPanel = False
+      end>
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    DesignSize = (
+      598
+      448)
+    object ctrllistCustNum: TControlList
+      Left = 0
+      Top = 0
+      Width = 598
+      Height = 448
+      Anchors = []
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ItemCount = 2
+      ItemHeight = 40
+      ItemIndex = 0
+      ItemMargins.Left = 0
+      ItemMargins.Top = 0
+      ItemMargins.Right = 0
+      ItemMargins.Bottom = 0
+      ParentColor = False
+      ParentFont = False
+      PopupMenu = pumenuCustNum
+      TabOrder = 0
+      OnBeforeDrawItem = ctrllistCustNumBeforeDrawItem
+      object lblNumberType: TLabel
+        Left = 16
+        Top = 8
+        Width = 60
+        Height = 21
+        Caption = 'Business'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblNumber: TLabel
+        Left = 174
+        Top = 8
+        Width = 98
+        Height = 21
+        Caption = '073 273 1360'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        StyleElements = [seClient, seBorder]
+      end
+      object ctrllistbtnEdit: TControlListButton
+        Left = 557
+        Top = 4
+        Width = 32
+        Height = 32
+        Anchors = [akTop, akRight]
+        Images = vimglistCustNum
+        ImageIndex = 2
+        ImageName = 'Edit'
+        LinkHotColor = clHighlight
+        Style = clbkToolButton
+      end
+      object ctrllistbtnPin: TControlListButton
+        Left = 519
+        Top = 4
+        Width = 32
+        Height = 32
+        Anchors = [akTop, akRight]
+        Images = vimglistCustNum
+        ImageIndex = 0
+        ImageName = 'pin'
+        LinkHotColor = clHighlight
+        Style = clbkToolButton
+        OnClick = ctrllistbtnPinClick
+      end
+      object lblCreatedOn: TLabel
+        Left = 440
+        Top = 11
+        Width = 66
+        Height = 17
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        Caption = '28/05/2021'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+  end
   object StackPanel1: TStackPanel
     Left = 0
     Top = 0
-    Width = 629
+    Width = 598
     Height = 32
     Align = alTop
     BevelOuter = bvNone
@@ -22,7 +135,7 @@ object FESCustAddress: TFESCustAddress
       Width = 32
       Height = 32
       Hint = 'Toggle visibility of un-pinned items.'
-      ImageCollection = imgcollCustAddress
+      ImageCollection = imgcollCustNum
       ImageWidth = 0
       ImageHeight = 0
       ImageIndex = 9
@@ -32,120 +145,7 @@ object FESCustAddress: TFESCustAddress
       OnClick = vimgHideUnPinnedClick
     end
   end
-  object RelativePanel1: TRelativePanel
-    Left = 0
-    Top = 32
-    Width = 629
-    Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustAddress
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
-    Align = alClient
-    BevelOuter = bvNone
-    TabOrder = 1
-    object ctrllistCustAddress: TControlList
-      Left = 0
-      Top = 0
-      Width = 629
-      Height = 448
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemCount = 1
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
-      ParentFont = False
-      PopupMenu = pumenuCustAddress
-      TabOrder = 0
-      OnBeforeDrawItem = ctrllistCustAddressBeforeDrawItem
-      object ctrllistbtnEdit: TControlListButton
-        Left = 589
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnEditClick
-        ExplicitLeft = 600
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 551
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnPinClick
-        ExplicitLeft = 562
-      end
-      object lblAddress: TLabel
-        Left = 128
-        Top = 8
-        Width = 355
-        Height = 57
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = False
-        Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-      end
-      object lblAddressType: TLabel
-        Left = 8
-        Top = 8
-        Width = 60
-        Height = 21
-        Caption = 'Business'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblZone: TLabel
-        Left = 510
-        Top = 46
-        Width = 111
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'Forest Lake - Oxley'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-    end
-  end
-  object imgcollCustAddress: TImageCollection
+  object imgcollCustNum: TImageCollection
     Images = <
       item
         Name = 'pin'
@@ -459,7 +459,7 @@ object FESCustAddress: TFESCustAddress
     Left = 312
     Top = 152
   end
-  object vimglistCustAddress: TVirtualImageList
+  object vimglistCustNum: TVirtualImageList
     Images = <
       item
         CollectionIndex = 0
@@ -501,14 +501,14 @@ object FESCustAddress: TFESCustAddress
         CollectionName = 'Refresh'
         Name = 'Refresh'
       end>
-    ImageCollection = imgcollCustAddress
+    ImageCollection = imgcollCustNum
     Width = 32
     Height = 32
     Left = 312
     Top = 208
   end
-  object pumenuCustAddress: TPopupMenu
-    Images = vimglistCustAddress
+  object pumenuCustNum: TPopupMenu
+    Images = vimglistCustNum
     Left = 312
     Top = 272
     object puEdit: TMenuItem
@@ -549,43 +549,43 @@ object FESCustAddress: TFESCustAddress
       ShortCut = 123
     end
   end
-  object bindlistCustAddress: TBindingsList
+  object bindsrcCustNum: TBindSourceDB
+    DataSet = CustomerData.qryCustNum
+    ScopeMappings = <>
+    Left = 128
+    Top = 200
+  end
+  object bindlistCustNum: TBindingsList
     Methods = <>
     OutputConverters = <>
     Left = 128
-    Top = 176
-    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+    Top = 136
+    object LinkPropertyToField1: TLinkPropertyToField
       Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      GridControl = ctrllistCustAddress
+      DataSource = bindsrcCustNum
+      FieldName = 'ShortDateStr'
+      Component = lblCreatedOn
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField2: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustNum
+      FieldName = 'NumberTypeStr'
+      Component = lblNumberType
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField3: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustNum
+      FieldName = 'Number'
+      Component = lblNumber
+      ComponentProperty = 'Caption'
+    end
+    object LinkGridToDataSourcebindsrcCustNum: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustNum
+      GridControl = ctrllistCustNum
       Columns = <>
     end
-    object LinkPropertyToFieldCaption: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'Zone'
-      Component = lblZone
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption2: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'AddressStr'
-      Component = lblAddress
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToFieldCaption3: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustAddress
-      FieldName = 'AddrTypeStr'
-      Component = lblAddressType
-      ComponentProperty = 'Caption'
-    end
-  end
-  object bindsrcCustAddress: TBindSourceDB
-    DataSet = CustomerData.qryCustAddress
-    ScopeMappings = <>
-    Left = 128
-    Top = 240
   end
 end

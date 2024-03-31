@@ -2,24 +2,12 @@ object Customer: TCustomer
   Left = 0
   Top = 0
   Caption = 'FES Customer'
-  ClientHeight = 674
+  ClientHeight = 673
   ClientWidth = 815
   Color = clBtnFace
   CustomTitleBar.Control = TitleBarPanel1
   CustomTitleBar.Height = 40
   CustomTitleBar.SystemHeight = False
-  CustomTitleBar.BackgroundColor = 4552068
-  CustomTitleBar.ForegroundColor = clWhite
-  CustomTitleBar.InactiveBackgroundColor = clWhite
-  CustomTitleBar.InactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonForegroundColor = clWhite
-  CustomTitleBar.ButtonBackgroundColor = 4552068
-  CustomTitleBar.ButtonHoverForegroundColor = 65793
-  CustomTitleBar.ButtonHoverBackgroundColor = 5541793
-  CustomTitleBar.ButtonPressedForegroundColor = 65793
-  CustomTitleBar.ButtonPressedBackgroundColor = 8170169
-  CustomTitleBar.ButtonInactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
@@ -27,13 +15,14 @@ object Customer: TCustomer
   Font.Style = []
   FormStyle = fsStayOnTop
   GlassFrame.Top = 40
+  Position = poDesigned
   StyleElements = [seFont, seClient]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
-    Top = 39
+    Top = 40
     Width = 815
     Height = 42
     Align = alTop
@@ -74,19 +63,17 @@ object Customer: TCustomer
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 81
+    Top = 82
     Width = 815
-    Height = 524
-    ActivePage = TabSheet7
+    Height = 522
+    ActivePage = TabSheet8
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 118
-    ExplicitHeight = 702
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
         807
-        488)
+        486)
       object Label2: TLabel
         Left = 3
         Top = 59
@@ -175,25 +162,6 @@ object Customer: TCustomer
     object TabSheet8: TTabSheet
       Caption = 'Business Numbers'
       ImageIndex = -1
-      object DBGrid1: TDBGrid
-        AlignWithMargins = True
-        Left = 10
-        Top = 10
-        Width = 787
-        Height = 468
-        Margins.Left = 10
-        Margins.Top = 10
-        Margins.Right = 10
-        Margins.Bottom = 10
-        Align = alClient
-        DataSource = CustomerData.dsCustContactNum
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -16
-        TitleFont.Name = 'Segoe UI'
-        TitleFont.Style = []
-      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Business Address'
@@ -203,7 +171,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 468
+        Height = 466
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -213,61 +181,58 @@ object Customer: TCustomer
         ExplicitLeft = 10
         ExplicitTop = 10
         ExplicitWidth = 787
-        ExplicitHeight = 646
-        inherited ctrllistCustBusNum: TControlList
-          Width = 787
-          Height = 436
-          ExplicitTop = 32
-          ExplicitWidth = 787
-          ExplicitHeight = 614
-          inherited ctrllistbtnEdit: TControlListButton
-            Left = 744
-            ExplicitLeft = 771
-          end
-          inherited ctrllistbtnPin: TControlListButton
-            Left = 706
-            ExplicitLeft = 733
-          end
-          inherited lblAddress: TLabel
-            Width = 526
-            ExplicitWidth = 553
-          end
-          inherited lblZone: TLabel
-            Left = 528
-            Width = 248
-            AutoSize = False
-            ExplicitLeft = 528
-            ExplicitWidth = 248
-          end
-        end
+        ExplicitHeight = 466
         inherited StackPanel1: TStackPanel
           Width = 787
+          ControlCollection = <
+            item
+              Control = FESCustAddress1.vimgHideUnPinned
+            end>
           ExplicitWidth = 787
+        end
+        inherited RelativePanel1: TRelativePanel
+          Width = 787
+          Height = 434
+          ControlCollection = <
+            item
+              Control = FESCustAddress1.ctrllistCustAddress
+              AlignBottomWithPanel = True
+              AlignHorizontalCenterWithPanel = True
+              AlignLeftWithPanel = True
+              AlignRightWithPanel = True
+              AlignTopWithPanel = True
+              AlignVerticalCenterWithPanel = False
+            end>
+          ExplicitWidth = 787
+          ExplicitHeight = 434
+          inherited ctrllistCustAddress: TControlList
+            Width = 787
+            Height = 434
+            ExplicitWidth = 787
+            ExplicitHeight = 434
+            inherited ctrllistbtnEdit: TControlListButton
+              Left = 743
+              ExplicitLeft = 763
+            end
+            inherited ctrllistbtnPin: TControlListButton
+              Left = 705
+              ExplicitLeft = 725
+            end
+            inherited lblAddress: TLabel
+              Width = 493
+              ExplicitWidth = 513
+            end
+            inherited lblZone: TLabel
+              Left = 664
+              ExplicitLeft = 664
+            end
+          end
         end
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Business Emails'
       ImageIndex = 2
-      object DBGrid2: TDBGrid
-        AlignWithMargins = True
-        Left = 10
-        Top = 10
-        Width = 787
-        Height = 468
-        Margins.Left = 10
-        Margins.Top = 10
-        Margins.Right = 10
-        Margins.Bottom = 10
-        Align = alClient
-        DataSource = CustomerData.dsCustEmails
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -16
-        TitleFont.Name = 'Segoe UI'
-        TitleFont.Style = []
-      end
     end
     object TabSheet4: TTabSheet
       Caption = 'LINKS to Sites'
@@ -277,7 +242,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 468
+        Height = 466
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -300,14 +265,13 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 468
+        Height = 466
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
         Margins.Bottom = 10
         Align = alClient
         DataSource = CustomerData.dsCustContact
-        PopupMenu = pumenuContacts
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -324,7 +288,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 468
+        Height = 466
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -347,7 +311,7 @@ object Customer: TCustomer
         Left = 10
         Top = 10
         Width = 787
-        Height = 468
+        Height = 466
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
@@ -365,21 +329,20 @@ object Customer: TCustomer
   end
   object Panel2: TPanel
     Left = 0
-    Top = 605
+    Top = 604
     Width = 815
     Height = 69
     Align = alBottom
-    BevelEdges = [beTop]
+    BevelEdges = []
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 820
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
       Top = 10
       Width = 795
-      Height = 47
+      Height = 49
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -393,13 +356,13 @@ object Customer: TCustomer
     Left = 0
     Top = 0
     Width = 815
-    Height = 39
+    Height = 40
     CustomButtons = <>
     object vimgSetFilters: TVirtualImage
       Left = 473
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Set Filters'
       Align = alRight
       ImageCollection = ImageCollection1
@@ -418,7 +381,7 @@ object Customer: TCustomer
       Left = 505
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Toggle Filters ON/OFF'
       Align = alRight
       ImageCollection = ImageCollection1
@@ -436,7 +399,7 @@ object Customer: TCustomer
       Left = 537
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Find a customer'
       Align = alRight
       ImageCollection = ImageCollection1
@@ -454,7 +417,7 @@ object Customer: TCustomer
       Left = 601
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Goto customer'#39's ID'
       Align = alRight
       ImageCollection = ImageCollection1
@@ -473,7 +436,7 @@ object Customer: TCustomer
       Left = 633
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Syncronize and refresh.'
       Margins.Left = 0
       Margins.Top = 0
@@ -495,7 +458,7 @@ object Customer: TCustomer
       Left = 569
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Goto customer'#39's CODE'
       Align = alRight
       ImageCollection = ImageCollection1
@@ -1221,39 +1184,6 @@ object Customer: TCustomer
     object actnpuClearPostcodeSuburb: TAction
       Category = 'PopupMenu'
       Caption = 'Clear Postcode/Suburb'
-    end
-  end
-  object pumenuContacts: TPopupMenu
-    Images = VirtualImageList1
-    Left = 636
-    Top = 435
-    object Insert1: TMenuItem
-      Action = actnpuInsert
-    end
-    object Delete1: TMenuItem
-      Action = actnpuDelete
-    end
-    object Edit2: TMenuItem
-      Action = actnpuEdit
-    end
-    object Post1: TMenuItem
-      Action = actnpuPost
-      ShortCut = 8205
-    end
-    object Cncel1: TMenuItem
-      Action = actnpuCancel
-    end
-    object Refresh1: TMenuItem
-      Action = actpuRefresh
-    end
-    object N4: TMenuItem
-      Caption = '-'
-    end
-    object Goto2: TMenuItem
-      Action = actnpuGotoContact
-    end
-    object Find2: TMenuItem
-      Action = actnpuFindContact
     end
   end
 end
