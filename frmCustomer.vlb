@@ -1,7 +1,4 @@
-﻿[DBGrid4]
-Coordinates=10,724,64,36
-
-[TabSheet2]
+﻿[TabSheet2]
 Coordinates=1020,678,77,36
 
 [VirtualImageList1]
@@ -9,9 +6,6 @@ Coordinates=989,474,114,36
 
 [ImageCollection1]
 Coordinates=989,529,114,36
-
-[CustomerData.dsCustContact]
-Coordinates=99,888,185,36
 
 [actnmanCustomer]
 Coordinates=989,694,119,36
@@ -28,9 +22,6 @@ Coordinates=298,564,55,58
 [DBCheckBox1]
 Coordinates=638,678,98,36
 
-[DBGrid3]
-Coordinates=564,678,64,36
-
 [TabSheet8]
 Coordinates=477,678,77,36
 
@@ -45,9 +36,6 @@ Coordinates=303,678,77,36
 
 [dbedtCustCode]
 Coordinates=189,678,104,36
-
-[CustomerData.qryCustContact]
-Coordinates=389,10,189,278
 
 [TabSheet4]
 Coordinates=10,678,77,36
@@ -72,15 +60,13 @@ Coordinates=852,342,53,58
 
 [CustomerData.qryCustSite]
 Coordinates=10,10,167,322
+Visible=False
 
 [CustomerData.qryCustomer]
 Coordinates=588,10,174,278
 
 [TabSheet7]
 Coordinates=561,632,77,36
-
-[DBGrid5]
-Coordinates=381,632,64,36
 
 [Label3]
 Coordinates=789,342,53,58
@@ -90,6 +76,7 @@ Coordinates=190,632,75,36
 
 [CustomerData.qryCustEmails]
 Coordinates=398,362,184,212
+Visible=False
 
 [CustomerData.dsCustAdress]
 Coordinates=515,1112,181,36
@@ -165,21 +152,18 @@ Coordinates=514,1472,107,36
 Coordinates=198,1472,148,36
 
 []
-Coordinates=833,678,64,36
+Coordinates=460,380,64,36
 LayerNames=NewLayer0
 Visible=True
 
 [CustomerData.qryCustSurvey]
 Coordinates=137,888,185,322
 
-[DBGrid6]
-Coordinates=460,380,64,36
-
 [CustomerData.dsCustInspect]
 Coordinates=326,888,182,36
 
 [CustomerData.qryCustInspect]
-Coordinates=400,750,187,476
+Coordinates=597,760,187,476
 
 [CustomerData.dsCustSurvey]
 Coordinates=0,0,181,36
@@ -197,7 +181,15 @@ Coordinates=772,10,179,212
 
 [CustomerData.qryCustNum]
 Coordinates=1413,30,216,212
+Visible=False
 
 [CustomerData.dsCustNum]
 Coordinates=739,463,212,36
+
+[CustomerData.qryCustContact]
+Coordinates=389,10,189,278
+Visible=False
+
+[CustomerData.dsCustContact]
+Coordinates=99,888,185,36
 

@@ -101,9 +101,9 @@ object FESCustAddress: TFESCustAddress
       end
       object lblAddress: TLabel
         Left = 128
-        Top = 8
+        Top = 4
         Width = 355
-        Height = 57
+        Height = 62
         Anchors = [akLeft, akTop, akRight, akBottom]
         AutoSize = False
         Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
@@ -117,7 +117,7 @@ object FESCustAddress: TFESCustAddress
       end
       object lblAddressType: TLabel
         Left = 8
-        Top = 8
+        Top = 4
         Width = 60
         Height = 21
         Caption = 'Business'

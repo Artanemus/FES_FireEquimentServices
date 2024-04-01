@@ -1,4 +1,4 @@
-object FESCustEmail: TFESCustEmail
+object FESCustSurvey: TFESCustSurvey
   Left = 0
   Top = 0
   Width = 640
@@ -22,14 +22,13 @@ object FESCustEmail: TFESCustEmail
       Width = 32
       Height = 32
       Hint = 'Toggle visibility of un-pinned items.'
-      ImageCollection = imgcollCustEmail
+      ImageCollection = imgcollCustSurvey
       ImageWidth = 0
       ImageHeight = 0
       ImageIndex = 9
       ImageName = 'VisibilityOn'
       ParentShowHint = False
       ShowHint = True
-      OnClick = vimgHideUnPinnedClick
     end
   end
   object RelativePanel1: TRelativePanel
@@ -73,9 +72,7 @@ object FESCustEmail: TFESCustEmail
       ItemMargins.Bottom = 0
       ParentColor = False
       ParentFont = False
-      PopupMenu = pumenuCustEmail
       TabOrder = 0
-      OnBeforeDrawItem = ctrllistCustEmailBeforeDrawItem
       object lblEmailType: TLabel
         Left = 7
         Top = 8
@@ -124,12 +121,11 @@ object FESCustEmail: TFESCustEmail
         Width = 32
         Height = 32
         Anchors = [akTop, akRight]
-        Images = vimglistCustEmail
+        Images = vimglistCustSurvey
         ImageIndex = 0
         ImageName = 'pin'
         LinkHotColor = clHighlight
         Style = clbkToolButton
-        OnClick = ctrllistbtnPinClick
       end
       object ctrllistbtnEdit: TControlListButton
         Left = 593
@@ -137,7 +133,7 @@ object FESCustEmail: TFESCustEmail
         Width = 32
         Height = 32
         Anchors = [akTop, akRight]
-        Images = vimglistCustEmail
+        Images = vimglistCustSurvey
         ImageIndex = 2
         ImageName = 'Edit'
         LinkHotColor = clHighlight
@@ -145,7 +141,7 @@ object FESCustEmail: TFESCustEmail
       end
     end
   end
-  object imgcollCustEmail: TImageCollection
+  object imgcollCustSurvey: TImageCollection
     Images = <
       item
         Name = 'pin'
@@ -459,7 +455,7 @@ object FESCustEmail: TFESCustEmail
     Left = 312
     Top = 152
   end
-  object vimglistCustEmail: TVirtualImageList
+  object vimglistCustSurvey: TVirtualImageList
     Images = <
       item
         CollectionIndex = 0
@@ -501,14 +497,14 @@ object FESCustEmail: TFESCustEmail
         CollectionName = 'Refresh'
         Name = 'Refresh'
       end>
-    ImageCollection = imgcollCustEmail
+    ImageCollection = imgcollCustSurvey
     Width = 32
     Height = 32
     Left = 312
     Top = 208
   end
-  object pumenuCustEmail: TPopupMenu
-    Images = vimglistCustEmail
+  object pumenuCustSurvey: TPopupMenu
+    Images = vimglistCustSurvey
     Left = 312
     Top = 264
     object puEdit: TMenuItem
@@ -553,43 +549,16 @@ object FESCustEmail: TFESCustEmail
       ShortCut = 123
     end
   end
-  object bindsrcCustEmail: TBindSourceDB
-    DataSet = CustomerData.qryCustEmails
-    ScopeMappings = <>
-    Left = 144
-    Top = 160
-  end
-  object bindListCustEmail: TBindingsList
+  object bindlistCustSurvey: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 144
-    Top = 96
-    object LinkPropertyToField1: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustEmail
-      FieldName = 'EmailTypeStr'
-      Component = lblEmailType
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToField2: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustEmail
-      FieldName = 'Email'
-      Component = lblEmail
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToField3: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustEmail
-      FieldName = 'ShortDateStr'
-      Component = lblCreatedOn
-      ComponentProperty = 'Caption'
-    end
-    object LinkGridToDataSourcebindsrcCustEmail: TLinkGridToDataSource
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustEmail
-      GridControl = ctrllistCustEmail
-      Columns = <>
-    end
+    Left = 128
+    Top = 152
+  end
+  object bindsrcCustSurvey: TBindSourceDB
+    DataSet = CustomerData.qryCustSurvey
+    ScopeMappings = <>
+    Left = 128
+    Top = 240
   end
 end

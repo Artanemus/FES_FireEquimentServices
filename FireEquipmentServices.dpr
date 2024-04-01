@@ -32,7 +32,11 @@ uses
   unitFESHelpers in 'unitFESHelpers.pas',
   frameFESCustAddress in 'frameFESCustAddress.pas' {FESCustAddress: TFrame},
   frameFESCustNumber in 'frameFESCustNumber.pas' {FESCustNumber: TFrame},
-  frameFESCustEmail in 'frameFESCustEmail.pas' {FESCustEmail: TFrame};
+  frameFESCustEmail in 'frameFESCustEmail.pas' {FESCustEmail: TFrame},
+  frameFESCustSite in 'frameFESCustSite.pas' {FESCustSite: TFrame},
+  frameFESCustContact in 'frameFESCustContact.pas' {FESCustContact: TFrame},
+  frameFESCustInspect in 'frameFESCustInspect.pas' {FESCustInspect: TFrame},
+  frameFESCustSurvey in 'frameFESCustSurvey.pas' {FESCustSurvey: TFrame};
 
 {$R *.res}
 

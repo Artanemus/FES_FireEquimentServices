@@ -192,6 +192,8 @@ object CustomerData: TCustomerData
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
     Connection = FES.fesConnection
+    FormatOptions.AssignedValues = [fvFmtDisplayDateTime]
+    FormatOptions.FmtDisplayDateTime = 'dd/mm/yy'
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
     UpdateOptions.EnableDelete = False
     UpdateOptions.EnableInsert = False
@@ -206,92 +208,26 @@ object CustomerData: TCustomerData
       '      ,[CustSite].[IsArchived]'
       '      ,[CustSite].[IsEnabled]'
       '      ,[SiteContactID]'
-      '      ,[CustSite].[Note]'
+      '     -- ,[CustSite].[Note]'
       '      ,[SeedDate]'
       '      ,[SeedLevel]'
       '      ,[DoReseed]'
-      '--      ,[Site].Address'
       
-        '      , [dbo].GetSiteAddrSingleLine(CustSite.SiteID,1) AS SiteAd' +
-        'drStr '
+        '      ,[dbo].GetSiteAddrMultiLine(CustSite.SiteID) AS SiteAddrSt' +
+        'r '
+      
+        '      ,[dbo].GetCustSiteHRSingleLine(CustSite.CustSiteID,1)  AS ' +
+        'SiteContactStr'
       '  FROM [IDFES].[dbo].[CustSite]'
-      '  INNER JOIN dbo.Site ON CustSite.SiteID = Site.SiteID')
-    Left = 664
-    Top = 136
-    object qryCustSiteCustSiteID: TFDAutoIncField
-      FieldName = 'CustSiteID'
-      Origin = 'CustSiteID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustSiteCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Required = True
-      Visible = False
-    end
-    object qryCustSiteSiteID: TIntegerField
-      FieldName = 'SiteID'
-      Origin = 'SiteID'
-      Required = True
-      Visible = False
-    end
-    object qryCustSiteSiteAddrStr: TWideStringField
-      DisplayWidth = 60
-      FieldName = 'SiteAddrStr'
-      Origin = 'SiteAddrStr'
-      ReadOnly = True
-      Size = 100
-    end
-    object qryCustSiteCreatedOn: TSQLTimeStampField
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-      Visible = False
-    end
-    object qryCustSiteIsArchived: TBooleanField
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustSiteIsEnabled: TBooleanField
-      FieldName = 'IsEnabled'
-      Origin = 'IsEnabled'
-      Required = True
-    end
-    object qryCustSiteSiteContactID: TIntegerField
-      FieldName = 'SiteContactID'
-      Origin = 'SiteContactID'
-      Visible = False
-    end
-    object qryCustSiteNote: TMemoField
-      FieldName = 'Note'
-      Origin = 'Note'
-      OnGetText = qryCustSiteNoteGetText
-      OnSetText = qryCustSiteNoteSetText
-      BlobType = ftMemo
-    end
-    object qryCustSiteSeedDate: TSQLTimeStampField
-      FieldName = 'SeedDate'
-      Origin = 'SeedDate'
-      Visible = False
-    end
-    object qryCustSiteSeedLevel: TIntegerField
-      FieldName = 'SeedLevel'
-      Origin = 'SeedLevel'
-      Visible = False
-    end
-    object qryCustSiteDoReseed: TBooleanField
-      FieldName = 'DoReseed'
-      Origin = 'DoReseed'
-      Required = True
-      Visible = False
-    end
+      '  --INNER JOIN dbo.Site ON CustSite.SiteID = Site.SiteID'
+      '  --INNER JOIN dbo.HR ON CustSite.SiteContactID = HR.HRID')
+    Left = 592
+    Top = 128
   end
   object dsCustSite: TDataSource
     DataSet = qryCustSite
-    Left = 744
-    Top = 136
+    Left = 656
+    Top = 128
   end
   object qryCustContact: TFDQuery
     Tag = 1
@@ -310,88 +246,28 @@ object CustomerData: TCustomerData
       'SELECT [CustContactID]'
       '     , [CustContact].[CustomerID]'
       '     , [CustContact].[HRID]'
-      '     , [CustContact].[CreatedOn]'
-      '     , CONCAT(hr.FirstName, '#39' '#39', UPPER(hr.LastName)) AS FName'
+      
+        '     , CONVERT(DATE, [CustContact].[CreatedOn], 102) AS CreatedO' +
+        'n102'
+      '     , dbo.GetHRSingleLine([CustContact].[HRID], 1) AS FName'
       '     , ContactType.AliasCust AS ContactTypeStr'
-      '     , [CustContact].[Caption]'
+      '     --, [CustContact].[Caption]'
       '     , [CustContact].[IsArchived]'
-      '     , [CustContact].[SortList]'
-      '     , [CustContact].[ContactTypeID]'
+      '     --, [CustContact].[SortList]'
+      '     --, [CustContact].[ContactTypeID]'
       'FROM [IDFES].[dbo].[CustContact]'
       '    INNER JOIN HR'
       '        ON CustContact.HRID = HR.HRID'
       '    LEFT JOIN ContactType'
-      '        ON CustContact.ContactTypeID = ContactType.ContactTypeID')
-    Left = 840
-    Top = 136
-    object qryCustContactCustContactID: TFDAutoIncField
-      FieldName = 'CustContactID'
-      Origin = 'CustContactID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustContactCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Required = True
-      Visible = False
-    end
-    object qryCustContactHRID: TIntegerField
-      FieldName = 'HRID'
-      Origin = 'HRID'
-      Required = True
-      Visible = False
-    end
-    object qryCustContactCreatedOn: TSQLTimeStampField
-      DisplayLabel = 'Created On'
-      DisplayWidth = 10
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustContactFName: TWideStringField
-      DisplayWidth = 26
-      FieldName = 'FName'
-      Origin = 'FName'
-      ReadOnly = True
-      Required = True
-      Size = 513
-    end
-    object qryCustContactContactTypeStr: TWideStringField
-      DisplayLabel = 'Contact Type'
-      DisplayWidth = 16
-      FieldName = 'ContactTypeStr'
-      Origin = 'ContactTypeStr'
-      Size = 50
-    end
-    object qryCustContactCaption: TWideStringField
-      DisplayLabel = 'Notes'
-      DisplayWidth = 28
-      FieldName = 'Caption'
-      Origin = 'Caption'
-      Size = 128
-    end
-    object qryCustContactIsArchived: TBooleanField
-      DisplayLabel = 'Archived'
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustContactSortList: TIntegerField
-      FieldName = 'SortList'
-      Origin = 'SortList'
-      Visible = False
-    end
-    object qryCustContactContactTypeID: TIntegerField
-      FieldName = 'ContactTypeID'
-      Origin = 'ContactTypeID'
-      Visible = False
-    end
+      '        ON CustContact.ContactTypeID = ContactType.ContactTypeID'
+      'WHERE CustContact.HRID IS NOT NULL')
+    Left = 736
+    Top = 128
   end
   object dsCustContact: TDataSource
     DataSet = qryCustContact
-    Left = 920
-    Top = 136
+    Left = 800
+    Top = 128
   end
   object qryCustInspect: TFDQuery
     Active = True
@@ -403,143 +279,53 @@ object CustomerData: TCustomerData
     UpdateOptions.UpdateTableName = 'IDFES.dbo.InspectionOrder'
     UpdateOptions.KeyFields = 'InspectedOn'
     SQL.Strings = (
-      'SELECT '
-      #9#9' [InspectionOrderID]'
-      #9#9',[InspectionOrder].[CreatedOn]'
-      #9#9',[RequestedDT]'
-      #9#9',[InspectedOn]'
-      #9#9',[CompletedDT]'
-      #9#9',[ServiceInterval]'
-      #9#9',[LevelNum]'
-      #9#9',[InspectionOrder].[Note]'
-      #9#9',[NotePortable]'
-      #9#9',[NoteElectrical]'
-      #9#9',[NoteWaterBase]'
-      #9#9',[NoteStructual]'
-      #9#9',[InspectionOrder].[InspectionStatusID]'
-      #9#9',[HRID]'
-      #9#9',[CustSiteID]'
-      #9#9',[CustomerID]'
-      #9#9',[InspectionOrder].[SiteID]'
-      '        ,[Site].Address'
-      '        ,[InspectionStatus].Caption AS InspectStatusStr'
-      'FROM [dbo].[InspectionOrder] '
+      'SELECT [InspectionOrderID]'
+      '     , [CustSiteID]'
+      '     , [CustomerID]'
+      '     --, [InspectionOrder].[CreatedOn]'
+      '     --, [InspectionOrder].[RequestedDT]'
+      '     --, [InspectionOrder].[InspectedOn]'
+      '     --, [InspectionOrder].[CompletedDT]'
       
-        'INNER JOIN [dbo].[Site] ON [InspectionOrder].SiteID =  Site.Site' +
-        'ID'
+        '     , CONCAT('#39'REQU:'#39', CONVERT(DATE, [RequestedDT], 102)) AS Req' +
+        'uestedDT'
       
-        'INNER JOIN InspectionStatus ON [InspectionOrder].InspectionStatu' +
-        'sID = InspectionStatus.InspectionStatusID;')
-    Left = 1016
-    Top = 136
-    object qryCustInspectInspectionOrderID: TFDAutoIncField
-      FieldName = 'InspectionOrderID'
-      Origin = 'InspectionOrderID'
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustInspectAddress: TWideStringField
-      DisplayWidth = 40
-      FieldName = 'Address'
-      Origin = 'Address'
-      Size = 256
-    end
-    object qryCustInspectInspectStatusStr: TWideStringField
-      DisplayWidth = 12
-      FieldName = 'InspectStatusStr'
-      Origin = 'InspectStatusStr'
-      Size = 50
-    end
-    object qryCustInspectCreatedOn: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustInspectRequestedDT: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'RequestedDT'
-      Origin = 'RequestedDT'
-    end
-    object qryCustInspectInspectedOn: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'InspectedOn'
-      Origin = 'InspectedOn'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-    end
-    object qryCustInspectCompletedDT: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'CompletedDT'
-      Origin = 'CompletedDT'
-    end
-    object qryCustInspectServiceInterval: TFloatField
-      FieldName = 'ServiceInterval'
-      Origin = 'ServiceInterval'
-      Visible = False
-    end
-    object qryCustInspectLevelNum: TIntegerField
-      FieldName = 'LevelNum'
-      Origin = 'LevelNum'
-      Visible = False
-    end
-    object qryCustInspectNote: TWideStringField
-      FieldName = 'Note'
-      Origin = 'Note'
-      Size = 128
-    end
-    object qryCustInspectNotePortable: TWideStringField
-      FieldName = 'NotePortable'
-      Origin = 'NotePortable'
-      Visible = False
-      Size = 128
-    end
-    object qryCustInspectNoteElectrical: TWideStringField
-      FieldName = 'NoteElectrical'
-      Origin = 'NoteElectrical'
-      Visible = False
-      Size = 128
-    end
-    object qryCustInspectNoteWaterBase: TWideStringField
-      FieldName = 'NoteWaterBase'
-      Origin = 'NoteWaterBase'
-      Visible = False
-      Size = 128
-    end
-    object qryCustInspectNoteStructual: TWideStringField
-      FieldName = 'NoteStructual'
-      Origin = 'NoteStructual'
-      Visible = False
-      Size = 128
-    end
-    object qryCustInspectInspectionStatusID: TIntegerField
-      FieldName = 'InspectionStatusID'
-      Origin = 'InspectionStatusID'
-      Visible = False
-    end
-    object qryCustInspectHRID: TIntegerField
-      FieldName = 'HRID'
-      Origin = 'HRID'
-      Visible = False
-    end
-    object qryCustInspectCustSiteID: TIntegerField
-      FieldName = 'CustSiteID'
-      Origin = 'CustSiteID'
-      Visible = False
-    end
-    object qryCustInspectCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Visible = False
-    end
-    object qryCustInspectSiteID: TIntegerField
-      FieldName = 'SiteID'
-      Origin = 'SiteID'
-      Visible = False
-    end
+        '     , CONCAT('#39'INSP:'#39', CONVERT(DATE, [InspectedOn], 102)) AS Ins' +
+        'pectedOn'
+      
+        '     , CONCAT('#39'COMP:'#39', CONVERT(DATE, [CompletedDT], 102)) AS Com' +
+        'pletedDT'
+      '     , [ServiceInterval]'
+      '     , [LevelNum]'
+      '     --,[InspectionOrder].[Note]'
+      '     --,[NotePortable]'
+      '     --,[NoteElectrical]'
+      '     --,[NoteWaterBase]'
+      '     --,[NoteStructual]'
+      '     , [InspectionOrder].[InspectionStatusID]'
+      '     , [InspectionOrder].[HRID]'
+      '     , CONCAT('#39'TECH:'#39', firstname, '#39' '#39', UPPER(lastname)) AS FNAME'
+      '     , [InspectionOrder].[SiteID]'
+      
+        '     , dbo.GetSiteAddrSingleLine([InspectionOrder].[SiteID], 1) ' +
+        'AS SiteAddrStr'
+      '     , [InspectionStatus].Caption AS InspectStatusStr'
+      'FROM [dbo].[InspectionOrder]'
+      '    INNER JOIN [dbo].[Site]'
+      '        ON [InspectionOrder].SiteID = Site.SiteID'
+      '    LEFT JOIN InspectionStatus'
+      
+        '        ON [InspectionOrder].InspectionStatusID = InspectionStat' +
+        'us.InspectionStatusID'
+      '    LEFT JOIN HR'
+      '        ON InspectionOrder.HRID = HR.HRID;')
+    Left = 904
+    Top = 128
   end
   object dsCustInspect: TDataSource
     DataSet = qryCustInspect
-    Left = 1104
-    Top = 136
+    Left = 992
+    Top = 128
   end
   object qryCustSurvey: TFDQuery
     Active = True
@@ -551,90 +337,43 @@ object CustomerData: TCustomerData
     UpdateOptions.UpdateTableName = 'IDFES.dbo.SurveyOrder'
     UpdateOptions.KeyFields = 'SurveyOrderID'
     SQL.Strings = (
-      'SELECT '
-      #9#9' [SurveyOrderID]'
-      #9#9',[SurveyOrder].[CreatedOn]'
-      #9#9',[RequestedDT]'
-      #9#9',[SurveyedOn]'
-      #9#9',[CompletedDT]'
-      #9#9',[SurveyOrder].[IsArchived]'
-      #9#9',[SurveyStatusID]'
-      #9#9',[HRID]'
-      #9#9',[CustSiteID]'
-      #9#9',[CustomerID]'
-      #9#9',[SurveyOrder].[SiteID]'
-      '        ,[Site].[Address]'
-      'FROM [dbo].[SurveyOrder] '
-      'INNER JOIN [dbo].[Site] ON [SurveyOrder].SiteID =  Site.SiteID')
-    Left = 1232
-    Top = 136
-    object qryCustSurveySurveyOrderID: TFDAutoIncField
-      FieldName = 'SurveyOrderID'
-      Origin = 'SurveyOrderID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      Visible = False
-    end
-    object qryCustSurveyAddress: TWideStringField
-      DisplayWidth = 40
-      FieldName = 'Address'
-      Origin = 'Address'
-      Size = 256
-    end
-    object qryCustSurveyCreatedOn: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'CreatedOn'
-      Origin = 'CreatedOn'
-    end
-    object qryCustSurveyRequestedDT: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'RequestedDT'
-      Origin = 'RequestedDT'
-    end
-    object qryCustSurveySurveyedOn: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'SurveyedOn'
-      Origin = 'SurveyedOn'
-    end
-    object qryCustSurveyCompletedDT: TSQLTimeStampField
-      DisplayWidth = 10
-      FieldName = 'CompletedDT'
-      Origin = 'CompletedDT'
-    end
-    object qryCustSurveyIsArchived: TBooleanField
-      FieldName = 'IsArchived'
-      Origin = 'IsArchived'
-      Required = True
-    end
-    object qryCustSurveySurveyStatusID: TIntegerField
-      FieldName = 'SurveyStatusID'
-      Origin = 'SurveyStatusID'
-      Visible = False
-    end
-    object qryCustSurveyHRID: TIntegerField
-      FieldName = 'HRID'
-      Origin = 'HRID'
-      Visible = False
-    end
-    object qryCustSurveyCustSiteID: TIntegerField
-      FieldName = 'CustSiteID'
-      Origin = 'CustSiteID'
-      Visible = False
-    end
-    object qryCustSurveyCustomerID: TIntegerField
-      FieldName = 'CustomerID'
-      Origin = 'CustomerID'
-      Visible = False
-    end
-    object qryCustSurveySiteID: TIntegerField
-      FieldName = 'SiteID'
-      Origin = 'SiteID'
-      Visible = False
-    end
+      'SELECT [SurveyOrderID]'
+      '     , [SurveyOrder].[CreatedOn]'
+      '     --,[RequestedDT]'
+      '     --,[SurveyedOn]'
+      '     --,[CompletedDT]'
+      
+        '     , CONCAT('#39'REQU:'#39', CONVERT(DATE, [RequestedDT], 102)) AS Req' +
+        'uestedDTstr'
+      
+        '     , CONCAT('#39'INSP:'#39', CONVERT(DATE, [SurveyedOn], 102)) AS Surv' +
+        'eyedOnstr'
+      
+        '     , CONCAT('#39'COMP:'#39', CONVERT(DATE, [CompletedDT], 102)) AS Com' +
+        'pletedDTstr'
+      '     , [SurveyOrder].[IsArchived]'
+      '     , [SurveyStatusID]'
+      '     , [SurveyOrder].[HRID]'
+      '     , [CustSiteID]'
+      '     , [CustomerID]'
+      '     , [SurveyOrder].[SiteID]'
+      '     , [Site].[Address]'
+      '     , CONCAT('#39'TECH:'#39', firstname, '#39' '#39', UPPER(lastname)) AS FNAME'
+      
+        '     , dbo.GetSiteAddrSingleLine([SurveyOrder].[SiteID], 1) AS S' +
+        'iteAddrStr'
+      ''
+      'FROM [dbo].[SurveyOrder]'
+      '    INNER JOIN [dbo].[Site]'
+      '        ON [SurveyOrder].SiteID = Site.SiteID'
+      '    LEFT JOIN HR'
+      '        ON SurveyOrder.HRID = HR.HRID;')
+    Left = 1200
+    Top = 128
   end
   object dsCustSurvey: TDataSource
     DataSet = qryCustSurvey
-    Left = 1328
-    Top = 136
+    Left = 1272
+    Top = 128
   end
 end

@@ -19,7 +19,8 @@ uses
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
   Data.Bind.Grid, Data.Bind.DBScope, Vcl.VirtualImage,
   frameFESCustAddress, Vcl.TitleBarCtrls, Vcl.WinXPanels, frameFESCustNumber,
-  frameFESCustEmail;
+  frameFESCustEmail, frameFESCustSite, frameFESCustContact, frameFESCustInspect,
+  frameFESCustSurvey;
 
 type
   TCustomer = class(TForm)
@@ -46,9 +47,6 @@ type
     spdbtnGenerateCustCode: TSpeedButton;
     Label3: TLabel;
     DBMemo1: TDBMemo;
-    DBGrid3: TDBGrid;
-    DBGrid4: TDBGrid;
-    DBGrid5: TDBGrid;
     DBCheckBox1: TDBCheckBox;
     TabSheet8: TTabSheet;
     actnmanCustomer: TActionManager;
@@ -68,15 +66,20 @@ type
     actnSuburb: TAction;
     actnpuClearPostcodeSuburb: TAction;
     actnpuGotoInspectOrder: TAction;
-    DBGrid6: TDBGrid;
     TitleBarPanel1: TTitleBarPanel;
     vimgSetFilters: TVirtualImage;
     vimgToggleFilters: TVirtualImage;
     vimgFindCustomer: TVirtualImage;
     vimgGotoID: TVirtualImage;
-    VirtualImage5: TVirtualImage;
+    vimgSync: TVirtualImage;
     vimgGotoCode: TVirtualImage;
     FESCustAddress1: TFESCustAddress;
+    FESCustNumber1: TFESCustNumber;
+    FESCustEmail1: TFESCustEmail;
+    FESCustSite1: TFESCustSite;
+    FESCustContact1: TFESCustContact;
+    FESCustInspect1: TFESCustInspect;
+    FESCustSurvey1: TFESCustSurvey;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
