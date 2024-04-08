@@ -8,40 +8,56 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
   Vcl.ImageCollection, Vcl.VirtualImage, Vcl.ExtCtrls, Vcl.WinXPanels,
   Vcl.ControlList, Vcl.StdCtrls, Vcl.WinXCtrls, dmCustomerData,
-  Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
+  Vcl.Bind.ControlList, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
+  Data.Bind.Grid;
 
 type
   TFESCustSurvey = class(TFrame)
+    bindlistCustSurvey: TBindingsList;
+    bindsrcCustSurvey: TBindSourceDB;
+    btnEditSurvey: TControlListButton;
+    btnPinSurvey: TControlListButton;
+    ctrllistCustSurvey: TControlList;
     imgcollCustSurvey: TImageCollection;
-    vimglistCustSurvey: TVirtualImageList;
-    pumenuCustSurvey: TPopupMenu;
-    puEdit: TMenuItem;
-    puInsert: TMenuItem;
-    puDelete: TMenuItem;
+    lblSurveyRequestedDT: TLabel;
+    lblSurveySiteAddrStr: TLabel;
+    lblSurveyTech: TLabel;
+    LinkGridToDataSource1: TLinkGridToDataSource;
+    LinkPropertyToField1: TLinkPropertyToField;
+    LinkPropertyToField2: TLinkPropertyToField;
+    LinkPropertyToField3: TLinkPropertyToField;
     N1: TMenuItem;
-    puPin: TMenuItem;
     puCopy: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
     puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustSurvey: TPopupMenu;
+    puPin: TMenuItem;
     puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    RelativePanel1: TRelativePanel;
-    ctrllistCustEmail: TControlList;
-    lblEmailType: TLabel;
-    lblEmail: TLabel;
-    lblCreatedOn: TLabel;
-    ctrllistbtnPin: TControlListButton;
-    ctrllistbtnEdit: TControlListButton;
-    bindlistCustSurvey: TBindingsList;
-    bindsrcCustSurvey: TBindSourceDB;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    vimglistCustSurvey: TVirtualImageList;
+    procedure ctrllistCustSurveyBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+        ARect: TRect; AState: TOwnerDrawState);
   end;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFESCustSurvey.ctrllistCustSurveyBeforeDrawItem(AIndex: Integer;
+    ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
+var
+  b: boolean;
+begin
+  with bindsrcCustSurvey.DataSet do
+  begin
+    b := FieldByName('IsArchived').AsBoolean;
+    if b then btnPinSurvey.ImageIndex := 1
+    else btnPinSurvey.ImageIndex := 0;
+  end;
+end;
 
 end.

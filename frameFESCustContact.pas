@@ -14,40 +14,50 @@ uses
 
 type
   TFESCustContact = class(TFrame)
-    imgcollCustContact: TImageCollection;
-    vimglistCustContact: TVirtualImageList;
-    pumenuCustContact: TPopupMenu;
-    puEdit: TMenuItem;
-    puInsert: TMenuItem;
-    puDelete: TMenuItem;
-    N1: TMenuItem;
-    puPin: TMenuItem;
-    puCopy: TMenuItem;
-    puFilter: TMenuItem;
-    puRefresh: TMenuItem;
-    StackPanel1: TStackPanel;
-    vimgHideUnPinned: TVirtualImage;
-    RelativePanel1: TRelativePanel;
-    ctrllistCustEmail: TControlList;
-    lblContactType: TLabel;
-    lblContactName: TLabel;
     bindlistCustContact: TBindingsList;
-    ctrllistbtnEdit: TControlListButton;
-    ctrllistbtnPin: TControlListButton;
-    lblCreatedOn: TLabel;
     bindsrcCustContact: TBindSourceDB;
+    btnEditContact: TControlListButton;
+    btnPinContact: TControlListButton;
+    ctrllistCustEmail: TControlList;
+    imgcollCustContact: TImageCollection;
+    lblContactName: TLabel;
+    lblContactType: TLabel;
+    lblContactCreatedDT: TLabel;
     LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     LinkPropertyToFieldCaption: TLinkPropertyToField;
     LinkPropertyToFieldCaption2: TLinkPropertyToField;
     LinkPropertyToFieldCaption3: TLinkPropertyToField;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    N1: TMenuItem;
+    puCopy: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
+    puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustContact: TPopupMenu;
+    puPin: TMenuItem;
+    puRefresh: TMenuItem;
+    StackPanel1: TStackPanel;
+    vimgHideUnPinned: TVirtualImage;
+    vimglistCustContact: TVirtualImageList;
+    procedure ctrllistCustEmailBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+        ARect: TRect; AState: TOwnerDrawState);
   end;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFESCustContact.ctrllistCustEmailBeforeDrawItem(AIndex: Integer;
+    ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
+var
+  b: boolean;
+begin
+  with bindsrcCustContact.DataSet do
+  begin
+    b := FieldByName('IsArchived').AsBoolean;
+    if b then btnPinContact.ImageIndex := 1
+    else btnPinContact.ImageIndex := 0;
+  end;
+end;
 
 end.

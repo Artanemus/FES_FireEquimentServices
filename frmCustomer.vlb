@@ -59,7 +59,7 @@ Coordinates=915,342,55,58
 Coordinates=852,342,53,58
 
 [CustomerData.qryCustSite]
-Coordinates=10,10,167,322
+Coordinates=187,20,167,322
 Visible=False
 
 [CustomerData.qryCustomer]
@@ -75,14 +75,14 @@ Coordinates=789,342,53,58
 Coordinates=190,632,75,36
 
 [CustomerData.qryCustEmails]
-Coordinates=398,362,184,212
+Coordinates=592,372,184,212
 Visible=False
 
 [CustomerData.dsCustAdress]
 Coordinates=515,1112,181,36
 
 [CustomerData.qryCustAddress]
-Coordinates=793,40,192,36
+Coordinates=995,50,192,36
 Visible=False
 
 [Label2]
@@ -158,12 +158,14 @@ Visible=True
 
 [CustomerData.qryCustSurvey]
 Coordinates=137,888,185,322
+Visible=False
 
 [CustomerData.dsCustInspect]
 Coordinates=326,888,182,36
 
 [CustomerData.qryCustInspect]
-Coordinates=597,760,187,476
+Coordinates=1188,790,187,476
+Visible=False
 
 [CustomerData.dsCustSurvey]
 Coordinates=0,0,181,36
@@ -180,16 +182,31 @@ EditingLayerName=NewLayer0
 Coordinates=772,10,179,212
 
 [CustomerData.qryCustNum]
-Coordinates=1413,30,216,212
+Coordinates=1639,40,216,212
 Visible=False
 
 [CustomerData.dsCustNum]
 Coordinates=739,463,212,36
 
 [CustomerData.qryCustContact]
-Coordinates=389,10,189,278
+Coordinates=588,20,189,278
 Visible=False
 
 [CustomerData.dsCustContact]
 Coordinates=99,888,185,36
+
+[FESCustAddress1.bindsrcCustAddress]
+Coordinates=793,40,192,36
+
+[FESCustContact1.bindsrcCustContact]
+Coordinates=389,10,189,278
+
+[FESCustEmail1.bindsrcCustEmail]
+Coordinates=398,362,184,212
+
+[FESCustNumber1.bindsrcCustNum]
+Coordinates=1413,30,216,212
+
+[FESCustSite1.bindsrcCustSite]
+Coordinates=10,10,167,322
 

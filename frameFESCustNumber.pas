@@ -14,48 +14,44 @@ uses
 
 type
   TFESCustNumber = class(TFrame)
-    imgcollCustNum: TImageCollection;
-    vimglistCustNum: TVirtualImageList;
-    pumenuCustNum: TPopupMenu;
-    puEdit: TMenuItem;
-    puInsert: TMenuItem;
-    puDelete: TMenuItem;
-    N1: TMenuItem;
-    puPin: TMenuItem;
-    puFilter: TMenuItem;
-    puRefresh: TMenuItem;
-    StackPanel1: TStackPanel;
-    vimgHideUnPinned: TVirtualImage;
-    ctrllistCustNum: TControlList;
-    bindsrcCustNum: TBindSourceDB;
     bindlistCustNum: TBindingsList;
+    bindsrcCustNum: TBindSourceDB;
+    btnEditNumber: TControlListButton;
+    btnPinNumber: TControlListButton;
+    ctrllistCustNum: TControlList;
+    imgcollCustNum: TImageCollection;
+    lblNumber: TLabel;
+    lblNumberCreatedOn: TLabel;
+    lblNumberType: TLabel;
+    LinkGridToDataSourcebindsrcCustNum: TLinkGridToDataSource;
     LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
-    RelativePanel1: TRelativePanel;
-    lblNumberType: TLabel;
-    lblNumber: TLabel;
-    ctrllistbtnEdit: TControlListButton;
-    ctrllistbtnPin: TControlListButton;
-    lblCreatedOn: TLabel;
-    LinkGridToDataSourcebindsrcCustNum: TLinkGridToDataSource;
-    procedure ctrllistbtnPinClick(Sender: TObject);
+    N1: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
+    puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustNum: TPopupMenu;
+    puPin: TMenuItem;
+    puRefresh: TMenuItem;
+    StackPanel1: TStackPanel;
+    vimgHideUnPinned: TVirtualImage;
+    vimglistCustNum: TVirtualImageList;
+    procedure btnPinNumberClick(Sender: TObject);
     procedure ctrllistCustNumBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);
     procedure vimgHideUnPinnedClick(Sender: TObject);
   private
     { Private declarations }
     fHideUnPinned: Boolean;
-
-  public
-    { Public declarations }
   end;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFESCustNumber.ctrllistbtnPinClick(Sender: TObject);
+procedure TFESCustNumber.btnPinNumberClick(Sender: TObject);
 var
   b: boolean;
 begin
@@ -80,8 +76,8 @@ begin
   with bindsrcCustNum.DataSet do
   begin
     b := FieldByName('IsArchived').AsBoolean;
-    if b then ctrllistbtnPin.ImageIndex := 1
-    else ctrllistbtnPin.ImageIndex := 0;
+    if b then btnPinNumber.ImageIndex := 1
+    else btnPinNumber.ImageIndex := 0;
   end;
 end;
 

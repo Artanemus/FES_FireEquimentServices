@@ -1,4 +1,9 @@
 unit frmCustomer;
+{
+  Default ....
+  WIDTH  799
+  HEIGHT 712
+}
 
 interface
 
@@ -78,16 +83,28 @@ type
     FESCustEmail1: TFESCustEmail;
     FESCustSite1: TFESCustSite;
     FESCustContact1: TFESCustContact;
-    FESCustInspect1: TFESCustInspect;
     FESCustSurvey1: TFESCustSurvey;
+    FESCustInspect1: TFESCustInspect;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
+    procedure FormHide(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure vimgSetFiltersClick(Sender: TObject);
   private
     { Private declarations }
     fFilterDlg: TCustFilter;
     FCustFilterState: TFilterState;
+    { Metric for OnShow}
+    FxHeight: integer;
+    FxWidth: integer;
+    FxTop: integer;
+    FxLeft: integer;
+    FxTabIndex: integer;
+
+    procedure ReadPreferences(iniFileName: TFileName);
+    procedure WritePreferences(iniFileName: TFileName);
+
 
   protected
     procedure FilterDlgUpdated(var Msg: TMessage); message FES_FILTERUPDATED;
@@ -100,16 +117,24 @@ type
 var
   Customer: TCustomer;
 
+const
+  DEFCUSTFORM_HEIGHT = 712;
+  DEFCUSTFORM_WIDTH = 799;
+
 implementation
 
 {$R *.dfm}
 
-uses unitFEStools;
+uses unitFEStools, system.IniFiles, unitFESutility;
 
 
 procedure TCustomer.FormDestroy(Sender: TObject);
+var
+  iniFileName: TFileName;
 begin
-  //  WritePreferences;
+  // w r i t e   p r e f e r e n c e s .
+  iniFileName := GetFESPreferenceFileName();
+  if (FileExists(iniFileName)) then WritePreferences(iniFileName);
   if assigned(fFilterDlg) then fFilterDlg.Free;
 end;
 
@@ -151,10 +176,22 @@ begin
 end;
 
 procedure TCustomer.FormCreate(Sender: TObject);
+var
+  iniFileName: string;
+
 begin
   fFilterDlg := nil; // Select filters for customer records
-  CustomTitleBar.Enabled := true; // GlassFrame.Top = TitleBar.Height
-//  FESCustAddress1.HideUnPinned := false;
+  CustomTitleBar.Enabled := true; // GlassFrame.Top = CustomeTitleBar.Height
+  { DEFAULT form metrics }
+  FxHeight := DEFCUSTFORM_HEIGHT;
+  FxWidth := DEFCUSTFORM_WIDTH;
+  FxTop := 0;
+  FxLeft := 0;
+  FxTabIndex := 0;
+  // r e a d   p r e f e r e n c e .
+  iniFileName := GetFESPreferenceFileName();
+  if (FileExists(iniFileName)) then ReadPreferences(iniFileName);
+
 end;
 
 procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
@@ -172,6 +209,38 @@ begin
   end;
 end;
 
+procedure TCustomer.FormHide(Sender: TObject);
+begin
+  FxHeight  := Height;
+  fxWidth := Width;
+  FxTabIndex := PageControl1.ActivePageIndex;
+end;
+
+procedure TCustomer.FormShow(Sender: TObject);
+begin
+  {Form metric}
+  Height := FxHeight;
+  Width := fxWidth;
+  PageControl1.ActivePageIndex := FxTabIndex;
+end;
+
+
+procedure TCustomer.ReadPreferences(iniFileName: TFileName);
+var
+  iFile: TIniFile;
+
+begin
+  iFile := TIniFile.Create(iniFileName);
+
+  FxWidth := iFile.ReadInteger('CustomerPref', 'Width', DEFCUSTFORM_WIDTH);
+  FxHeight := iFile.ReadInteger('CustomerPref', 'Height', DEFCUSTFORM_HEIGHT);
+  FxTop := iFile.ReadInteger('CustomerPref', 'Top', 0);
+  FxLeft:= iFile.ReadInteger('CustomerPref', 'Left', 0);
+  FxTabIndex := iFile.ReadInteger('CustomerPref', 'TabIndex', 0);
+
+  iFile.free;
+end;
+
 procedure TCustomer.vimgSetFiltersClick(Sender: TObject);
 var
   aRect: TRect;
@@ -187,6 +256,21 @@ begin
   end;
 end;
 
+
+procedure TCustomer.WritePreferences(iniFileName: TFileName);
+var
+  iFile: TIniFile;
+begin
+  iFile := TIniFile.Create(IniFileName);
+
+  iFile.WriteInteger('CustomerPref', 'Width', Width);
+  iFile.WriteInteger('CustomerPref', 'Height', Height);
+  iFile.WriteInteger('CustomerPref', 'Top', Top);
+  iFile.WriteInteger('CustomerPref', 'Left', Left);
+  iFile.WriteInteger('CustomerPref', 'TabIndex', PageControl1.ActivePageIndex);
+
+ 	iFile.free;
+end;
 
 {
 procedure TDBNavigator.BtnClick(Index: TNavigateBtn);

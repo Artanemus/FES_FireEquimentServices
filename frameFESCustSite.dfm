@@ -3,6 +3,7 @@ object FESCustSite: TFESCustSite
   Top = 0
   Width = 579
   Height = 480
+  Align = alClient
   TabOrder = 0
   object StackPanel1: TStackPanel
     Left = 0
@@ -16,7 +17,6 @@ object FESCustSite: TFESCustSite
         Control = vimgHideUnPinned
       end>
     TabOrder = 0
-    ExplicitWidth = 641
     object vimgHideUnPinned: TVirtualImage
       Left = 0
       Top = 0
@@ -32,103 +32,105 @@ object FESCustSite: TFESCustSite
       ShowHint = True
     end
   end
-  object RelativePanel1: TRelativePanel
+  object ctrllistCustSite: TControlList
     Left = 0
     Top = 32
     Width = 579
     Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustSite
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
     Align = alClient
-    BevelOuter = bvNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemCount = 1
+    ItemIndex = 0
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 641
-    object ctrllistCustSite: TControlList
-      Left = 0
+    OnBeforeDrawItem = ctrllistCustSiteBeforeDrawItem
+    ExplicitTop = 0
+    object lblSiteContact_ss: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 50
+      Width = 562
+      Height = 17
+      Margins.Right = 10
+      Align = alBottom
+      Alignment = taRightJustify
+      Caption = 'Tony LEE  (32731360)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlBottom
+      ExplicitLeft = 442
+      ExplicitTop = -56
+      ExplicitWidth = 123
+    end
+    object lblSiteAddress: TLabel
+      AlignWithMargins = True
+      Left = 10
       Top = 0
-      Width = 579
-      Height = 448
+      Width = 478
+      Height = 47
+      Margins.Left = 10
+      Margins.Top = 0
+      Margins.Bottom = 0
+      Align = alClient
+      Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemCount = 1
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
+      Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 0
-      object lblAddress: TLabel
-        Left = 16
-        Top = 4
-        Width = 468
-        Height = 62
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = False
-        Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-        ExplicitWidth = 467
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 489
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustSite
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        ExplicitLeft = 562
-      end
-      object ctrllistbtnEdit: TControlListButton
-        Left = 527
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustSite
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        ExplicitLeft = 600
-      end
-      object lblSiteContact: TLabel
-        Left = 436
-        Top = 46
-        Width = 123
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'Tony LEE  (32731360)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitLeft = 442
-      end
+      Layout = tlCenter
+      WordWrap = True
+      ExplicitLeft = 3
+      ExplicitWidth = 189
+      ExplicitHeight = 42
+    end
+    object btnPinSite: TControlListButton
+      AlignWithMargins = True
+      Left = 494
+      Top = 3
+      Width = 32
+      Height = 41
+      Margins.Right = 4
+      Align = alRight
+      Images = vimglistCustSite
+      ImageIndex = 0
+      ImageName = 'pin'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 533
+      ExplicitTop = 4
+      ExplicitHeight = 64
+    end
+    object btnEditSite: TControlListButton
+      AlignWithMargins = True
+      Left = 533
+      Top = 3
+      Width = 32
+      Height = 41
+      Margins.Right = 10
+      Align = alRight
+      Images = vimglistCustSite
+      ImageIndex = 2
+      ImageName = 'Edit'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 600
+      ExplicitTop = 8
+      ExplicitHeight = 32
     end
   end
   object bindlistCustSite: TBindingsList
@@ -146,14 +148,14 @@ object FESCustSite: TFESCustSite
       Category = 'Quick Bindings'
       DataSource = bindsrcCustSite
       FieldName = 'SiteAddrStr'
-      Component = lblAddress
+      Component = lblSiteAddress
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToFieldCaption3: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = bindsrcCustSite
       FieldName = 'SiteContactStr'
-      Component = lblSiteContact
+      Component = lblSiteContact_ss
       ComponentProperty = 'Caption'
     end
   end

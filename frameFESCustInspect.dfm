@@ -3,6 +3,7 @@ object FESCustInspect: TFESCustInspect
   Top = 0
   Width = 640
   Height = 480
+  Align = alClient
   TabOrder = 0
   object StackPanel1: TStackPanel
     Left = 0
@@ -13,11 +14,27 @@ object FESCustInspect: TFESCustInspect
     BevelOuter = bvNone
     ControlCollection = <
       item
-        Control = vimgHideUnPinned
+        Control = btnTogglePinVisibility
+        HorizontalPositioning = sphpLeft
+        VerticalPositioning = spvpFill
+      end
+      item
+        Control = btnClipboard
+        HorizontalPositioning = sphpLeft
+        VerticalPositioning = spvpFill
+      end
+      item
+        Control = btnNew
+      end
+      item
+        Control = btnDelete
       end>
+    Orientation = spoHorizontal
+    Padding.Left = 34
+    Spacing = 8
     TabOrder = 0
-    object vimgHideUnPinned: TVirtualImage
-      Left = 0
+    object btnTogglePinVisibility: TVirtualImage
+      Left = 34
       Top = 0
       Width = 32
       Height = 32
@@ -30,153 +47,188 @@ object FESCustInspect: TFESCustInspect
       ParentShowHint = False
       ShowHint = True
     end
+    object btnClipboard: TVirtualImage
+      Left = 74
+      Top = 0
+      Width = 32
+      Height = 32
+      Hint = 'Toggle visibility of un-pinned items.'
+      ImageCollection = imgcollCustInspect
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 10
+      ImageName = 'content_paste'
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object btnNew: TVirtualImage
+      Left = 114
+      Top = 0
+      Width = 32
+      Height = 32
+      Hint = 'Toggle visibility of un-pinned items.'
+      ImageCollection = imgcollCustInspect
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 4
+      ImageName = 'New'
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object btnDelete: TVirtualImage
+      Left = 154
+      Top = 0
+      Width = 32
+      Height = 32
+      Hint = 'Toggle visibility of un-pinned items.'
+      ImageCollection = imgcollCustInspect
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 3
+      ImageName = 'Delete'
+      ParentShowHint = False
+      ShowHint = True
+    end
   end
-  object RelativePanel1: TRelativePanel
+  object ctrllistCustInspect: TControlList
     Left = 0
     Top = 32
     Width = 640
     Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustInspect
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
     Align = alClient
-    BevelOuter = bvNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemCount = 1
+    ItemHeight = 80
+    ItemIndex = 0
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    ParentFont = False
     TabOrder = 1
-    DesignSize = (
-      640
-      448)
-    object ctrllistCustInspect: TControlList
-      Left = 0
-      Top = 0
-      Width = 640
-      Height = 448
-      Anchors = []
+    OnBeforeDrawItem = ctrllistCustInspectBeforeDrawItem
+    object lblInspectAddress: TLabel
+      AlignWithMargins = True
+      Left = 130
+      Top = 3
+      Width = 368
+      Height = 74
+      Margins.Left = 130
+      Align = alClient
+      Caption = '66 Learoyd Road ACACIA RIDGE, QLD 4110'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      WordWrap = True
+      StyleElements = [seClient, seBorder]
+      ExplicitWidth = 319
+      ExplicitHeight = 21
+    end
+    object lblInspectTech: TLabel
+      Left = 7
+      Top = 4
+      Width = 44
+      Height = 21
+      Caption = 'TECH: '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      ItemCount = 1
-      ItemHeight = 80
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
       ParentFont = False
-      TabOrder = 0
-      object lblTech: TLabel
-        Left = 7
-        Top = 4
-        Width = 44
-        Height = 21
-        Caption = 'TECH: '
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblAddress: TLabel
-        Left = 7
-        Top = 31
-        Width = 319
-        Height = 21
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        Caption = '66 Learoyd Road ACACIA RIDGE, QLD 4110'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        StyleElements = [seClient, seBorder]
-      end
-      object lblStatus: TLabel
-        Left = 7
-        Top = 58
-        Width = 44
-        Height = 21
-        Caption = 'Action'
-      end
-      object lblRequested: TLabel
-        Left = 446
-        Top = 4
-        Width = 103
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'REQU:2021-06-30'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblInspected: TLabel
-        Left = 519
-        Top = 27
-        Width = 30
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'INSP:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblCompleted: TLabel
-        Left = 509
-        Top = 50
-        Width = 40
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'COMP:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 555
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustInspect
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-      end
-      object ctrllistbtnEdit: TControlListButton
-        Left = 593
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustInspect
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-      end
+    end
+    object lblInspectStatus: TLabel
+      AlignWithMargins = True
+      Left = 504
+      Top = 3
+      Width = 44
+      Height = 74
+      Margins.Right = 4
+      Align = alRight
+      Caption = 'Action'
+      Layout = tlCenter
+      ExplicitLeft = 543
+      ExplicitHeight = 21
+    end
+    object lblInspectRequestedDT: TLabel
+      Left = 11
+      Top = 44
+      Width = 107
+      Height = 17
+      Caption = 'REQU: 2021-06-30'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblInspectInspectedDT: TLabel
+      Left = 17
+      Top = 43
+      Width = 4
+      Height = 17
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblInspectCompletedDT: TLabel
+      Left = 7
+      Top = 60
+      Width = 44
+      Height = 17
+      Caption = 'COMP: '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object btnPinInspect: TControlListButton
+      AlignWithMargins = True
+      Left = 555
+      Top = 3
+      Width = 32
+      Height = 74
+      Margins.Right = 4
+      Align = alRight
+      Images = vimglistCustInspect
+      ImageIndex = 0
+      ImageName = 'pin'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 576
+      ExplicitTop = 4
+    end
+    object btnEditInspect: TControlListButton
+      AlignWithMargins = True
+      Left = 594
+      Top = 3
+      Width = 32
+      Height = 74
+      Margins.Right = 10
+      Align = alRight
+      Images = vimglistCustInspect
+      ImageIndex = 2
+      ImageName = 'Edit'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 593
+      ExplicitTop = 4
+      ExplicitHeight = 32
     end
   end
   object imgcollCustInspect: TImageCollection
@@ -489,6 +541,32 @@ object FESCustInspect: TFESCustInspect
               8D819519D824B43281ABCDFF018921E03192487AFD0000000049454E44AE4260
               82}
           end>
+      end
+      item
+        Name = 'content_paste'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE900000208494441546843ED9ABB3204411885
+              BF8D3C81C42D40092584AA5084A4220F8012C9154A2EC40B48A4520A55421255
+              1285C02DF10422F6A89935667B765B77AF40FD1DEDEEFCB7D37DFA9FD93E53A3
+              33A31B9800FAB2F0CFC005F0963A5D2D754060055803864AB1EF811D603765CE
+              D40036818D36056ED5AFCB2EC94809600E38F2AC6A1138F0B46D69D60E4017D0
+              0B0C7824136DE63DEC647203AC7AD83E022FC07B956D2B004BC03AD0E391C865
+              22AA1C6617163CA85595E615D806F65D06550066EA5DE438B0F0DC6D1A38CBBE
+              4C01A791F1668193720C1700D1E61A18894C385EA7D45516630CB88C8C770B8C
+              96E9E402A0F67717994CEE9A7DD148439D49AB103B8601B5E3C67001702D775E
+              881C271315E30223D0E7850BE5965CA4E597D96F00E4BD5B5C4E319B550054A4
+              86EB9E62003433B6022D76B2F640C729F49BE7988FAC58D75ED3B5FCF7E2E73C
+              7EC7F6406C2BF4F53700C5994AFA08ECB904B602B6029E54A932330A19858C42
+              CD271C499E462327D6DBDD36B16D626FB2B80D8D424621A390DD07BE39607F68
+              02F683B5D17FD746035810ED1274B83B583EC28E2E235D001DFD3F14C355091C
+              320A9596D295FB3392A4264DEE0FBDAC4A62923EB6D7A94A02E32EBB74B25622
+              9F743289D2B1525360BD0D37494B12CF9BF43159F8C8AC7A5DA03FB68A40FF27
+              40AF2904C9AC8139FFD6ADDD0AFC6D3501D90C40C0A42575F904AEDBB2315E69
+              67F60000000049454E44AE426082}
+          end>
       end>
     Left = 312
     Top = 152
@@ -590,9 +668,9 @@ object FESCustInspect: TFESCustInspect
   object bindlistCustInspect: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 456
+    Left = 120
     Top = 160
-    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+    object LinkGridToDataSource1: TLinkGridToDataSource
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
       GridControl = ctrllistCustInspect
@@ -602,49 +680,42 @@ object FESCustInspect: TFESCustInspect
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
       FieldName = 'FNAME'
-      Component = lblTech
+      Component = lblInspectTech
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToField2: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
       FieldName = 'SiteAddrStr'
-      Component = lblAddress
+      Component = lblInspectAddress
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToField3: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
       FieldName = 'InspectStatusStr'
-      Component = lblStatus
-      ComponentProperty = 'Caption'
-    end
-    object LinkPropertyToField4: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustInspect
-      FieldName = 'InspectedOn'
-      Component = lblInspected
+      Component = lblInspectStatus
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToField5: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
-      FieldName = 'RequestedDT'
-      Component = lblRequested
+      FieldName = 'BookINstr'
+      Component = lblInspectRequestedDT
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToField6: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = bindsrcCustInspect
-      FieldName = 'CompletedDT'
-      Component = lblCompleted
+      FieldName = 'BookOUTstr'
+      Component = lblInspectCompletedDT
       ComponentProperty = 'Caption'
     end
   end
   object bindsrcCustInspect: TBindSourceDB
     DataSet = CustomerData.qryCustInspect
     ScopeMappings = <>
-    Left = 456
-    Top = 232
+    Left = 112
+    Top = 240
   end
 end

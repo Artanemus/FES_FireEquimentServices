@@ -14,33 +14,32 @@ uses
 
 type
   TFESCustAddress = class(TFrame)
-    imgcollCustAddress: TImageCollection;
-    ctrllistCustAddress: TControlList;
-    ctrllistbtnEdit: TControlListButton;
-    ctrllistbtnPin: TControlListButton;
-    vimglistCustAddress: TVirtualImageList;
-    pumenuCustAddress: TPopupMenu;
-    puInsert: TMenuItem;
-    puEdit: TMenuItem;
-    puDelete: TMenuItem;
-    N1: TMenuItem;
-    puRefresh: TMenuItem;
-    puPin: TMenuItem;
-    puFilter: TMenuItem;
     bindlistCustAddress: TBindingsList;
     bindsrcCustAddress: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
+    btnEditAddress: TControlListButton;
+    btnPinAddress: TControlListButton;
+    ctrllistCustAddress: TControlList;
+    imgcollCustAddress: TImageCollection;
     lblAddress: TLabel;
     lblAddressType: TLabel;
-    lblZone: TLabel;
+    lblPostalZone: TLabel;
+    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     LinkPropertyToFieldCaption: TLinkPropertyToField;
     LinkPropertyToFieldCaption2: TLinkPropertyToField;
     LinkPropertyToFieldCaption3: TLinkPropertyToField;
+    N1: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
+    puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustAddress: TPopupMenu;
+    puPin: TMenuItem;
+    puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    RelativePanel1: TRelativePanel;
-    procedure ctrllistbtnEditClick(Sender: TObject);
-    procedure ctrllistbtnPinClick(Sender: TObject);
+    vimglistCustAddress: TVirtualImageList;
+    procedure btnEditAddressClick(Sender: TObject);
+    procedure btnPinAddressClick(Sender: TObject);
     procedure ctrllistCustAddressBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);
     procedure vimgHideUnPinnedClick(Sender: TObject);
@@ -56,12 +55,12 @@ implementation
 
 {$R *.dfm}
 
-procedure TFESCustAddress.ctrllistbtnEditClick(Sender: TObject);
+procedure TFESCustAddress.btnEditAddressClick(Sender: TObject);
 begin
-  // open dialogue to edit Customer's Business Number
+  // open dialogue to edit
 end;
 
-procedure TFESCustAddress.ctrllistbtnPinClick(Sender: TObject);
+procedure TFESCustAddress.btnPinAddressClick(Sender: TObject);
 var
   b: boolean;
 begin
@@ -86,8 +85,8 @@ begin
   with bindsrcCustAddress.DataSet do
   begin
     b := FieldByName('IsArchived').AsBoolean;
-    if b then ctrllistbtnPin.ImageIndex := 1
-    else ctrllistbtnPin.ImageIndex := 0;
+    if b then btnPinAddress.ImageIndex := 1
+    else btnPinAddress.ImageIndex := 0;
   end;
 end;
 

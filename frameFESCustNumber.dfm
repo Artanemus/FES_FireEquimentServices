@@ -3,120 +3,8 @@ object FESCustNumber: TFESCustNumber
   Top = 0
   Width = 598
   Height = 480
+  Align = alClient
   TabOrder = 0
-  object RelativePanel1: TRelativePanel
-    Left = 0
-    Top = 32
-    Width = 598
-    Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustNum
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
-    Align = alClient
-    BevelOuter = bvNone
-    TabOrder = 1
-    DesignSize = (
-      598
-      448)
-    object ctrllistCustNum: TControlList
-      Left = 0
-      Top = 0
-      Width = 598
-      Height = 448
-      Anchors = []
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemCount = 2
-      ItemHeight = 40
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
-      ParentFont = False
-      PopupMenu = pumenuCustNum
-      TabOrder = 0
-      OnBeforeDrawItem = ctrllistCustNumBeforeDrawItem
-      object lblNumberType: TLabel
-        Left = 16
-        Top = 8
-        Width = 60
-        Height = 21
-        Caption = 'Business'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblNumber: TLabel
-        Left = 174
-        Top = 8
-        Width = 98
-        Height = 21
-        Caption = '073 273 1360'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        StyleElements = [seClient, seBorder]
-      end
-      object ctrllistbtnEdit: TControlListButton
-        Left = 557
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustNum
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 519
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustNum
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnPinClick
-      end
-      object lblCreatedOn: TLabel
-        Left = 440
-        Top = 11
-        Width = 66
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = '28/05/2021'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-    end
-  end
   object StackPanel1: TStackPanel
     Left = 0
     Top = 0
@@ -143,6 +31,126 @@ object FESCustNumber: TFESCustNumber
       ParentShowHint = False
       ShowHint = True
       OnClick = vimgHideUnPinnedClick
+    end
+  end
+  object ctrllistCustNum: TControlList
+    Left = 0
+    Top = 32
+    Width = 598
+    Height = 448
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemCount = 2
+    ItemHeight = 40
+    ItemIndex = 0
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    ParentFont = False
+    PopupMenu = pumenuCustNum
+    TabOrder = 1
+    OnBeforeDrawItem = ctrllistCustNumBeforeDrawItem
+    ExplicitTop = 0
+    object lblNumberType: TLabel
+      AlignWithMargins = True
+      Left = 10
+      Top = 3
+      Width = 143
+      Height = 34
+      Margins.Left = 10
+      Align = alLeft
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Business'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object lblNumber: TLabel
+      AlignWithMargins = True
+      Left = 166
+      Top = 3
+      Width = 98
+      Height = 34
+      Margins.Left = 10
+      Align = alLeft
+      Caption = '073 273 1360'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      StyleElements = [seClient, seBorder]
+      ExplicitLeft = 108
+      ExplicitTop = 0
+      ExplicitHeight = 21
+    end
+    object btnEditNumber: TControlListButton
+      AlignWithMargins = True
+      Left = 552
+      Top = 3
+      Width = 32
+      Height = 34
+      Margins.Right = 10
+      Align = alRight
+      Images = vimglistCustNum
+      ImageIndex = 2
+      ImageName = 'Edit'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 557
+      ExplicitTop = 4
+      ExplicitHeight = 32
+    end
+    object btnPinNumber: TControlListButton
+      AlignWithMargins = True
+      Left = 513
+      Top = 3
+      Width = 32
+      Height = 34
+      Margins.Right = 4
+      Align = alRight
+      Images = vimglistCustNum
+      ImageIndex = 0
+      ImageName = 'pin'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      OnClick = btnPinNumberClick
+      ExplicitLeft = 519
+      ExplicitTop = 4
+      ExplicitHeight = 32
+    end
+    object lblNumberCreatedOn: TLabel
+      AlignWithMargins = True
+      Left = 440
+      Top = 3
+      Width = 66
+      Height = 34
+      Margins.Right = 4
+      Align = alRight
+      Alignment = taRightJustify
+      Caption = '28/05/2021'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+      ExplicitTop = 11
+      ExplicitHeight = 17
     end
   end
   object imgcollCustNum: TImageCollection
@@ -564,7 +572,7 @@ object FESCustNumber: TFESCustNumber
       Category = 'Quick Bindings'
       DataSource = bindsrcCustNum
       FieldName = 'ShortDateStr'
-      Component = lblCreatedOn
+      Component = lblNumberCreatedOn
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToField2: TLinkPropertyToField

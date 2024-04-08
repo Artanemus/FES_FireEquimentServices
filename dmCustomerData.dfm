@@ -283,18 +283,16 @@ object CustomerData: TCustomerData
       '     , [CustSiteID]'
       '     , [CustomerID]'
       '     --, [InspectionOrder].[CreatedOn]'
-      '     --, [InspectionOrder].[RequestedDT]'
-      '     --, [InspectionOrder].[InspectedOn]'
-      '     --, [InspectionOrder].[CompletedDT]'
+      '     , [InspectionOrder].IsPinned'
       
-        '     , CONCAT('#39'REQU:'#39', CONVERT(DATE, [RequestedDT], 102)) AS Req' +
-        'uestedDT'
+        '     , CONCAT('#39'CREA: '#39', CONVERT(DATE, [InspectionOrder].[Created' +
+        'On], 102)) AS CreatedONstr'
       
-        '     , CONCAT('#39'INSP:'#39', CONVERT(DATE, [InspectedOn], 102)) AS Ins' +
-        'pectedOn'
+        '     , CONCAT('#39'REQU: '#39', CONVERT(DATE, [BookIN], 102)) AS BookINs' +
+        'tr'
       
-        '     , CONCAT('#39'COMP:'#39', CONVERT(DATE, [CompletedDT], 102)) AS Com' +
-        'pletedDT'
+        '     , CONCAT('#39'COMP: '#39', CONVERT(DATE, [BookOUT], 102)) AS BookOU' +
+        'Tstr'
       '     , [ServiceInterval]'
       '     , [LevelNum]'
       '     --,[InspectionOrder].[Note]'
@@ -357,7 +355,6 @@ object CustomerData: TCustomerData
       '     , [CustSiteID]'
       '     , [CustomerID]'
       '     , [SurveyOrder].[SiteID]'
-      '     , [Site].[Address]'
       '     , CONCAT('#39'TECH:'#39', firstname, '#39' '#39', UPPER(lastname)) AS FNAME'
       
         '     , dbo.GetSiteAddrSingleLine([SurveyOrder].[SiteID], 1) AS S' +

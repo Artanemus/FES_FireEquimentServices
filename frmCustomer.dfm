@@ -2,12 +2,13 @@ object Customer: TCustomer
   Left = 0
   Top = 0
   Caption = 'FES Customer'
-  ClientHeight = 673
+  ClientHeight = 642
   ClientWidth = 783
   Color = clBtnFace
   CustomTitleBar.Control = TitleBarPanel1
   CustomTitleBar.Height = 40
   CustomTitleBar.SystemHeight = False
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
@@ -19,6 +20,8 @@ object Customer: TCustomer
   StyleElements = [seFont, seClient]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnHide = FormHide
+  OnShow = FormShow
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
@@ -30,7 +33,6 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 816
     object dbtxtCustomerID: TDBText
       Left = 16
       Top = 6
@@ -67,20 +69,21 @@ object Customer: TCustomer
     Left = 5
     Top = 87
     Width = 773
-    Height = 512
+    Height = 481
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
     Margins.Bottom = 5
-    ActivePage = TabSheet7
+    ActivePage = TabSheet6
     Align = alClient
+    DoubleBuffered = False
+    ParentDoubleBuffered = False
     TabOrder = 1
-    ExplicitWidth = 806
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
         765
-        476)
+        445)
       object Label2: TLabel
         Left = 3
         Top = 59
@@ -136,7 +139,6 @@ object Customer: TCustomer
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 1
-        ExplicitWidth = 777
       end
       object dbedtCustCode: TDBEdit
         Left = 3
@@ -156,7 +158,6 @@ object Customer: TCustomer
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 3
-        ExplicitWidth = 777
       end
       object DBCheckBox1: TDBCheckBox
         Left = 393
@@ -176,7 +177,7 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -185,49 +186,43 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 788
-        ExplicitHeight = 466
-        inherited RelativePanel1: TRelativePanel
-          Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustNumber1.ctrllistCustNum
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          ExplicitWidth = 788
-          ExplicitHeight = 434
-          inherited ctrllistCustNum: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 709
-              ExplicitLeft = 738
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 671
-              ExplicitLeft = 700
-            end
-            inherited lblCreatedOn: TLabel
-              Left = 592
-              ExplicitLeft = 621
-            end
-          end
-        end
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustNumber1.vimgHideUnPinned
             end>
-          ExplicitWidth = 788
+          ExplicitWidth = 755
+        end
+        inherited ctrllistCustNum: TControlList
+          Width = 755
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblNumberType: TLabel
+            Height = -6
+          end
+          inherited lblNumber: TLabel
+            Height = -6
+          end
+          inherited btnEditNumber: TControlListButton
+            Left = -42
+            Height = -6
+            ExplicitLeft = 709
+          end
+          inherited btnPinNumber: TControlListButton
+            Left = -81
+            Height = -6
+            ExplicitLeft = 670
+          end
+          inherited lblNumberCreatedOn: TLabel
+            Left = -154
+            Height = -6
+            ExplicitLeft = 597
+          end
         end
       end
     end
@@ -239,7 +234,7 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -248,52 +243,36 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 788
-        ExplicitHeight = 466
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustAddress1.vimgHideUnPinned
             end>
-          ExplicitWidth = 788
+          ExplicitWidth = 755
         end
-        inherited RelativePanel1: TRelativePanel
+        inherited ctrllistCustAddress: TControlList
           Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustAddress1.ctrllistCustAddress
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          ExplicitWidth = 788
-          ExplicitHeight = 434
-          inherited ctrllistCustAddress: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 709
-              ExplicitLeft = 709
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 671
-              ExplicitLeft = 671
-            end
-            inherited lblAddress: TLabel
-              Width = 530
-              ExplicitWidth = 530
-            end
-            inherited lblZone: TLabel
-              Left = 630
-              ExplicitLeft = 630
-            end
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblAddress: TLabel
+            Width = 507
+            Height = 0
+            ExplicitWidth = 507
+          end
+          inherited btnEditAddress: TControlListButton
+            Left = -42
+            Height = -6
+            ExplicitLeft = 715
+          end
+          inherited btnPinAddress: TControlListButton
+            Left = -78
+            Height = -6
+            ExplicitLeft = 673
           end
         end
       end
@@ -306,7 +285,7 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -315,48 +294,42 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 788
-        ExplicitHeight = 466
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustEmail1.vimgHideUnPinned
             end>
-          ExplicitWidth = 788
+          ExplicitWidth = 755
         end
-        inherited RelativePanel1: TRelativePanel
+        inherited ctrllistCustEmail: TControlList
           Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustEmail1.ctrllistCustEmail
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          ExplicitWidth = 788
-          ExplicitHeight = 434
-          inherited ctrllistCustEmail: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited lblCreatedOn: TLabel
-              Left = 601
-              ExplicitLeft = 630
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 673
-              ExplicitLeft = 702
-            end
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 711
-              ExplicitLeft = 740
-            end
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblEmailType: TLabel
+            Height = -6
+          end
+          inherited lblEmail: TLabel
+            Height = 0
+          end
+          inherited lblEmailCreatedDT: TLabel
+            Left = -154
+            Height = -6
+            ExplicitLeft = 597
+          end
+          inherited btnPinEmail: TControlListButton
+            Left = -81
+            Height = -6
+            ExplicitLeft = 670
+          end
+          inherited btnEditEmail: TControlListButton
+            Left = -42
+            Height = -6
+            ExplicitLeft = 709
           end
         end
       end
@@ -369,7 +342,7 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -378,48 +351,42 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 788
-        ExplicitHeight = 466
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustContact1.vimgHideUnPinned
             end>
-          ExplicitWidth = 788
+          ExplicitWidth = 755
         end
-        inherited RelativePanel1: TRelativePanel
+        inherited ctrllistCustEmail: TControlList
           Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustContact1.ctrllistCustEmail
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          ExplicitWidth = 788
-          ExplicitHeight = 434
-          inherited ctrllistCustEmail: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 712
-              ExplicitLeft = 712
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 674
-              ExplicitLeft = 674
-            end
-            inherited lblCreatedOn: TLabel
-              Left = 616
-              ExplicitLeft = 616
-            end
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblContactType: TLabel
+            Height = -6
+          end
+          inherited lblContactName: TLabel
+            Height = -6
+          end
+          inherited btnEditContact: TControlListButton
+            Left = -42
+            Height = -6
+            ExplicitLeft = 709
+          end
+          inherited btnPinContact: TControlListButton
+            Left = -78
+            Height = -6
+            ExplicitLeft = 673
+          end
+          inherited lblContactCreatedDT: TLabel
+            Left = -134
+            Height = -6
+            ExplicitLeft = 617
           end
         end
       end
@@ -432,7 +399,7 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -441,52 +408,35 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 788
-        ExplicitHeight = 466
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustSite1.vimgHideUnPinned
             end>
-          ExplicitWidth = 788
+          ExplicitWidth = 755
         end
-        inherited RelativePanel1: TRelativePanel
+        inherited ctrllistCustSite: TControlList
           Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustSite1.ctrllistCustSite
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          ExplicitWidth = 788
-          ExplicitHeight = 434
-          inherited ctrllistCustSite: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited lblAddress: TLabel
-              Width = 630
-              ExplicitWidth = 630
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 672
-              ExplicitLeft = 672
-            end
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 710
-              ExplicitLeft = 710
-            end
-            inherited lblSiteContact: TLabel
-              Left = 619
-              ExplicitLeft = 619
-            end
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblSiteContact_ss: TLabel
+            Left = 3
+            Top = -20
+            Width = -13
+            ExplicitLeft = 618
+          end
+          inherited btnPinSite: TControlListButton
+            Left = -81
+            ExplicitLeft = 670
+          end
+          inherited btnEditSite: TControlListButton
+            Left = -42
+            ExplicitLeft = 709
           end
         end
       end
@@ -499,60 +449,71 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 158
-        ExplicitTop = -4
+        ExplicitLeft = 5
+        ExplicitTop = 5
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
-              Control = FESCustInspect1.vimgHideUnPinned
-            end>
-        end
-        inherited RelativePanel1: TRelativePanel
-          Width = 755
-          Height = 434
-          ControlCollection = <
+              Control = FESCustInspect1.btnTogglePinVisibility
+              HorizontalPositioning = sphpLeft
+              VerticalPositioning = spvpFill
+            end
             item
-              Control = FESCustInspect1.ctrllistCustInspect
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
+              Control = FESCustInspect1.btnClipboard
+              HorizontalPositioning = sphpLeft
+              VerticalPositioning = spvpFill
+            end
+            item
+              Control = FESCustInspect1.btnNew
+            end
+            item
+              Control = FESCustInspect1.btnDelete
             end>
-          inherited ctrllistCustInspect: TControlList
-            Width = 755
-            Height = 434
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited lblRequested: TLabel
-              Left = 565
-              ExplicitLeft = 598
-            end
-            inherited lblInspected: TLabel
-              Left = 638
-              ExplicitLeft = 671
-            end
-            inherited lblCompleted: TLabel
-              Left = 628
-              ExplicitLeft = 661
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 674
-              ExplicitLeft = 707
-            end
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 712
-              ExplicitLeft = 745
-            end
+          ExplicitWidth = 755
+        end
+        inherited ctrllistCustInspect: TControlList
+          Width = 755
+          Height = 403
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblInspectAddress: TLabel
+            Width = 483
+          end
+          inherited lblInspectStatus: TLabel
+            Left = 619
+            ExplicitLeft = 658
+          end
+          inherited btnPinInspect: TControlListButton
+            Left = 670
+            ExplicitLeft = 683
+          end
+          inherited btnEditInspect: TControlListButton
+            Left = 709
+            ExplicitLeft = 709
+          end
+        end
+        inherited bindlistCustInspect: TBindingsList
+          inherited LinkPropertyToField1: TLinkPropertyToField [0]
+          end
+          inherited LinkPropertyToField2: TLinkPropertyToField [1]
+          end
+          inherited LinkPropertyToField3: TLinkPropertyToField [2]
+          end
+          inherited LinkPropertyToField5: TLinkPropertyToField [3]
+          end
+          inherited LinkPropertyToField6: TLinkPropertyToField [4]
+          end
+          inherited LinkGridToDataSource1: TLinkGridToDataSource [5]
           end
         end
       end
@@ -565,57 +526,53 @@ object Customer: TCustomer
         Left = 5
         Top = 5
         Width = 755
-        Height = 466
+        Height = 435
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
         Margins.Bottom = 5
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 72
-        ExplicitTop = -4
+        ExplicitLeft = 5
+        ExplicitTop = 5
+        ExplicitWidth = 755
+        ExplicitHeight = 435
         inherited StackPanel1: TStackPanel
           Width = 755
           ControlCollection = <
             item
               Control = FESCustSurvey1.vimgHideUnPinned
             end>
-          inherited vimgHideUnPinned: TVirtualImage
-            OnClick = nil
-          end
+          ExplicitWidth = 755
         end
-        inherited RelativePanel1: TRelativePanel
+        inherited ctrllistCustSurvey: TControlList
           Width = 755
-          Height = 434
-          ControlCollection = <
-            item
-              Control = FESCustSurvey1.ctrllistCustEmail
-              AlignBottomWithPanel = True
-              AlignHorizontalCenterWithPanel = True
-              AlignLeftWithPanel = True
-              AlignRightWithPanel = True
-              AlignTopWithPanel = True
-              AlignVerticalCenterWithPanel = False
-            end>
-          inherited ctrllistCustEmail: TControlList
-            Width = 755
-            Height = 434
-            OnBeforeDrawItem = nil
-            ExplicitWidth = 755
-            ExplicitHeight = 434
-            inherited lblCreatedOn: TLabel
-              Left = 602
-              ExplicitLeft = 612
-            end
-            inherited ctrllistbtnPin: TControlListButton
-              Left = 674
-              OnClick = nil
-              ExplicitLeft = 684
-            end
-            inherited ctrllistbtnEdit: TControlListButton
-              Left = 712
-              ExplicitLeft = 722
-            end
+          Height = 403
+          ExplicitTop = 32
+          ExplicitWidth = 755
+          ExplicitHeight = 403
+          inherited lblSurveyTech: TLabel
+            Height = -6
+          end
+          inherited lblSurveySiteAddrStr: TLabel
+            Height = 0
+          end
+          inherited lblSurveyRequestedDT: TLabel
+            Left = -92
+            Height = -6
+            ExplicitLeft = -92
+          end
+          inherited btnPinSurvey: TControlListButton
+            Left = -81
+            Height = -6
+            ExplicitLeft = 670
+            ExplicitHeight = -6
+          end
+          inherited btnEditSurvey: TControlListButton
+            Left = -42
+            Height = -6
+            ExplicitLeft = 709
+            ExplicitHeight = -6
           end
         end
       end
@@ -623,7 +580,7 @@ object Customer: TCustomer
   end
   object Panel2: TPanel
     Left = 0
-    Top = 604
+    Top = 573
     Width = 783
     Height = 69
     Align = alBottom
@@ -631,7 +588,6 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 816
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
@@ -645,7 +601,6 @@ object Customer: TCustomer
       DataSource = CustomerData.dsCustomer
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 796
     end
   end
   object TitleBarPanel1: TTitleBarPanel
@@ -654,30 +609,6 @@ object Customer: TCustomer
     Width = 783
     Height = 40
     CustomButtons = <>
-    ExplicitWidth = 816
-    object vimgSetFilters: TVirtualImage
-      AlignWithMargins = True
-      Left = 457
-      Top = 0
-      Width = 32
-      Height = 40
-      Hint = 'Set Filters'
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 4
-      Margins.Bottom = 0
-      Align = alRight
-      ImageCollection = ImageCollection1
-      ImageWidth = 0
-      ImageHeight = 0
-      ImageIndex = 2
-      ImageName = 'arrow_drop_down_circle'
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = vimgSetFiltersClick
-      ExplicitLeft = 449
-      ExplicitTop = 3
-    end
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
       Left = 493
@@ -698,28 +629,6 @@ object Customer: TCustomer
       ParentShowHint = False
       ShowHint = True
       ExplicitLeft = 505
-      ExplicitTop = 3
-    end
-    object vimgFindCustomer: TVirtualImage
-      AlignWithMargins = True
-      Left = 421
-      Top = 0
-      Width = 32
-      Height = 40
-      Hint = 'Find a customer'
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 4
-      Margins.Bottom = 0
-      Align = alRight
-      ImageCollection = ImageCollection1
-      ImageWidth = 0
-      ImageHeight = 0
-      ImageIndex = 6
-      ImageName = 'search'
-      ParentShowHint = False
-      ShowHint = True
-      ExplicitLeft = 441
       ExplicitTop = 3
     end
     object vimgGotoID: TVirtualImage
@@ -786,6 +695,51 @@ object Customer: TCustomer
       ParentShowHint = False
       ShowHint = True
       ExplicitLeft = 0
+    end
+    object vimgSetFilters: TVirtualImage
+      AlignWithMargins = True
+      Left = 457
+      Top = 0
+      Width = 32
+      Height = 40
+      Hint = 'Set Filters'
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 4
+      Margins.Bottom = 0
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 2
+      ImageName = 'arrow_drop_down_circle'
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = vimgSetFiltersClick
+      ExplicitLeft = 40
+      ExplicitHeight = 39
+    end
+    object vimgFindCustomer: TVirtualImage
+      AlignWithMargins = True
+      Left = 421
+      Top = 0
+      Width = 32
+      Height = 40
+      Hint = 'Find a customer'
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 4
+      Margins.Bottom = 0
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 6
+      ImageName = 'search'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 0
+      ExplicitHeight = 39
     end
   end
   object ImageCollection1: TImageCollection

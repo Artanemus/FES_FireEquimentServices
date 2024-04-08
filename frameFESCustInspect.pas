@@ -14,46 +14,58 @@ uses
 
 type
   TFESCustInspect = class(TFrame)
-    imgcollCustInspect: TImageCollection;
-    vimglistCustInspect: TVirtualImageList;
-    pumenuCustInspect: TPopupMenu;
-    puEdit: TMenuItem;
-    puInsert: TMenuItem;
-    puDelete: TMenuItem;
-    N1: TMenuItem;
-    puPin: TMenuItem;
-    puCopy: TMenuItem;
-    puFilter: TMenuItem;
-    puRefresh: TMenuItem;
-    StackPanel1: TStackPanel;
-    vimgHideUnPinned: TVirtualImage;
-    RelativePanel1: TRelativePanel;
-    ctrllistCustInspect: TControlList;
     bindlistCustInspect: TBindingsList;
-    bindsrcCustInspect: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
-    lblTech: TLabel;
-    lblAddress: TLabel;
-    lblStatus: TLabel;
-    lblRequested: TLabel;
-    lblInspected: TLabel;
-    lblCompleted: TLabel;
-    ctrllistbtnPin: TControlListButton;
-    ctrllistbtnEdit: TControlListButton;
+    btnEditInspect: TControlListButton;
+    btnPinInspect: TControlListButton;
+    ctrllistCustInspect: TControlList;
+    imgcollCustInspect: TImageCollection;
+    lblInspectAddress: TLabel;
+    lblInspectCompletedDT: TLabel;
+    lblInspectInspectedDT: TLabel;
+    lblInspectRequestedDT: TLabel;
+    lblInspectStatus: TLabel;
+    lblInspectTech: TLabel;
     LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
-    LinkPropertyToField4: TLinkPropertyToField;
     LinkPropertyToField5: TLinkPropertyToField;
     LinkPropertyToField6: TLinkPropertyToField;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    N1: TMenuItem;
+    puCopy: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
+    puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustInspect: TPopupMenu;
+    puPin: TMenuItem;
+    puRefresh: TMenuItem;
+    StackPanel1: TStackPanel;
+    btnTogglePinVisibility: TVirtualImage;
+    vimglistCustInspect: TVirtualImageList;
+    btnClipboard: TVirtualImage;
+    btnNew: TVirtualImage;
+    btnDelete: TVirtualImage;
+    bindsrcCustInspect: TBindSourceDB;
+    LinkGridToDataSource1: TLinkGridToDataSource;
+    procedure ctrllistCustInspectBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+        ARect: TRect; AState: TOwnerDrawState);
   end;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFESCustInspect.ctrllistCustInspectBeforeDrawItem(AIndex: Integer;
+    ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
+var
+  b: boolean;
+begin
+  with bindsrcCustInspect.DataSet do
+  begin
+    b := FieldByName('IsPinned').AsBoolean;
+    if b then btnPinInspect.ImageIndex := 1
+    else btnPinInspect.ImageIndex := 0;
+  end;
+end;
 
 end.

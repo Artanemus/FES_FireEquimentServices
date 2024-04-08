@@ -28,10 +28,6 @@ Coordinates=192,209,179,36
 [CustomerData.dsCustSurvey]
 Coordinates=653,1,181,36
 
-[RelativePanel1]
-Coordinates=420,380,101,58
-LayerNames=NewLayer0
-
 [CustomerData.qryCustContact]
 Coordinates=10,512,189,278
 
@@ -65,11 +61,6 @@ Coordinates=0,445,51,36
 
 [CustomerData.dsCustContact]
 Coordinates=430,551,185,36
-
-[lblAddress]
-Coordinates=430,220,75,58
-Visible=True
-LayerNames=NewLayer0
 
 [CustomerData.dsCustInspect]
 Coordinates=225,803,182,36
@@ -106,23 +97,29 @@ Coordinates=880,837,107,36
 Coordinates=880,892,61,36
 
 []
-Coordinates=430,150,83,51
-
-[ctrllistbtnEdit]
-Coordinates=640,440,89,36
-LayerNames=NewLayer0
-
-[ctrllistbtnPin]
-Coordinates=640,390,85,36
-LayerNames=NewLayer0
-
-[lblSiteContact]
-Coordinates=430,120,94,58
-Visible=True
+Coordinates=420,380,101,58
 LayerNames=NewLayer0
 
 [Module Settings]
 ModelLayerNames=NewLayer0
 ActiveLayerNames=NewLayer0
 EditingLayerName=NewLayer0
+
+[lblSiteContact_ss]
+Coordinates=430,120,94,58
+Visible=True
+LayerNames=NewLayer0
+
+[btnPinSite]
+Coordinates=640,390,85,36
+LayerNames=NewLayer0
+
+[btnEditSite]
+Coordinates=640,440,89,36
+LayerNames=NewLayer0
+
+[lblSiteAddress]
+Coordinates=430,220,75,58
+Visible=True
+LayerNames=NewLayer0
 

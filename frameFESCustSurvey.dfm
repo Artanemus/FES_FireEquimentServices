@@ -3,6 +3,7 @@ object FESCustSurvey: TFESCustSurvey
   Top = 0
   Width = 640
   Height = 480
+  Align = alClient
   TabOrder = 0
   object StackPanel1: TStackPanel
     Left = 0
@@ -31,114 +32,112 @@ object FESCustSurvey: TFESCustSurvey
       ShowHint = True
     end
   end
-  object RelativePanel1: TRelativePanel
+  object ctrllistCustSurvey: TControlList
     Left = 0
     Top = 32
     Width = 640
     Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustEmail
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
     Align = alClient
-    BevelOuter = bvNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemHeight = 80
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    ParentFont = False
     TabOrder = 1
-    DesignSize = (
-      640
-      448)
-    object ctrllistCustEmail: TControlList
-      Left = 0
-      Top = 0
-      Width = 640
-      Height = 448
-      Anchors = []
+    OnBeforeDrawItem = ctrllistCustSurveyBeforeDrawItem
+    object lblSurveyTech: TLabel
+      AlignWithMargins = True
+      Left = 10
+      Top = 3
+      Width = 4
+      Height = 74
+      Margins.Left = 10
+      Align = alLeft
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      ItemCount = 2
-      ItemHeight = 40
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
       ParentFont = False
-      TabOrder = 0
-      object lblEmailType: TLabel
-        Left = 7
-        Top = 8
-        Width = 150
-        Height = 21
-        Caption = 'Accounts Department'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblEmail: TLabel
-        Left = 172
-        Top = 8
-        Width = 197
-        Height = 21
-        Caption = 'admin@cooperpg.com.au'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        StyleElements = [seClient, seBorder]
-      end
-      object lblCreatedOn: TLabel
-        Left = 483
-        Top = 12
-        Width = 66
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = '15/06/2021'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 555
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustSurvey
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-      end
-      object ctrllistbtnEdit: TControlListButton
-        Left = 593
-        Top = 4
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustSurvey
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-      end
+      Layout = tlCenter
+      ExplicitHeight = 21
+    end
+    object lblSurveySiteAddrStr: TLabel
+      Left = 17
+      Top = 0
+      Width = 524
+      Height = 80
+      Margins.Left = 10
+      Align = alClient
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      StyleElements = [seClient, seBorder]
+      ExplicitWidth = 4
+      ExplicitHeight = 21
+    end
+    object lblSurveyRequestedDT: TLabel
+      AlignWithMargins = True
+      Left = 628
+      Top = 3
+      Width = 4
+      Height = 74
+      Margins.Right = 4
+      Align = alRight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+      ExplicitLeft = 561
+      ExplicitHeight = 17
+    end
+    object btnPinSurvey: TControlListButton
+      AlignWithMargins = True
+      Left = 544
+      Top = 3
+      Width = 32
+      Height = 74
+      Margins.Right = 4
+      Align = alRight
+      Images = vimglistCustSurvey
+      ImageIndex = 0
+      ImageName = 'pin'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 555
+      ExplicitTop = 4
+      ExplicitHeight = 32
+    end
+    object btnEditSurvey: TControlListButton
+      AlignWithMargins = True
+      Left = 583
+      Top = 3
+      Width = 32
+      Height = 74
+      Margins.Right = 10
+      Align = alRight
+      Images = vimglistCustSurvey
+      ImageIndex = 2
+      ImageName = 'Edit'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      ExplicitLeft = 593
+      ExplicitTop = 4
+      ExplicitHeight = 32
     end
   end
   object imgcollCustSurvey: TImageCollection
@@ -554,6 +553,33 @@ object FESCustSurvey: TFESCustSurvey
     OutputConverters = <>
     Left = 128
     Top = 152
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustSurvey
+      GridControl = ctrllistCustSurvey
+      Columns = <>
+    end
+    object LinkPropertyToField1: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustSurvey
+      FieldName = 'SiteAddrStr'
+      Component = lblSurveySiteAddrStr
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField2: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustSurvey
+      FieldName = 'FNAME'
+      Component = lblSurveyTech
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToField3: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustSurvey
+      FieldName = 'RequestedDTstr'
+      Component = lblSurveyRequestedDT
+      ComponentProperty = 'Caption'
+    end
   end
   object bindsrcCustSurvey: TBindSourceDB
     DataSet = CustomerData.qryCustSurvey

@@ -15,35 +15,45 @@ type
   TFESCustSite = class(TFrame)
     bindlistCustSite: TBindingsList;
     bindsrcCustSite: TBindSourceDB;
+    btnEditSite: TControlListButton;
+    btnPinSite: TControlListButton;
+    ctrllistCustSite: TControlList;
     imgcollCustSite: TImageCollection;
-    vimglistCustSite: TVirtualImageList;
-    pumenuCustSite: TPopupMenu;
-    puEdit: TMenuItem;
-    puInsert: TMenuItem;
-    puDelete: TMenuItem;
+    lblSiteAddress: TLabel;
+    lblSiteContact_ss: TLabel;
+    LinkGridToDataSource1: TLinkGridToDataSource;
+    LinkPropertyToFieldCaption: TLinkPropertyToField;
+    LinkPropertyToFieldCaption3: TLinkPropertyToField;
     N1: TMenuItem;
-    puPin: TMenuItem;
+    puDelete: TMenuItem;
+    puEdit: TMenuItem;
     puFilter: TMenuItem;
+    puInsert: TMenuItem;
+    pumenuCustSite: TPopupMenu;
+    puPin: TMenuItem;
     puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    RelativePanel1: TRelativePanel;
-    ctrllistCustSite: TControlList;
-    lblAddress: TLabel;
-    LinkGridToDataSource1: TLinkGridToDataSource;
-    LinkPropertyToFieldCaption: TLinkPropertyToField;
-    ctrllistbtnPin: TControlListButton;
-    ctrllistbtnEdit: TControlListButton;
-    lblSiteContact: TLabel;
-    LinkPropertyToFieldCaption3: TLinkPropertyToField;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    vimglistCustSite: TVirtualImageList;
+    procedure ctrllistCustSiteBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
+        ARect: TRect; AState: TOwnerDrawState);
   end;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFESCustSite.ctrllistCustSiteBeforeDrawItem(AIndex: Integer; ACanvas:
+    TCanvas; ARect: TRect; AState: TOwnerDrawState);
+var
+  b: boolean;
+begin
+  with bindsrcCustSite.DataSet do
+  begin
+    b := FieldByName('IsArchived').AsBoolean;
+    if b then btnPinSite.ImageIndex := 1
+    else btnPinSite.ImageIndex := 0;
+  end;
+end;
 
 end.

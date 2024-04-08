@@ -13,25 +13,18 @@ Coordinates=187,141,54,33
 [N1]
 Coordinates=138,141,40,33
 
-[ctrllistbtnEdit]
-Coordinates=90,60,80,33
-LayerNames=NewLayer0
-
 [puPin]
 Coordinates=0,108,42,33
 
 [puEdit]
 Coordinates=340,209,46,33
 
-[ctrllistbtnPin]
-Coordinates=94,10,77,33
-LayerNames=NewLayer0
-
 [puFilter]
 Coordinates=202,212,52,33
 
 []
-Coordinates=103,62,82,33
+Coordinates=400,100,50,51
+LayerNames=NewLayer0
 
 [CustomerData.qryCustAddress]
 Visible=False
@@ -92,10 +85,6 @@ Coordinates=699,1,185,177
 Coordinates=50,200,91,51
 LayerNames=NewLayer0
 Visible=True
-
-[lblZone]
-Coordinates=400,100,50,51
-LayerNames=NewLayer0
 
 [lblAddress]
 Coordinates=400,180,67,51

@@ -32,117 +32,117 @@ object FESCustAddress: TFESCustAddress
       OnClick = vimgHideUnPinnedClick
     end
   end
-  object RelativePanel1: TRelativePanel
+  object ctrllistCustAddress: TControlList
     Left = 0
     Top = 32
     Width = 629
     Height = 448
-    ControlCollection = <
-      item
-        Control = ctrllistCustAddress
-        AlignBottomWithPanel = True
-        AlignHorizontalCenterWithPanel = True
-        AlignLeftWithPanel = True
-        AlignRightWithPanel = True
-        AlignTopWithPanel = True
-        AlignVerticalCenterWithPanel = False
-      end>
     Align = alClient
-    BevelOuter = bvNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ItemCount = 1
+    ItemIndex = 0
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    ParentFont = False
+    PopupMenu = pumenuCustAddress
     TabOrder = 1
-    object ctrllistCustAddress: TControlList
-      Left = 0
+    OnBeforeDrawItem = ctrllistCustAddressBeforeDrawItem
+    ExplicitTop = 0
+    object lblAddress: TLabel
+      AlignWithMargins = True
+      Left = 150
       Top = 0
-      Width = 629
-      Height = 448
+      Width = 381
+      Height = 70
+      Margins.Left = 150
+      Margins.Top = 0
+      Margins.Right = 16
+      Margins.Bottom = 0
+      Align = alClient
+      AutoSize = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      WordWrap = True
+      ExplicitLeft = 200
+      ExplicitTop = 10
+      ExplicitWidth = 415
+      ExplicitHeight = 50
+    end
+    object lblAddressType: TLabel
+      Left = 15
+      Top = 15
+      Width = 60
+      Height = 21
+      Caption = 'Business'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Segoe UI'
       Font.Style = []
-      ItemCount = 1
-      ItemIndex = 0
-      ItemMargins.Left = 0
-      ItemMargins.Top = 0
-      ItemMargins.Right = 0
-      ItemMargins.Bottom = 0
-      ParentColor = False
       ParentFont = False
-      PopupMenu = pumenuCustAddress
-      TabOrder = 0
-      OnBeforeDrawItem = ctrllistCustAddressBeforeDrawItem
-      object ctrllistbtnEdit: TControlListButton
-        Left = 589
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 2
-        ImageName = 'Edit'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnEditClick
-        ExplicitLeft = 600
-      end
-      object ctrllistbtnPin: TControlListButton
-        Left = 551
-        Top = 8
-        Width = 32
-        Height = 32
-        Anchors = [akTop, akRight]
-        Images = vimglistCustAddress
-        ImageIndex = 0
-        ImageName = 'pin'
-        LinkHotColor = clHighlight
-        Style = clbkToolButton
-        OnClick = ctrllistbtnPinClick
-        ExplicitLeft = 562
-      end
-      object lblAddress: TLabel
-        Left = 128
-        Top = 4
-        Width = 355
-        Height = 62
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = False
-        Caption = '66 Learoyd Road'#13#10'ACACIA RIDGE, QLD 4110'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        WordWrap = True
-      end
-      object lblAddressType: TLabel
-        Left = 8
-        Top = 4
-        Width = 60
-        Height = 21
-        Caption = 'Business'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblZone: TLabel
-        Left = 510
-        Top = 46
-        Width = 111
-        Height = 17
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        Caption = 'Forest Lake - Oxley'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
+    end
+    object btnEditAddress: TControlListButton
+      AlignWithMargins = True
+      Left = 583
+      Top = 3
+      Width = 32
+      Height = 64
+      Margins.Left = 0
+      Margins.Right = 10
+      Align = alRight
+      Images = vimglistCustAddress
+      ImageIndex = 2
+      ImageName = 'Edit'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      OnClick = btnEditAddressClick
+      ExplicitLeft = 40
+      ExplicitTop = 19
+      ExplicitHeight = 32
+    end
+    object btnPinAddress: TControlListButton
+      AlignWithMargins = True
+      Left = 547
+      Top = 3
+      Width = 32
+      Height = 64
+      Margins.Left = 0
+      Margins.Right = 4
+      Align = alRight
+      Images = vimglistCustAddress
+      ImageIndex = 0
+      ImageName = 'pin'
+      LinkHotColor = clHighlight
+      Style = clbkToolButton
+      OnClick = btnPinAddressClick
+      ExplicitLeft = 2
+      ExplicitTop = 19
+      ExplicitHeight = 32
+    end
+    object lblPostalZone: TLabel
+      Left = 15
+      Top = 35
+      Width = 111
+      Height = 17
+      Caption = 'Forest Lake - Oxley'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
     end
   end
   object imgcollCustAddress: TImageCollection
@@ -564,7 +564,7 @@ object FESCustAddress: TFESCustAddress
       Category = 'Quick Bindings'
       DataSource = bindsrcCustAddress
       FieldName = 'Zone'
-      Component = lblZone
+      Component = lblPostalZone
       ComponentProperty = 'Caption'
     end
     object LinkPropertyToFieldCaption2: TLinkPropertyToField

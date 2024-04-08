@@ -26,10 +26,6 @@ Coordinates=188,251,54,33
 [puCopy]
 Coordinates=119,251,52,33
 
-[vimgHideUnPinned]
-Coordinates=200,30,108,33
-LayerNames=NewLayer0
-
 [N1]
 Coordinates=70,251,40,33
 
@@ -38,10 +34,6 @@ Coordinates=499,56,65,33
 
 [pumenuCustInspect]
 Coordinates=499,111,113,33
-
-[RelativePanel1]
-Coordinates=200,80,87,51
-LayerNames=NewLayer0
 
 [bindlistCustInspect]
 Coordinates=499,221,109,33
@@ -62,7 +54,7 @@ Coordinates=515,629,158,33
 Coordinates=216,303,156,33
 
 [CustomerData.qryCustInspect]
-Coordinates=340,20,162,33
+Coordinates=512,30,162,33
 Visible=False
 
 [CustomerData.qryCustSurvey]
@@ -104,12 +96,12 @@ ModelLayerNames=NewLayer0
 ActiveLayerNames=NewLayer0
 EditingLayerName=NewLayer0
 
-[bindsrcCustInspect]
+[]
 Coordinates=340,20,144,321
 LayerNames=NewLayer0
-
-[]
-Coordinates=200,190,80,33
-LayerNames=NewLayer0
 Visible=True
+
+[btnTogglePinVisibility]
+Coordinates=200,30,108,33
+LayerNames=NewLayer0
 
