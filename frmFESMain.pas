@@ -14,8 +14,7 @@ uses
   // SCM datamodules
   dmFES,
   dmCustomerData, frameFESPlanner,
-  frmCustomer
-  ;
+  frmCustomer, frmInspectOrder, dmInspectOrderData;
 
 type
   TFESMain = class(TForm)
@@ -71,6 +70,8 @@ type
     procedure CustBrowseExecute(Sender: TObject);
     procedure CustBrowseUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure InspectBrowseOrdersExecute(Sender: TObject);
+    procedure InspectBrowseOrdersUpdate(Sender: TObject);
     procedure InspectFindOrderExecute(Sender: TObject);
     procedure InspectFindOrderUpdate(Sender: TObject);
   private
@@ -82,6 +83,7 @@ type
 var
   FESMain: TFESMain;
   FESCust: TCustomer;
+  FESInspect: TInspectOrder;
 
 implementation
 
@@ -91,7 +93,10 @@ uses dlgInspectOrdersFind;
 
 procedure TFESMain.FormDestroy(Sender: TObject);
 begin
-  if Assigned(FESCust) then FreeAndNil(FESCust)
+  if Assigned(FESCust) then
+    FreeAndNil(FESCust);
+  if Assigned(FESInspect) then
+    FreeAndNil(FESInspect)
 
 end;
 
@@ -105,15 +110,31 @@ end;
 procedure TFESMain.CustBrowseUpdate(Sender: TObject);
 begin
   TAction(Sender).Enabled := false;
-  if Assigned(FES) and FES.fesConnection.Connected and Assigned(CustomerData) then
+  if Assigned(FES) and FES.fesConnection.Connected and Assigned(CustomerData)
+  then
     TAction(Sender).Enabled := true;
 end;
 
 procedure TFESMain.FormCreate(Sender: TObject);
 begin
-  // enable hints
-  Application.ShowHint := true;
+  Application.ShowHint := true; // enable hints
   FESCust := nil;
+  FESInspect := nil;
+end;
+
+procedure TFESMain.InspectBrowseOrdersExecute(Sender: TObject);
+begin
+  if not Assigned(FESInspect) then
+    FESInspect := TInspectOrder.Create(Self);
+  FESInspect.Show;
+end;
+
+procedure TFESMain.InspectBrowseOrdersUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled := false;
+  if Assigned(FES) and FES.fesConnection.Connected and Assigned(InspectOrderData)
+  then
+    TAction(Sender).Enabled := true;
 end;
 
 procedure TFESMain.InspectFindOrderExecute(Sender: TObject);
@@ -122,8 +143,7 @@ var
 begin
   dlg := TFindInspectOrders.Create(Self);
   if IsPositiveResult(dlg.ShowModal) then
-  begin
-    ;
+  begin;
   end;
   dlg.Free;
 end;

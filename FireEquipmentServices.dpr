@@ -12,7 +12,7 @@ uses
   dmFES in 'dmFES.pas' {FES: TDataModule},
   dlgInspectOrdersUpdate in 'dlgInspectOrdersUpdate.pas' {UpdateInspectOrders},
   dlgInspectOrdersFind in 'dlgInspectOrdersFind.pas' {FindInspectOrders},
-  frmInspectOrders in 'frmInspectOrders.pas' {InspectOrders},
+  frmInspectOrder in 'frmInspectOrder.pas' {InspectOrder},
   frmCustomer in 'frmCustomer.pas' {Customer},
   pickCustomerFilter in 'pickCustomerFilter.pas' {CustomerFilter},
   pickHRFilter in 'pickHRFilter.pas' {HRFilter},
@@ -36,7 +36,8 @@ uses
   frameFESCustSite in 'frameFESCustSite.pas' {FESCustSite: TFrame},
   frameFESCustContact in 'frameFESCustContact.pas' {FESCustContact: TFrame},
   frameFESCustInspect in 'frameFESCustInspect.pas' {FESCustInspect: TFrame},
-  frameFESCustSurvey in 'frameFESCustSurvey.pas' {FESCustSurvey: TFrame};
+  frameFESCustSurvey in 'frameFESCustSurvey.pas' {FESCustSurvey: TFrame},
+  dmInspectOrderData in 'dmInspectOrderData.pas' {InspectOrderData: TDataModule};
 
 {$R *.res}
 
@@ -47,5 +48,6 @@ begin
   Application.CreateForm(TFESMain, FESMain);
   Application.CreateForm(TFES, FES);
   Application.CreateForm(TCustomerData, CustomerData);
+  Application.CreateForm(TInspectOrderData, InspectOrderData);
   Application.Run;
 end.

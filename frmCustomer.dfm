@@ -2,8 +2,8 @@ object Customer: TCustomer
   Left = 0
   Top = 0
   Caption = 'FES Customer'
-  ClientHeight = 638
-  ClientWidth = 782
+  ClientHeight = 610
+  ClientWidth = 791
   Color = clBtnFace
   CustomTitleBar.Control = TitleBarPanel1
   CustomTitleBar.Height = 40
@@ -20,7 +20,6 @@ object Customer: TCustomer
   CustomTitleBar.ButtonPressedBackgroundColor = 8170169
   CustomTitleBar.ButtonInactiveForegroundColor = 10066329
   CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
-  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
@@ -29,7 +28,6 @@ object Customer: TCustomer
   FormStyle = fsStayOnTop
   GlassFrame.Top = 40
   Position = poDesigned
-  StyleElements = [seFont, seClient]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnHide = FormHide
@@ -37,16 +35,15 @@ object Customer: TCustomer
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
-    Top = 39
-    Width = 782
+    Top = 40
+    Width = 791
     Height = 42
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 40
-    ExplicitWidth = 783
+    ExplicitWidth = 905
     object dbtxtCustomerID: TDBText
       Left = 16
       Top = 6
@@ -81,26 +78,24 @@ object Customer: TCustomer
   object PageControl1: TPageControl
     AlignWithMargins = True
     Left = 5
-    Top = 86
-    Width = 772
-    Height = 478
+    Top = 87
+    Width = 781
+    Height = 449
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
     Margins.Bottom = 5
-    ActivePage = TabSheet1
+    ActivePage = TabSheet6
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     TabOrder = 1
-    ExplicitTop = 87
-    ExplicitWidth = 773
-    ExplicitHeight = 481
+    ExplicitWidth = 895
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
-        764
-        442)
+        773
+        413)
       object Label2: TLabel
         Left = 3
         Top = 117
@@ -124,48 +119,6 @@ object Customer: TCustomer
         Alignment = taRightJustify
         Caption = 'Internal Office Notes'
       end
-      object vimgHideUnPinned: TVirtualImage
-        Left = 79
-        Top = 17
-        Width = 32
-        Height = 32
-        Hint = 'Archive or un-archive'
-        ImageCollection = ImageCollection1
-        ImageWidth = 0
-        ImageHeight = 0
-        ImageIndex = 15
-        ImageName = 'unarchive'
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object VirtualImage1: TVirtualImage
-        Left = 41
-        Top = 17
-        Width = 32
-        Height = 32
-        Hint = 'Make active or in-active'
-        ImageCollection = ImageCollection1
-        ImageWidth = 0
-        ImageHeight = 0
-        ImageIndex = 17
-        ImageName = 'toggle_on'
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object VirtualImage2: TVirtualImage
-        Left = 3
-        Top = 17
-        Width = 32
-        Height = 32
-        Hint = 'Pin/un-pin.'
-        ImageCollection = ImageCollection1
-        ImageWidth = 0
-        ImageHeight = 0
-        ImageIndex = 18
-        ImageName = 'keep'
-        ParentShowHint = False
-        ShowHint = True
-      end
       object VirtualImage3: TVirtualImage
         Left = 131
         Top = 144
@@ -180,29 +133,98 @@ object Customer: TCustomer
         ShowHint = True
         OnClick = actnGenerateCustCodeExecute
       end
-      object VirtualImage4: TVirtualImage
-        Left = 117
-        Top = 17
-        Width = 32
-        Height = 32
-        Hint = 'Print a detailed report.'
-        ImageCollection = ImageCollection1
-        ImageWidth = 0
-        ImageHeight = 0
-        ImageIndex = 20
-        ImageName = 'BatchPrint'
-        ParentShowHint = False
-        ShowHint = True
+      object StackPanel1: TStackPanel
+        Left = 0
+        Top = 0
+        Width = 773
+        Height = 41
+        Align = alTop
+        BevelOuter = bvNone
+        ControlCollection = <
+          item
+            Control = VirtualImage2
+          end
+          item
+            Control = VirtualImage1
+          end
+          item
+            Control = vimgArchive
+          end
+          item
+            Control = VirtualImage4
+          end>
+        Orientation = spoHorizontal
+        Padding.Left = 34
+        Spacing = 8
+        TabOrder = 3
+        ExplicitWidth = 887
+        object VirtualImage2: TVirtualImage
+          Left = 34
+          Top = 4
+          Width = 32
+          Height = 32
+          Hint = 'Pin/un-pin.'
+          ImageCollection = ImageCollection1
+          ImageWidth = 0
+          ImageHeight = 0
+          ImageIndex = 18
+          ImageName = 'keep'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object VirtualImage1: TVirtualImage
+          Left = 74
+          Top = 4
+          Width = 32
+          Height = 32
+          Hint = 'Make active or in-active'
+          ImageCollection = ImageCollection1
+          ImageWidth = 0
+          ImageHeight = 0
+          ImageIndex = 17
+          ImageName = 'toggle_on'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object vimgArchive: TVirtualImage
+          Left = 114
+          Top = 4
+          Width = 32
+          Height = 32
+          Hint = 'Archive or un-archive'
+          ImageCollection = ImageCollection1
+          ImageWidth = 0
+          ImageHeight = 0
+          ImageIndex = 15
+          ImageName = 'unarchive'
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object VirtualImage4: TVirtualImage
+          Left = 154
+          Top = 4
+          Width = 32
+          Height = 32
+          Hint = 'Print a detailed report.'
+          ImageCollection = ImageCollection1
+          ImageWidth = 0
+          ImageHeight = 0
+          ImageIndex = 20
+          ImageName = 'BatchPrint'
+          ParentShowHint = False
+          ShowHint = True
+        end
       end
       object dbedtCustName: TDBEdit
         Left = 1
         Top = 82
-        Width = 760
+        Width = 769
         Height = 29
         Anchors = [akLeft, akTop, akRight]
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 0
+        ExplicitWidth = 883
       end
       object dbedtCustCode: TDBEdit
         Left = 3
@@ -216,12 +238,13 @@ object Customer: TCustomer
       object DBMemo1: TDBMemo
         Left = 3
         Top = 206
-        Width = 758
+        Width = 767
         Height = 230
         Anchors = [akLeft, akTop, akRight]
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 2
+        ExplicitWidth = 881
       end
     end
     object TabSheet8: TTabSheet
@@ -231,8 +254,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -241,22 +264,22 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustNumber1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustNum: TControlList
-          Width = 754
-          Height = 400
+          Width = 763
+          Height = 371
           ExplicitTop = 32
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblNumberType: TLabel
             ExplicitHeight = -6
           end
@@ -264,17 +287,17 @@ object Customer: TCustomer
             Height = 34
           end
           inherited btnEditNumber: TControlListButton
-            Left = 708
+            Left = 717
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
           inherited btnPinNumber: TControlListButton
-            Left = 669
+            Left = 678
             ExplicitLeft = 670
             ExplicitHeight = -6
           end
           inherited lblNumberCreatedOn: TLabel
-            Left = 596
+            Left = 605
             Height = 34
             ExplicitLeft = -154
           end
@@ -288,8 +311,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -298,37 +321,34 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustAddress1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustAddress: TControlList
-          Width = 754
-          Height = 400
+          Width = 763
+          Height = 371
           ExplicitTop = 32
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblAddress: TLabel
-            Width = 507
-            Height = 0
+            Width = 515
             ExplicitWidth = 507
             ExplicitHeight = 0
           end
           inherited btnEditAddress: TControlListButton
-            Left = -42
-            Height = -6
+            Left = 717
             ExplicitLeft = 715
             ExplicitHeight = -6
           end
           inherited btnPinAddress: TControlListButton
-            Left = -78
-            Height = -6
+            Left = 681
             ExplicitLeft = 673
             ExplicitHeight = -6
           end
@@ -342,8 +362,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -352,43 +372,41 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustEmail1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustEmail: TControlList
-          Width = 754
-          Height = 400
+          Width = 763
+          Height = 371
           ExplicitTop = 32
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblEmailType: TLabel
-            Height = -6
             ExplicitHeight = -6
           end
           inherited lblEmail: TLabel
-            Height = 0
+            Width = 414
+            Height = 40
           end
           inherited lblEmailCreatedDT: TLabel
-            Left = -154
-            Height = -6
+            Left = 605
+            Height = 34
             ExplicitLeft = -154
           end
           inherited btnPinEmail: TControlListButton
-            Left = -81
-            Height = -6
+            Left = 678
             ExplicitLeft = 670
             ExplicitHeight = -6
           end
           inherited btnEditEmail: TControlListButton
-            Left = -42
-            Height = -6
+            Left = 717
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
@@ -402,8 +420,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -412,44 +430,41 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustContact1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustEmail: TControlList
-          Width = 754
-          Height = 400
+          Width = 763
+          Height = 371
           ExplicitTop = 32
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblContactType: TLabel
-            Height = -6
             ExplicitHeight = -6
           end
           inherited lblContactName: TLabel
-            Height = -6
+            Height = 34
           end
           inherited btnEditContact: TControlListButton
-            Left = -42
-            Height = -6
+            Left = 717
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
           inherited btnPinContact: TControlListButton
-            Left = -78
-            Height = -6
+            Left = 681
             ExplicitLeft = 673
             ExplicitHeight = -6
           end
           inherited lblContactCreatedDT: TLabel
-            Left = -134
-            Height = -6
+            Left = 625
+            Height = 34
             ExplicitLeft = -134
           end
         end
@@ -462,8 +477,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -472,35 +487,38 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustSite1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustSite: TControlList
-          Width = 754
-          Height = 400
+          Width = 763
+          Height = 371
           ExplicitTop = 32
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblSiteContact_ss: TLabel
             Left = 3
-            Top = -20
-            Width = -13
+            Width = 746
             ExplicitLeft = -133
             ExplicitTop = -20
           end
+          inherited lblSiteAddress: TLabel
+            Width = 662
+            Height = 47
+          end
           inherited btnPinSite: TControlListButton
-            Left = -81
+            Left = 678
             ExplicitLeft = 670
           end
           inherited btnEditSite: TControlListButton
-            Left = -42
+            Left = 717
             ExplicitLeft = 709
           end
         end
@@ -513,8 +531,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -523,10 +541,10 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustInspect1.btnTogglePinVisibility
@@ -544,29 +562,31 @@ object Customer: TCustomer
             item
               Control = FESCustInspect1.btnDelete
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustInspect: TControlList
-          Width = 754
-          Height = 400
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          Width = 763
+          Height = 371
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblInspectAddress: TLabel
-            Width = 482
+            Width = 491
             Height = 74
           end
           inherited lblInspectStatus: TLabel
-            Left = 618
+            Left = 627
             Height = 74
-            ExplicitLeft = 658
+            ExplicitLeft = -132
           end
           inherited btnPinInspect: TControlListButton
-            Left = 669
+            Left = 678
             ExplicitLeft = 683
+            ExplicitHeight = -6
           end
           inherited btnEditInspect: TControlListButton
-            Left = 708
+            Left = 717
             ExplicitLeft = 709
+            ExplicitHeight = -6
           end
         end
         inherited imgcollCustInspect: TImageCollection
@@ -976,8 +996,8 @@ object Customer: TCustomer
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 754
-        Height = 432
+        Width = 763
+        Height = 403
         Margins.Left = 5
         Margins.Top = 5
         Margins.Right = 5
@@ -986,21 +1006,21 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 755
-        ExplicitHeight = 435
+        ExplicitWidth = 877
+        ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
-          Width = 754
+          Width = 763
           ControlCollection = <
             item
               Control = FESCustSurvey1.vimgHideUnPinned
             end>
-          ExplicitWidth = 755
+          ExplicitWidth = 763
         end
         inherited ctrllistCustSurvey: TControlList
-          Width = 754
-          Height = 400
-          ExplicitWidth = 755
-          ExplicitHeight = 403
+          Width = 763
+          Height = 371
+          ExplicitWidth = 763
+          ExplicitHeight = 371
           inherited lblSurveyTech: TLabel
             Height = -6
           end
@@ -1030,21 +1050,20 @@ object Customer: TCustomer
   end
   object Panel2: TPanel
     Left = 0
-    Top = 569
-    Width = 782
+    Top = 541
+    Width = 791
     Height = 69
     Align = alBottom
     BevelEdges = []
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 573
-    ExplicitWidth = 783
+    ExplicitWidth = 905
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
       Top = 10
-      Width = 762
+      Width = 771
       Height = 49
       Margins.Left = 10
       Margins.Top = 10
@@ -1053,22 +1072,22 @@ object Customer: TCustomer
       DataSource = CustomerData.dsCustomer
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 763
+      ExplicitWidth = 885
     end
   end
   object TitleBarPanel1: TTitleBarPanel
     Left = 0
     Top = 0
-    Width = 782
-    Height = 39
+    Width = 791
+    Height = 40
     CustomButtons = <>
-    ExplicitWidth = 774
+    ExplicitWidth = 905
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 528
+      Left = 573
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Toggle Filters ON/OFF'
       Margins.Left = 0
       Margins.Top = 0
@@ -1084,37 +1103,13 @@ object Customer: TCustomer
       ShowHint = True
       ExplicitLeft = 505
       ExplicitTop = 3
-      ExplicitHeight = 40
-    end
-    object vimgGotoID: TVirtualImage
-      AlignWithMargins = True
-      Left = 564
-      Top = 0
-      Width = 32
-      Height = 39
-      Hint = 'Goto customer'#39's ID or CODE'
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 4
-      Margins.Bottom = 0
-      Align = alRight
-      ImageCollection = ImageCollection1
-      ImageWidth = 0
-      ImageHeight = 0
-      ImageIndex = 0
-      ImageName = 'bubble'
-      ParentShowHint = False
-      ShowHint = True
-      ExplicitLeft = 439
-      ExplicitTop = 3
-      ExplicitHeight = 40
     end
     object vimgSync: TVirtualImage
       AlignWithMargins = True
-      Left = 600
+      Left = 609
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Syncronize and refresh.'
       Margins.Left = 0
       Margins.Top = 0
@@ -1129,14 +1124,13 @@ object Customer: TCustomer
       ParentShowHint = False
       ShowHint = True
       ExplicitLeft = 0
-      ExplicitHeight = 40
     end
     object vimgSetFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 492
+      Left = 537
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Set Filters'
       Margins.Left = 0
       Margins.Top = 0
@@ -1152,13 +1146,14 @@ object Customer: TCustomer
       ShowHint = True
       OnClick = vimgSetFiltersClick
       ExplicitLeft = 40
+      ExplicitHeight = 39
     end
     object vimgFindCustomer: TVirtualImage
       AlignWithMargins = True
-      Left = 456
+      Left = 501
       Top = 0
       Width = 32
-      Height = 39
+      Height = 40
       Hint = 'Find a customer'
       Margins.Left = 0
       Margins.Top = 0
@@ -1173,6 +1168,29 @@ object Customer: TCustomer
       ParentShowHint = False
       ShowHint = True
       ExplicitLeft = 0
+      ExplicitHeight = 39
+    end
+    object VirtualImage5: TVirtualImage
+      AlignWithMargins = True
+      Left = 465
+      Top = 0
+      Width = 32
+      Height = 40
+      Hint = 'Goto customer ID or CODE'
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 4
+      Margins.Bottom = 0
+      Align = alRight
+      ImageCollection = ImageCollection1
+      ImageWidth = 0
+      ImageHeight = 0
+      ImageIndex = 0
+      ImageName = 'bubble'
+      ParentShowHint = False
+      ShowHint = True
+      ExplicitLeft = 0
+      ExplicitHeight = 39
     end
   end
   object ImageCollection1: TImageCollection

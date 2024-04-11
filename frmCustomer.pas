@@ -53,7 +53,6 @@ type
     vimgSetFilters: TVirtualImage;
     vimgToggleFilters: TVirtualImage;
     vimgFindCustomer: TVirtualImage;
-    vimgGotoID: TVirtualImage;
     vimgSync: TVirtualImage;
     FESCustAddress1: TFESCustAddress;
     FESCustNumber1: TFESCustNumber;
@@ -62,7 +61,7 @@ type
     FESCustContact1: TFESCustContact;
     FESCustSurvey1: TFESCustSurvey;
     FESCustInspect1: TFESCustInspect;
-    vimgHideUnPinned: TVirtualImage;
+    vimgArchive: TVirtualImage;
     ImageCollection1: TImageCollection;
     VirtualImageList1: TVirtualImageList;
     actnmanCustomer: TActionManager;
@@ -86,6 +85,8 @@ type
     VirtualImage2: TVirtualImage;
     VirtualImage3: TVirtualImage;
     VirtualImage4: TVirtualImage;
+    VirtualImage5: TVirtualImage;
+    StackPanel1: TStackPanel;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actnGenerateCustCodeExecute(Sender: TObject);
@@ -179,7 +180,6 @@ end;
 procedure TCustomer.FormCreate(Sender: TObject);
 var
   iniFileName: string;
-
 begin
   fFilterDlg := nil; // Select filters for customer records
   CustomTitleBar.Enabled := true; // GlassFrame.Top = CustomeTitleBar.Height
@@ -192,7 +192,6 @@ begin
   // r e a d   p r e f e r e n c e .
   iniFileName := GetFESPreferenceFileName();
   if (FileExists(iniFileName)) then ReadPreferences(iniFileName);
-
 end;
 
 procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
@@ -219,7 +218,6 @@ end;
 
 procedure TCustomer.FormShow(Sender: TObject);
 begin
-  {Form metric}
   Height := FxHeight;
   Width := fxWidth;
   PageControl1.ActivePageIndex := FxTabIndex;
@@ -229,16 +227,13 @@ end;
 procedure TCustomer.ReadPreferences(iniFileName: TFileName);
 var
   iFile: TIniFile;
-
 begin
   iFile := TIniFile.Create(iniFileName);
-
   FxWidth := iFile.ReadInteger('CustomerPref', 'Width', DEFCUSTFORM_WIDTH);
   FxHeight := iFile.ReadInteger('CustomerPref', 'Height', DEFCUSTFORM_HEIGHT);
   FxTop := iFile.ReadInteger('CustomerPref', 'Top', 0);
   FxLeft:= iFile.ReadInteger('CustomerPref', 'Left', 0);
   FxTabIndex := iFile.ReadInteger('CustomerPref', 'TabIndex', 0);
-
   iFile.free;
 end;
 
@@ -263,13 +258,11 @@ var
   iFile: TIniFile;
 begin
   iFile := TIniFile.Create(IniFileName);
-
   iFile.WriteInteger('CustomerPref', 'Width', Width);
   iFile.WriteInteger('CustomerPref', 'Height', Height);
   iFile.WriteInteger('CustomerPref', 'Top', Top);
   iFile.WriteInteger('CustomerPref', 'Left', Left);
   iFile.WriteInteger('CustomerPref', 'TabIndex', PageControl1.ActivePageIndex);
-
  	iFile.free;
 end;
 

@@ -51,8 +51,6 @@ object FESMain: TFESMain
     Width = 1295
     Height = 19
     Panels = <>
-    ExplicitTop = 886
-    ExplicitWidth = 1293
   end
   object ActionMainMenuBar1: TActionMainMenuBar
     Left = 0
@@ -75,7 +73,6 @@ object FESMain: TFESMain
     HorzMargin = 10
     Spacing = 10
     VertMargin = 4
-    ExplicitWidth = 1293
   end
   object Panel1: TPanel
     Left = 0
@@ -85,8 +82,6 @@ object FESMain: TFESMain
     Align = alClient
     Caption = 'frameFESPlanner'
     TabOrder = 3
-    ExplicitTop = 97
-    ExplicitHeight = 792
     inline TFESPlanner1: TFESPlanner
       Left = 1
       Top = 1
@@ -97,13 +92,13 @@ object FESMain: TFESMain
       ExplicitLeft = 1
       ExplicitTop = 1
       ExplicitWidth = 1293
-      ExplicitHeight = 790
+      ExplicitHeight = 814
       inherited DBPlanner1: TDBPlanner
         Width = 1293
         Height = 814
         Hint = 'TDBPlanner Hint string'
-        ExplicitWidth = 1291
-        ExplicitHeight = 787
+        ExplicitWidth = 1293
+        ExplicitHeight = 814
         TMSStyle = 0
       end
     end
@@ -4244,6 +4239,8 @@ object FESMain: TFESMain
       Caption = 'Browse for Order'
       ImageIndex = 0
       ImageName = 'open_in_browser'
+      OnExecute = InspectBrowseOrdersExecute
+      OnUpdate = InspectBrowseOrdersUpdate
     end
     object InspectGotoOrderID: TAction
       Category = 'Inspection'
