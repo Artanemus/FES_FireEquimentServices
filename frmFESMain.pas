@@ -13,8 +13,11 @@ uses
   Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.StdActns,
   // SCM datamodules
   dmFES,
+  // TMS PLANNER VCL
+  Planner, DBPlanner,
   dmCustomerData, frameFESPlanner,
-  frmCustomer, frmInspectOrder, dmInspectOrderData;
+  frmCustomer, frmInspectOrder, dmInspectOrderData
+  ;
 
 type
   TFESMain = class(TForm)

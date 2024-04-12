@@ -17,7 +17,7 @@ object FESMain: TFESMain
   TextHeight = 21
   object pnlHeader: TPanel
     Left = 0
-    Top = 48
+    Top = 31
     Width = 1295
     Height = 42
     Align = alTop
@@ -56,7 +56,7 @@ object FESMain: TFESMain
     Left = 0
     Top = 0
     Width = 1295
-    Height = 48
+    Height = 31
     UseSystemFont = False
     ActionManager = actnmanMain
     Caption = 'ActionMainMenuBar1'
@@ -76,9 +76,9 @@ object FESMain: TFESMain
   end
   object Panel1: TPanel
     Left = 0
-    Top = 90
+    Top = 73
     Width = 1295
-    Height = 799
+    Height = 816
     Align = alClient
     Caption = 'frameFESPlanner'
     TabOrder = 3
@@ -86,19 +86,19 @@ object FESMain: TFESMain
       Left = 1
       Top = 1
       Width = 1293
-      Height = 797
+      Height = 814
       Align = alClient
       TabOrder = 0
       ExplicitLeft = 1
       ExplicitTop = 1
       ExplicitWidth = 1293
-      ExplicitHeight = 797
-      inherited DBPlanner1: TDBPlanner
+      ExplicitHeight = 814
+      inherited FESPlanner: TDBPlanner
         Width = 1293
-        Height = 797
+        Height = 814
         Hint = 'TDBPlanner Hint string'
         ExplicitWidth = 1293
-        ExplicitHeight = 797
+        ExplicitHeight = 814
         TMSStyle = 0
       end
     end
@@ -4028,6 +4028,7 @@ object FESMain: TFESMain
               end
               item
                 Action = actnStationEditor
+                Caption = '&Edit Stations at Site'
                 ImageIndex = 17
                 ImageName = 'edit'
               end

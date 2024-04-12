@@ -14,7 +14,7 @@ uses
 
 type
   TFESPlanner = class(TFrame)
-    DBPlanner1: TDBPlanner;
+    FESPlanner: TDBPlanner;
     qryInspectionOrders: TFDQuery;
     dsInspectionOrders: TDataSource;
     DBMonthSource1: TDBMonthSource;

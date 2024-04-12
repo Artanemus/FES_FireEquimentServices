@@ -4,7 +4,7 @@ object FESPlanner: TFESPlanner
   Width = 1343
   Height = 683
   TabOrder = 0
-  object DBPlanner1: TDBPlanner
+  object FESPlanner: TDBPlanner
     Left = 0
     Top = 0
     Width = 1343
@@ -104,6 +104,7 @@ object FESPlanner: TFESPlanner
       5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
       0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
     Display.ActiveEnd = 40
+    Display.DisplayEnd = 30
     Display.ColorNonActive = clWhite
     Display.HourLineColor = 15987699
     Font.Charset = DEFAULT_CHARSET
@@ -111,6 +112,9 @@ object FESPlanner: TFESPlanner
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
+    Footer.Captions.Strings = (
+      ''
+      '')
     Footer.CompletionFormat = '%d%%'
     Footer.Color = clWhite
     Footer.Completion.Font.Charset = DEFAULT_CHARSET
@@ -128,6 +132,9 @@ object FESPlanner: TFESPlanner
     GridLeftCol = 0
     GridLineColor = 15987699
     GridTopRow = 1
+    Header.Captions.Strings = (
+      ''
+      '')
     Header.Color = clWhite
     Header.ColorTo = clNone
     Header.CustomGroups = <>
@@ -148,34 +155,7 @@ object FESPlanner: TFESPlanner
     HTMLOptions.CellFontStyle = []
     HTMLOptions.HeaderFontStyle = []
     HTMLOptions.SidebarFontStyle = []
-    Items = <
-      item
-        BorderColor = 11250603
-        CaptionBkg = 14925219
-        CaptionBkgTo = 14925219
-        CaptionFont.Charset = DEFAULT_CHARSET
-        CaptionFont.Color = 4474440
-        CaptionFont.Height = -12
-        CaptionFont.Name = 'Segoe UI'
-        CaptionFont.Style = []
-        ColorTo = clWhite
-        Cursor = -1
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 4474440
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ItemBegin = 4
-        ItemEnd = 8
-        ItemPos = 0
-        Name = 'PlannerItem0'
-        SelectColor = 14925219
-        SelectColorTo = 14925219
-        SelectFontColor = 3881787
-        Shadow = False
-        TrackColor = 11565130
-        TrackSelectColor = 11565130
-      end>
+    Items = <>
     Mode.Month = 12
     Mode.PeriodStartDay = 22
     Mode.PeriodStartMonth = 12
@@ -183,10 +163,11 @@ object FESPlanner: TFESPlanner
     Mode.PeriodEndDay = 8
     Mode.PeriodEndMonth = 2
     Mode.PeriodEndYear = 2024
+    Mode.PlannerType = plMonth
     Mode.TimeLineStart = 45282.000000000000000000
     Mode.TimeLineNVUBegin = 0
     Mode.TimeLineNVUEnd = 0
-    Mode.Year = 2023
+    Mode.Year = 2022
     Mode.Day = 22
     Sidebar.Background = clWhite
     Sidebar.BackgroundTo = clNone
@@ -204,6 +185,7 @@ object FESPlanner: TFESPlanner
     Sidebar.OccupiedFontColor = 3881787
     Sidebar.Position = spTop
     Sidebar.SeparatorLineColor = 16444643
+    Positions = 1
     PositionProps = <>
     PrintOptions.LineWidth = 0
     PrintOptions.FooterFont.Charset = DEFAULT_CHARSET
@@ -228,6 +210,7 @@ object FESPlanner: TFESPlanner
       88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
       888887F8F8222208888888776888208888888887777778888888}
     Version = '3.4.6.0'
+    ItemSource = DBMonthSource1
     TMSStyle = 0
   end
   object qryInspectionOrders: TFDQuery
@@ -286,13 +269,20 @@ object FESPlanner: TFESPlanner
   end
   object DBMonthSource1: TDBMonthSource
     AutoIncKey = False
-    DataSource = dsInspectionOrders
+    DataSource = FES.dsPlannerItem
     ResourceMap = <>
+    StartTimeField = 'StartTime'
+    EndTimeField = 'EndTime'
     KeyField = 'InspectionOrderID'
     ReadOnly = False
+    SubjectField = 'Subject'
+    NotesField = 'Notes'
     UpdateByQuery = False
+    RecurrencyField = 'Recurrency'
+    MinTimeField = 'MinTimeField'
+    MaxTimeField = 'MaxTimeField'
     Month = 12
-    Year = 2023
+    Year = 2022
     Left = 520
     Top = 400
   end
