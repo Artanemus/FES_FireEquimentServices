@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
   Vcl.ImageCollection, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.VirtualImage, Vcl.WinXPanels, Vcl.TitleBarCtrls,
-  dlgCustFilter, dmInspectOrderData;
+  dlgCustFilter, dmInspectOrderData, frameFESTechHours;
 
 type
   TInspectOrder = class(TForm)
@@ -26,7 +26,6 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
-    Label5: TLabel;
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
@@ -43,15 +42,6 @@ type
     SpeedButton6: TSpeedButton;
     Label15: TLabel;
     DBMemo1: TDBMemo;
-    Label16: TLabel;
-    DBMemo2: TDBMemo;
-    Label17: TLabel;
-    DBGrid4: TDBGrid;
-    SpeedButton8: TSpeedButton;
-    Label1: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
     StackPanel1: TStackPanel;
     vimgReport: TVirtualImage;
     vimgArchived: TVirtualImage;
@@ -64,10 +54,6 @@ type
     VirtualImage8: TVirtualImage;
     VirtualImage9: TVirtualImage;
     TabSheet7: TTabSheet;
-    Label2: TLabel;
-    DBtxtCustSiteID: TDBText;
-    DBtxtCustomerID: TDBText;
-    DBtxtSiteID: TDBText;
     DBtxtCustomerName: TDBText;
     DBtxtSiteName: TDBText;
     Label3: TLabel;
@@ -94,6 +80,10 @@ type
     VirtualImage10: TVirtualImage;
     StackPanel2: TStackPanel;
     VirtualImage11: TVirtualImage;
+    Label5: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    FESTechHours1: TFESTechHours;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormHide(Sender: TObject);

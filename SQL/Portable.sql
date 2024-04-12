@@ -1,0 +1,20 @@
+SELECT 
+		 [Station].[StationID]
+        ,[Equipment].[EquipTypeID]
+        ,[EquipType].[CoreGroupID]
+		,[Station].[StationNum]
+		,[Station].[CircuitBlock]
+		,[Station].[Location]
+		,[Station].[Note]
+		,[Station].[CreatedOn]
+		,[Station].[LifeCycleSeed]
+		,[Station].[IsEmpty]
+		,[Station].[IsManaged]
+		,[Station].[SiteID]
+		,[Station].[EquipmentID]
+FROM [IDFES].[dbo].[Station]
+LEFT JOIN [Equipment] ON [Station].[EquipmentID] = [Equipment].[EquipmentID]
+LEFT JOIN [EquipType] ON [Equipment].[EquipTypeID] = [EquipType].[EquipTypeID]
+LEFT JOIN [CoreGroup] ON [EquipType].[CoreGroupID] = [CoreGroup].[CoreGroupID] 
+WHERE [EquipType].[CoreGroupID] = 1
+ORDER BY StationNum; 

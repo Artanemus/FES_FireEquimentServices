@@ -38,6 +38,14 @@ type
     dsSite: TDataSource;
     qryCustSite: TFDQuery;
     dsCustSite: TDataSource;
+    qryPortable: TFDQuery;
+    dsPortable: TDataSource;
+    qryElectric: TFDQuery;
+    dsElectric: TDataSource;
+    qryWaterBase: TFDQuery;
+    dsWaterBase: TDataSource;
+    qryStructual: TFDQuery;
+    dsStructual: TDataSource;
   private
     { Private declarations }
   public

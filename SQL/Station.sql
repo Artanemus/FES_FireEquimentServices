@@ -1,0 +1,13 @@
+SELECT 
+		 [StationID]
+		,[StationNum]
+		,[CircuitBlock]
+		,[Location]
+		,[Note]
+		,[CreatedOn]
+		,[LifeCycleSeed]
+		,[IsEmpty]
+		,[IsManaged]
+		,[SiteID]
+		,[EquipmentID]
+FROM [IDFES].[dbo].[Station] 

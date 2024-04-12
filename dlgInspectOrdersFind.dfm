@@ -753,7 +753,6 @@ object FindInspectOrders: TFindInspectOrders
       DisplayWidth = 6
       FieldName = 'InspectionOrderID'
       Origin = 'InspectionOrderID'
-      ReadOnly = True
     end
     object qryFindInspectOrderCustomerID: TIntegerField
       DisplayLabel = 'Cust#'

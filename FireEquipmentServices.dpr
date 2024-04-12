@@ -37,7 +37,9 @@ uses
   frameFESCustContact in 'frameFESCustContact.pas' {FESCustContact: TFrame},
   frameFESCustInspect in 'frameFESCustInspect.pas' {FESCustInspect: TFrame},
   frameFESCustSurvey in 'frameFESCustSurvey.pas' {FESCustSurvey: TFrame},
-  dmInspectOrderData in 'dmInspectOrderData.pas' {InspectOrderData: TDataModule};
+  dmInspectOrderData in 'dmInspectOrderData.pas' {InspectOrderData: TDataModule},
+  frameFESStation in 'frameFESStation.pas' {FESStation: TFrame},
+  frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame};
 
 {$R *.res}
 

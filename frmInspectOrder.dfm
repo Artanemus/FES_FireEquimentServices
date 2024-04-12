@@ -3,7 +3,7 @@ object InspectOrder: TInspectOrder
   Top = 0
   Caption = 'Inspection Orders'
   ClientHeight = 739
-  ClientWidth = 716
+  ClientWidth = 713
   Color = clBtnFace
   CustomTitleBar.Control = TitleBarPanel2
   CustomTitleBar.Height = 40
@@ -22,15 +22,14 @@ object InspectOrder: TInspectOrder
   object Panel1: TPanel
     Left = 0
     Top = 40
-    Width = 716
+    Width = 713
     Height = 42
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 0
-    ExplicitWidth = 874
+    ExplicitWidth = 716
     object DBTextOrderNum: TDBText
       Left = 18
       Top = 6
@@ -49,7 +48,7 @@ object InspectOrder: TInspectOrder
     object DBTextInspectionStatus: TDBText
       Left = 89
       Top = 6
-      Width = 215
+      Width = 101
       Height = 30
       AutoSize = True
       DataField = 'luInspectOrderStatus'
@@ -65,19 +64,19 @@ object InspectOrder: TInspectOrder
   object Panel2: TPanel
     Left = 0
     Top = 670
-    Width = 716
+    Width = 713
     Height = 69
     Align = alBottom
     BevelEdges = [beTop]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 874
+    ExplicitWidth = 716
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
       Top = 10
-      Width = 696
+      Width = 693
       Height = 47
       Margins.Left = 10
       Margins.Top = 10
@@ -85,101 +84,91 @@ object InspectOrder: TInspectOrder
       Margins.Bottom = 10
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 854
+      ExplicitWidth = 696
     end
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 82
-    Width = 716
+    Width = 713
     Height = 588
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 42
-    ExplicitWidth = 874
-    ExplicitHeight = 628
+    ExplicitWidth = 716
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
-        708
+        705
         552)
-      object Label5: TLabel
-        Left = 95
-        Top = 53
-        Width = 42
-        Height = 21
-        Alignment = taRightJustify
-        Caption = 'LINK#'
-      end
       object Label6: TLabel
-        Left = 60
-        Top = 80
-        Width = 77
+        Left = 53
+        Top = 46
+        Width = 68
         Height = 21
         Alignment = taRightJustify
-        Caption = 'Customer#'
+        Caption = 'Customer'
       end
       object Label8: TLabel
-        Left = 102
-        Top = 107
-        Width = 35
+        Left = 95
+        Top = 73
+        Width = 26
         Height = 21
         Alignment = taRightJustify
-        Caption = 'Site#'
+        Caption = 'Site'
       end
       object Label9: TLabel
-        Left = 58
-        Top = 134
+        Left = 42
+        Top = 100
         Width = 79
         Height = 21
         Alignment = taRightJustify
         Caption = 'Created On'
       end
       object DBText4: TDBText
-        Left = 143
-        Top = 134
-        Width = 54
+        Left = 127
+        Top = 100
+        Width = 158
         Height = 21
         AutoSize = True
         DataField = 'CreatedOn'
         DataSource = InspectOrderData.dsInspectOrder
       end
       object Label10: TLabel
-        Left = 95
-        Top = 235
+        Left = 79
+        Top = 201
         Width = 42
         Height = 21
         Alignment = taRightJustify
         Caption = 'Status'
       end
       object Label11: TLabel
-        Left = 40
-        Top = 270
+        Left = 24
+        Top = 236
         Width = 97
         Height = 21
         Alignment = taRightJustify
         Caption = 'Requested for'
       end
       object Label12: TLabel
-        Left = 37
-        Top = 305
+        Left = 21
+        Top = 271
         Width = 101
         Height = 21
         Alignment = taRightJustify
         Caption = 'Completed On'
       end
       object Label13: TLabel
-        Left = 220
-        Top = 343
+        Left = 204
+        Top = 309
         Width = 36
         Height = 21
         Alignment = taRightJustify
         Caption = 'Level'
       end
       object SpeedButton5: TSpeedButton
-        Left = 336
-        Top = 270
+        Left = 325
+        Top = 236
         Width = 32
         Height = 32
         ImageIndex = 5
@@ -188,8 +177,8 @@ object InspectOrder: TInspectOrder
         Flat = True
       end
       object SpeedButton6: TSpeedButton
-        Left = 336
-        Top = 305
+        Left = 325
+        Top = 271
         Width = 32
         Height = 32
         ImageIndex = 5
@@ -198,50 +187,17 @@ object InspectOrder: TInspectOrder
         Flat = True
       end
       object Label15: TLabel
-        Left = 35
-        Top = 375
+        Left = 19
+        Top = 341
         Width = 102
         Height = 63
         Alignment = taRightJustify
         Caption = 'Office notes'#13#10'for Technicians'#13#10'eyes-only'
       end
-      object DBtxtCustSiteID: TDBText
-        Left = 143
-        Top = 53
-        Width = 109
-        Height = 21
-        AutoSize = True
-        Color = clWindow
-        DataField = 'CustSiteID'
-        DataSource = InspectOrderData.dsInspectOrder
-        ParentColor = False
-      end
-      object DBtxtCustomerID: TDBText
-        Left = 143
-        Top = 80
-        Width = 120
-        Height = 21
-        AutoSize = True
-        Color = clWindow
-        DataField = 'CustomerID'
-        DataSource = InspectOrderData.dsInspectOrder
-        ParentColor = False
-      end
-      object DBtxtSiteID: TDBText
-        Left = 143
-        Top = 107
-        Width = 78
-        Height = 21
-        AutoSize = True
-        Color = clWindow
-        DataField = 'SiteID'
-        DataSource = InspectOrderData.dsInspectOrder
-        ParentColor = False
-      end
       object DBtxtCustomerName: TDBText
-        Left = 203
-        Top = 80
-        Width = 129
+        Left = 127
+        Top = 46
+        Width = 230
         Height = 21
         AutoSize = True
         Color = clWindow
@@ -256,9 +212,9 @@ object InspectOrder: TInspectOrder
         ParentFont = False
       end
       object DBtxtSiteName: TDBText
-        Left = 203
-        Top = 107
-        Width = 118
+        Left = 127
+        Top = 73
+        Width = 399
         Height = 21
         AutoSize = True
         Color = clWindow
@@ -273,50 +229,50 @@ object InspectOrder: TInspectOrder
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 50
-        Top = 161
+        Left = 34
+        Top = 127
         Width = 87
         Height = 21
         Alignment = taRightJustify
         Caption = 'Modified On'
       end
       object DBtxtModifiedOn: TDBText
-        Left = 143
-        Top = 161
-        Width = 120
+        Left = 127
+        Top = 127
+        Width = 4
         Height = 21
         AutoSize = True
         DataField = 'ModifiedOn'
         DataSource = InspectOrderData.dsInspectOrder
       end
       object Label4: TLabel
-        Left = 54
-        Top = 188
+        Left = 38
+        Top = 154
         Width = 83
         Height = 21
         Alignment = taRightJustify
         Caption = 'Modified By'
       end
       object DBtxtModifiedBy: TDBText
-        Left = 143
-        Top = 188
-        Width = 116
+        Left = 127
+        Top = 154
+        Width = 4
         Height = 21
         AutoSize = True
         DataField = 'ModifiedBy'
         DataSource = InspectOrderData.dsInspectOrder
       end
       object Label7: TLabel
-        Left = 32
-        Top = 343
+        Left = 16
+        Top = 309
         Width = 106
         Height = 21
         Alignment = taRightJustify
         Caption = 'Service Interval'
       end
       object DBComboBox1: TDBComboBox
-        Left = 143
-        Top = 235
+        Left = 127
+        Top = 201
         Width = 187
         Height = 29
         DataField = 'luInspectOrderStatus'
@@ -324,8 +280,8 @@ object InspectOrder: TInspectOrder
         TabOrder = 0
       end
       object DateTimePicker1: TDateTimePicker
-        Left = 144
-        Top = 270
+        Left = 128
+        Top = 236
         Width = 186
         Height = 29
         Date = 45278.000000000000000000
@@ -333,8 +289,8 @@ object InspectOrder: TInspectOrder
         TabOrder = 1
       end
       object DateTimePicker2: TDateTimePicker
-        Left = 144
-        Top = 305
+        Left = 128
+        Top = 271
         Width = 186
         Height = 29
         Date = 45278.000000000000000000
@@ -342,8 +298,8 @@ object InspectOrder: TInspectOrder
         TabOrder = 2
       end
       object DBEdit6: TDBEdit
-        Left = 262
-        Top = 340
+        Left = 246
+        Top = 306
         Width = 68
         Height = 29
         DataField = 'LevelNum'
@@ -351,19 +307,20 @@ object InspectOrder: TInspectOrder
         TabOrder = 3
       end
       object DBMemo1: TDBMemo
-        Left = 143
-        Top = 375
-        Width = 562
-        Height = 174
+        Left = 127
+        Top = 341
+        Width = 572
+        Height = 196
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataField = 'Note'
         DataSource = InspectOrderData.dsInspectOrder
         TabOrder = 4
+        ExplicitWidth = 575
       end
       object StackPanel1: TStackPanel
         Left = 0
         Top = 0
-        Width = 708
+        Width = 705
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -384,7 +341,7 @@ object InspectOrder: TInspectOrder
         Padding.Left = 34
         Spacing = 8
         TabOrder = 5
-        ExplicitWidth = 866
+        ExplicitWidth = 708
         object vimgPin: TVirtualImage
           Left = 34
           Top = 0
@@ -431,8 +388,8 @@ object InspectOrder: TInspectOrder
         end
       end
       object DBEdit1: TDBEdit
-        Left = 144
-        Top = 340
+        Left = 128
+        Top = 306
         Width = 70
         Height = 29
         DataField = 'ServiceInterval'
@@ -443,21 +400,92 @@ object InspectOrder: TInspectOrder
     object TabSheet7: TTabSheet
       Caption = 'Technicians'
       ImageIndex = -1
-      object Label2: TLabel
-        Left = 32
-        Top = 16
-        Width = 414
-        Height = 42
-        Caption = 
-          'LIST SHOWING SERVICE HOURSE FOR ORDER'#13#10'TECHNICIAN NAME - START -' +
-          ' END - TECH SUMMARY NOTE'
+      inline FESTechHours1: TFESTechHours
+        Left = 0
+        Top = 0
+        Width = 705
+        Height = 552
+        Align = alClient
+        TabOrder = 0
+        ExplicitLeft = 68
+        ExplicitTop = 72
+        inherited StackPanel1: TStackPanel
+          Width = 705
+          ControlCollection = <
+            item
+              Control = FESTechHours1.btnTogglePinVisibility
+              HorizontalPositioning = sphpLeft
+              VerticalPositioning = spvpFill
+            end
+            item
+              Control = FESTechHours1.btnClipboard
+              HorizontalPositioning = sphpLeft
+              VerticalPositioning = spvpFill
+            end
+            item
+              Control = FESTechHours1.VirtualImage1
+            end
+            item
+              Control = FESTechHours1.VirtualImage3
+            end
+            item
+              Control = FESTechHours1.VirtualImage2
+            end
+            item
+              Control = FESTechHours1.btnNew
+            end
+            item
+              Control = FESTechHours1.btnDelete
+            end>
+          ExplicitLeft = 0
+          ExplicitWidth = 640
+        end
+        inherited ctrllistCustInspect: TControlList
+          Width = 705
+          Height = 479
+          ExplicitLeft = 0
+          ExplicitTop = 32
+          ExplicitWidth = 640
+          ExplicitHeight = 407
+          inherited lblNotes: TLabel
+            Width = 420
+          end
+          inherited lblStationNumber: TLabel
+            ExplicitLeft = 39
+            ExplicitTop = 0
+            ExplicitHeight = 21
+          end
+          inherited btnEdit: TControlListButton
+            Left = 659
+          end
+          inherited Label3: TLabel
+            Left = 603
+            ExplicitLeft = -137
+          end
+        end
+        inherited pnlTOT: TPanel
+          Top = 511
+          Width = 705
+          ExplicitLeft = 0
+          ExplicitTop = 439
+          ExplicitWidth = 640
+          DesignSize = (
+            705
+            41)
+          inherited Label1: TLabel
+            Left = 431
+          end
+          inherited Label2: TLabel
+            Left = 537
+          end
+        end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Link'
       ImageIndex = 1
       object Label14: TLabel
-        Left = 218
+        Left = 98
         Top = 61
         Width = 77
         Height = 21
@@ -465,7 +493,7 @@ object InspectOrder: TInspectOrder
         Caption = 'Customer#'
       end
       object DBText1: TDBText
-        Left = 301
+        Left = 192
         Top = 61
         Width = 54
         Height = 21
@@ -476,9 +504,9 @@ object InspectOrder: TInspectOrder
         ParentColor = False
       end
       object DBText2: TDBText
-        Left = 218
+        Left = 98
         Top = 88
-        Width = 129
+        Width = 230
         Height = 21
         AutoSize = True
         Color = clWindow
@@ -493,16 +521,16 @@ object InspectOrder: TInspectOrder
         ParentFont = False
       end
       object Label21: TLabel
-        Left = 222
-        Top = 181
+        Left = 98
+        Top = 195
         Width = 35
         Height = 21
         Alignment = taRightJustify
         Caption = 'Site#'
       end
       object DBText3: TDBText
-        Left = 263
-        Top = 181
+        Left = 150
+        Top = 195
         Width = 54
         Height = 21
         AutoSize = True
@@ -512,9 +540,9 @@ object InspectOrder: TInspectOrder
         ParentColor = False
       end
       object DBText5: TDBText
-        Left = 222
-        Top = 208
-        Width = 63
+        Left = 98
+        Top = 222
+        Width = 399
         Height = 21
         AutoSize = True
         Color = clWindow
@@ -541,7 +569,7 @@ object InspectOrder: TInspectOrder
       end
       object VirtualImage3: TVirtualImage
         Left = 60
-        Top = 179
+        Top = 195
         Width = 32
         Height = 32
         ImageCollection = ImageCollection1
@@ -552,7 +580,7 @@ object InspectOrder: TInspectOrder
       end
       object VirtualImage4: TVirtualImage
         Left = 22
-        Top = 179
+        Top = 195
         Width = 32
         Height = 32
         ImageCollection = ImageCollection1
@@ -572,10 +600,31 @@ object InspectOrder: TInspectOrder
         ImageIndex = 3
         ImageName = 'bubble'
       end
+      object Label5: TLabel
+        Left = 98
+        Top = 115
+        Width = 60
+        Height = 21
+        Caption = 'Business'
+      end
+      object Label22: TLabel
+        Left = 98
+        Top = 142
+        Width = 53
+        Height = 21
+        Caption = 'Contact'
+      end
+      object Label23: TLabel
+        Left = 98
+        Top = 249
+        Width = 83
+        Height = 21
+        Caption = 'Site Contact'
+      end
       object StackPanel2: TStackPanel
         Left = 0
         Top = 0
-        Width = 708
+        Width = 705
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -585,6 +634,7 @@ object InspectOrder: TInspectOrder
           end>
         Padding.Left = 34
         TabOrder = 0
+        ExplicitWidth = 708
         object VirtualImage11: TVirtualImage
           Left = 34
           Top = 0
@@ -601,78 +651,6 @@ object InspectOrder: TInspectOrder
     object TabSheet3: TTabSheet
       Caption = 'Portable'
       ImageIndex = 2
-      object Label16: TLabel
-        Left = 3
-        Top = 3
-        Width = 319
-        Height = 21
-        Caption = 'Technician'#39's summary notes for site'#39's portable'
-      end
-      object Label17: TLabel
-        Left = 3
-        Top = 141
-        Width = 201
-        Height = 21
-        Caption = 'Check list for site'#39's portables.'
-      end
-      object Label1: TLabel
-        Left = 658
-        Top = 114
-        Width = 57
-        Height = 21
-        Caption = 'Station#'
-      end
-      object Label18: TLabel
-        Left = 611
-        Top = 141
-        Width = 104
-        Height = 21
-        Caption = 'Commissioned'
-      end
-      object Label19: TLabel
-        Left = 588
-        Top = 168
-        Width = 127
-        Height = 21
-        Caption = 'Last Major Service'
-      end
-      object Label20: TLabel
-        Left = 588
-        Top = 195
-        Width = 128
-        Height = 21
-        Caption = 'Last Minor Service'
-      end
-      object SpeedButton8: TSpeedButton
-        Left = 279
-        Top = 124
-        Width = 217
-        Height = 38
-        Caption = 'Build Site Portables'
-        ImageIndex = 2
-        ImageName = 'build'
-        Images = VirtualImageList1
-        Margin = 10
-      end
-      object DBMemo2: TDBMemo
-        Left = 3
-        Top = 30
-        Width = 646
-        Height = 105
-        TabOrder = 0
-      end
-      object DBGrid4: TDBGrid
-        Left = 3
-        Top = 168
-        Width = 646
-        Height = 249
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -16
-        TitleFont.Name = 'Segoe UI'
-        TitleFont.Style = []
-      end
     end
     object TabSheet4: TTabSheet
       Caption = 'Electrical'
@@ -690,14 +668,13 @@ object InspectOrder: TInspectOrder
   object TitleBarPanel1: TTitleBarPanel
     Left = 0
     Top = 82
-    Width = 716
+    Width = 713
     Height = 0
     CustomButtons = <>
-    ExplicitTop = 42
-    ExplicitWidth = 874
+    ExplicitWidth = 716
     object VirtualImage5: TVirtualImage
       AlignWithMargins = True
-      Left = 534
+      Left = 531
       Top = 0
       Width = 32
       Height = 0
@@ -716,7 +693,7 @@ object InspectOrder: TInspectOrder
     end
     object VirtualImage6: TVirtualImage
       AlignWithMargins = True
-      Left = 498
+      Left = 495
       Top = 0
       Width = 32
       Height = 0
@@ -735,7 +712,7 @@ object InspectOrder: TInspectOrder
     end
     object VirtualImage7: TVirtualImage
       AlignWithMargins = True
-      Left = 390
+      Left = 387
       Top = 0
       Width = 32
       Height = 0
@@ -754,7 +731,7 @@ object InspectOrder: TInspectOrder
     end
     object VirtualImage8: TVirtualImage
       AlignWithMargins = True
-      Left = 426
+      Left = 423
       Top = 0
       Width = 32
       Height = 0
@@ -773,7 +750,7 @@ object InspectOrder: TInspectOrder
     end
     object VirtualImage9: TVirtualImage
       AlignWithMargins = True
-      Left = 462
+      Left = 459
       Top = 0
       Width = 32
       Height = 0
@@ -794,12 +771,13 @@ object InspectOrder: TInspectOrder
   object TitleBarPanel2: TTitleBarPanel
     Left = 0
     Top = 0
-    Width = 716
+    Width = 713
     Height = 40
     CustomButtons = <>
+    ExplicitWidth = 716
     object VirtualImage1: TVirtualImage
       AlignWithMargins = True
-      Left = 498
+      Left = 495
       Top = 0
       Width = 32
       Height = 40
@@ -821,7 +799,7 @@ object InspectOrder: TInspectOrder
     end
     object vimgFindCustomer: TVirtualImage
       AlignWithMargins = True
-      Left = 462
+      Left = 459
       Top = 0
       Width = 32
       Height = 40
@@ -843,7 +821,7 @@ object InspectOrder: TInspectOrder
     end
     object vimgSetFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 426
+      Left = 423
       Top = 0
       Width = 32
       Height = 40
@@ -865,7 +843,7 @@ object InspectOrder: TInspectOrder
     end
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 390
+      Left = 387
       Top = 0
       Width = 32
       Height = 40
@@ -887,7 +865,7 @@ object InspectOrder: TInspectOrder
     end
     object vimgSync: TVirtualImage
       AlignWithMargins = True
-      Left = 534
+      Left = 531
       Top = 0
       Width = 32
       Height = 40

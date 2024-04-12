@@ -66,6 +66,7 @@ type
     HelpWebSite: TAction;
     Panel1: TPanel;
     TFESPlanner1: TFESPlanner;
+    actnStationEditor: TAction;
     procedure FormDestroy(Sender: TObject);
     procedure CustBrowseExecute(Sender: TObject);
     procedure CustBrowseUpdate(Sender: TObject);

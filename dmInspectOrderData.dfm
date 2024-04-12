@@ -1,6 +1,6 @@
 object InspectOrderData: TInspectOrderData
-  Height = 480
-  Width = 946
+  Height = 670
+  Width = 1073
   object qryInspectOrder: TFDQuery
     Active = True
     Connection = FES.fesConnection
@@ -31,7 +31,7 @@ object InspectOrderData: TInspectOrderData
       #9#9',[ModifiedBy]'
       '    ,dbo.GetSiteAddrSingleLine(SiteID,1) AS SiteAddress'
       'FROM [IDFES].[dbo].[InspectionOrder] ')
-    Left = 472
+    Left = 232
     Top = 40
     object qryInspectOrderInspectionOrderID: TFDAutoIncField
       FieldName = 'InspectionOrderID'
@@ -131,7 +131,7 @@ object InspectOrderData: TInspectOrderData
   end
   object dsInspectOrder: TDataSource
     DataSet = qryInspectOrder
-    Left = 536
+    Left = 288
     Top = 40
   end
   object qryInspectOrderStatus: TFDQuery
@@ -167,12 +167,12 @@ object InspectOrderData: TInspectOrderData
       '    INNER JOIN [CustSite]'
       '        ON [Customer].[CustomerID] = [CustSite].[CustomerID]')
     Left = 144
-    Top = 304
+    Top = 240
   end
   object dsCustomer: TDataSource
     DataSet = qryCustomer
     Left = 200
-    Top = 304
+    Top = 240
   end
   object qrySite: TFDQuery
     Active = True
@@ -200,11 +200,12 @@ object InspectOrderData: TInspectOrderData
       '        ON [Site].[SiteID] = [CustSite].[SiteID]'
       '')
     Left = 312
-    Top = 304
+    Top = 240
   end
   object dsSite: TDataSource
+    DataSet = qrySite
     Left = 368
-    Top = 304
+    Top = 240
   end
   object qryCustSite: TFDQuery
     Active = True
@@ -239,11 +240,184 @@ object InspectOrderData: TInspectOrderData
         '           AND [CustSite].[CustomerID] = [InspectionOrder].[Cust' +
         'omerID]')
     Left = 232
-    Top = 192
+    Top = 128
   end
   object dsCustSite: TDataSource
     DataSet = qryCustSite
     Left = 288
-    Top = 192
+    Top = 128
+  end
+  object qryPortable: TFDQuery
+    Active = True
+    IndexFieldNames = 'SiteID'
+    MasterSource = dsSite
+    MasterFields = 'SiteID'
+    DetailFields = 'SiteID'
+    Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.Station'
+    UpdateOptions.KeyFields = 'StationID'
+    SQL.Strings = (
+      'SELECT '
+      #9#9' [Station].[StationID]'
+      '        ,[Equipment].[EquipTypeID]'
+      '        ,[EquipType].[CoreGroupID]'
+      #9#9',[Station].[StationNum]'
+      #9#9',[Station].[CircuitBlock]'
+      #9#9',[Station].[Location]'
+      #9#9',[Station].[Note]'
+      #9#9',[Station].[CreatedOn]'
+      #9#9',[Station].[LifeCycleSeed]'
+      #9#9',[Station].[IsEmpty]'
+      #9#9',[Station].[IsManaged]'
+      #9#9',[Station].[SiteID]'
+      #9#9',[Station].[EquipmentID]'
+      'FROM [IDFES].[dbo].[Station]'
+      
+        'LEFT JOIN [Equipment] ON [Station].[EquipmentID] = [Equipment].[' +
+        'EquipmentID]'
+      
+        'LEFT JOIN [EquipType] ON [Equipment].[EquipTypeID] = [EquipType]' +
+        '.[EquipTypeID]'
+      
+        'LEFT JOIN [CoreGroup] ON [EquipType].[CoreGroupID] = [CoreGroup]' +
+        '.[CoreGroupID] '
+      'WHERE [EquipType].[CoreGroupID] = 1'
+      'ORDER BY StationNum; ')
+    Left = 368
+    Top = 312
+  end
+  object dsPortable: TDataSource
+    DataSet = qryPortable
+    Left = 424
+    Top = 312
+  end
+  object qryElectric: TFDQuery
+    IndexFieldNames = 'SiteID'
+    MasterSource = dsSite
+    MasterFields = 'SiteID'
+    DetailFields = 'SiteID'
+    Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.Station'
+    UpdateOptions.KeyFields = 'StationID'
+    SQL.Strings = (
+      'SELECT '
+      #9#9' [Station].[StationID]'
+      '        ,[Equipment].[EquipTypeID]'
+      '        ,[EquipType].[CoreGroupID]'
+      #9#9',[Station].[StationNum]'
+      #9#9',[Station].[CircuitBlock]'
+      #9#9',[Station].[Location]'
+      #9#9',[Station].[Note]'
+      #9#9',[Station].[CreatedOn]'
+      #9#9',[Station].[LifeCycleSeed]'
+      #9#9',[Station].[IsEmpty]'
+      #9#9',[Station].[IsManaged]'
+      #9#9',[Station].[SiteID]'
+      #9#9',[Station].[EquipmentID]'
+      'FROM [IDFES].[dbo].[Station]'
+      
+        'LEFT JOIN [Equipment] ON [Station].[EquipmentID] = [Equipment].[' +
+        'EquipmentID]'
+      
+        'LEFT JOIN [EquipType] ON [Equipment].[EquipTypeID] = [EquipType]' +
+        '.[EquipTypeID]'
+      
+        'LEFT JOIN [CoreGroup] ON [EquipType].[CoreGroupID] = [CoreGroup]' +
+        '.[CoreGroupID] '
+      'WHERE [EquipType].[CoreGroupID] = 2'
+      'ORDER BY StationNum; ')
+    Left = 504
+    Top = 312
+  end
+  object dsElectric: TDataSource
+    DataSet = qryElectric
+    Left = 560
+    Top = 312
+  end
+  object qryWaterBase: TFDQuery
+    IndexFieldNames = 'SiteID'
+    MasterSource = dsSite
+    MasterFields = 'SiteID'
+    DetailFields = 'SiteID'
+    Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.Station'
+    UpdateOptions.KeyFields = 'StationID'
+    SQL.Strings = (
+      'SELECT '
+      #9#9' [Station].[StationID]'
+      '        ,[Equipment].[EquipTypeID]'
+      '        ,[EquipType].[CoreGroupID]'
+      #9#9',[Station].[StationNum]'
+      #9#9',[Station].[CircuitBlock]'
+      #9#9',[Station].[Location]'
+      #9#9',[Station].[Note]'
+      #9#9',[Station].[CreatedOn]'
+      #9#9',[Station].[LifeCycleSeed]'
+      #9#9',[Station].[IsEmpty]'
+      #9#9',[Station].[IsManaged]'
+      #9#9',[Station].[SiteID]'
+      #9#9',[Station].[EquipmentID]'
+      'FROM [IDFES].[dbo].[Station]'
+      
+        'LEFT JOIN [Equipment] ON [Station].[EquipmentID] = [Equipment].[' +
+        'EquipmentID]'
+      
+        'LEFT JOIN [EquipType] ON [Equipment].[EquipTypeID] = [EquipType]' +
+        '.[EquipTypeID]'
+      
+        'LEFT JOIN [CoreGroup] ON [EquipType].[CoreGroupID] = [CoreGroup]' +
+        '.[CoreGroupID] '
+      'WHERE [EquipType].[CoreGroupID] = 3'
+      'ORDER BY StationNum; ')
+    Left = 640
+    Top = 312
+  end
+  object dsWaterBase: TDataSource
+    DataSet = qryWaterBase
+    Left = 688
+    Top = 312
+  end
+  object qryStructual: TFDQuery
+    IndexFieldNames = 'SiteID'
+    MasterSource = dsSite
+    MasterFields = 'SiteID'
+    DetailFields = 'SiteID'
+    Connection = FES.fesConnection
+    UpdateOptions.UpdateTableName = 'IDFES.dbo.Station'
+    UpdateOptions.KeyFields = 'StationID'
+    SQL.Strings = (
+      'SELECT '
+      #9#9' [Station].[StationID]'
+      '        ,[Equipment].[EquipTypeID]'
+      '        ,[EquipType].[CoreGroupID]'
+      #9#9',[Station].[StationNum]'
+      #9#9',[Station].[CircuitBlock]'
+      #9#9',[Station].[Location]'
+      #9#9',[Station].[Note]'
+      #9#9',[Station].[CreatedOn]'
+      #9#9',[Station].[LifeCycleSeed]'
+      #9#9',[Station].[IsEmpty]'
+      #9#9',[Station].[IsManaged]'
+      #9#9',[Station].[SiteID]'
+      #9#9',[Station].[EquipmentID]'
+      'FROM [IDFES].[dbo].[Station]'
+      
+        'LEFT JOIN [Equipment] ON [Station].[EquipmentID] = [Equipment].[' +
+        'EquipmentID]'
+      
+        'LEFT JOIN [EquipType] ON [Equipment].[EquipTypeID] = [EquipType]' +
+        '.[EquipTypeID]'
+      
+        'LEFT JOIN [CoreGroup] ON [EquipType].[CoreGroupID] = [CoreGroup]' +
+        '.[CoreGroupID] '
+      'WHERE [EquipType].[CoreGroupID] = 4'
+      'ORDER BY StationNum; ')
+    Left = 768
+    Top = 312
+  end
+  object dsStructual: TDataSource
+    DataSet = qryStructual
+    Left = 824
+    Top = 312
   end
 end
