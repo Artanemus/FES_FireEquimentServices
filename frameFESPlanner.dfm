@@ -2,13 +2,14 @@ object FESPlanner: TFESPlanner
   Left = 0
   Top = 0
   Width = 1343
-  Height = 683
+  Height = 838
   TabOrder = 0
-  object FESPlanner: TDBPlanner
+  object DBPlanner1: TDBPlanner
     Left = 0
     Top = 0
     Width = 1343
-    Height = 683
+    Height = 838
+    ActiveDisplay = True
     Align = alClient
     AttachementGlyph.Data = {
       F6000000424DF600000000000000760000002800000010000000100000000100
@@ -19,13 +20,14 @@ object FESPlanner: TFESPlanner
       8888888880808080888888888080808088888888808080808888888880808080
       8888888880808080888888888080808088888888808080808888888888808080
       8888888888808880888888888888000888888888888888888888}
-    Caption.Title = 'Fire Equipment Services <b>Inspection Orders</b>'
+    Caption.Title = 'TMS software <b>TDBPlanner</b>'
     Caption.Font.Charset = DEFAULT_CHARSET
     Caption.Font.Color = clBlack
     Caption.Font.Height = -13
     Caption.Font.Name = 'Verdana'
     Caption.Font.Style = []
     Caption.Background = clWhite
+    Caption.Visible = False
     Color = clWhite
     DayNames.Strings = (
       'Sun'
@@ -43,6 +45,7 @@ object FESPlanner: TFESPlanner
     DefaultItem.CaptionFont.Height = -12
     DefaultItem.CaptionFont.Name = 'Segoe UI'
     DefaultItem.CaptionFont.Style = []
+    DefaultItem.CaptionType = ctText
     DefaultItem.ColorTo = clWhite
     DefaultItem.Cursor = -1
     DefaultItem.Font.Charset = DEFAULT_CHARSET
@@ -103,16 +106,33 @@ object FESPlanner: TFESPlanner
       EF5EAFF6075616165E07070D6707F6075E5656AFF60716165E07070DA7AF075F
       5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
       0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
-    Display.ActiveEnd = 40
-    Display.DisplayEnd = 30
+    Display.ActiveEnd = 30
+    Display.CurrentPosFrom = 997
+    Display.CurrentPosTo = 997
+    Display.DisplayStart = 12
+    Display.DisplayEnd = 42
     Display.ColorNonActive = clWhite
     Display.HourLineColor = 15987699
+    DragItemAlways = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Footer.Captions.Strings = (
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
       ''
       '')
     Footer.CompletionFormat = '%d%%'
@@ -129,12 +149,18 @@ object FESPlanner: TFESPlanner
     Footer.Font.Name = 'Segoe UI'
     Footer.Font.Style = []
     Footer.LineColor = 16444643
-    GridLeftCol = 0
+    GridLeftCol = 1
     GridLineColor = 15987699
-    GridTopRow = 1
+    GridTopRow = 0
     Header.Captions.Strings = (
       ''
-      '')
+      '22/07/21'
+      '23/07/21'
+      '24/07/21'
+      '25/07/21'
+      '26/07/21'
+      '27/07/21'
+      '28/07/21')
     Header.Color = clWhite
     Header.ColorTo = clNone
     Header.CustomGroups = <>
@@ -155,20 +181,258 @@ object FESPlanner: TFESPlanner
     HTMLOptions.CellFontStyle = []
     HTMLOptions.HeaderFontStyle = []
     HTMLOptions.SidebarFontStyle = []
-    Items = <>
-    Mode.Month = 12
-    Mode.PeriodStartDay = 22
-    Mode.PeriodStartMonth = 12
-    Mode.PeriodStartYear = 2023
-    Mode.PeriodEndDay = 8
-    Mode.PeriodEndMonth = 2
+    Items = <
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '21 Meaning To Stop 50 Forest Hill - Fer'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 6
+        ItemEnd = 22
+        ItemPos = 6
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '57 Free Range Kids - Ga 5391 Warrego Highway'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 6
+        ItemEnd = 22
+        ItemPos = 4
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1036 Allys Kindy 68 Woodford Street'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 6
+        ItemEnd = 22
+        ItemPos = 3
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1043 Sophia College 56 Otto Road'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 6
+        ItemEnd = 22
+        ItemPos = 5
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        Text.Strings = (
+          
+            'Own Sparkie services - EM & EX lights.  H/R not connected to Pum' +
+            'pset.  Annual HYD JAN   Pumpset CQMPS2307 & 6MFEHRHYDS EXP JUL23')
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1192 Savco Vegetation Ser 134 Briggs Road'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 6
+        ItemEnd = 22
+        ItemPos = 1
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        Text.Strings = (
+          'PO# 33375')
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1446 Len Russell Funeral  238 Brisbane Street'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 8
+        ItemEnd = 24
+        ItemPos = 0
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1448 Plasvacc Pty Ltd 6066 Cunningham High'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 8
+        ItemEnd = 24
+        ItemPos = 1
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end
+      item
+        BorderColor = 11250603
+        CaptionBkg = 14925219
+        CaptionBkgTo = 14925219
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = 4474440
+        CaptionFont.Height = -12
+        CaptionFont.Name = 'Segoe UI'
+        CaptionFont.Style = []
+        CaptionType = ctText
+        CaptionText = '1449 The Karalee Communit 56 Harold Summervill'
+        ColorTo = clWhite
+        Cursor = -1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4474440
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemBegin = 8
+        ItemEnd = 24
+        ItemPos = 2
+        Name = 'PlannerItem0'
+        SelectColor = 14925219
+        SelectColorTo = 14925219
+        SelectFontColor = 3881787
+        Shadow = False
+        TrackColor = 11565130
+        TrackSelectColor = 11565130
+      end>
+    Mode.Month = 7
+    Mode.PeriodStartDay = 14
+    Mode.PeriodStartMonth = 4
+    Mode.PeriodStartYear = 2024
+    Mode.PeriodEndDay = 1
+    Mode.PeriodEndMonth = 6
     Mode.PeriodEndYear = 2024
-    Mode.PlannerType = plMonth
-    Mode.TimeLineStart = 45282.000000000000000000
+    Mode.TimeLineStart = 45396.000000000000000000
     Mode.TimeLineNVUBegin = 0
     Mode.TimeLineNVUEnd = 0
-    Mode.Year = 2022
+    Mode.Year = 2021
     Mode.Day = 22
+    Sidebar.Alignment = taRightJustify
     Sidebar.Background = clWhite
     Sidebar.BackgroundTo = clNone
     Sidebar.Border = False
@@ -183,9 +447,9 @@ object FESPlanner: TFESPlanner
     Sidebar.Occupied = clWhite
     Sidebar.OccupiedTo = clWhite
     Sidebar.OccupiedFontColor = 3881787
-    Sidebar.Position = spTop
     Sidebar.SeparatorLineColor = 16444643
-    Positions = 1
+    Sidebar.Width = 60
+    Positions = 7
     PositionProps = <>
     PrintOptions.LineWidth = 0
     PrintOptions.FooterFont.Charset = DEFAULT_CHARSET
@@ -210,80 +474,26 @@ object FESPlanner: TFESPlanner
       88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
       888887F8F8222208888888776888208888888887777778888888}
     Version = '3.4.6.0'
-    ItemSource = DBMonthSource1
+    ItemSource = DBDaySource1
+    ExplicitHeight = 683
     TMSStyle = 0
   end
-  object qryInspectionOrders: TFDQuery
-    ActiveStoredUsage = [auDesignTime]
-    Connection = FES.fesConnection
-    SQL.Strings = (
-      'SELECT dbo.InspectionOrder.InspectionOrderID,'
-      '       dbo.CustSite.CustomerID,'
-      '       dbo.CustSite.SiteID,'
-      '       dbo.CustSite.IsEnabled,'
-      '       dbo.InspectionOrder.RequestedDT,'
-      '       dbo.InspectionOrder.CompletedDT,'
-      '       dbo.Customer.CustName,'
-      '       dbo.InspectionStatus.Caption,'
-      '       dbo.Site.Address,'
-      '       dbo.InspectionOrder.InspectionStatusID,'
-      '       dbo.Site.PostcodeID,'
-      '       dbo.Postcode.Suburb,'
-      '       CASE'
-      '           WHEN [IsEnabled] = 1 THEN'
-      '               '#39'ENABLED'#39
-      '           ELSE'
-      '               '#39'DISABLED'#39
-      '       END AS LinkStatus,'
-      
-        '       -- Field address is a Memo type. What'#39's needed is a singl' +
-        'e line without line feeds and carriage returns.'
-      
-        '       REPLACE(REPLACE([Address], CHAR(10), '#39#39'), CHAR(13), '#39#39') A' +
-        'S xAddress,'
-      '       dbo.InspectionOrder.CreatedOn'
-      'FROM dbo.InspectionOrder'
-      '    LEFT JOIN dbo.InspectionStatus'
-      
-        '        ON dbo.InspectionOrder.InspectionStatusID = dbo.Inspecti' +
-        'onStatus.InspectionStatusID'
-      '    LEFT JOIN dbo.CustSite'
-      
-        '        ON dbo.InspectionOrder.CustSiteID = dbo.CustSite.CustSit' +
-        'eID'
-      '    LEFT JOIN dbo.Site'
-      '        ON dbo.CustSite.SiteID = dbo.Site.SiteID'
-      '    LEFT JOIN dbo.Postcode'
-      '        ON dbo.Site.PostcodeID = dbo.Postcode.PostcodeID'
-      '    LEFT JOIN dbo.Customer'
-      '        ON dbo.CustSite.CustomerID = dbo.Customer.CustomerID'
-      'ORDER BY dbo.InspectionOrder.RequestedDT DESC;'
-      '')
-    Left = 520
-    Top = 328
-  end
-  object dsInspectionOrders: TDataSource
-    DataSet = qryInspectionOrders
-    Left = 632
-    Top = 328
-  end
-  object DBMonthSource1: TDBMonthSource
-    AutoIncKey = False
+  object DBDaySource1: TDBDaySource
+    AutoIncKey = True
     DataSource = FES.dsPlannerItem
     ResourceMap = <>
-    StartTimeField = 'StartTime'
-    EndTimeField = 'EndTime'
+    StartTimeField = 'BookIN'
+    EndTimeField = 'BookOut'
     KeyField = 'InspectionOrderID'
     ReadOnly = False
-    SubjectField = 'Subject'
-    NotesField = 'Notes'
+    SubjectField = 'Caption'
+    NotesField = 'Note'
     UpdateByQuery = False
-    RecurrencyField = 'Recurrency'
-    MinTimeField = 'MinTimeField'
-    MaxTimeField = 'MaxTimeField'
-    Month = 12
-    Year = 2022
-    Left = 520
-    Top = 400
+    AutoHeaderUpdate = True
+    Day = 44399.000000000000000000
+    DayIncrement = 5
+    Mode = dmMultiDay
+    Left = 528
+    Top = 456
   end
 end

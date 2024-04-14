@@ -93,12 +93,23 @@ object FESMain: TFESMain
       ExplicitTop = 1
       ExplicitWidth = 1293
       ExplicitHeight = 814
-      inherited FESPlanner: TDBPlanner
+      inherited DBPlanner1: TDBPlanner
         Width = 1293
         Height = 814
-        Hint = 'TDBPlanner Hint string'
-        ExplicitWidth = 1293
-        ExplicitHeight = 814
+        Caption.Font.Color = clBlack
+        Color = clWhite
+        Display.ColorNonActive = clWhite
+        Display.HourLineColor = 15987699
+        Font.Color = clBlack
+        GridLineColor = 15987699
+        Header.ColorTo = clNone
+        Header.Flat = True
+        Header.Font.Color = clBlack
+        Header.LineColor = 15987699
+        Sidebar.BackgroundTo = clNone
+        Sidebar.BorderColor = 15987699
+        Sidebar.Font.Color = clBlack
+        Sidebar.LineColor = 15987699
         TMSStyle = 0
       end
     end
@@ -4198,7 +4209,7 @@ object FESMain: TFESMain
           end>
         ActionBar = ActionMainMenuBar1
       end>
-    Images = vImageListMenu
+    Images = FES.imgList32x32
     Left = 856
     Top = 8
     StyleName = 'Platform Default'

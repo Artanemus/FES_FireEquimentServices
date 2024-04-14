@@ -14,10 +14,8 @@ uses
 
 type
   TFESPlanner = class(TFrame)
-    FESPlanner: TDBPlanner;
-    qryInspectionOrders: TFDQuery;
-    dsInspectionOrders: TDataSource;
-    DBMonthSource1: TDBMonthSource;
+    DBPlanner1: TDBPlanner;
+    DBDaySource1: TDBDaySource;
   private
     { Private declarations }
   public
