@@ -23,7 +23,7 @@ Coordinates=340,209,46,33
 Coordinates=202,212,52,33
 
 []
-Coordinates=400,100,50,51
+Coordinates=340,53,118,33
 LayerNames=NewLayer0
 
 [CustomerData.qryCustAddress]
@@ -101,16 +101,10 @@ Coordinates=180,1053,155,177
 [pumenuCustAddress]
 Coordinates=340,1,119,33
 
-[vimglistCustAddress]
-Coordinates=340,53,118,33
-
 [ctrllistCustAddress]
 Coordinates=20,110,110,51
 Visible=True
 LayerNames=NewLayer0
-
-[imgcollCustAddress]
-Coordinates=187,1,115,33
 
 [bindsrcCustAddress]
 Coordinates=220,10,148,177

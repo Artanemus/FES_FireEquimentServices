@@ -25,7 +25,6 @@ type
     lblInspectRequestedDT: TLabel;
     lblInspectStatus: TLabel;
     lblInspectTech: TLabel;
-    LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
     LinkPropertyToField5: TLinkPropertyToField;

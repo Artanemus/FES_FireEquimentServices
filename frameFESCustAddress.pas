@@ -10,7 +10,7 @@ uses
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Grid, Data.Bind.DBScope,
   Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.VirtualImage,
-  Vcl.WinXCtrls;
+  Vcl.WinXCtrls, dmFES;
 
 type
   TFESCustAddress = class(TFrame)
@@ -19,7 +19,6 @@ type
     btnEditAddress: TControlListButton;
     btnPinAddress: TControlListButton;
     ctrllistCustAddress: TControlList;
-    imgcollCustAddress: TImageCollection;
     lblAddress: TLabel;
     lblAddressType: TLabel;
     lblPostalZone: TLabel;
@@ -37,7 +36,6 @@ type
     puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    vimglistCustAddress: TVirtualImageList;
     procedure btnEditAddressClick(Sender: TObject);
     procedure btnPinAddressClick(Sender: TObject);
     procedure ctrllistCustAddressBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;

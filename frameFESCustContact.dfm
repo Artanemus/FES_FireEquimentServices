@@ -54,7 +54,6 @@ object FESCustContact: TFESCustContact
     ParentFont = False
     TabOrder = 1
     OnBeforeDrawItem = ctrllistCustEmailBeforeDrawItem
-    ExplicitTop = 0
     object lblContactType: TLabel
       AlignWithMargins = True
       Left = 10
@@ -92,8 +91,6 @@ object FESCustContact: TFESCustContact
       ParentFont = False
       Layout = tlCenter
       StyleElements = [seClient, seBorder]
-      ExplicitLeft = 96
-      ExplicitTop = 0
       ExplicitHeight = 21
     end
     object btnEditContact: TControlListButton
@@ -108,7 +105,6 @@ object FESCustContact: TFESCustContact
       Images = vimglistCustContact
       ImageIndex = 2
       ImageName = 'Edit'
-      LinkHotColor = clHighlight
       Style = clbkToolButton
       ExplicitLeft = 593
       ExplicitTop = 4
@@ -126,7 +122,6 @@ object FESCustContact: TFESCustContact
       Images = vimglistCustContact
       ImageIndex = 0
       ImageName = 'pin'
-      LinkHotColor = clHighlight
       Style = clbkToolButton
       ExplicitLeft = 555
       ExplicitTop = 4
@@ -150,8 +145,6 @@ object FESCustContact: TFESCustContact
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
-      ExplicitLeft = 497
-      ExplicitTop = 12
       ExplicitHeight = 17
     end
   end

@@ -20,7 +20,6 @@ object InspectOrderData: TInspectOrderData
       #9#9',[NoteWaterBase]'
       #9#9',[NoteStructual]'
       #9#9',[InspectionStatusID]'
-      #9#9',[HRID]'
       #9#9',[IsArchived]'
       #9#9',[CustSiteID]'
       #9#9',[IsEnabled]'
@@ -52,11 +51,6 @@ object InspectOrderData: TInspectOrderData
     object qryInspectOrderCustomerID: TIntegerField
       FieldName = 'CustomerID'
       Origin = 'CustomerID'
-      DisplayFormat = '000000'
-    end
-    object qryInspectOrderHRID: TIntegerField
-      FieldName = 'HRID'
-      Origin = 'HRID'
       DisplayFormat = '000000'
     end
     object qryInspectOrderInspectionStatusID: TIntegerField

@@ -20,7 +20,6 @@ type
     qryInspectOrderLevelNum: TIntegerField;
     qryInspectOrderNote: TWideStringField;
     qryInspectOrderInspectionStatusID: TIntegerField;
-    qryInspectOrderHRID: TIntegerField;
     qryInspectOrderIsArchived: TBooleanField;
     qryInspectOrderCustSiteID: TIntegerField;
     qryInspectOrderIsEnabled: TBooleanField;

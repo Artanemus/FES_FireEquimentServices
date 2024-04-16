@@ -107,8 +107,8 @@ object FESPlanner: TFESPlanner
       5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
       0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
     Display.ActiveEnd = 30
-    Display.CurrentPosFrom = 997
-    Display.CurrentPosTo = 997
+    Display.CurrentPosFrom = 999
+    Display.CurrentPosTo = 999
     Display.DisplayStart = 12
     Display.DisplayEnd = 42
     Display.ColorNonActive = clWhite
@@ -154,13 +154,13 @@ object FESPlanner: TFESPlanner
     GridTopRow = 0
     Header.Captions.Strings = (
       ''
-      '22/07/21'
-      '23/07/21'
-      '24/07/21'
-      '25/07/21'
-      '26/07/21'
-      '27/07/21'
-      '28/07/21')
+      '07/22/2021'
+      '07/23/2021'
+      '07/24/2021'
+      '07/25/2021'
+      '07/26/2021'
+      '07/27/2021'
+      '07/28/2021')
     Header.Color = clWhite
     Header.ColorTo = clNone
     Header.CustomGroups = <>
@@ -192,7 +192,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '21 Meaning To Stop 50 Forest Hill - Fer'
+        CaptionText = '21 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -207,7 +207,15 @@ object FESPlanner: TFESPlanner
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
+        Selected = True
         Shadow = False
+        Text.Strings = (
+          'Meaning To Stop'
+          ''
+          '50 Forest Hill - Fernvale Road'
+          'FOREST HILL, QLD 4342'
+          ''
+          'TECH:Mitchell BELL')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -221,7 +229,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '57 Free Range Kids - Ga 5391 Warrego Highway'
+        CaptionText = '57 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -237,6 +245,12 @@ object FESPlanner: TFESPlanner
         SelectColorTo = 14925219
         SelectFontColor = 3881787
         Shadow = False
+        Text.Strings = (
+          'Free Range Kids - Gatton'
+          ''
+          '5391 Warrego Highway'
+          'GATTON, QLD 4343'
+          '')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -250,7 +264,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1036 Allys Kindy 68 Woodford Street'
+        CaptionText = '1036 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -258,14 +272,20 @@ object FESPlanner: TFESPlanner
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        ItemBegin = 6
-        ItemEnd = 22
-        ItemPos = 3
+        ItemBegin = 2
+        ItemEnd = 12
+        ItemPos = 4
         Name = 'PlannerItem0'
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
         Shadow = False
+        Text.Strings = (
+          'Allys Kindy'
+          ''
+          '68 Woodford Street'
+          'ONE MILE, QLD 4305'
+          '')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -279,7 +299,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1043 Sophia College 56 Otto Road'
+        CaptionText = '1043 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -296,9 +316,11 @@ object FESPlanner: TFESPlanner
         SelectFontColor = 3881787
         Shadow = False
         Text.Strings = (
-          
-            'Own Sparkie services - EM & EX lights.  H/R not connected to Pum' +
-            'pset.  Annual HYD JAN   Pumpset CQMPS2307 & 6MFEHRHYDS EXP JUL23')
+          'Sophia College'
+          ''
+          '56 Otto Road'
+          'PLAINLAND, QLD 4341'
+          '')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -312,7 +334,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1192 Savco Vegetation Ser 134 Briggs Road'
+        CaptionText = '1192 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -320,8 +342,8 @@ object FESPlanner: TFESPlanner
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        ItemBegin = 6
-        ItemEnd = 22
+        ItemBegin = 4
+        ItemEnd = 20
         ItemPos = 1
         Name = 'PlannerItem0'
         SelectColor = 14925219
@@ -329,7 +351,10 @@ object FESPlanner: TFESPlanner
         SelectFontColor = 3881787
         Shadow = False
         Text.Strings = (
-          'PO# 33375')
+          'Savco Vegetation Services Pty Ltd'
+          ''
+          '134 Briggs Road'
+          'RACEVIEW, QLD 4305')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -343,7 +368,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1446 Len Russell Funeral  238 Brisbane Street'
+        CaptionText = '1446 Action'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -359,6 +384,12 @@ object FESPlanner: TFESPlanner
         SelectColorTo = 14925219
         SelectFontColor = 3881787
         Shadow = False
+        Text.Strings = (
+          'Len Russell Funeral Director'
+          ''
+          '238 Brisbane Street'
+          'WEST IPSWICH, QLD 4305'
+          '')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -372,7 +403,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1448 Plasvacc Pty Ltd 6066 Cunningham High'
+        CaptionText = '1448 Action'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -380,14 +411,19 @@ object FESPlanner: TFESPlanner
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        ItemBegin = 8
-        ItemEnd = 24
+        ItemBegin = 15
+        ItemEnd = 27
         ItemPos = 1
         Name = 'PlannerItem0'
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
         Shadow = False
+        Text.Strings = (
+          'Plasvacc Pty Ltd'
+          ''
+          '6066 Cunningham Highway'
+          'KALBAR, QLD 4309')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
@@ -401,7 +437,7 @@ object FESPlanner: TFESPlanner
         CaptionFont.Name = 'Segoe UI'
         CaptionFont.Style = []
         CaptionType = ctText
-        CaptionText = '1449 The Karalee Communit 56 Harold Summervill'
+        CaptionText = '1449 Action'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -417,6 +453,12 @@ object FESPlanner: TFESPlanner
         SelectColorTo = 14925219
         SelectFontColor = 3881787
         Shadow = False
+        Text.Strings = (
+          'The Karalee Community Kindergarten Inc.'
+          ''
+          '56 Harold Summervilles Road'
+          'KARALEE, QLD 4306'
+          '')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end>
@@ -475,7 +517,6 @@ object FESPlanner: TFESPlanner
       888887F8F8222208888888776888208888888887777778888888}
     Version = '3.4.6.0'
     ItemSource = DBDaySource1
-    ExplicitHeight = 683
     TMSStyle = 0
   end
   object DBDaySource1: TDBDaySource
@@ -486,10 +527,11 @@ object FESPlanner: TFESPlanner
     EndTimeField = 'BookOut'
     KeyField = 'InspectionOrderID'
     ReadOnly = False
-    SubjectField = 'Caption'
-    NotesField = 'Note'
+    SubjectField = 'TMSCaption'
+    NotesField = 'TMSNotes'
     UpdateByQuery = False
     AutoHeaderUpdate = True
+    DateFormat = 'mm/dd/yyyy'
     Day = 44399.000000000000000000
     DayIncrement = 5
     Mode = dmMultiDay

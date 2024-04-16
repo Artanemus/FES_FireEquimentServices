@@ -39,7 +39,8 @@ uses
   frameFESCustSurvey in 'frameFESCustSurvey.pas' {FESCustSurvey: TFrame},
   dmInspectOrderData in 'dmInspectOrderData.pas' {InspectOrderData: TDataModule},
   frameFESStation in 'frameFESStation.pas' {FESStation: TFrame},
-  frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame};
+  frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame},
+  dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette};
 
 {$R *.res}
 

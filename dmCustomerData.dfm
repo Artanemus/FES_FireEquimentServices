@@ -27,7 +27,6 @@ object CustomerData: TCustomerData
       FieldName = 'CustomerID'
       Origin = 'CustomerID'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
       DisplayFormat = '00000'
     end
     object qryCustomerCustName: TWideStringField
@@ -300,9 +299,8 @@ object CustomerData: TCustomerData
       '     --,[NoteElectrical]'
       '     --,[NoteWaterBase]'
       '     --,[NoteStructual]'
+      '     , IsPinned'
       '     , [InspectionOrder].[InspectionStatusID]'
-      '     , [InspectionOrder].[HRID]'
-      '     , CONCAT('#39'TECH:'#39', firstname, '#39' '#39', UPPER(lastname)) AS FNAME'
       '     , [InspectionOrder].[SiteID]'
       
         '     , dbo.GetSiteAddrSingleLine([InspectionOrder].[SiteID], 1) ' +
@@ -315,8 +313,7 @@ object CustomerData: TCustomerData
       
         '        ON [InspectionOrder].InspectionStatusID = InspectionStat' +
         'us.InspectionStatusID'
-      '    LEFT JOIN HR'
-      '        ON InspectionOrder.HRID = HR.HRID;')
+      '')
     Left = 904
     Top = 128
   end
@@ -326,7 +323,6 @@ object CustomerData: TCustomerData
     Top = 128
   end
   object qryCustSurvey: TFDQuery
-    Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'

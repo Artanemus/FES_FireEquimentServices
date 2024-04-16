@@ -41,8 +41,6 @@ object FESTechHours: TFESTechHours
     Padding.Left = 34
     Spacing = 8
     TabOrder = 0
-    ExplicitLeft = -141
-    ExplicitWidth = 781
     object btnTogglePinVisibility: TVirtualImage
       Left = 34
       Top = 0
@@ -163,10 +161,6 @@ object FESTechHours: TFESTechHours
     ParentColor = False
     ParentFont = False
     TabOrder = 1
-    ExplicitLeft = -141
-    ExplicitTop = -16
-    ExplicitWidth = 781
-    ExplicitHeight = 496
     object lblNotes: TLabel
       AlignWithMargins = True
       Left = 173
@@ -202,8 +196,7 @@ object FESTechHours: TFESTechHours
       Font.Style = []
       ParentFont = False
       Layout = tlCenter
-      ExplicitLeft = 42
-      ExplicitTop = 4
+      ExplicitHeight = 21
     end
     object lblInspectInspectedDT: TLabel
       Left = 17
@@ -257,7 +250,6 @@ object FESTechHours: TFESTechHours
       Align = alRight
       Caption = 'HOURS'
       Layout = tlCenter
-      ExplicitLeft = 508
       ExplicitHeight = 21
     end
   end
@@ -269,9 +261,6 @@ object FESTechHours: TFESTechHours
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitWidth = 185
     DesignSize = (
       640
       41)

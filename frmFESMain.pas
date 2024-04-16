@@ -16,8 +16,8 @@ uses
   // TMS PLANNER VCL
   Planner, DBPlanner,
   dmCustomerData, frameFESPlanner,
-  frmCustomer, frmInspectOrder, dmInspectOrderData
-  ;
+  frmCustomer, frmInspectOrder, dmInspectOrderData, Vcl.WinXPanels
+  , Data.DB;
 
 type
   TFESMain = class(TForm)
@@ -25,7 +25,6 @@ type
     vimageLogo: TVirtualImage;
     lblCompanyName: TLabel;
     StatusBar1: TStatusBar;
-    imgcollectMain: TImageCollection;
     ActionMainMenuBar1: TActionMainMenuBar;
     actnmanMain: TActionManager;
     SurveyFind: TAction;
@@ -54,7 +53,6 @@ type
     EquipBrowse: TAction;
     EquipGotoID: TAction;
     EquipNew: TAction;
-    vImageListMenu: TVirtualImageList;
     FileExit1: TFileExit;
     FileConnect: TAction;
     BalloonHint1: TBalloonHint;
@@ -68,16 +66,30 @@ type
     HelpAbout: TAction;
     HelpWebSite: TAction;
     Panel1: TPanel;
-    TFESPlanner1: TFESPlanner;
+    MyPlanner: TFESPlanner;
     actnStationEditor: TAction;
+    actnCut: TAction;
+    actnCopy: TAction;
+    actnPaste: TAction;
+    actnDelete: TAction;
+    actnStatusPalette: TAction;
+    actnPrefernces: TAction;
+    edtDayCount: TEdit;
+    vimgDayCountDec: TVirtualImage;
+    vimgDayCountInc: TVirtualImage;
+    StackPanel1: TStackPanel;
+    procedure actnStatusPaletteExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CustBrowseExecute(Sender: TObject);
-    procedure CustBrowseUpdate(Sender: TObject);
+    procedure edtDayCountChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure InspectBrowseOrdersExecute(Sender: TObject);
-    procedure InspectBrowseOrdersUpdate(Sender: TObject);
     procedure InspectFindOrderExecute(Sender: TObject);
-    procedure InspectFindOrderUpdate(Sender: TObject);
+    procedure GenericUpdate(Sender: TObject);
+    procedure TFESPlanner1DBDaySource1FieldsToItem(Sender: TObject; Fields:
+        TFields; Item: TPlannerItem);
+    procedure vimgDayCountDecClick(Sender: TObject);
+    procedure vimgDayCountIncClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -93,7 +105,21 @@ implementation
 
 {$R *.dfm}
 
-uses dlgInspectOrdersFind;
+uses dlgInspectOrdersFind, dlgStatusPalette;
+
+procedure TFESMain.actnStatusPaletteExecute(Sender: TObject);
+var
+dlg: TStatusPalette;
+begin
+  dlg := TStatusPalette.Create(self);
+  if IsPositiveResult(dlg.ShowModal()) then
+  begin
+    FES.qryPlannerItem.Close;
+    FES.qryPlannerItem.Active := true;
+    MyPlanner.DBDaySource1.SynchDBItems;
+  end;
+  dlg.free;
+end;
 
 procedure TFESMain.FormDestroy(Sender: TObject);
 begin
@@ -101,7 +127,6 @@ begin
     FreeAndNil(FESCust);
   if Assigned(FESInspect) then
     FreeAndNil(FESInspect)
-
 end;
 
 procedure TFESMain.CustBrowseExecute(Sender: TObject);
@@ -111,12 +136,13 @@ begin
   FESCust.Show;
 end;
 
-procedure TFESMain.CustBrowseUpdate(Sender: TObject);
+procedure TFESMain.edtDayCountChange(Sender: TObject);
+var
+Days: integer;
 begin
-  TAction(Sender).Enabled := false;
-  if Assigned(FES) and FES.fesConnection.Connected and Assigned(CustomerData)
-  then
-    TAction(Sender).Enabled := true;
+  Days := Round(StrToIntDef(edtDayCount.Text, 0));
+  if (Days > 0) and (Days < 32) then
+  MyPlanner.DBDaySource1.NumberOfDays := Days;
 end;
 
 procedure TFESMain.FormCreate(Sender: TObject);
@@ -124,6 +150,7 @@ begin
   Application.ShowHint := true; // enable hints
   FESCust := nil;
   FESInspect := nil;
+  edtDayCount.Text := IntToStr(MyPlanner.DBDaySource1.NumberOfDays);
 end;
 
 procedure TFESMain.InspectBrowseOrdersExecute(Sender: TObject);
@@ -131,14 +158,6 @@ begin
   if not Assigned(FESInspect) then
     FESInspect := TInspectOrder.Create(Self);
   FESInspect.Show;
-end;
-
-procedure TFESMain.InspectBrowseOrdersUpdate(Sender: TObject);
-begin
-  TAction(Sender).Enabled := false;
-  if Assigned(FES) and FES.fesConnection.Connected and Assigned(InspectOrderData)
-  then
-    TAction(Sender).Enabled := true;
 end;
 
 procedure TFESMain.InspectFindOrderExecute(Sender: TObject);
@@ -152,11 +171,37 @@ begin
   dlg.Free;
 end;
 
-procedure TFESMain.InspectFindOrderUpdate(Sender: TObject);
+procedure TFESMain.GenericUpdate(Sender: TObject);
 begin
   TAction(Sender).Enabled := false;
   if Assigned(FES) and FES.fesConnection.Connected then
     TAction(Sender).Enabled := true;
+end;
+
+procedure TFESMain.TFESPlanner1DBDaySource1FieldsToItem(Sender: TObject;
+    Fields: TFields; Item: TPlannerItem);
+begin
+  Item.TrackColor := Fields.FieldByName('TMSTrackColor').AsInteger;
+end;
+
+procedure TFESMain.vimgDayCountDecClick(Sender: TObject);
+var
+Days: integer;
+begin
+  Days := Round(StrToIntDef(edtDayCount.Text, 0));
+  Days := Days - 1;
+  if (Days > 0) then
+    edtDayCount.Text := IntToStr(Days);
+end;
+
+procedure TFESMain.vimgDayCountIncClick(Sender: TObject);
+var
+Days: integer;
+begin
+  Days := Round(StrToIntDef(edtDayCount.Text, 0));
+  Days := Days + 1;
+  if (Days < 32) then
+    edtDayCount.Text := IntToStr(Days);
 end;
 
 end.

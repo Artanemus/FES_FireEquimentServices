@@ -8,18 +8,6 @@ object Customer: TCustomer
   CustomTitleBar.Control = TitleBarPanel1
   CustomTitleBar.Height = 40
   CustomTitleBar.SystemHeight = False
-  CustomTitleBar.BackgroundColor = 4552068
-  CustomTitleBar.ForegroundColor = clWhite
-  CustomTitleBar.InactiveBackgroundColor = clWhite
-  CustomTitleBar.InactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonForegroundColor = clWhite
-  CustomTitleBar.ButtonBackgroundColor = 4552068
-  CustomTitleBar.ButtonHoverForegroundColor = 65793
-  CustomTitleBar.ButtonHoverBackgroundColor = 5541793
-  CustomTitleBar.ButtonPressedForegroundColor = 65793
-  CustomTitleBar.ButtonPressedBackgroundColor = 8170169
-  CustomTitleBar.ButtonInactiveForegroundColor = 10066329
-  CustomTitleBar.ButtonInactiveBackgroundColor = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
@@ -43,7 +31,6 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 905
     object dbtxtCustomerID: TDBText
       Left = 16
       Top = 6
@@ -90,7 +77,6 @@ object Customer: TCustomer
     DoubleBuffered = False
     ParentDoubleBuffered = False
     TabOrder = 1
-    ExplicitWidth = 895
     object TabSheet1: TTabSheet
       Caption = 'Details'
       DesignSize = (
@@ -157,7 +143,6 @@ object Customer: TCustomer
         Padding.Left = 34
         Spacing = 8
         TabOrder = 3
-        ExplicitWidth = 887
         object VirtualImage2: TVirtualImage
           Left = 34
           Top = 4
@@ -224,7 +209,6 @@ object Customer: TCustomer
         DataField = 'CustName'
         DataSource = CustomerData.dsCustomer
         TabOrder = 0
-        ExplicitWidth = 883
       end
       object dbedtCustCode: TDBEdit
         Left = 3
@@ -244,7 +228,6 @@ object Customer: TCustomer
         DataField = 'Note'
         DataSource = CustomerData.dsCustomer
         TabOrder = 2
-        ExplicitWidth = 881
       end
     end
     object TabSheet8: TTabSheet
@@ -264,7 +247,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -281,25 +264,28 @@ object Customer: TCustomer
           ExplicitWidth = 763
           ExplicitHeight = 371
           inherited lblNumberType: TLabel
+            Height = -6
             ExplicitHeight = -6
           end
           inherited lblNumber: TLabel
-            Height = 34
+            Height = -6
           end
           inherited btnEditNumber: TControlListButton
-            Left = 717
+            Left = -42
+            Height = -6
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
           inherited btnPinNumber: TControlListButton
-            Left = 678
+            Left = -81
+            Height = -6
             ExplicitLeft = 670
             ExplicitHeight = -6
           end
           inherited lblNumberCreatedOn: TLabel
-            Left = 605
-            Height = 34
-            ExplicitLeft = -154
+            Left = -154
+            Height = -6
+            ExplicitLeft = 605
           end
         end
       end
@@ -321,7 +307,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -334,21 +320,23 @@ object Customer: TCustomer
         inherited ctrllistCustAddress: TControlList
           Width = 763
           Height = 371
-          ExplicitTop = 32
           ExplicitWidth = 763
           ExplicitHeight = 371
           inherited lblAddress: TLabel
             Width = 515
+            Height = 0
             ExplicitWidth = 507
             ExplicitHeight = 0
           end
           inherited btnEditAddress: TControlListButton
-            Left = 717
+            Left = -42
+            Height = -6
             ExplicitLeft = 715
             ExplicitHeight = -6
           end
           inherited btnPinAddress: TControlListButton
-            Left = 681
+            Left = -78
+            Height = -6
             ExplicitLeft = 673
             ExplicitHeight = -6
           end
@@ -372,7 +360,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -389,24 +377,26 @@ object Customer: TCustomer
           ExplicitWidth = 763
           ExplicitHeight = 371
           inherited lblEmailType: TLabel
+            Height = -6
             ExplicitHeight = -6
           end
           inherited lblEmail: TLabel
-            Width = 414
-            Height = 40
+            Height = 0
           end
           inherited lblEmailCreatedDT: TLabel
-            Left = 605
-            Height = 34
-            ExplicitLeft = -154
+            Left = -154
+            Height = -6
+            ExplicitLeft = 605
           end
           inherited btnPinEmail: TControlListButton
-            Left = 678
+            Left = -81
+            Height = -6
             ExplicitLeft = 670
             ExplicitHeight = -6
           end
           inherited btnEditEmail: TControlListButton
-            Left = 717
+            Left = -42
+            Height = -6
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
@@ -430,7 +420,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -443,29 +433,31 @@ object Customer: TCustomer
         inherited ctrllistCustEmail: TControlList
           Width = 763
           Height = 371
-          ExplicitTop = 32
           ExplicitWidth = 763
           ExplicitHeight = 371
           inherited lblContactType: TLabel
+            Height = -6
             ExplicitHeight = -6
           end
           inherited lblContactName: TLabel
-            Height = 34
+            Height = -6
           end
           inherited btnEditContact: TControlListButton
-            Left = 717
+            Left = -42
+            Height = -6
             ExplicitLeft = 709
             ExplicitHeight = -6
           end
           inherited btnPinContact: TControlListButton
-            Left = 681
+            Left = -78
+            Height = -6
             ExplicitLeft = 673
             ExplicitHeight = -6
           end
           inherited lblContactCreatedDT: TLabel
-            Left = 625
-            Height = 34
-            ExplicitLeft = -134
+            Left = -134
+            Height = -6
+            ExplicitLeft = 625
           end
         end
       end
@@ -487,7 +479,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -505,20 +497,16 @@ object Customer: TCustomer
           ExplicitHeight = 371
           inherited lblSiteContact_ss: TLabel
             Left = 3
-            Width = 746
-            ExplicitLeft = -133
-            ExplicitTop = -20
-          end
-          inherited lblSiteAddress: TLabel
-            Width = 662
-            Height = 47
+            Top = -20
+            Width = -13
+            ExplicitLeft = 626
           end
           inherited btnPinSite: TControlListButton
-            Left = 678
+            Left = -81
             ExplicitLeft = 670
           end
           inherited btnEditSite: TControlListButton
-            Left = 717
+            Left = -42
             ExplicitLeft = 709
           end
         end
@@ -541,7 +529,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -571,12 +559,10 @@ object Customer: TCustomer
           ExplicitHeight = 371
           inherited lblInspectAddress: TLabel
             Width = 491
-            Height = 74
           end
           inherited lblInspectStatus: TLabel
             Left = 627
-            Height = 74
-            ExplicitLeft = -132
+            ExplicitLeft = 627
           end
           inherited btnPinInspect: TControlListButton
             Left = 678
@@ -1006,7 +992,7 @@ object Customer: TCustomer
         TabOrder = 0
         ExplicitLeft = 5
         ExplicitTop = 5
-        ExplicitWidth = 877
+        ExplicitWidth = 763
         ExplicitHeight = 403
         inherited StackPanel1: TStackPanel
           Width = 763
@@ -1058,7 +1044,6 @@ object Customer: TCustomer
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 905
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
@@ -1072,7 +1057,6 @@ object Customer: TCustomer
       DataSource = CustomerData.dsCustomer
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 885
     end
   end
   object TitleBarPanel1: TTitleBarPanel
@@ -1081,7 +1065,6 @@ object Customer: TCustomer
     Width = 791
     Height = 40
     CustomButtons = <>
-    ExplicitWidth = 905
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
       Left = 573
@@ -1969,8 +1952,8 @@ object Customer: TCustomer
     Top = 290
   end
   object actnmanCustomer: TActionManager
-    Left = 348
-    Top = 290
+    Left = 604
+    Top = 378
     StyleName = 'Platform Default'
     object actnFilterSelect: TAction
       Caption = 'Filter'

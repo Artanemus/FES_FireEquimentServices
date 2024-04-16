@@ -156,7 +156,6 @@ object FESCustInspect: TFESCustInspect
       Align = alRight
       Caption = 'Action'
       Layout = tlCenter
-      ExplicitLeft = 543
       ExplicitHeight = 21
     end
     object lblInspectRequestedDT: TLabel
@@ -208,7 +207,6 @@ object FESCustInspect: TFESCustInspect
       Images = vimglistCustInspect
       ImageIndex = 0
       ImageName = 'pin'
-      LinkHotColor = clHighlight
       Style = clbkToolButton
       ExplicitLeft = 576
       ExplicitTop = 4
@@ -224,7 +222,6 @@ object FESCustInspect: TFESCustInspect
       Images = vimglistCustInspect
       ImageIndex = 2
       ImageName = 'Edit'
-      LinkHotColor = clHighlight
       Style = clbkToolButton
       ExplicitLeft = 593
       ExplicitTop = 4
@@ -675,13 +672,6 @@ object FESCustInspect: TFESCustInspect
       DataSource = bindsrcCustInspect
       GridControl = ctrllistCustInspect
       Columns = <>
-    end
-    object LinkPropertyToField1: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = bindsrcCustInspect
-      FieldName = 'FNAME'
-      Component = lblInspectTech
-      ComponentProperty = 'Caption'
     end
     object LinkPropertyToField2: TLinkPropertyToField
       Category = 'Quick Bindings'
