@@ -40,7 +40,8 @@ uses
   dmInspectOrderData in 'dmInspectOrderData.pas' {InspectOrderData: TDataModule},
   frameFESStation in 'frameFESStation.pas' {FESStation: TFrame},
   frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame},
-  dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette};
+  dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette},
+  dlgStatusFilter in 'dlgStatusFilter.pas' {StatusFilter};
 
 {$R *.res}
 

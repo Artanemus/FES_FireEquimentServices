@@ -1,0 +1,16 @@
+﻿[FES.dsPlannerItem]
+Coordinates=0,0,108,33
+
+[FES.qryPlannerItem]
+Coordinates=10,10,128,609
+
+[]
+Coordinates=157,62,82,33
+
+[PLANNER]
+Coordinates=173,10,72,33
+Visible=True
+
+[DAYSRC]
+Coordinates=44,759,88,33
+

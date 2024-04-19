@@ -4,7 +4,7 @@ object FESPlanner: TFESPlanner
   Width = 1343
   Height = 838
   TabOrder = 0
-  object DBPlanner1: TDBPlanner
+  object PLANNER: TDBPlanner
     Left = 0
     Top = 0
     Width = 1343
@@ -37,14 +37,15 @@ object FESPlanner: TFESPlanner
       'Thu'
       'Fri'
       'Sat')
+    DefaultItem.AllowOverlap = False
     DefaultItem.BorderColor = 11250603
     DefaultItem.CaptionBkg = 14925219
     DefaultItem.CaptionBkgTo = 14925219
     DefaultItem.CaptionFont.Charset = DEFAULT_CHARSET
     DefaultItem.CaptionFont.Color = 4474440
-    DefaultItem.CaptionFont.Height = -12
+    DefaultItem.CaptionFont.Height = -16
     DefaultItem.CaptionFont.Name = 'Segoe UI'
-    DefaultItem.CaptionFont.Style = []
+    DefaultItem.CaptionFont.Style = [fsBold]
     DefaultItem.CaptionType = ctText
     DefaultItem.ColorTo = clWhite
     DefaultItem.Cursor = -1
@@ -57,6 +58,7 @@ object FESPlanner: TFESPlanner
     DefaultItem.ItemEnd = 17
     DefaultItem.ItemPos = 0
     DefaultItem.Name = 'PlannerItem0'
+    DefaultItem.ReadOnly = True
     DefaultItem.SelectColor = 14925219
     DefaultItem.SelectColorTo = 14925219
     DefaultItem.SelectFontColor = 3881787
@@ -106,14 +108,14 @@ object FESPlanner: TFESPlanner
       EF5EAFF6075616165E07070D6707F6075E5656AFF60716165E07070DA7AF075F
       5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
       0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
+    DirectMove = True
     Display.ActiveEnd = 30
-    Display.CurrentPosFrom = 999
-    Display.CurrentPosTo = 999
+    Display.CurrentPosFrom = 1001
+    Display.CurrentPosTo = 1001
     Display.DisplayStart = 12
     Display.DisplayEnd = 42
     Display.ColorNonActive = clWhite
     Display.HourLineColor = 15987699
-    DragItemAlways = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -12
@@ -183,16 +185,16 @@ object FESPlanner: TFESPlanner
     HTMLOptions.SidebarFontStyle = []
     Items = <
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
         CaptionFont.Charset = DEFAULT_CHARSET
         CaptionFont.Color = 4474440
-        CaptionFont.Height = -12
+        CaptionFont.Height = -16
         CaptionFont.Name = 'Segoe UI'
-        CaptionFont.Style = []
+        CaptionFont.Style = [fsBold]
         CaptionType = ctText
-        CaptionText = '21 Completed'
         ColorTo = clWhite
         Cursor = -1
         Font.Charset = DEFAULT_CHARSET
@@ -204,22 +206,16 @@ object FESPlanner: TFESPlanner
         ItemEnd = 22
         ItemPos = 6
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
-        Selected = True
         Shadow = False
-        Text.Strings = (
-          'Meaning To Stop'
-          ''
-          '50 Forest Hill - Fernvale Road'
-          'FOREST HILL, QLD 4342'
-          ''
-          'TECH:Mitchell BELL')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -232,6 +228,8 @@ object FESPlanner: TFESPlanner
         CaptionText = '57 Completed'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
@@ -241,6 +239,7 @@ object FESPlanner: TFESPlanner
         ItemEnd = 22
         ItemPos = 4
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -255,6 +254,7 @@ object FESPlanner: TFESPlanner
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -267,6 +267,8 @@ object FESPlanner: TFESPlanner
         CaptionText = '1036 Completed'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
@@ -276,6 +278,7 @@ object FESPlanner: TFESPlanner
         ItemEnd = 12
         ItemPos = 4
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -290,6 +293,7 @@ object FESPlanner: TFESPlanner
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -302,6 +306,8 @@ object FESPlanner: TFESPlanner
         CaptionText = '1043 Completed'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
@@ -311,6 +317,7 @@ object FESPlanner: TFESPlanner
         ItemEnd = 22
         ItemPos = 5
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -325,6 +332,7 @@ object FESPlanner: TFESPlanner
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -337,15 +345,18 @@ object FESPlanner: TFESPlanner
         CaptionText = '1192 Completed'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        ItemBegin = 4
-        ItemEnd = 20
+        ItemBegin = 0
+        ItemEnd = 9
         ItemPos = 1
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -359,6 +370,7 @@ object FESPlanner: TFESPlanner
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -371,15 +383,18 @@ object FESPlanner: TFESPlanner
         CaptionText = '1446 Action'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        ItemBegin = 8
-        ItemEnd = 24
+        ItemBegin = 6
+        ItemEnd = 22
         ItemPos = 0
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -388,12 +403,12 @@ object FESPlanner: TFESPlanner
           'Len Russell Funeral Director'
           ''
           '238 Brisbane Street'
-          'WEST IPSWICH, QLD 4305'
-          '')
+          'WEST IPSWICH, QLD 4305')
         TrackColor = 11565130
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -406,6 +421,8 @@ object FESPlanner: TFESPlanner
         CaptionText = '1448 Action'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
@@ -415,6 +432,7 @@ object FESPlanner: TFESPlanner
         ItemEnd = 27
         ItemPos = 1
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -428,6 +446,7 @@ object FESPlanner: TFESPlanner
         TrackSelectColor = 11565130
       end
       item
+        AllowOverlap = False
         BorderColor = 11250603
         CaptionBkg = 14925219
         CaptionBkgTo = 14925219
@@ -440,6 +459,8 @@ object FESPlanner: TFESPlanner
         CaptionText = '1449 Action'
         ColorTo = clWhite
         Cursor = -1
+        FixedPos = True
+        FixedSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4474440
         Font.Height = -12
@@ -449,6 +470,7 @@ object FESPlanner: TFESPlanner
         ItemEnd = 24
         ItemPos = 2
         Name = 'PlannerItem0'
+        ReadOnly = True
         SelectColor = 14925219
         SelectColorTo = 14925219
         SelectFontColor = 3881787
@@ -506,6 +528,7 @@ object FESPlanner: TFESPlanner
     PrintOptions.HeaderFont.Style = []
     SelectColor = 15917525
     TrackColor = 11565130
+    TrackProportional = True
     URLGlyph.Data = {
       F6000000424DF600000000000000760000002800000010000000100000000100
       0400000000008000000000000000000000001000000000000000000000000000
@@ -516,10 +539,10 @@ object FESPlanner: TFESPlanner
       88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
       888887F8F8222208888888776888208888888887777778888888}
     Version = '3.4.6.0'
-    ItemSource = DBDaySource1
+    ItemSource = DAYSRC
     TMSStyle = 0
   end
-  object DBDaySource1: TDBDaySource
+  object DAYSRC: TDBDaySource
     AutoIncKey = True
     DataSource = FES.dsPlannerItem
     ResourceMap = <>
@@ -530,12 +553,13 @@ object FESPlanner: TFESPlanner
     SubjectField = 'TMSCaption'
     NotesField = 'TMSNotes'
     UpdateByQuery = False
+    OnFieldsToItem = DAYSRCFieldsToItem
     AutoHeaderUpdate = True
     DateFormat = 'mm/dd/yyyy'
     Day = 44399.000000000000000000
     DayIncrement = 5
     Mode = dmMultiDay
-    Left = 528
-    Top = 456
+    Left = 672
+    Top = 640
   end
 end

@@ -20,7 +20,7 @@ Coordinates=313,320,90,36
 Coordinates=313,375,58,36
 
 [FES.qryPlannerItem]
-Coordinates=10,10,130,630
+Coordinates=10,10,153,740
 
 [pnlHeader]
 Coordinates=10,872,74,58
@@ -205,10 +205,6 @@ Coordinates=508,650,185,58
 [CustomerData.dsCustContact]
 Coordinates=592,650,185,36
 
-[edtDayCount]
-Coordinates=860,380,89,58
-Visible=True
-
 [actnDelete]
 Coordinates=1168,353,76,36
 
@@ -222,17 +218,28 @@ Coordinates=1168,1,181,36
 Coordinates=306,894,182,36
 
 []
-Coordinates=1168,188,91,36
+Coordinates=410,100,59,36
+Visible=True
 
 [vimgDayCountDec]
-Coordinates=94,872,94,36
+Coordinates=94,872,121,36
 
 [vimgDayCountInc]
-Coordinates=198,872,94,36
+Coordinates=200,750,116,36
 
 [StatusPalette.qryStatusPalette]
 Visible=False
 
-[MyPlanner]
-Coordinates=724,872,99,36
+[DAYSRC]
+Coordinates=182,78,67,36
+
+[PLAN]
+Coordinates=460,170,48,36
+
+[dtPicker]
+Coordinates=380,390,61,58
+
+[edtNumOfDays]
+Coordinates=860,380,89,58
+Visible=True
 

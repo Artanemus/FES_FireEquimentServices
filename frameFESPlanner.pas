@@ -14,8 +14,10 @@ uses
 
 type
   TFESPlanner = class(TFrame)
-    DBPlanner1: TDBPlanner;
-    DBDaySource1: TDBDaySource;
+    PLANNER: TDBPlanner;
+    DAYSRC: TDBDaySource;
+    procedure DAYSRCFieldsToItem(Sender: TObject; Fields: TFields; Item:
+        TPlannerItem);
   private
     { Private declarations }
   public
@@ -25,5 +27,17 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TFESPlanner.DAYSRCFieldsToItem(Sender: TObject; Fields: TFields;
+    Item: TPlannerItem);
+begin
+  Item.TrackColor := Fields.FieldByName('TMSTrackColor').AsInteger;
+//  Item.TrackSelectColor := Fields.FieldByName('TMSSelectedTrackColor').AsInteger;
+//  Item.Color := Fields.FieldByName('TMSColor').AsInteger;
+//  Item.SelectColor := Fields.FieldByName('TMSSelectedColor').AsInteger;
+//  Item.CaptionBkg := Fields.FieldByName('TMSCaptionColor').AsInteger;
+//  Item.SelectCaptionBkg := Fields.FieldByName('TMSSelectedCaptionColor').AsInteger;
+
+end;
 
 end.

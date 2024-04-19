@@ -59,7 +59,7 @@ type
   end;
 
 const
-  INIFILE_SECTION = 'SCM_Member';
+  INIFILE_SECTION = 'FilterCustomer';
 
 var
   CustFilter: TCustFilter;

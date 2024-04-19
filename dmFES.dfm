@@ -12,6 +12,7 @@ object FES: TFES
     Top = 48
   end
   object qryPlannerItem: TFDQuery
+    Active = True
     IndexFieldNames = 'InspectionOrderID'
     Connection = fesConnection
     UpdateOptions.UpdateTableName = 'IDFES.dbo.InspectionOrder'
@@ -32,8 +33,8 @@ object FES: TFES
       '      ,[TMSNotes] -- Can contain HTML '
       '      ,[TMSImgIndx] -- Small 16x16 images in CaptionBar'
       
-        '     , [InspectionOrder].[InspectionStatusID]  -- UTDBPlanner.la' +
-        'yer'
+        '     , [InspectionOrder].[InspectionStatusID]  -- TDBPlanner.lay' +
+        'er'
       '     -- OTHER DATA'
       '     , [InspectionOrder].[CreatedOn]'
       '     , [ServiceInterval]'
@@ -52,13 +53,16 @@ object FES: TFES
       '     , [InspectionOrder].[ModifiedOn]'
       '     , [InspectionOrder].[ModifiedBy]'
       '     , [InspectionOrder].Caption'
-      '     , [InspectionStatus].TMSNotesColor'
+      '     , [InspectionStatus].TMSColor'
+      '     , [InspectionStatus].TMSSelectedColor'
       '     , [InspectionStatus].TMSCaptionColor'
       '     , [InspectionStatus].TMSSelectedCaptionColor'
       '     , [InspectionStatus].TMSTrackColor'
       '     , [InspectionStatus].TMSSelectedTrackColor     '
       '     , [InspectionStatus].TMSLinkColor'
-      '     '
+      
+        '    ,POWER(2,[InspectionOrder].[InspectionStatusID]-1) AS Layer ' +
+        '      '
       '     '
       'FROM [IDFES].[dbo].[InspectionOrder]'
       '    LEFT JOIN [Customer]'
@@ -77,8 +81,8 @@ object FES: TFES
   end
   object dsPlannerItem: TDataSource
     DataSet = qryPlannerItem
-    Left = 232
-    Top = 216
+    Left = 224
+    Top = 208
   end
   object imgCollection: TImageCollection
     Images = <
@@ -4568,6 +4572,85 @@ object FES: TFES
               29F3C21EBEB4D839AD112B58CD67155F3CAB2CAD3FAB10420821849C8D175393
               04B454F30EAF0000000049454E44AE426082}
           end>
+      end
+      item
+        Name = 'checked_box'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE900000188494441546843ED995D51C6301045
+              CFA7001C000E90004EC0010E0007380009384002480005E000E6CE90994E4993
+              E6AF4999CD4B1F9AA4F7ECDD24DBC9819DB7C3CEF56300BD1D34074677E016B8
+              018E3B09FD021E80FBA5EF8752E80E10C0084D00D2F3A785003E3B467E2EF41D
+              384B05F89E0CE8B5D8A31A42C2A28337C8ADA8060368EC8239E0026C8B38906A
+              3A242F80674F9FE15348E25F8073E01A789A410C0D3015EF74EBB0D2A1E5DAB0
+              003EF1BB7160AD78B9309C0329E29B03B8125B25EF9A962ABE298013A38F5C02
+              31881CF14D015E7FB73E7DE42D02912BBE29C015F038C99B258812F14D013479
+              0CA2547C73801084DEB913D619E5DBE7638B7F936DD4E78484A93C2811BF8903
+              4EE01C621AD99CC87729257C1025E23775C0E744A9F82E006E61EB392F8D630B
+              D6F77E93459C236CED18037091B27FE2B53933EB6729642994993A554E62FDA4
+              1C150AA835FC0338F54DF6AF2F3804AC5B11D53827B54299388F22AF13DD7B3B
+              A3B97AEDEF891CCBDD0DA05A28332732073203576DD8EE1DF80140A979314B2A
+              62800000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'checked_boxNIL'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              87000000017352474200AECE1CE9000000EF494441546843ED99D10DC2300C44
+              5F27800D80CD18810D800D1881D1E804B001C842150848ADA40537E8F2DBBAF5
+              9D5FE2A669A87C3495E78F0444575015987A05B6C0069807257A010EC03EF5FE
+              3E8476800998C2300196CFDBE813700E74FE35D113B0CA15707D0A889AEC6E0E
+              7D89B9C13F60CBCD4102BE5C0555A0335893B810352124840AD1E9C284901012
+              420F073EF6227D0B0D44C40BD72AA455C863C4B92E848490105223BB3BA02D65
+              E15CD032AA65B4101D6D29CD013B5C980D7470ACF01658E6FE5EAFFE80C3049B
+              8835B018CBCACCE798F3C7D4E94C6483CAD491BE3DAAC34A4074835205FEA602
+              37C5724A31DEC9C9540000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'expand_less'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              8700000148494441546843ED96D10DC2300C44DB0D58810D1801266006368049
+              601436003660131881588AA5AA224DEC8B8590AE12CA07B57BEFCE493B0E7F7E
+              8D7FAE7F20C0AF1364024C00748023041A08973301D842B00113000D84CB9900
+              6C21D8203A814DD6F7047516CB230144FC2D3F7997D61088280015BFCA00EFB4
+              86404400CCC56BFC2110BD014AE2C3207A02D4C48740F4026815DF1DA207C092
+              F84B567CFC720E76D91328404DFC290B3FA7350402016815AFE69720E47F3962
+              EF9E979D17C02A3E0CC203E0151F02610540C57787B002BC9202FD3C988EAC9C
+              36BA615B47796963AF531339A5AA9715603BF940D3E61EF1A52444F421FDAE55
+              E5F9062B80944D2110F17308B37869E0015088BD636C4AC6CA383D2CCE6B232F
+              406BC2E1F71120DCE2CA03980013001DE0088106C2E54C00B6106CC0044003E1
+              7226005B08366002A08170F9072EEB3D31AB4629CB0000000049454E44AE4260
+              82}
+          end>
+      end
+      item
+        Name = 'expand_more'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+              8700000154494441546843ED958109C2301045DB0D1CC115DC4037D20D7402DD
+              C41174031DC1111CC11CF4A004DAE6E7FF208513828297CB7FFF5FD3BE5BF9A7
+              5FB9FE2E00FE9D60241009900EC4089106D2DB2301DA42B24124401A486F8F04
+              680BC906B5096CD3B9B69EE4F9BE7D9F7EBCD3FAA2FD6A004CF863003808204C
+              FC7D10BF43215080B178378B8170F19BA1D9277D431008801DF21A9CCF93AE81
+              C8C57B4F080201B0038E695D27E6148198126FAD6F699D4A9F0514400121136F
+              626A001808A97806A006422E9E054020E6C45F52A373E9CCE775B52334EEB3F4
+              605BADDDF37E558EF752E21509B89839087BBB3611AF04581AA73C79DA796FA8
+              18A1D271F23A9978750225E32415DF0A606A9CE4E25B02E4104DC4B7067008BB
+              81AAEFF9A5F783FA215E3A4FFE7F00C82D051B4602A061F2F248406E29D83012
+              000D93974702724BC18691006898BC3C12905B0A365C7D023FBD0537313ABC59
+              060000000049454E44AE426082}
+          end>
       end>
     Left = 288
     Top = 40
@@ -4683,6 +4766,36 @@ object FES: TFES
         CollectionIndex = 82
         CollectionName = 'Dot'
         Name = 'Dot'
+      end
+      item
+        CollectionIndex = 83
+        CollectionName = 'checked_box'
+        Name = 'checked_box'
+      end
+      item
+        CollectionIndex = 84
+        CollectionName = 'checked_boxNIL'
+        Name = 'checked_boxNIL'
+      end
+      item
+        CollectionIndex = 72
+        CollectionName = 'filter\filter'
+        Name = 'filter'
+      end
+      item
+        CollectionIndex = 73
+        CollectionName = 'filter\filter_off'
+        Name = 'filter_off'
+      end
+      item
+        CollectionIndex = 85
+        CollectionName = 'expand_less'
+        Name = 'expand_less'
+      end
+      item
+        CollectionIndex = 86
+        CollectionName = 'expand_more'
+        Name = 'expand_more'
       end>
     ImageCollection = imgCollection
     Width = 32
