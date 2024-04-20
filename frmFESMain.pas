@@ -40,7 +40,7 @@ uses
   frmInspectOrder,
   dmInspectOrderData,
   Vcl.WinXPanels,
-  dlgStatusFilter,
+  dlgFilterStatus,
   Data.DB, unitFESDefines;
 
 type
@@ -127,7 +127,7 @@ type
     procedure vimgDayCountIncClick(Sender: TObject);
     procedure vimgFiltersClick(Sender: TObject);
   private
-    FilterDLG: TStatusFilter;
+    FilterDLG: TFilterStatus;
     FxHeight: integer;
     FxLeft: integer;
     FxTop: integer;
@@ -247,7 +247,7 @@ begin
     // Creation - preferences are read and the layercode is calculated.
     // Done here to be sure FES.fesConnection is created and initialised.
     // FilterDLG.LayerCode stores current users preferences for layer visibility.
-    FilterDLG := TStatusFilter.Create(self);
+    FilterDLG := TFilterStatus.Create(self);
   end;
 end;
 
@@ -272,7 +272,7 @@ begin
   FESCust := nil;
   FESInspect := nil;
   edtNumOfDays.Text := '7';
-  dtPicker.Date := Now;
+  dtPicker.Date := Date;
   // r e a d   p r e f e r e n c e .
   iniFileName := GetFESPreferenceFileName();
   if (FileExists(iniFileName)) then
@@ -361,7 +361,7 @@ begin
   FxHeight := iFile.ReadInteger('MainPref', 'Height', DEFFORM_HEIGHT);
   FxTop := iFile.ReadInteger('MainPref', 'Top', 0);
   FxLeft := iFile.ReadInteger('MainPref', 'Left', 0);
-  dtPicker.Date := iFile.ReadDate('MainPref', 'Day', Now);
+  dtPicker.Date := iFile.ReadDate('MainPref', 'Day', Date);
   edtNumOfDays.Text := IntToStr(iFile.ReadInteger('MainPref',
     'NumOfDays', 1));
   FxTopRow := iFile.ReadInteger('MainPref', 'TopRow', 0);

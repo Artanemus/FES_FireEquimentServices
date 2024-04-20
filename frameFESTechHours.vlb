@@ -4,9 +4,6 @@ Coordinates=321,192,94,36
 [puInsert]
 Coordinates=77,173,61,36
 
-[imgcolTech]
-Coordinates=520,1,80,36
-
 [pumenuTech]
 Coordinates=520,56,89,36
 
@@ -34,9 +31,6 @@ Coordinates=77,10,53,58
 [lblInspectInspectedDT]
 Coordinates=263,10,142,58
 
-[btnClipboard]
-Coordinates=10,192,88,36
-
 [puFilter]
 Coordinates=281,269,58,36
 
@@ -57,12 +51,6 @@ Coordinates=286,146,69,36
 
 [Label3]
 Coordinates=136,78,53,58
-
-[vimglistTech]
-Coordinates=520,221,86,36
-
-[VirtualImage1]
-Coordinates=182,146,94,36
 
 [btnNew]
 Coordinates=114,146,58,36
@@ -87,5 +75,5 @@ Coordinates=10,146,94,36
 Coordinates=451,343,59,36
 
 []
-Coordinates=696,1,91,36
+Coordinates=520,221,86,36
 

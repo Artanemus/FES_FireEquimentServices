@@ -18,7 +18,7 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   dmFES, dmCustomerData, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dlgCustFilter, unitFESDefines,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dlgFilterCommon, unitFESDefines,
   Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.ControlList,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Vcl.Bind.ControlList, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
@@ -62,8 +62,6 @@ type
     FESCustSurvey1: TFESCustSurvey;
     FESCustInspect1: TFESCustInspect;
     vimgArchive: TVirtualImage;
-    ImageCollection1: TImageCollection;
-    VirtualImageList1: TVirtualImageList;
     actnmanCustomer: TActionManager;
     actnFilterSelect: TAction;
     actnpuInsert: TAction;
@@ -95,7 +93,7 @@ type
     procedure vimgSetFiltersClick(Sender: TObject);
   private
     { Private declarations }
-    fFilterDlg: TCustFilter;
+    fFilterDlg: TFilterCommon;
     FCustFilterState: TFilterState;
     { Metric for OnShow}
     FxHeight: integer;
@@ -161,7 +159,7 @@ begin
       FilterState := PFilterState(CopyData^.lpData);
       // store record data...
       fCustFilterState.HideArchived := FilterState^.HideArchived;
-      fCustFilterState.HideInActive := FilterState^.HideInActive;
+      fCustFilterState.HideLocked := FilterState^.HideLocked;
       fCustFilterState.HideLinked := FilterState^.HideLinked;
       fCustFilterState.StartDT := FilterState^.StartDT;
       fCustFilterState.EndDT := FilterState^.EndDT;
@@ -243,7 +241,7 @@ var
 begin
   if not assigned(fFilterDlg) then
   begin
-    fFilterDlg := TCustFilter.Create(Self);
+    fFilterDlg := TFilterCommon.Create(Self);
     fFilterDlg.Position := poDesigned;
     aRect := vimgSetFilters.ClientToScreen(vimgSetFilters.ClientRect);
     fFilterDlg.Left := aRect.Left;

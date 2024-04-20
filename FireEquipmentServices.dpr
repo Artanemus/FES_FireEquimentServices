@@ -26,7 +26,7 @@ uses
   dmCustomerData in 'dmCustomerData.pas' {CustomerData: TDataModule},
   frmFESButtons in 'frmFESButtons.pas' {FESButtons},
   unitFEStools in 'unitFEStools.pas',
-  dlgCustFilter in 'dlgCustFilter.pas' {CustFilter},
+  dlgFilterCommon in 'dlgFilterCommon.pas' {FilterCommon},
   unitFESDefines in 'unitFESDefines.pas',
   unitFESutility in 'unitFESutility.pas',
   unitFESHelpers in 'unitFESHelpers.pas',
@@ -41,7 +41,7 @@ uses
   frameFESStation in 'frameFESStation.pas' {FESStation: TFrame},
   frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame},
   dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette},
-  dlgStatusFilter in 'dlgStatusFilter.pas' {StatusFilter};
+  dlgFilterStatus in 'dlgFilterStatus.pas' {FilterStatus};
 
 {$R *.res}
 

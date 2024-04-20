@@ -7,12 +7,10 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus,
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
   Vcl.ImageCollection, Vcl.VirtualImage, Vcl.ExtCtrls, Vcl.WinXPanels,
-  Vcl.ControlList, Vcl.StdCtrls;
+  Vcl.ControlList, Vcl.StdCtrls, dmFES;
 
 type
   TFESTechHours = class(TFrame)
-    imgcolTech: TImageCollection;
-    vimglistTech: TVirtualImageList;
     pumenuTech: TPopupMenu;
     puEdit: TMenuItem;
     puInsert: TMenuItem;
@@ -24,10 +22,8 @@ type
     puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     btnTogglePinVisibility: TVirtualImage;
-    btnClipboard: TVirtualImage;
     btnNew: TVirtualImage;
     btnDelete: TVirtualImage;
-    VirtualImage1: TVirtualImage;
     ctrllistCustInspect: TControlList;
     lblNotes: TLabel;
     lblStationNumber: TLabel;

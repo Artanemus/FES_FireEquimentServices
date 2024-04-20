@@ -10,66 +10,60 @@ uses
   dmFES, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.VirtualImage;
+  Vcl.VirtualImage, Vcl.TitleBarCtrls, System.Actions, Vcl.ActnList,
+  dlgFilterCommon, unitFESDefines;
 
 type
 
   TFESGotoRequest = (fesGotoUnknown, fesGotoCustomer, fesGotoSite, fesGotoInspectOrder);
 
   TFindInspectOrders = class(TForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
-    btnClose: TButton;
-    Label5: TLabel;
-    SpeedButton4: TSpeedButton;
-    SpeedButton11: TSpeedButton;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label10: TLabel;
-    DateTimePicker3: TDateTimePicker;
-    DateTimePicker4: TDateTimePicker;
-    SpeedButton1: TSpeedButton;
-    ImageCollection1: TImageCollection;
-    VirtualImageList1: TVirtualImageList;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    Edit1: TEdit;
-    Label1: TLabel;
-    Edit2: TEdit;
-    Label2: TLabel;
-    Edit3: TEdit;
-    Label4: TLabel;
-    DBGrid1: TDBGrid;
-    qryFindInspectOrder: TFDQuery;
+    actnFilters: TAction;
+    actnFilterToggle: TAction;
+    actnList: TActionList;
+    actnSearch: TAction;
     dsFindInspectOrder: TDataSource;
-    qryFindInspectOrderInspectionOrderID: TFDAutoIncField;
-    qryFindInspectOrderCustomerID: TIntegerField;
-    qryFindInspectOrderSiteID: TIntegerField;
-    qryFindInspectOrderIsEnabled: TBooleanField;
-    qryFindInspectOrderRequestedDT: TSQLTimeStampField;
-    qryFindInspectOrderCompletedDT: TSQLTimeStampField;
-    qryFindInspectOrderCustName: TWideStringField;
-    qryFindInspectOrderCaption: TWideStringField;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel1: TPanel;
+    qryFindInspectOrder: TFDQuery;
     qryFindInspectOrderAddress: TWideStringField;
-    qryFindInspectOrderInspectionStatusID: TIntegerField;
-    qryFindInspectOrderPostcodeID: TIntegerField;
-    qryFindInspectOrderSuburb: TWideStringField;
-    qryFindInspectOrderLinkStatus: TStringField;
-    qryFindInspectOrderxAddress: TWideStringField;
+    qryFindInspectOrderCaption: TWideStringField;
+    qryFindInspectOrderCompletedDT: TSQLTimeStampField;
     qryFindInspectOrderCreatedOn: TSQLTimeStampField;
-    sbtnGotoCustomer: TSpeedButton;
-    sbtnGotoSite: TSpeedButton;
-    sbtnGotoInspectOrder: TSpeedButton;
-    VirtualImage1: TVirtualImage;
-    Bevel1: TBevel;
+    qryFindInspectOrderCustName: TWideStringField;
+    qryFindInspectOrderCustomerID: TIntegerField;
+    qryFindInspectOrderInspectionOrderID: TFDAutoIncField;
+    qryFindInspectOrderInspectionStatusID: TIntegerField;
+    qryFindInspectOrderIsEnabled: TBooleanField;
+    qryFindInspectOrderLinkStatus: TStringField;
+    qryFindInspectOrderPostcodeID: TIntegerField;
+    qryFindInspectOrderRequestedDT: TSQLTimeStampField;
+    qryFindInspectOrderSiteID: TIntegerField;
+    qryFindInspectOrderSuburb: TWideStringField;
+    qryFindInspectOrderxAddress: TWideStringField;
+    TitleBarPanel1: TTitleBarPanel;
+    vimgFilters: TVirtualImage;
+    vimgFindCustomer: TVirtualImage;
+    vimgSync: TVirtualImage;
+    vimgToggleFilters: TVirtualImage;
+    VirtualImage5: TVirtualImage;
+    procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure vimgFiltersClick(Sender: TObject);
   private
     { Private declarations }
     fGotoRequest: TFESGotoRequest;
+    FilterDLG: TFilterCommon;
+    procedure FilterDeActivated(var Message: TMessage);
+      message FES_FILTERDEACTIVATED;
+    procedure FilterDLGInit(var Message: TMessage); message FES_FILTERDLGINIT;
+    procedure FilterUpdated(var Message: TMessage); message FES_FILTERUPDATED;
   public
     { Public declarations }
     property GotoRequest: TFESGotoRequest read FGotoRequest write FGotoRequest;
-
   end;
 
 var
@@ -79,12 +73,75 @@ implementation
 
 {$R *.dfm}
 
+procedure TFindInspectOrders.FormDestroy(Sender: TObject);
+begin
+  // F I L T E R .
+  if Assigned(FilterDLG) then
+    FreeAndNil(FilterDLG);
+end;
+
+procedure TFindInspectOrders.FilterDeActivated(var Message: TMessage);
+begin
+  // if filter toggle is ON then enact the filter
+  if actnFilterToggle.Checked then
+  begin
+    qryFindInspectOrder.DisableControls;
+    qryFindInspectOrder.Close;
+    // reassign params ....
+    qryFindInspectOrder.Active;
+    qryFindInspectOrder.EnableControls;
+  end;
+end;
+
+procedure TFindInspectOrders.FilterDLGInit(var Message: TMessage);
+begin
+  if not Assigned(FilterDLG) then
+  begin
+    // F I L T E R .
+    FilterDLG := TFilterCommon.Create(self);
+  end;
+end;
+
+procedure TFindInspectOrders.FilterUpdated(var Message: TMessage);
+begin
+  if Assigned(FilterDLG) then
+  begin
+    // if filter toggle is ON then ...
+    if actnFilterToggle.Checked then
+      //
+    else
+      //
+  end;
+end;
+
 procedure TFindInspectOrders.FormCreate(Sender: TObject);
 begin
   qryFindInspectOrder.Active := false;
   // Setup default or last filtering given by user ...
   qryFindInspectOrder.Active := true;
   fGotoRequest := fesGotoUnknown;
+  // F I L T E R S .
+  // Can't create filterDLG here as (apparently) datamodule
+  // FES hasn't been constructed!
+  FilterDLG := nil;
+  actnFilterToggle.Checked := false; // filter_off
+  // Creation of FilterDLG requested here ...
+  POSTMESSAGE(Handle, FES_FILTERDLGINIT, 0, 0);
+end;
+
+procedure TFindInspectOrders.vimgFiltersClick(Sender: TObject);
+var
+  aRect: Trect;
+begin
+  // launch the status filter....
+  if Assigned(FilterDLG) and not FilterDLG.Visible then
+  begin
+    FilterDLG.Position := poDesigned;
+    aRect := vimgFilters.ClientToScreen(vimgFilters.ClientRect);
+    FilterDLG.Left := aRect.Left;
+    FilterDLG.Top := aRect.Bottom + 1;
+    FilterDLG.Show;
+  end;
 end;
 
 end.

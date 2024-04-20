@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.VirtualImageList, Vcl.BaseImageCollection,
   Vcl.ImageCollection, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.VirtualImage, Vcl.WinXPanels, Vcl.TitleBarCtrls,
-  dlgCustFilter, dmInspectOrderData, frameFESTechHours;
+  dlgFilterCommon, dmInspectOrderData, frameFESTechHours, dmFES;
 
 type
   TInspectOrder = class(TForm)
@@ -17,8 +17,6 @@ type
     DBNavigator1: TDBNavigator;
     DBTextOrderNum: TDBText;
     DBTextInspectionStatus: TDBText;
-    ImageCollection1: TImageCollection;
-    VirtualImageList1: TVirtualImageList;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -90,7 +88,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    fFilterDlg: TCustFilter;
+    fFilterDlg: TFilterCommon;
     FCustFilterState: TFilterState;
     { Metric for OnShow }
     FxHeight: integer;

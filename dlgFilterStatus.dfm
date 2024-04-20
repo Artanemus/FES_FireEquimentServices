@@ -1,11 +1,10 @@
-object StatusFilter: TStatusFilter
+object FilterStatus: TFilterStatus
   Left = 0
   Top = 0
-  AutoSize = True
   BorderStyle = bsNone
   Caption = 'Filter Status'
-  ClientHeight = 242
-  ClientWidth = 155
+  ClientHeight = 240
+  ClientWidth = 153
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,9 +20,8 @@ object StatusFilter: TStatusFilter
   object btnGroup: TButtonGroup
     Left = 0
     Top = 0
-    Width = 155
-    Height = 242
-    Align = alClient
+    Width = 153
+    Height = 249
     ButtonHeight = 34
     ButtonWidth = 150
     Images = FES.imgList32x32

@@ -1,4 +1,4 @@
-unit dlgCustFilter;
+unit dlgFilterCommon;
 
 interface
 
@@ -9,48 +9,53 @@ uses
   Vcl.VirtualImageList, Vcl.BaseImageCollection, Vcl.ImageCollection,
   Vcl.StdCtrls, Vcl.ButtonGroup, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, unitFESDefines,
-  Vcl.VirtualImage, Vcl.ComCtrls;
+  Vcl.VirtualImage, Vcl.ComCtrls, dmFES, Vcl.ExtCtrls, Vcl.WinXCtrls,
+  Vcl.Buttons;
   //, SCMUtility, SCMDefines;
 
 type
   PFilterState = ^TFilterState;
   TFilterState = record
     HideArchived: Boolean;
-    HideInactive: Boolean;
+    HideLocked: Boolean;
     HideLinked:Boolean;
     StartDT:TDateTime;
     EndDT:TDateTime;
   end;
 
-  TCustFilter = class(TForm)
-    btngrpFilter: TButtonGroup;
-    filterImageCollection: TImageCollection;
-    filterImageList32x32: TVirtualImageList;
-    filterActionManager: TActionManager;
+  TFilterCommon = class(TForm)
+    actnList: TActionList;
     actnHideArchived: TAction;
-    actnHideInActive: TAction;
+    btnToday1: TButton;
+    btnToday2: TButton;
+    actnHideLocked: TAction;
     actnHideLinked: TAction;
-    actnClose: TAction;
-    actnClear: TAction;
-    actnFilterFrom: TAction;
-    actnFilterTo: TAction;
+    actnDateFrom: TAction;
+    actnDateTo: TAction;
+    RelativePanel1: TRelativePanel;
     dtpStart: TDateTimePicker;
     dtpEnd: TDateTimePicker;
-    procedure actnClearExecute(Sender: TObject);
-    procedure actnClearUpdate(Sender: TObject);
+    spbDateFrom: TSpeedButton;
+    spbDateTo: TSpeedButton;
+    spbCurrentMonth: TSpeedButton;
+    spbHideLocked: TSpeedButton;
+    spdHideLinked: TSpeedButton;
+    spdHideArchived: TSpeedButton;
     procedure actnCloseExecute(Sender: TObject);
     procedure actnGenericExecute(Sender: TObject);
     procedure actnGenericUpdate(Sender: TObject);
+    procedure btnToday1Click(Sender: TObject);
+    procedure btnToday2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure SendFilterDataPacket();
+    procedure spbCurrentMonthClick(Sender: TObject);
   private
     fFilterState: TFilterState;
     procedure ReadPreferences();
     procedure WritePreferences();
-    procedure SetIconDisplayState();
   public
     { Public declarations }
     // property HideArchived: boolean read FHideArchived write FHideArchived;
@@ -62,7 +67,7 @@ const
   INIFILE_SECTION = 'FilterCustomer';
 
 var
-  CustFilter: TCustFilter;
+  FilterCommon: TFilterCommon;
 
 implementation
 
@@ -70,55 +75,57 @@ implementation
 
 Uses IniFiles, unitFESutility, system.DateUtils;
 
-procedure TCustFilter.actnClearExecute(Sender: TObject);
-begin
-  actnHideArchived.Checked := false;
-  actnHideInActive.Checked := false;
-  actnHideLinked.Checked := false;
-  SetIconDisplayState;
-  SendFilterDataPacket;
-end;
-
-procedure TCustFilter.actnClearUpdate(Sender: TObject);
-begin
-  if actnHideArchived.Checked or actnHideInActive.Checked or actnHideLinked.Checked
-  then TAction(Sender).ImageName := 'filter_alt'
-  else TAction(Sender).ImageName := 'filter_alt_off';
-end;
-
-procedure TCustFilter.actnCloseExecute(Sender: TObject);
+procedure TFilterCommon.actnCloseExecute(Sender: TObject);
 begin
   WritePreferences;
   ModalResult := mrOK;
 end;
 
-procedure TCustFilter.actnGenericExecute(Sender: TObject);
+procedure TFilterCommon.actnGenericExecute(Sender: TObject);
 begin
-  TAction(Sender).Checked := not TAction(Sender).Checked;
-  SetIconDisplayState;
-  SendFilterDataPacket;
+  with TAction(Sender) do
+  begin
+    Checked := not Checked;
+    UpdateAction(TAction(Sender));
+    SendFilterDataPacket;
+  end;
 end;
 
-procedure TCustFilter.actnGenericUpdate(Sender: TObject);
+procedure TFilterCommon.actnGenericUpdate(Sender: TObject);
 begin
-  if TAction(Sender).Checked then TAction(Sender).ImageName := 'Checked'
-  else TAction(Sender).ImageName := 'UnChecked';
+  with TAction(Sender) do
+  begin
+    if Checked and (ImageIndex <> 22) then
+      ImageIndex := 22;
+    if not Checked and (ImageIndex <> 23) then
+      ImageIndex := 23;
+  end;
 end;
 
-procedure TCustFilter.FormCreate(Sender: TObject);
+procedure TFilterCommon.btnToday1Click(Sender: TObject);
+begin
+  dtpStart.Date :=  Date;
+end;
+
+procedure TFilterCommon.btnToday2Click(Sender: TObject);
+begin
+  dtpEnd.Date :=  Date;
+end;
+
+procedure TFilterCommon.FormCreate(Sender: TObject);
 begin
   actnHideArchived.Checked := false;
-  actnHideInActive.Checked := false;
+  actnHideLocked.Checked := false;
   actnHideLinked.Checked := false;
 end;
 
-procedure TCustFilter.FormDeactivate(Sender: TObject);
+procedure TFilterCommon.FormDeactivate(Sender: TObject);
 begin
   WritePreferences; // record filter state
   PostMessage(TForm(Owner).Handle, FES_FILTERDEACTIVATED, 0, 0);
 end;
 
-procedure TCustFilter.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TFilterCommon.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then
@@ -128,15 +135,15 @@ begin
   end;
 end;
 
-procedure TCustFilter.FormShow(Sender: TObject);
+procedure TFilterCommon.FormShow(Sender: TObject);
 begin
   ReadPreferences;
-  SetIconDisplayState;
+  UpdateActions;
 end;
 
 { TMemberFilter }
 
-procedure TCustFilter.ReadPreferences;
+procedure TFilterCommon.ReadPreferences;
 var
   iFile: TIniFile;
   iniFileName: string;
@@ -146,29 +153,29 @@ begin
   iFile := TIniFile.Create(iniFileName);
   actnHideArchived.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideArchived', false);
-  actnHideInActive.Checked := iFile.ReadBool(INIFILE_SECTION,
-    'HideInActive', false);
+  actnHideLocked.Checked := iFile.ReadBool(INIFILE_SECTION,
+    'HideLocked', false);
   actnHideLinked.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideLinked', false);
-  actnFilterFrom.Checked := iFile.ReadBool(INIFILE_SECTION,
+  actnDateFrom.Checked := iFile.ReadBool(INIFILE_SECTION,
     'FilterFrom', false);
-  actnFilterTo.Checked := iFile.ReadBool(INIFILE_SECTION,
+  actnDateTo.Checked := iFile.ReadBool(INIFILE_SECTION,
     'FilterTo', false);
-
 
   dtpStart.Date := iFile.ReadDate(INIFILE_SECTION,'StartDT', Today);
   dtpEnd.Date := iFile.ReadDate(INIFILE_SECTION,'EndDT', Today);
+
   iFile.Free;
 end;
 
-procedure TCustFilter.SendFilterDataPacket;
+procedure TFilterCommon.SendFilterDataPacket;
 var
   Buffer: TMemoryStream;
   CopyData: TCopyDataStruct;
 begin
-  // fill record
+  // fill record.
   fFilterState.HideArchived := actnHideArchived.Checked;
-  fFilterState.HideInActive := actnHideInActive.Checked;
+  fFilterState.HideLocked := actnHideLocked.Checked;
   fFilterState.HideLinked := actnHideLinked.Checked;
   fFilterState.StartDT := dtpStart.DateTime;
   fFilterState.EndDT := dtpStart.DateTime;
@@ -186,30 +193,13 @@ begin
   end;
 end;
 
-procedure TCustFilter.SetIconDisplayState;
+procedure TFilterCommon.spbCurrentMonthClick(Sender: TObject);
 begin
-  // The TAction's state must change else OnActionUpdate isn't called.
-  // Programmatically assigning TAction.Checked with a value does not
-  // produce a change in it's state.
-  // Here we sync the icon states manaually.
-  if actnHideArchived.Checked then actnHideArchived.ImageName := 'Checked'
-  else actnHideArchived.ImageName := 'UnChecked';
-  if actnHideInActive.Checked then actnHideInActive.ImageName := 'Checked'
-  else actnHideInActive.ImageName := 'UnChecked';
-  if actnHideLinked.Checked then actnHideLinked.ImageName := 'Checked'
-  else actnHideLinked.ImageName := 'UnChecked';
-  if actnFilterFrom.Checked then actnFilterFrom.ImageName := 'Checked'
-  else actnFilterFrom.ImageName := 'UnChecked';
-  if actnFilterTo.Checked then actnFilterTo.ImageName := 'Checked'
-  else actnFilterTo.ImageName := 'UnChecked';
-
-  if actnHideArchived.Checked or actnHideInActive.Checked or
-    actnHideLinked.Checked or actnFilterFrom.Checked or actnFilterTo.Checked
-  then actnClear.ImageName := 'filter_alt'
-  else actnClear.ImageName := 'filter_alt_off';
+  dtpStart.Date :=  System.DateUtils.StartOfTheMonth(Date);
+  dtpEnd.Date := System.DateUtils.EndOfTheMonth(Date);
 end;
 
-procedure TCustFilter.WritePreferences;
+procedure TFilterCommon.WritePreferences;
 var
   iFile: TIniFile;
   iniFileName: string;
@@ -218,10 +208,10 @@ begin
   if not FileExists(iniFileName) then exit;
   iFile := TIniFile.Create(iniFileName);
   iFile.WriteBool(INIFILE_SECTION, 'HideArchived', actnHideArchived.Checked);
-  iFile.WriteBool(INIFILE_SECTION, 'HideInActive', actnHideInActive.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'HideLocked', actnHideLocked.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'HideLinked', actnHideLinked.Checked);
-  iFile.WriteBool(INIFILE_SECTION, 'FilterFrom', actnFilterFrom.Checked);
-  iFile.WriteBool(INIFILE_SECTION, 'FilterTo', actnFilterTo.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'FilterFrom', actnDateFrom.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'FilterTo', actnDateTo.Checked);
   iFile.WriteDate(INIFILE_SECTION, 'StartDT', dtpStart.Date);
   iFile.WriteDate(INIFILE_SECTION, 'EndDT', dtpEnd.Date);
   iFile.Free;

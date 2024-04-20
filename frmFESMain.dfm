@@ -310,8 +310,8 @@ object FESMain: TFESMain
         5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
         0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
       Display.ActiveEnd = 40
-      Display.CurrentPosFrom = 1002
-      Display.CurrentPosTo = 1002
+      Display.CurrentPosFrom = 1003
+      Display.CurrentPosTo = 1003
       Display.ColorNonActive = clWhite
       Display.HourLineColor = 15987699
       Font.Charset = DEFAULT_CHARSET
@@ -808,8 +808,6 @@ object FESMain: TFESMain
               item
                 Action = InspectSchedule
                 Caption = '&Schedule'
-                ImageIndex = 2
-                ImageName = 'calendar_today'
               end
               item
                 Action = InspectFindOrder
@@ -1063,7 +1061,6 @@ object FESMain: TFESMain
     object InspectSchedule: TAction
       Category = 'Inspection'
       Caption = 'Schedule'
-      ImageIndex = 2
       ImageName = 'calendar_today'
     end
     object InspectFindOrder: TAction

@@ -1,4 +1,4 @@
-unit dlgStatusFilter;
+unit dlgFilterStatus;
 
 interface
 
@@ -13,7 +13,7 @@ uses
   unitFESDefines;
 
 type
-  TStatusFilter = class(TForm)
+  TFilterStatus = class(TForm)
     btnGroup: TButtonGroup;
     qryStatus: TFDQuery;
     ActionList1: TActionList;
@@ -47,7 +47,7 @@ type
   end;
 
 var
-  StatusFilter: TStatusFilter;
+  FilterStatus: TFilterStatus;
 
 implementation
 
@@ -56,12 +56,12 @@ implementation
 Uses
   IniFiles, unitFESutility;
 
-procedure TStatusFilter.FormDestroy(Sender: TObject);
+procedure TFilterStatus.FormDestroy(Sender: TObject);
 begin
   // Preference are written on event Done
 end;
 
-procedure TStatusFilter.actnGenericExecute(Sender: TObject);
+procedure TFilterStatus.actnGenericExecute(Sender: TObject);
 var
 fl: LongInt;
 begin
@@ -71,7 +71,7 @@ begin
   POSTMESSAGE(TForm(Owner).Handle, FES_FILTERUPDATED, fl, 0);
 end;
 
-procedure TStatusFilter.actnGenericUpdate(Sender: TObject);
+procedure TFilterStatus.actnGenericUpdate(Sender: TObject);
 begin
   if TAction(Sender).Checked and (TAction(Sender).ImageIndex <> 22) then
     TAction(Sender).ImageIndex := 22;
@@ -79,7 +79,7 @@ begin
     TAction(Sender).ImageIndex := 23;
 end;
 
-function TStatusFilter.CalcLayerCode: integer;
+function TFilterStatus.CalcLayerCode: integer;
 var
   I, num: integer;
   actn: TContainedAction;
@@ -111,7 +111,7 @@ begin
   end;
 end;
 
-procedure TStatusFilter.Done;
+procedure TFilterStatus.Done;
 var
   newLayerCode: integer;
 begin
@@ -126,7 +126,7 @@ begin
   Hide;
 end;
 
-procedure TStatusFilter.FormCreate(Sender: TObject);
+procedure TFilterStatus.FormCreate(Sender: TObject);
 var
   btn: TGrpButtonItem;
   actn: TContainedAction;
@@ -171,19 +171,19 @@ begin
 
 end;
 
-procedure TStatusFilter.FormDeactivate(Sender: TObject);
+procedure TFilterStatus.FormDeactivate(Sender: TObject);
 begin
   Done();
 end;
 
-procedure TStatusFilter.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TFilterStatus.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then
     Done();
 end;
 
-procedure TStatusFilter.ReadPreferences;
+procedure TFilterStatus.ReadPreferences;
 var
   iFile: TIniFile;
   iniFileName: string;
@@ -203,7 +203,7 @@ begin
   iFile.Free;
 end;
 
-procedure TStatusFilter.WritePreferences;
+procedure TFilterStatus.WritePreferences;
 var
   iFile: TIniFile;
   iniFileName: string;
