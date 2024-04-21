@@ -243,3 +243,6 @@ Coordinates=380,390,61,58
 Coordinates=860,380,89,58
 Visible=True
 
+[FindInspectOrders.qryFindInspectOrder]
+Visible=False
+

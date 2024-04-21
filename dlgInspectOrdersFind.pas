@@ -11,7 +11,10 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.VirtualImage, Vcl.TitleBarCtrls, System.Actions, Vcl.ActnList,
-  dlgFilterCommon, unitFESDefines;
+  unitFESDefines, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
+  Vcl.Bind.ControlList, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, Vcl.ControlList,
+  dlgFilterCommon, dlgFilterStatus, HTMLabel;
 
 type
 
@@ -22,41 +25,45 @@ type
     actnFilterToggle: TAction;
     actnList: TActionList;
     actnSearch: TAction;
+    bindList: TBindingsList;
+    bindSrc: TBindSourceDB;
+    btnEdit: TControlListButton;
+    btnIsEnabled: TControlListButton;
+    ControlList1: TControlList;
     dsFindInspectOrder: TDataSource;
-    Edit1: TEdit;
-    Edit2: TEdit;
+    edtSearch: TEdit;
+    HTMLabel1: THTMLabel;
     Label1: TLabel;
-    Label2: TLabel;
+    lblBookIN: TLabel;
+    lblCustCode: TLabel;
+    lblStatusStr: TLabel;
+    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
+    LinkPropertyToFieldBrushColor: TLinkPropertyToField;
+    LinkPropertyToFieldCaption: TLinkPropertyToField;
+    LinkPropertyToFieldCaption2: TLinkPropertyToField;
+    LinkPropertyToFieldCaption4: TLinkPropertyToField;
+    LinkPropertyToFieldHTMLTextText: TLinkPropertyToField;
     Panel1: TPanel;
     qryFindInspectOrder: TFDQuery;
-    qryFindInspectOrderAddress: TWideStringField;
-    qryFindInspectOrderCaption: TWideStringField;
-    qryFindInspectOrderCompletedDT: TSQLTimeStampField;
-    qryFindInspectOrderCreatedOn: TSQLTimeStampField;
-    qryFindInspectOrderCustName: TWideStringField;
-    qryFindInspectOrderCustomerID: TIntegerField;
-    qryFindInspectOrderInspectionOrderID: TFDAutoIncField;
-    qryFindInspectOrderInspectionStatusID: TIntegerField;
-    qryFindInspectOrderIsEnabled: TBooleanField;
-    qryFindInspectOrderLinkStatus: TStringField;
-    qryFindInspectOrderPostcodeID: TIntegerField;
-    qryFindInspectOrderRequestedDT: TSQLTimeStampField;
-    qryFindInspectOrderSiteID: TIntegerField;
-    qryFindInspectOrderSuburb: TWideStringField;
-    qryFindInspectOrderxAddress: TWideStringField;
+    Shape1: TShape;
     TitleBarPanel1: TTitleBarPanel;
-    vimgFilters: TVirtualImage;
+    vimgFilterStatus: TVirtualImage;
+    vimgFilterCommon: TVirtualImage;
     vimgFindCustomer: TVirtualImage;
     vimgSync: TVirtualImage;
     vimgToggleFilters: TVirtualImage;
     VirtualImage5: TVirtualImage;
-    procedure FormDestroy(Sender: TObject);
+    procedure ControlList1BeforeDrawItem(AIndex: Integer; ACanvas: TCanvas; ARect:
+        TRect; AState: TOwnerDrawState);
     procedure FormCreate(Sender: TObject);
-    procedure vimgFiltersClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure vimgFilterCommonClick(Sender: TObject);
+    procedure vimgFilterStatusClick(Sender: TObject);
   private
     { Private declarations }
     fGotoRequest: TFESGotoRequest;
-    FilterDLG: TFilterCommon;
+    FilterCommonDLG: TFilterCommon;
+    FilterStatusDLG: TFilterStatus;
     procedure FilterDeActivated(var Message: TMessage);
       message FES_FILTERDEACTIVATED;
     procedure FilterDLGInit(var Message: TMessage); message FES_FILTERDLGINIT;
@@ -73,11 +80,13 @@ implementation
 
 {$R *.dfm}
 
-procedure TFindInspectOrders.FormDestroy(Sender: TObject);
+procedure TFindInspectOrders.ControlList1BeforeDrawItem(AIndex: Integer;
+    ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 begin
-  // F I L T E R .
-  if Assigned(FilterDLG) then
-    FreeAndNil(FilterDLG);
+  if bindSrc.DataSet.FieldByName('IsEnabled').AsBoolean then
+    btnIsEnabled.ImageIndex := 22  // Checked.
+  else
+    btnIsEnabled.ImageIndex := 23; // Un-Checked.
 end;
 
 procedure TFindInspectOrders.FilterDeActivated(var Message: TMessage);
@@ -95,16 +104,18 @@ end;
 
 procedure TFindInspectOrders.FilterDLGInit(var Message: TMessage);
 begin
-  if not Assigned(FilterDLG) then
+  if not Assigned(FilterCommonDLG) then
   begin
     // F I L T E R .
-    FilterDLG := TFilterCommon.Create(self);
+    FilterCommonDLG := TFilterCommon.Create(self);
+    // F I L T E R .
+    FilterStatusDLG := TFilterStatus.Create(self);
   end;
 end;
 
 procedure TFindInspectOrders.FilterUpdated(var Message: TMessage);
 begin
-  if Assigned(FilterDLG) then
+  if Assigned(FilterCommonDLG) then
   begin
     // if filter toggle is ON then ...
     if actnFilterToggle.Checked then
@@ -116,31 +127,55 @@ end;
 
 procedure TFindInspectOrders.FormCreate(Sender: TObject);
 begin
-  qryFindInspectOrder.Active := false;
-  // Setup default or last filtering given by user ...
   qryFindInspectOrder.Active := true;
   fGotoRequest := fesGotoUnknown;
+  CustomTitleBar.Enabled := true; // GlassFrame.Top = CustomeTitleBar.Height
+
   // F I L T E R S .
   // Can't create filterDLG here as (apparently) datamodule
   // FES hasn't been constructed!
-  FilterDLG := nil;
+  FilterCommonDLG := nil;
   actnFilterToggle.Checked := false; // filter_off
   // Creation of FilterDLG requested here ...
   POSTMESSAGE(Handle, FES_FILTERDLGINIT, 0, 0);
 end;
 
-procedure TFindInspectOrders.vimgFiltersClick(Sender: TObject);
-var
-  aRect: Trect;
+procedure TFindInspectOrders.FormDestroy(Sender: TObject);
 begin
-  // launch the status filter....
-  if Assigned(FilterDLG) and not FilterDLG.Visible then
+  // F I L T E R .
+  if Assigned(FilterCommonDLG) then
+    FreeAndNil(FilterCommonDLG);
+  if Assigned(FilterStatusDLG) then
+    FreeAndNil(FilterStatusDLG);
+end;
+
+procedure TFindInspectOrders.vimgFilterCommonClick(Sender: TObject);
+var
+  ARect: TRect;
+begin
+  // launch filter dialogue....
+  if Assigned(FilterCommonDLG) and not FilterCommonDLG.Visible then
   begin
-    FilterDLG.Position := poDesigned;
-    aRect := vimgFilters.ClientToScreen(vimgFilters.ClientRect);
-    FilterDLG.Left := aRect.Left;
-    FilterDLG.Top := aRect.Bottom + 1;
-    FilterDLG.Show;
+    FilterCommonDLG.Position := poDesigned;
+    ARect := vimgFilterCommon.ClientToScreen(vimgFilterCommon.ClientRect);
+    FilterCommonDLG.Left := ARect.Left;
+    FilterCommonDLG.Top := ARect.Bottom + 1;
+    FilterCommonDLG.Show;
+  end;
+
+end;
+
+procedure TFindInspectOrders.vimgFilterStatusClick(Sender: TObject);
+var
+  ARect: TRect;
+begin
+  if Assigned(FilterStatusDLG) and not FilterStatusDLG.Visible then
+  begin
+    FilterStatusDLG.Position := poDesigned;
+    ARect := vimgFilterStatus.ClientToScreen(vimgFilterStatus.ClientRect);
+    FilterStatusDLG.Left := ARect.Left;
+    FilterStatusDLG.Top := ARect.Bottom + 1;
+    FilterStatusDLG.Show;
   end;
 end;
 
