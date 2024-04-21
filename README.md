@@ -1,5 +1,5 @@
 # FES_FireEquimentServices
-FES - Fire Equipment Services an ACCESS front-end with ADO MSSQL EXPRESS backend.
+FES - Fire Equipment Services an RAD Studio Delphi front-end with MSSQL backend.
 
 Manage Customers, HR, HR-Staff, Sites, (and stations), Fire Equipment, Emergency Lights, link customers to sites, Enable/Disable sites, create survey orders, create inspection orders, create customer inspection reports and manage equipment life cycles. 
 
@@ -13,7 +13,7 @@ Future code for this site is (support applications, seperate GitHub project - pr
 
 GitHub project, FES_ERStudio, holds the database design for MSSQL EXPRESS dbo.FES database. (SQL build scripts may appear here.)
 
-VBA folder holds the export of BAS and Forms. via RubberDuck addin
+(Original ACCESS project - VBA folder holds the export of BAS and Forms. via RubberDuck addin)
 
 Folder BUILD contains accdb snapshot and T-SQL for backend creation and system data dump. 
 
