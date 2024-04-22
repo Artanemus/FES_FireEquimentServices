@@ -5,23 +5,11 @@ Coordinates=796,349,149,33
 [StackPanel1]
 Coordinates=796,1,75,51
 
-[puFilter]
-Coordinates=796,141,52,33
-
 [CustomerData.dsCustSurvey]
 Coordinates=195,571,156,33
 
 [CustomerData.qryCustInspect]
 Coordinates=14,250,162,393
-
-[pumenuCustNum]
-Coordinates=796,193,100,33
-
-[puInsert]
-Coordinates=796,245,54,33
-
-[puEdit]
-Coordinates=542,878,46,33
 
 [CustomerData.dsCustSite]
 Coordinates=393,751,141,33
@@ -38,12 +26,6 @@ Coordinates=796,401,96,33
 [CustomerData.dsCustNum]
 Coordinates=591,215,145,33
 
-[puDelete]
-Coordinates=796,453,57,33
-
-[N1]
-Coordinates=796,505,40,33
-
 [lblNumber]
 Coordinates=183,215,65,51
 
@@ -55,15 +37,6 @@ Coordinates=430,1037,145,267
 
 [CustomerData.qryCustContact]
 Coordinates=0,0,164,231
-
-[puPin]
-Coordinates=796,557,42,33
-
-[puRefresh]
-Coordinates=796,609,65,33
-
-[vimglistCustNum]
-Coordinates=796,661,99,33
 
 [CustomerData.qryCustAddress]
 Coordinates=591,429,167,159
@@ -92,15 +65,12 @@ Coordinates=234,878,158,33
 [vimgHideUnPinned]
 Coordinates=796,765,108,33
 
-[imgcollCustNum]
-Coordinates=796,817,96,33
-
 [ctrllistCustNum]
 Coordinates=230,700,91,51
 Visible=True
 
 []
-Coordinates=796,71,87,51
+Coordinates=796,193,100,33
 
 [btnEditNumber]
 Coordinates=796,297,80,33

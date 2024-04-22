@@ -121,6 +121,7 @@ type
     procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GenericUpdate(Sender: TObject);
+    procedure HRBrowseExecute(Sender: TObject);
     procedure InspectBrowseOrdersExecute(Sender: TObject);
     procedure InspectFindOrderExecute(Sender: TObject);
     procedure vimgDayCountDecClick(Sender: TObject);
@@ -159,7 +160,7 @@ implementation
 
 uses dlgInspectOrdersFind, dlgStatusPalette
 
-    , System.IniFiles, unitFESutility;
+    , System.IniFiles, unitFESutility, frmHR;
 
 procedure TFESMain.actnFilterToggleExecute(Sender: TObject);
 begin
@@ -334,6 +335,18 @@ begin
     TAction(Sender).Enabled := true;
 end;
 
+procedure TFESMain.HRBrowseExecute(Sender: TObject);
+var
+  dlg: THR;
+begin
+  dlg := THR.Create(self);
+  if IsPositiveResult(dlg.ShowModal()) then
+  begin;
+    // do something ....
+  end;
+  dlg.free;
+end;
+
 procedure TFESMain.InspectBrowseOrdersExecute(Sender: TObject);
 begin
   if not Assigned(FESInspect) then
@@ -346,8 +359,9 @@ var
   dlg: TFindInspectOrders;
 begin
   dlg := TFindInspectOrders.Create(self);
-  if IsPositiveResult(dlg.ShowModal) then
+  if IsPositiveResult(dlg.ShowModal()) then
   begin;
+    // do something ....
   end;
   dlg.free;
 end;

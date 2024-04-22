@@ -89,7 +89,7 @@ type
   private
     { Private declarations }
     fFilterDlg: TFilterCommon;
-    FCustFilterState: TFilterState;
+//    FCustFilterState: TFilterState;
     { Metric for OnShow }
     FxHeight: integer;
     FxWidth: integer;

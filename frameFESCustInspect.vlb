@@ -1,39 +1,6 @@
-﻿[vimglistCustInspect]
-Coordinates=335,155,112,33
-
-[imgcollCustInspect]
-Coordinates=78,174,109,33
-
-[StackPanel1]
+﻿[StackPanel1]
 Coordinates=200,240,75,51
 LayerNames=NewLayer0
-
-[puEdit]
-Coordinates=31,77,46,33
-
-[puPin]
-Coordinates=335,210,42,33
-
-[puDelete]
-Coordinates=316,251,57,33
-
-[puFilter]
-Coordinates=257,251,52,33
-
-[puInsert]
-Coordinates=188,251,54,33
-
-[puCopy]
-Coordinates=119,251,52,33
-
-[N1]
-Coordinates=70,251,40,33
-
-[puRefresh]
-Coordinates=499,56,65,33
-
-[pumenuCustInspect]
-Coordinates=499,111,113,33
 
 [bindlistCustInspect]
 Coordinates=499,221,109,33
@@ -97,7 +64,7 @@ ActiveLayerNames=NewLayer0
 EditingLayerName=NewLayer0
 
 []
-Coordinates=340,20,144,321
+Coordinates=499,111,113,33
 LayerNames=NewLayer0
 Visible=True
 

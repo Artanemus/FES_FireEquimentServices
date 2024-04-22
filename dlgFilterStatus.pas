@@ -14,17 +14,16 @@ uses
 
 type
   TFilterStatus = class(TForm)
-    btnGroup: TButtonGroup;
-    qryStatus: TFDQuery;
     ActionList1: TActionList;
-    actnXAction: TAction;
-    actnSent: TAction;
     actnAwaiting: TAction;
+    actnCancelled: TAction;
+    actnCompleted: TAction;
     actnHold: TAction;
     actnIRNS: TAction;
-    actnCompleted: TAction;
-    actnCancelled: TAction;
-    procedure FormDestroy(Sender: TObject);
+    actnSent: TAction;
+    actnXAction: TAction;
+    btnGroup: TButtonGroup;
+    qryStatus: TFDQuery;
     procedure actnGenericExecute(Sender: TObject);
     procedure actnGenericUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -33,17 +32,15 @@ type
   private
     { Private declarations }
     fLayerCode: LongInt;
+    function CalcLayerCode(): integer;
+    procedure Done();
     procedure ReadPreferences();
     procedure WritePreferences();
-    procedure Done();
-    function CalcLayerCode(): integer;
   public
-    { Public declarations }
-    property LayerCode: integer read fLayerCode write fLayerCode;
-
   const
     INIFILE_SECTION = 'FilterStatus';
-
+    { Public declarations }
+    property LayerCode: integer read fLayerCode write fLayerCode;
   end;
 
 var
@@ -55,11 +52,6 @@ implementation
 
 Uses
   IniFiles, unitFESutility;
-
-procedure TFilterStatus.FormDestroy(Sender: TObject);
-begin
-  // Preference are written on event Done
-end;
 
 procedure TFilterStatus.actnGenericExecute(Sender: TObject);
 var
@@ -81,7 +73,7 @@ end;
 
 function TFilterStatus.CalcLayerCode: integer;
 var
-  I, num: integer;
+  I: integer;
   actn: TContainedAction;
 begin
   // build the filter code used by TMS Planner to hide show layers

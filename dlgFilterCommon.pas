@@ -16,7 +16,7 @@ uses
 type
   PFilterState = ^TFilterState;
   TFilterState = record
-    HideArchived: Boolean;
+    ShowArchived: Boolean;
     HideLocked: Boolean;
     HideLinked:Boolean;
     StartDT:TDateTime;
@@ -24,23 +24,23 @@ type
   end;
 
   TFilterCommon = class(TForm)
-    actnList: TActionList;
-    actnHideArchived: TAction;
-    btnToday1: TButton;
-    btnToday2: TButton;
-    actnHideLocked: TAction;
-    actnHideLinked: TAction;
     actnDateFrom: TAction;
     actnDateTo: TAction;
-    RelativePanel1: TRelativePanel;
-    dtpStart: TDateTimePicker;
+    actnShowArchived: TAction;
+    actnHideLinked: TAction;
+    actnHideLocked: TAction;
+    actnList: TActionList;
+    btnToday1: TButton;
+    btnToday2: TButton;
     dtpEnd: TDateTimePicker;
+    dtpStart: TDateTimePicker;
+    RelativePanel1: TRelativePanel;
+    spbCurrentMonth: TSpeedButton;
     spbDateFrom: TSpeedButton;
     spbDateTo: TSpeedButton;
-    spbCurrentMonth: TSpeedButton;
     spbHideLocked: TSpeedButton;
+    spdShowArchived: TSpeedButton;
     spdHideLinked: TSpeedButton;
-    spdHideArchived: TSpeedButton;
     procedure actnCloseExecute(Sender: TObject);
     procedure actnGenericExecute(Sender: TObject);
     procedure actnGenericUpdate(Sender: TObject);
@@ -49,18 +49,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
     procedure SendFilterDataPacket();
     procedure spbCurrentMonthClick(Sender: TObject);
   private
     fFilterState: TFilterState;
+    procedure Done();
     procedure ReadPreferences();
     procedure WritePreferences();
-  public
-    { Public declarations }
-    // property HideArchived: boolean read FHideArchived write FHideArchived;
-    // property HideInActive: boolean read fHideInActive write fHideInActive;
-    // property HideNonSwimmer: boolean read fHideNonSwimmer write fHideNonSwimmer;
+    procedure UpdateFilterState();
   end;
 
 const
@@ -77,8 +73,7 @@ Uses IniFiles, unitFESutility, system.DateUtils;
 
 procedure TFilterCommon.actnCloseExecute(Sender: TObject);
 begin
-  WritePreferences;
-  ModalResult := mrOK;
+  Done();
 end;
 
 procedure TFilterCommon.actnGenericExecute(Sender: TObject);
@@ -112,34 +107,34 @@ begin
   dtpEnd.Date :=  Date;
 end;
 
+procedure TFilterCommon.Done;
+begin
+  WritePreferences;
+  UpdateFilterState;
+  SendFilterDataPacket;
+  ModalResult := mrOk;
+  Hide;
+end;
+
 procedure TFilterCommon.FormCreate(Sender: TObject);
 begin
-  actnHideArchived.Checked := false;
+  actnShowArchived.Checked := false;
   actnHideLocked.Checked := false;
   actnHideLinked.Checked := false;
+  ReadPreferences;
 end;
 
 procedure TFilterCommon.FormDeactivate(Sender: TObject);
 begin
-  WritePreferences; // record filter state
-  PostMessage(TForm(Owner).Handle, FES_FILTERDEACTIVATED, 0, 0);
+  Done();
 end;
 
 procedure TFilterCommon.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if Key = VK_ESCAPE then
-  begin
-    WritePreferences;
-    ModalResult := mrOk;
-  end;
+  if Key = VK_ESCAPE then Done();
 end;
 
-procedure TFilterCommon.FormShow(Sender: TObject);
-begin
-  ReadPreferences;
-  UpdateActions;
-end;
 
 { TMemberFilter }
 
@@ -151,8 +146,8 @@ begin
   iniFileName := unitFESUtility.GetFESPreferenceFileName;
   if not FileExists(iniFileName) then exit;
   iFile := TIniFile.Create(iniFileName);
-  actnHideArchived.Checked := iFile.ReadBool(INIFILE_SECTION,
-    'HideArchived', false);
+  actnShowArchived.Checked := iFile.ReadBool(INIFILE_SECTION,
+    'ShowArchived', false);
   actnHideLocked.Checked := iFile.ReadBool(INIFILE_SECTION,
     'HideLocked', false);
   actnHideLinked.Checked := iFile.ReadBool(INIFILE_SECTION,
@@ -173,12 +168,6 @@ var
   Buffer: TMemoryStream;
   CopyData: TCopyDataStruct;
 begin
-  // fill record.
-  fFilterState.HideArchived := actnHideArchived.Checked;
-  fFilterState.HideLocked := actnHideLocked.Checked;
-  fFilterState.HideLinked := actnHideLinked.Checked;
-  fFilterState.StartDT := dtpStart.DateTime;
-  fFilterState.EndDT := dtpStart.DateTime;
   Buffer := TMemoryStream.Create;
   try
     // fill memory stream
@@ -199,6 +188,16 @@ begin
   dtpEnd.Date := System.DateUtils.EndOfTheMonth(Date);
 end;
 
+procedure TFilterCommon.UpdateFilterState;
+begin
+  // fill record.
+  fFilterState.ShowArchived := actnShowArchived.Checked;
+  fFilterState.HideLocked := actnHideLocked.Checked;
+  fFilterState.HideLinked := actnHideLinked.Checked;
+  fFilterState.StartDT := dtpStart.DateTime;
+  fFilterState.EndDT := dtpStart.DateTime;
+end;
+
 procedure TFilterCommon.WritePreferences;
 var
   iFile: TIniFile;
@@ -207,7 +206,7 @@ begin
   iniFileName := unitFESutility.GetFESPreferenceFileName;
   if not FileExists(iniFileName) then exit;
   iFile := TIniFile.Create(iniFileName);
-  iFile.WriteBool(INIFILE_SECTION, 'HideArchived', actnHideArchived.Checked);
+  iFile.WriteBool(INIFILE_SECTION, 'ShowArchived', actnShowArchived.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'HideLocked', actnHideLocked.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'HideLinked', actnHideLinked.Checked);
   iFile.WriteBool(INIFILE_SECTION, 'FilterFrom', actnDateFrom.Checked);

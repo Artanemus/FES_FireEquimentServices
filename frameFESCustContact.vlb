@@ -1,9 +1,6 @@
 ﻿[CustomerData.dsCustNum]
 Coordinates=73,483,145,33
 
-[puEdit]
-Coordinates=24,483,46,33
-
 [ctrllistCustEmail]
 Coordinates=620,410,95,51
 Visible=True
@@ -18,27 +15,15 @@ Coordinates=778,211,112,33
 [CustomerData.qryCustSite]
 Coordinates=384,10,145,267
 
-[puPin]
-Coordinates=778,263,42,33
-
-[puFilter]
-Coordinates=778,315,52,33
-
 [CustomerData.dsCustInspect]
 Coordinates=405,679,158,33
 
 [CustomerData.qryCustAddress]
 Coordinates=10,650,167,159
 
-[puDelete]
-Coordinates=778,367,57,33
-
 [CustomerData.qryCustContact]
 Coordinates=179,413,164,33
 Visible=False
-
-[puRefresh]
-Coordinates=778,419,65,33
 
 [CustomerData.dsCustSite]
 Coordinates=371,393,141,33
@@ -56,14 +41,8 @@ Coordinates=198,10,160,267
 [CustomerData.dsCustContact]
 Coordinates=77,788,160,33
 
-[vimglistCustContact]
-Coordinates=778,523,114,33
-
 [CustomerData.dsCustAdress]
 Coordinates=246,788,157,33
-
-[puCopy]
-Coordinates=778,575,52,33
 
 [vimgHideUnPinned]
 Coordinates=420,680,108,33
@@ -75,23 +54,11 @@ Coordinates=452,1110,147,33
 [CustomerData.dsCustSurvey]
 Coordinates=601,895,156,33
 
-[N1]
-Coordinates=778,679,40,33
-
 [CustomerData.qryCustomer]
 Coordinates=555,10,151,231
 
 [CustomerData.dsCustEmails]
 Coordinates=178,1,155,33
-
-[puInsert]
-Coordinates=778,783,54,33
-
-[imgcollCustContact]
-Coordinates=778,835,111,33
-
-[pumenuCustContact]
-Coordinates=778,887,115,33
 
 [CustomerData.qryCustNum]
 Coordinates=195,429,149,195
@@ -115,7 +82,7 @@ LayerNames=NewLayer0
 Visible=True
 
 []
-Coordinates=440,720,87,51
+Coordinates=778,887,115,33
 LayerNames=NewLayer0
 
 [btnEditContact]

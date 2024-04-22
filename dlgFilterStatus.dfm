@@ -13,7 +13,6 @@ object FilterStatus: TFilterStatus
   Font.Style = []
   KeyPreview = True
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnDeactivate = FormDeactivate
   OnKeyDown = FormKeyDown
   TextHeight = 15

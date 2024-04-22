@@ -41,7 +41,9 @@ uses
   frameFESStation in 'frameFESStation.pas' {FESStation: TFrame},
   frameFESTechHours in 'frameFESTechHours.pas' {FESTechHours: TFrame},
   dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette},
-  dlgFilterStatus in 'dlgFilterStatus.pas' {FilterStatus};
+  dlgFilterStatus in 'dlgFilterStatus.pas' {FilterStatus},
+  frmHR in 'frmHR.pas' {HR},
+  dmHR in 'dmHR.pas' {HRData: TDataModule};
 
 {$R *.res}
 
@@ -53,5 +55,6 @@ begin
   Application.CreateForm(TFES, FES);
   Application.CreateForm(TCustomerData, CustomerData);
   Application.CreateForm(TInspectOrderData, InspectOrderData);
+  Application.CreateForm(THRData, HRData);
   Application.Run;
 end.

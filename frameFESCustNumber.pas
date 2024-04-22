@@ -10,7 +10,7 @@ uses
   Vcl.StdCtrls, Vcl.ControlList, dmCustomerData, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, System.Rtti,
   System.Bindings.Outputs, Data.Bind.Grid, Vcl.Bind.ControlList,
-  Vcl.Bind.Editors, Data.DB, Vcl.WinXCtrls;
+  Vcl.Bind.Editors, Data.DB, Vcl.WinXCtrls, dmFES;
 
 type
   TFESCustNumber = class(TFrame)
@@ -19,7 +19,6 @@ type
     btnEditNumber: TControlListButton;
     btnPinNumber: TControlListButton;
     ctrllistCustNum: TControlList;
-    imgcollCustNum: TImageCollection;
     lblNumber: TLabel;
     lblNumberCreatedOn: TLabel;
     lblNumberType: TLabel;
@@ -27,17 +26,8 @@ type
     LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
-    N1: TMenuItem;
-    puDelete: TMenuItem;
-    puEdit: TMenuItem;
-    puFilter: TMenuItem;
-    puInsert: TMenuItem;
-    pumenuCustNum: TPopupMenu;
-    puPin: TMenuItem;
-    puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    vimglistCustNum: TVirtualImageList;
     procedure btnPinNumberClick(Sender: TObject);
     procedure ctrllistCustNumBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);

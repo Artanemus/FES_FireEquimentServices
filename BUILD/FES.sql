@@ -1,19 +1,19 @@
 /*
  * ER/Studio Data Architect SQL Code Generation
- * Company :      Ambrosia
- * Project :      FES_VER1.DM1
+ * Company :      Artanemus
+ * Project :      FES_v1.2.dm1
  * Author :       Ben Ambrose
  *
- * Date Created : Friday, May 05, 2023 13:04:22
+ * Date Created : Monday, April 22, 2024 15:13:04
  * Target DBMS : Microsoft SQL Server 2017
  */
 
 USE master
-go
+GO
 CREATE DATABASE FES
-go
+GO
 USE FES
-go
+GO
 /* 
  * TABLE: AddressType 
  */
@@ -28,7 +28,7 @@ CREATE TABLE AddressType(
     IsArchived       bit             DEFAULT 0 NOT NULL,
     CONSTRAINT PK_AddressType PRIMARY KEY CLUSTERED (AddressTypeID)
 )
-go
+GO
 
 
 
@@ -36,7 +36,7 @@ IF OBJECT_ID('AddressType') IS NOT NULL
     PRINT '<<< CREATED TABLE AddressType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE AddressType >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[AddressType] ON 
 GO
 INSERT [dbo].[AddressType] ([AddressTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (1, N'PRIMARY', 1, N'Home', 1, N'Business', 0)
@@ -62,7 +62,7 @@ CREATE TABLE ChemicalType(
     Symbol            nvarchar(50)    NULL,
     CONSTRAINT PK_ChemicalType PRIMARY KEY CLUSTERED (ChemicalTypeID)
 )
-go
+GO
 
 
 
@@ -70,7 +70,7 @@ IF OBJECT_ID('ChemicalType') IS NOT NULL
     PRINT '<<< CREATED TABLE ChemicalType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE ChemicalType >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[ChemicalType] ON 
 GO
 INSERT [dbo].[ChemicalType] ([ChemicalTypeID], [Caption], [Symbol]) VALUES (1, N'Water and Foam', N'AFF')
@@ -95,6 +95,52 @@ SET IDENTITY_INSERT [dbo].[ChemicalType] OFF
 GO
 
 /* 
+ * TABLE: CompanyAddress 
+ */
+
+CREATE TABLE CompanyAddress(
+    CompanyAddressID    int              NOT NULL,
+    CreatedOn           datetime         NULL,
+    IsArchived          bit              DEFAULT 0 NOT NULL,
+    Address             nvarchar(200)    NULL,
+    AddressTypeID       int              NULL,
+    CompanyInfoID       int              NULL,
+    CONSTRAINT PK_CompanyAddress PRIMARY KEY CLUSTERED (CompanyAddressID)
+)
+GO
+
+
+
+IF OBJECT_ID('CompanyAddress') IS NOT NULL
+    PRINT '<<< CREATED TABLE CompanyAddress >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE CompanyAddress >>>'
+GO
+
+/* 
+ * TABLE: CompanyEmail 
+ */
+
+CREATE TABLE CompanyEmail(
+    CompanyEmailID    int              NOT NULL,
+    CreatedOn         datetime         NULL,
+    Email             nvarchar(128)    NULL,
+    IsArchived        bit              DEFAULT 0 NOT NULL,
+    EmailTypeID       int              NULL,
+    CompanyInfoID     int              NULL,
+    CONSTRAINT PK_CompanyEmail PRIMARY KEY CLUSTERED (CompanyEmailID)
+)
+GO
+
+
+
+IF OBJECT_ID('CompanyEmail') IS NOT NULL
+    PRINT '<<< CREATED TABLE CompanyEmail >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE CompanyEmail >>>'
+GO
+
+/* 
  * TABLE: CompanyInfo 
  */
 
@@ -116,7 +162,7 @@ CREATE TABLE CompanyInfo(
     GlobalID            int              NULL,
     CONSTRAINT PK_CompanyInfo PRIMARY KEY CLUSTERED (CompanyInfoID)
 )
-go
+GO
 
 
 
@@ -124,46 +170,29 @@ IF OBJECT_ID('CompanyInfo') IS NOT NULL
     PRINT '<<< CREATED TABLE CompanyInfo >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CompanyInfo >>>'
-go
+GO
 
 /* 
- * TABLE: ContactNumType 
+ * TABLE: CompanyNumber 
  */
 
-CREATE TABLE ContactNumType(
-    ContactNumTypeID    int             IDENTITY(1,1),
-    Caption             nvarchar(50)    NULL,
-    UsedByHR            bit             DEFAULT 0 NOT NULL,
-    AliasHR             nvarchar(50)    NULL,
-    UsedByCust          bit             DEFAULT 0 NOT NULL,
-    AliasCust           nvarchar(50)    NULL,
-    IsArchived          bit             DEFAULT 0 NOT NULL,
-    CONSTRAINT PK_ContactNumType PRIMARY KEY CLUSTERED (ContactNumTypeID)
+CREATE TABLE CompanyNumber(
+    CompanyNumberID    int             NOT NULL,
+    IsArchived         bit             DEFAULT 0 NOT NULL,
+    Number             nvarchar(64)    NULL,
+    CreatedOn          datetime        NULL,
+    NumberTypeID       int             NULL,
+    CompanyInfoID      int             NULL,
+    CONSTRAINT PK_CompanyNumber PRIMARY KEY CLUSTERED (CompanyNumberID)
 )
-go
+GO
 
 
 
-IF OBJECT_ID('ContactNumType') IS NOT NULL
-    PRINT '<<< CREATED TABLE ContactNumType >>>'
+IF OBJECT_ID('CompanyNumber') IS NOT NULL
+    PRINT '<<< CREATED TABLE CompanyNumber >>>'
 ELSE
-    PRINT '<<< FAILED CREATING TABLE ContactNumType >>>'
-go
-SET IDENTITY_INSERT [dbo].[ContactNumType] ON 
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (1, N'PRIMARY', 1, N'Mobile', 1, N'Business', 0)
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (2, N'SECONDARY', 1, N'Work', 1, N'Accounts', 0)
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (3, N'3rd', 1, N'Home', 1, N'General Enquires', 0)
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (4, N'4th', 1, N'Real Estate', 1, N'Real Estate fnCOM', 0)
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (5, NULL, 0, NULL, 1, N'Landlord', 0)
-GO
-INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (6, NULL, 0, NULL, 1, N'Real Estate - CPG', 0)
-GO
-SET IDENTITY_INSERT [dbo].[ContactNumType] OFF
+    PRINT '<<< FAILED CREATING TABLE CompanyNumber >>>'
 GO
 
 /* 
@@ -180,7 +209,7 @@ CREATE TABLE ContactType(
     IsArchived       bit             DEFAULT 0 NOT NULL,
     CONSTRAINT PK_ContactType PRIMARY KEY CLUSTERED (ContactTypeID)
 )
-go
+GO
 
 
 
@@ -188,7 +217,7 @@ IF OBJECT_ID('ContactType') IS NOT NULL
     PRINT '<<< CREATED TABLE ContactType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE ContactType >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[ContactType] ON 
 GO
 INSERT [dbo].[ContactType] ([ContactTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (1, N'PRIMARY', 0, NULL, 1, N'Site Contact', 0)
@@ -223,7 +252,7 @@ CREATE TABLE CoreGroup(
     Caption        nvarchar(50)    NULL,
     CONSTRAINT PK_CoreGroup PRIMARY KEY CLUSTERED (CoreGroupID)
 )
-go
+GO
 
 
 
@@ -231,7 +260,7 @@ IF OBJECT_ID('CoreGroup') IS NOT NULL
     PRINT '<<< CREATED TABLE CoreGroup >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CoreGroup >>>'
-go
+GO
 --USE [FES]
 --GO
 SET IDENTITY_INSERT [dbo].[CoreGroup] ON 
@@ -259,10 +288,10 @@ CREATE TABLE CustAddress(
     Address          nvarchar(200)    NULL,
     CreatedOn        datetime         NULL,
     IsArchived       bit              DEFAULT 0 NOT NULL,
-    SortList         int              NULL,
+    StackOrder       int              NULL,
     CONSTRAINT PK_CustAddress PRIMARY KEY CLUSTERED (CustAddressID)
 )
-go
+GO
 
 
 
@@ -270,7 +299,7 @@ IF OBJECT_ID('CustAddress') IS NOT NULL
     PRINT '<<< CREATED TABLE CustAddress >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CustAddress >>>'
-go
+GO
 
 /* 
  * TABLE: CustContact 
@@ -283,11 +312,11 @@ CREATE TABLE CustContact(
     CreatedOn        datetime         NULL,
     Caption          nvarchar(128)    NULL,
     IsArchived       bit              DEFAULT 0 NOT NULL,
-    SortList         int              NULL,
+    StackOrder       int              NULL,
     ContactTypeID    int              NULL,
     CONSTRAINT PK_CustContact PRIMARY KEY CLUSTERED (CustContactID, CustomerID, HRID)
 )
-go
+GO
 
 
 
@@ -295,31 +324,7 @@ IF OBJECT_ID('CustContact') IS NOT NULL
     PRINT '<<< CREATED TABLE CustContact >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CustContact >>>'
-go
-
-/* 
- * TABLE: CustContactNum 
- */
-
-CREATE TABLE CustContactNum(
-    CustContactNumID    int             IDENTITY(1,1),
-    CustomerID          int             NULL,
-    ContactNum          nvarchar(64)    NULL,
-    CreatedOn           datetime        NULL,
-    IsArchived          bit             DEFAULT 0 NOT NULL,
-    SortList            int             NULL,
-    ContactNumTypeID    int             NULL,
-    CONSTRAINT PK_CustContactNum PRIMARY KEY CLUSTERED (CustContactNumID)
-)
-go
-
-
-
-IF OBJECT_ID('CustContactNum') IS NOT NULL
-    PRINT '<<< CREATED TABLE CustContactNum >>>'
-ELSE
-    PRINT '<<< FAILED CREATING TABLE CustContactNum >>>'
-go
+GO
 
 /* 
  * TABLE: CustEmail 
@@ -331,11 +336,11 @@ CREATE TABLE CustEmail(
     Email          nvarchar(128)    NULL,
     CreatedOn      datetime         NULL,
     IsArchived     bit              DEFAULT 0 NOT NULL,
-    SortList       int              NULL,
+    StackOrder     int              NULL,
     EmailTypeID    int              NULL,
     CONSTRAINT PK_CustEmail PRIMARY KEY CLUSTERED (CustEmailID)
 )
-go
+GO
 
 
 
@@ -343,7 +348,31 @@ IF OBJECT_ID('CustEmail') IS NOT NULL
     PRINT '<<< CREATED TABLE CustEmail >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CustEmail >>>'
-go
+GO
+
+/* 
+ * TABLE: CustNumber 
+ */
+
+CREATE TABLE CustNumber(
+    CustNumberID    int             IDENTITY(1,1),
+    CustomerID      int             NULL,
+    Number          nvarchar(64)    NULL,
+    CreatedOn       datetime        NULL,
+    IsArchived      bit             DEFAULT 0 NOT NULL,
+    StackOrder      int             NULL,
+    NumberTypeID    int             NULL,
+    CONSTRAINT PK_CustNumber PRIMARY KEY CLUSTERED (CustNumberID)
+)
+GO
+
+
+
+IF OBJECT_ID('CustNumber') IS NOT NULL
+    PRINT '<<< CREATED TABLE CustNumber >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE CustNumber >>>'
+GO
 
 /* 
  * TABLE: Customer 
@@ -362,7 +391,7 @@ CREATE TABLE Customer(
     IsArchived    bit             DEFAULT 0 NOT NULL,
     CONSTRAINT PK_Customer PRIMARY KEY CLUSTERED (CustomerID)
 )
-go
+GO
 
 
 
@@ -370,7 +399,7 @@ IF OBJECT_ID('Customer') IS NOT NULL
     PRINT '<<< CREATED TABLE Customer >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Customer >>>'
-go
+GO
 
 /* 
  * TABLE: CustSite 
@@ -381,6 +410,8 @@ CREATE TABLE CustSite(
     CustomerID       int         NOT NULL,
     SiteID           int         NOT NULL,
     CreatedOn        datetime    NULL,
+    ModifiedOn       datetime    NULL,
+    ModifiedBy       int         NULL,
     IsArchived       bit         DEFAULT 0 NOT NULL,
     IsEnabled        bit         DEFAULT 0 NOT NULL,
     SiteContactID    int         NULL,
@@ -390,7 +421,7 @@ CREATE TABLE CustSite(
     DoReseed         bit         DEFAULT 0 NOT NULL,
     CONSTRAINT PK_CustSite PRIMARY KEY CLUSTERED (CustSiteID, CustomerID, SiteID)
 )
-go
+GO
 
 
 
@@ -398,7 +429,7 @@ IF OBJECT_ID('CustSite') IS NOT NULL
     PRINT '<<< CREATED TABLE CustSite >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE CustSite >>>'
-go
+GO
 
 /* 
  * TABLE: EmailType 
@@ -414,7 +445,7 @@ CREATE TABLE EmailType(
     IsArchived     bit             DEFAULT 0 NOT NULL,
     CONSTRAINT PK_EmailType PRIMARY KEY CLUSTERED (EmailTypeID)
 )
-go
+GO
 
 
 
@@ -422,7 +453,7 @@ IF OBJECT_ID('EmailType') IS NOT NULL
     PRINT '<<< CREATED TABLE EmailType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE EmailType >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[EmailType] ON 
 GO
 INSERT [dbo].[EmailType] ([EmailTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (1, N'PRIMARY', 1, N'Work', 1, N'Seeking PO #', 0)
@@ -445,7 +476,7 @@ CREATE TABLE EquipBrand(
     Caption         nvarchar(50)    NULL,
     CONSTRAINT PK_EquipBrand PRIMARY KEY CLUSTERED (EquipBrandID)
 )
-go
+GO
 
 
 
@@ -453,7 +484,7 @@ IF OBJECT_ID('EquipBrand') IS NOT NULL
     PRINT '<<< CREATED TABLE EquipBrand >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE EquipBrand >>>'
-go
+GO
 
 /* 
  * TABLE: Equipment 
@@ -481,7 +512,7 @@ CREATE TABLE Equipment(
     HydrantTypeID        int             NULL,
     CONSTRAINT PK_Equipment PRIMARY KEY CLUSTERED (EquipmentID)
 )
-go
+GO
 
 
 
@@ -489,7 +520,7 @@ IF OBJECT_ID('Equipment') IS NOT NULL
     PRINT '<<< CREATED TABLE Equipment >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Equipment >>>'
-go
+GO
 
 /* 
  * TABLE: EquipType 
@@ -501,12 +532,12 @@ CREATE TABLE EquipType(
     ShortCaption       nvarchar(50)    NULL,
     MinorLifeCycle     float           NULL,
     MajorLifeCycle     float           NULL,
-    NumOfLevels        int             DEFAULT 2 NULL,
+    ServiceLevels      int             DEFAULT 2 NULL,
     ServiceInterval    float           NULL,
     CoreGroupID        int             NULL,
     CONSTRAINT PK_EquipType PRIMARY KEY CLUSTERED (EquipTypeID)
 )
-go
+GO
 
 
 
@@ -514,7 +545,7 @@ IF OBJECT_ID('EquipType') IS NOT NULL
     PRINT '<<< CREATED TABLE EquipType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE EquipType >>>'
-go
+GO
 --USE [FES]
 --GO
 SET IDENTITY_INSERT [dbo].[EquipType] ON 
@@ -559,7 +590,7 @@ CREATE TABLE Global(
     MaxPOS                      int               DEFAULT 5 NULL,
     CONSTRAINT PK_Global PRIMARY KEY CLUSTERED (GlobalID)
 )
-go
+GO
 
 
 
@@ -567,26 +598,27 @@ IF OBJECT_ID('Global') IS NOT NULL
     PRINT '<<< CREATED TABLE Global >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Global >>>'
-go
+GO
 
 /* 
  * TABLE: HR 
  */
 
 CREATE TABLE HR(
-    HRID                    int              IDENTITY(1,1),
-    LastName                nvarchar(256)    NULL,
-    FirstName               nvarchar(256)    NULL,
-    Note                    text             NULL,
-    DOB                     datetime         NULL,
-    UserLoginName           nvarchar(256)    NULL,
-    EmergencyContactHRID    int              NULL,
-    CreatedOn               datetime         NULL,
-    ModifiedOn              datetime         NULL,
-    IsArchived              bit              DEFAULT 0 NOT NULL,
+    HRID                    int             IDENTITY(1,1),
+    EmergencyContactHRID    int             NULL,
+    LastName                nvarchar(64)    NULL,
+    MiddleName              nvarchar(64)    NULL,
+    FirstName               nvarchar(64)    NULL,
+    Note                    text            NULL,
+    DOB                     datetime        NULL,
+    UserLoginName           nvarchar(64)    NULL,
+    CreatedOn               datetime        NULL,
+    ModifiedOn              datetime        NULL,
+    IsArchived              bit             DEFAULT 0 NOT NULL,
     CONSTRAINT PK_HR PRIMARY KEY CLUSTERED (HRID)
 )
-go
+GO
 
 
 
@@ -594,7 +626,7 @@ IF OBJECT_ID('HR') IS NOT NULL
     PRINT '<<< CREATED TABLE HR >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE HR >>>'
-go
+GO
 
 /* 
  * TABLE: HRAddress 
@@ -608,10 +640,10 @@ CREATE TABLE HRAddress(
     Address          nvarchar(200)    NULL,
     CreatedOn        datetime         NULL,
     IsArchived       bit              DEFAULT 0 NOT NULL,
-    SortList         int              NULL,
+    StackOrder       int              NULL,
     CONSTRAINT PK_HRAddress PRIMARY KEY CLUSTERED (HRAddressID)
 )
-go
+GO
 
 
 
@@ -619,31 +651,7 @@ IF OBJECT_ID('HRAddress') IS NOT NULL
     PRINT '<<< CREATED TABLE HRAddress >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE HRAddress >>>'
-go
-
-/* 
- * TABLE: HRContactNum 
- */
-
-CREATE TABLE HRContactNum(
-    HRContactNumID      int             IDENTITY(1,1),
-    HRID                int             NULL,
-    ContactNum          nvarchar(64)    NULL,
-    CreatedOn           datetime        NULL,
-    IsArchived          bit             DEFAULT 0 NOT NULL,
-    SortList            int             NULL,
-    ContactNumTypeID    int             NULL,
-    CONSTRAINT PK_HRContactNum PRIMARY KEY CLUSTERED (HRContactNumID)
-)
-go
-
-
-
-IF OBJECT_ID('HRContactNum') IS NOT NULL
-    PRINT '<<< CREATED TABLE HRContactNum >>>'
-ELSE
-    PRINT '<<< FAILED CREATING TABLE HRContactNum >>>'
-go
+GO
 
 /* 
  * TABLE: HREmail 
@@ -655,11 +663,11 @@ CREATE TABLE HREmail(
     Email          nvarchar(128)    NULL,
     CreatedOn      datetime         NULL,
     IsArchived     bit              DEFAULT 0 NOT NULL,
-    SortList       int              NULL,
+    StackOrder     int              NULL,
     EmailTypeID    int              NULL,
     CONSTRAINT PK_HREmail PRIMARY KEY CLUSTERED (HREmailID)
 )
-go
+GO
 
 
 
@@ -667,27 +675,31 @@ IF OBJECT_ID('HREmail') IS NOT NULL
     PRINT '<<< CREATED TABLE HREmail >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE HREmail >>>'
-go
+GO
 
 /* 
- * TABLE: HRZone 
+ * TABLE: HRNumber 
  */
 
-CREATE TABLE HRZone(
-    HRZoneID      int    IDENTITY(1,1),
-    HRID          int    NULL,
-    PostcodeID    int    NULL,
-    CONSTRAINT PK_HRZone PRIMARY KEY CLUSTERED (HRZoneID)
+CREATE TABLE HRNumber(
+    HRNumberID      int             IDENTITY(1,1),
+    HRID            int             NULL,
+    Number          nvarchar(64)    NULL,
+    CreatedOn       datetime        NULL,
+    IsArchived      bit             DEFAULT 0 NOT NULL,
+    StackOrder      int             NULL,
+    NumberTypeID    int             NULL,
+    CONSTRAINT PK_HRNumber PRIMARY KEY CLUSTERED (HRNumberID)
 )
-go
+GO
 
 
 
-IF OBJECT_ID('HRZone') IS NOT NULL
-    PRINT '<<< CREATED TABLE HRZone >>>'
+IF OBJECT_ID('HRNumber') IS NOT NULL
+    PRINT '<<< CREATED TABLE HRNumber >>>'
 ELSE
-    PRINT '<<< FAILED CREATING TABLE HRZone >>>'
-go
+    PRINT '<<< FAILED CREATING TABLE HRNumber >>>'
+GO
 
 /* 
  * TABLE: HydrantType 
@@ -699,7 +711,7 @@ CREATE TABLE HydrantType(
     ShortCaption     nvarchar(50)    NULL,
     CONSTRAINT PK_HydrantType PRIMARY KEY CLUSTERED (HydrantTypeID)
 )
-go
+GO
 
 
 
@@ -707,7 +719,7 @@ IF OBJECT_ID('HydrantType') IS NOT NULL
     PRINT '<<< CREATED TABLE HydrantType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE HydrantType >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[HydrantType] ON 
 GO
 INSERT [dbo].[HydrantType] ([HydrantTypeID], [Caption], [ShortCaption]) VALUES (1, N'Hydrant', N'HYD')
@@ -727,10 +739,12 @@ GO
 
 CREATE TABLE InspectionOrder(
     InspectionOrderID     int              IDENTITY(1,1),
+    Caption               nvarchar(64)     NULL,
     CreatedOn             datetime         NULL,
-    RequestedDT           datetime         NULL,
-    InspectedOn           datetime         NULL,
-    CompletedDT           datetime         NULL,
+    ModifiedOn            datetime         NULL,
+    ModifiedBy            int              NULL,
+    BookIN                datetime         NULL,
+    BookOUT               datetime         NULL,
     ServiceInterval       float            NULL,
     LevelNum              int              NULL,
     Note                  nvarchar(128)    NULL,
@@ -738,14 +752,19 @@ CREATE TABLE InspectionOrder(
     NoteElectrical        nvarchar(128)    NULL,
     NoteWaterBase         nvarchar(128)    NULL,
     NoteStructual         nvarchar(128)    NULL,
+    IsArchived            bit              DEFAULT 0 NOT NULL,
+    IsEnabled             bit              DEFAULT 0 NOT NULL,
+    IsPinned              bit              DEFAULT 0 NOT NULL,
+    TMSCaption            nvarchar(64)     NULL,
+    TMSNotes              text             NULL,
+    TMSImgIndx            int              NULL,
     InspectionStatusID    int              NULL,
-    HRID                  int              NULL,
     CustSiteID            int              NULL,
     CustomerID            int              NULL,
     SiteID                int              NULL,
     CONSTRAINT PK_InspectionOrder PRIMARY KEY CLUSTERED (InspectionOrderID)
 )
-go
+GO
 
 
 
@@ -753,20 +772,27 @@ IF OBJECT_ID('InspectionOrder') IS NOT NULL
     PRINT '<<< CREATED TABLE InspectionOrder >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE InspectionOrder >>>'
-go
+GO
 
 /* 
  * TABLE: InspectionStatus 
  */
 
 CREATE TABLE InspectionStatus(
-    InspectionStatusID    int              IDENTITY(1,1),
-    Caption               nvarchar(50)     NULL,
-    Description           nvarchar(128)    NULL,
-    StackOrder            int              NULL,
+    InspectionStatusID         int              IDENTITY(1,1),
+    Caption                    nvarchar(50)     NULL,
+    Description                nvarchar(128)    NULL,
+    StackOrder                 int              NULL,
+    TMSColor                   int              NULL,
+    TMSSelectedColor           int              NULL,
+    TMSCaptionColor            int              NULL,
+    TMSSelectedCaptionColor    int              NULL,
+    TMSTrackColor              int              NULL,
+    TMSSelectedTrackColor      int              NULL,
+    TMSLinkColor               int              NULL,
     CONSTRAINT PK_InspectionStatus PRIMARY KEY CLUSTERED (InspectionStatusID)
 )
-go
+GO
 
 
 
@@ -774,7 +800,7 @@ IF OBJECT_ID('InspectionStatus') IS NOT NULL
     PRINT '<<< CREATED TABLE InspectionStatus >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE InspectionStatus >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[InspectionStatus] ON 
 GO
 INSERT [dbo].[InspectionStatus] ([InspectionStatusID], [Caption], [Description], [StackOrder]) VALUES (1, N'Action', N'system. Don''t change field No.', 1)
@@ -794,6 +820,28 @@ GO
 SET IDENTITY_INSERT [dbo].[InspectionStatus] OFF
 GO
 
+/* 
+ * TABLE: InspectTime 
+ */
+
+CREATE TABLE InspectTime(
+    InspectTimeID        int         IDENTITY(1,1),
+    InspectionOrderID    int         NOT NULL,
+    HRID                 int         NOT NULL,
+    StartDT              datetime    NOT NULL,
+    EndDT                datetime    NULL,
+    CONSTRAINT PK283 PRIMARY KEY CLUSTERED (InspectTimeID, InspectionOrderID, HRID)
+)
+GO
+
+
+
+IF OBJECT_ID('InspectTime') IS NOT NULL
+    PRINT '<<< CREATED TABLE InspectTime >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE InspectTime >>>'
+GO
+
 
 /* 
  * TABLE: LightFormFactor 
@@ -805,7 +853,7 @@ CREATE TABLE LightFormFactor(
     ShortCaption         nvarchar(50)    NULL,
     CONSTRAINT PK_LightFormFactor PRIMARY KEY CLUSTERED (LightFormFactorID)
 )
-go
+GO
 
 
 
@@ -813,7 +861,7 @@ IF OBJECT_ID('LightFormFactor') IS NOT NULL
     PRINT '<<< CREATED TABLE LightFormFactor >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE LightFormFactor >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[LightFormFactor] ON 
 GO
 INSERT [dbo].[LightFormFactor] ([LightFormFactorID], [Caption], [ShortCaption]) VALUES (1, N'Fluro Batton', N'Batton')
@@ -835,7 +883,7 @@ CREATE TABLE LightLampType(
     ShortCaption       nvarchar(50)    NULL,
     CONSTRAINT PK_LightLampType PRIMARY KEY CLUSTERED (LightLampTypeID)
 )
-go
+GO
 
 
 
@@ -843,7 +891,7 @@ IF OBJECT_ID('LightLampType') IS NOT NULL
     PRINT '<<< CREATED TABLE LightLampType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE LightLampType >>>'
-go
+GO
 --USE [FES]
 --GO
 SET IDENTITY_INSERT [dbo].[LightLampType] ON 
@@ -867,7 +915,7 @@ CREATE TABLE LightType(
     ShortCaption    nvarchar(50)    NULL,
     CONSTRAINT PK_LightType PRIMARY KEY CLUSTERED (LightTypeID)
 )
-go
+GO
 
 
 
@@ -875,7 +923,7 @@ IF OBJECT_ID('LightType') IS NOT NULL
     PRINT '<<< CREATED TABLE LightType >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE LightType >>>'
-go
+GO
 --USE [FES]
 --GO
 SET IDENTITY_INSERT [dbo].[LightType] ON 
@@ -901,7 +949,7 @@ CREATE TABLE Log(
     LogErrLevelID    int              NULL,
     CONSTRAINT PK_Log PRIMARY KEY CLUSTERED (LogID)
 )
-go
+GO
 
 
 
@@ -909,7 +957,7 @@ IF OBJECT_ID('Log') IS NOT NULL
     PRINT '<<< CREATED TABLE Log >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Log >>>'
-go
+GO
 
 /* 
  * TABLE: LogCaller 
@@ -920,7 +968,7 @@ CREATE TABLE LogCaller(
     Caption        nvarchar(50)    NULL,
     CONSTRAINT PK_LogCaller PRIMARY KEY CLUSTERED (LogCallerID)
 )
-go
+GO
 
 
 
@@ -928,7 +976,7 @@ IF OBJECT_ID('LogCaller') IS NOT NULL
     PRINT '<<< CREATED TABLE LogCaller >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE LogCaller >>>'
-go
+GO
 
 /* 
  * TABLE: LogErrLevel 
@@ -939,7 +987,7 @@ CREATE TABLE LogErrLevel(
     Caption          nvarchar(50)    NULL,
     CONSTRAINT PK_LogErrLevel PRIMARY KEY CLUSTERED (LogErrLevelID)
 )
-go
+GO
 
 
 
@@ -947,7 +995,47 @@ IF OBJECT_ID('LogErrLevel') IS NOT NULL
     PRINT '<<< CREATED TABLE LogErrLevel >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE LogErrLevel >>>'
-go
+GO
+
+/* 
+ * TABLE: NumberType 
+ */
+
+CREATE TABLE NumberType(
+    NumberTypeID    int             IDENTITY(1,1),
+    Caption         nvarchar(50)    NULL,
+    UsedByHR        bit             DEFAULT 0 NOT NULL,
+    AliasHR         nvarchar(50)    NULL,
+    UsedByCust      bit             DEFAULT 0 NOT NULL,
+    AliasCust       nvarchar(50)    NULL,
+    IsArchived      bit             DEFAULT 0 NOT NULL,
+    CONSTRAINT PK_NumberType PRIMARY KEY CLUSTERED (NumberTypeID)
+)
+GO
+
+
+
+IF OBJECT_ID('NumberType') IS NOT NULL
+    PRINT '<<< CREATED TABLE NumberType >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE NumberType >>>'
+GO
+SET IDENTITY_INSERT [dbo].[ContactNumType] ON 
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (1, N'PRIMARY', 1, N'Mobile', 1, N'Business', 0)
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (2, N'SECONDARY', 1, N'Work', 1, N'Accounts', 0)
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (3, N'3rd', 1, N'Home', 1, N'General Enquires', 0)
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (4, N'4th', 1, N'Real Estate', 1, N'Real Estate fnCOM', 0)
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (5, NULL, 0, NULL, 1, N'Landlord', 0)
+GO
+INSERT [dbo].[ContactNumType] ([ContactNumTypeID], [Caption], [UsedByHR], [AliasHR], [UsedByCust], [AliasCust], [IsArchived]) VALUES (6, NULL, 0, NULL, 1, N'Real Estate - CPG', 0)
+GO
+SET IDENTITY_INSERT [dbo].[ContactNumType] OFF
+GO
 
 /* 
  * TABLE: Postcode 
@@ -964,7 +1052,7 @@ CREATE TABLE Postcode(
     Zone          nvarchar(50)    NULL,
     CONSTRAINT PK_Postcode PRIMARY KEY CLUSTERED (PostcodeID)
 )
-go
+GO
 
 
 
@@ -972,7 +1060,7 @@ IF OBJECT_ID('Postcode') IS NOT NULL
     PRINT '<<< CREATED TABLE Postcode >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Postcode >>>'
-go
+GO
 
 /* 
  * TABLE: PowerBoard 
@@ -987,7 +1075,7 @@ CREATE TABLE PowerBoard(
     SiteID           int              NULL,
     CONSTRAINT PK_PowerBoard PRIMARY KEY CLUSTERED (PowerBoardID)
 )
-go
+GO
 
 
 
@@ -995,7 +1083,7 @@ IF OBJECT_ID('PowerBoard') IS NOT NULL
     PRINT '<<< CREATED TABLE PowerBoard >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE PowerBoard >>>'
-go
+GO
 
 /* 
  * TABLE: Role 
@@ -1008,7 +1096,7 @@ CREATE TABLE Role(
     IsArchived    bit              DEFAULT 0 NOT NULL,
     CONSTRAINT PK_Role PRIMARY KEY CLUSTERED (RoleID)
 )
-go
+GO
 
 
 
@@ -1016,7 +1104,7 @@ IF OBJECT_ID('Role') IS NOT NULL
     PRINT '<<< CREATED TABLE Role >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Role >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[Role] ON 
 GO
 INSERT [dbo].[Role] ([RoleID], [Caption], [Note], [IsArchived]) VALUES (1, N'IDFES Technician', N'Inspects and services customer equipment', 0)
@@ -1045,7 +1133,7 @@ CREATE TABLE RoleList(
     CreatedOn     datetime    NULL,
     CONSTRAINT PK_RoleList PRIMARY KEY CLUSTERED (RoleListID, HRID, RoleID)
 )
-go
+GO
 
 
 
@@ -1053,7 +1141,7 @@ IF OBJECT_ID('RoleList') IS NOT NULL
     PRINT '<<< CREATED TABLE RoleList >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE RoleList >>>'
-go
+GO
 
 /* 
  * TABLE: Site 
@@ -1068,7 +1156,7 @@ CREATE TABLE Site(
     PostcodeID    int               NULL,
     CONSTRAINT PK_Site PRIMARY KEY CLUSTERED (SiteID)
 )
-go
+GO
 
 
 
@@ -1076,7 +1164,7 @@ IF OBJECT_ID('Site') IS NOT NULL
     PRINT '<<< CREATED TABLE Site >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Site >>>'
-go
+GO
 
 /* 
  * TABLE: Station 
@@ -1096,7 +1184,7 @@ CREATE TABLE Station(
     EquipmentID      int              NULL,
     CONSTRAINT PK_Station PRIMARY KEY CLUSTERED (StationID)
 )
-go
+GO
 
 
 
@@ -1104,7 +1192,7 @@ IF OBJECT_ID('Station') IS NOT NULL
     PRINT '<<< CREATED TABLE Station >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Station >>>'
-go
+GO
 
 /* 
  * TABLE: SurveyOrder 
@@ -1124,7 +1212,7 @@ CREATE TABLE SurveyOrder(
     SiteID            int         NULL,
     CONSTRAINT PK_SurveyOrder PRIMARY KEY CLUSTERED (SurveyOrderID)
 )
-go
+GO
 
 
 
@@ -1132,7 +1220,7 @@ IF OBJECT_ID('SurveyOrder') IS NOT NULL
     PRINT '<<< CREATED TABLE SurveyOrder >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE SurveyOrder >>>'
-go
+GO
 
 /* 
  * TABLE: SurveyStatus 
@@ -1145,7 +1233,7 @@ CREATE TABLE SurveyStatus(
     StackOrder        int              NULL,
     CONSTRAINT PK_SurveyStatus PRIMARY KEY CLUSTERED (SurveyStatusID)
 )
-go
+GO
 
 
 
@@ -1153,7 +1241,7 @@ IF OBJECT_ID('SurveyStatus') IS NOT NULL
     PRINT '<<< CREATED TABLE SurveyStatus >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE SurveyStatus >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[SurveyStatus] ON 
 GO
 INSERT [dbo].[SurveyStatus] ([SurveyStatusID], [Caption], [Description], [StackOrder]) VALUES (1, N'Action', N'system. Don''t change field No.', NULL)
@@ -1188,7 +1276,7 @@ CREATE TABLE Test(
     TestB                int              NULL,
     CONSTRAINT PK_Test PRIMARY KEY CLUSTERED (TestID)
 )
-go
+GO
 
 
 
@@ -1196,7 +1284,7 @@ IF OBJECT_ID('Test') IS NOT NULL
     PRINT '<<< CREATED TABLE Test >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE Test >>>'
-go
+GO
 
 /* 
  * TABLE: TestAction 
@@ -1207,7 +1295,7 @@ CREATE TABLE TestAction(
     Caption         nvarchar(50)    NULL,
     CONSTRAINT PK_TestAction PRIMARY KEY CLUSTERED (TestActionID)
 )
-go
+GO
 
 
 
@@ -1215,7 +1303,7 @@ IF OBJECT_ID('TestAction') IS NOT NULL
     PRINT '<<< CREATED TABLE TestAction >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE TestAction >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[TestAction] ON 
 GO
 INSERT [dbo].[TestAction] ([TestActionID], [Caption]) VALUES (1, N'Repair')
@@ -1236,7 +1324,7 @@ CREATE TABLE TestLifeCycle(
     Caption            nvarchar(50)    NULL,
     CONSTRAINT PK_TestLifeCycle PRIMARY KEY CLUSTERED (TestLifeCycleID)
 )
-go
+GO
 
 
 
@@ -1244,7 +1332,7 @@ IF OBJECT_ID('TestLifeCycle') IS NOT NULL
     PRINT '<<< CREATED TABLE TestLifeCycle >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE TestLifeCycle >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[TestLifeCycle] ON 
 GO
 INSERT [dbo].[TestLifeCycle] ([TestLifeCycleID], [Caption]) VALUES (1, N'Minor')
@@ -1264,7 +1352,7 @@ CREATE TABLE TestResult(
     ShortCaption    nvarchar(50)    NULL,
     CONSTRAINT PK_TestResult PRIMARY KEY CLUSTERED (TestResultID)
 )
-go
+GO
 
 
 
@@ -1272,7 +1360,7 @@ IF OBJECT_ID('TestResult') IS NOT NULL
     PRINT '<<< CREATED TABLE TestResult >>>'
 ELSE
     PRINT '<<< FAILED CREATING TABLE TestResult >>>'
-go
+GO
 SET IDENTITY_INSERT [dbo].[TestResult] ON 
 GO
 INSERT [dbo].[TestResult] ([TestResultID], [Caption], [ShortCaption]) VALUES (1, N'-', N'-')
@@ -1285,23 +1373,68 @@ SET IDENTITY_INSERT [dbo].[TestResult] OFF
 GO
 
 /* 
+ * TABLE: CompanyAddress 
+ */
+
+ALTER TABLE CompanyAddress ADD CONSTRAINT AddressTypeCompanyAddress 
+    FOREIGN KEY (AddressTypeID)
+    REFERENCES AddressType(AddressTypeID)
+GO
+
+ALTER TABLE CompanyAddress ADD CONSTRAINT CompanyInfoCompanyAddress 
+    FOREIGN KEY (CompanyInfoID)
+    REFERENCES CompanyInfo(CompanyInfoID)
+GO
+
+
+/* 
+ * TABLE: CompanyEmail 
+ */
+
+ALTER TABLE CompanyEmail ADD CONSTRAINT CompanyInfoCompanyEmail 
+    FOREIGN KEY (CompanyInfoID)
+    REFERENCES CompanyInfo(CompanyInfoID)
+GO
+
+ALTER TABLE CompanyEmail ADD CONSTRAINT EmailTypeCompanyEmail 
+    FOREIGN KEY (EmailTypeID)
+    REFERENCES EmailType(EmailTypeID)
+GO
+
+
+/* 
  * TABLE: CompanyInfo 
  */
 
 ALTER TABLE CompanyInfo ADD CONSTRAINT GlobalCompanyInfo 
     FOREIGN KEY (GlobalID)
     REFERENCES Global(GlobalID)
-go
+GO
 
-ALTER TABLE CompanyInfo ADD CONSTRAINT PostcodeCompanyI53 
-    FOREIGN KEY (PostalPostcodeID)
-    REFERENCES Postcode(PostcodeID)
-go
-
-ALTER TABLE CompanyInfo ADD CONSTRAINT PostcodeCompanyInfo 
+ALTER TABLE CompanyInfo ADD CONSTRAINT PostcodeCompanyIinfo 
     FOREIGN KEY (PostcodeID)
     REFERENCES Postcode(PostcodeID)
-go
+GO
+
+ALTER TABLE CompanyInfo ADD CONSTRAINT PostcodeCompanyInfoPostal 
+    FOREIGN KEY (PostalPostcodeID)
+    REFERENCES Postcode(PostcodeID)
+GO
+
+
+/* 
+ * TABLE: CompanyNumber 
+ */
+
+ALTER TABLE CompanyNumber ADD CONSTRAINT CompanyInfoCompanyNumber 
+    FOREIGN KEY (CompanyInfoID)
+    REFERENCES CompanyInfo(CompanyInfoID)
+GO
+
+ALTER TABLE CompanyNumber ADD CONSTRAINT NumberTypeCompanyNumber 
+    FOREIGN KEY (NumberTypeID)
+    REFERENCES NumberType(NumberTypeID)
+GO
 
 
 /* 
@@ -1311,17 +1444,17 @@ go
 ALTER TABLE CustAddress ADD CONSTRAINT AddressTypeCustAddress 
     FOREIGN KEY (AddressTypeID)
     REFERENCES AddressType(AddressTypeID)
-go
+GO
 
 ALTER TABLE CustAddress ADD CONSTRAINT CustomerCustAddress 
     FOREIGN KEY (CustomerID)
     REFERENCES Customer(CustomerID)
-go
+GO
 
 ALTER TABLE CustAddress ADD CONSTRAINT PostcodeCustAddress 
     FOREIGN KEY (PostcodeID)
     REFERENCES Postcode(PostcodeID)
-go
+GO
 
 
 /* 
@@ -1331,32 +1464,17 @@ go
 ALTER TABLE CustContact ADD CONSTRAINT ContactTypeCustContact 
     FOREIGN KEY (ContactTypeID)
     REFERENCES ContactType(ContactTypeID)
-go
+GO
 
 ALTER TABLE CustContact ADD CONSTRAINT CustomerCustContact 
     FOREIGN KEY (CustomerID)
     REFERENCES Customer(CustomerID)
-go
+GO
 
 ALTER TABLE CustContact ADD CONSTRAINT HRCustContact 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID)
-go
-
-
-/* 
- * TABLE: CustContactNum 
- */
-
-ALTER TABLE CustContactNum ADD CONSTRAINT ContactNumTypeCustContactNum 
-    FOREIGN KEY (ContactNumTypeID)
-    REFERENCES ContactNumType(ContactNumTypeID)
-go
-
-ALTER TABLE CustContactNum ADD CONSTRAINT CustomerCustContactNum 
-    FOREIGN KEY (CustomerID)
-    REFERENCES Customer(CustomerID)
-go
+GO
 
 
 /* 
@@ -1366,12 +1484,27 @@ go
 ALTER TABLE CustEmail ADD CONSTRAINT CustomerCustEmail 
     FOREIGN KEY (CustomerID)
     REFERENCES Customer(CustomerID)
-go
+GO
 
 ALTER TABLE CustEmail ADD CONSTRAINT EmailTypeCustEmail 
     FOREIGN KEY (EmailTypeID)
     REFERENCES EmailType(EmailTypeID)
-go
+GO
+
+
+/* 
+ * TABLE: CustNumber 
+ */
+
+ALTER TABLE CustNumber ADD CONSTRAINT CustomerCustNumber 
+    FOREIGN KEY (CustomerID)
+    REFERENCES Customer(CustomerID)
+GO
+
+ALTER TABLE CustNumber ADD CONSTRAINT NumberTypeCustNumber 
+    FOREIGN KEY (NumberTypeID)
+    REFERENCES NumberType(NumberTypeID)
+GO
 
 
 /* 
@@ -1381,17 +1514,17 @@ go
 ALTER TABLE CustSite ADD CONSTRAINT CustomerCustSite 
     FOREIGN KEY (CustomerID)
     REFERENCES Customer(CustomerID)
-go
+GO
 
 ALTER TABLE CustSite ADD CONSTRAINT HRCustSite 
     FOREIGN KEY (SiteContactID)
     REFERENCES HR(HRID)
-go
+GO
 
 ALTER TABLE CustSite ADD CONSTRAINT SiteCustSite 
     FOREIGN KEY (SiteID)
     REFERENCES Site(SiteID)
-go
+GO
 
 
 /* 
@@ -1401,37 +1534,37 @@ go
 ALTER TABLE Equipment ADD CONSTRAINT ChemicalTypeEquipment 
     FOREIGN KEY (ChemicalTypeID)
     REFERENCES ChemicalType(ChemicalTypeID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT EquipBrandEquipment 
     FOREIGN KEY (EquipBrandID)
     REFERENCES EquipBrand(EquipBrandID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT EquipTypeEquipment 
     FOREIGN KEY (EquipTypeID)
     REFERENCES EquipType(EquipTypeID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT HydrantTypeEquipment 
     FOREIGN KEY (HydrantTypeID)
     REFERENCES HydrantType(HydrantTypeID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT LightFormFactorEquipment 
     FOREIGN KEY (LightFormFactorID)
     REFERENCES LightFormFactor(LightFormFactorID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT LightLampTypeEquipment 
     FOREIGN KEY (LightLampTypeID)
     REFERENCES LightLampType(LightLampTypeID)
-go
+GO
 
 ALTER TABLE Equipment ADD CONSTRAINT LightTypeEquipment 
     FOREIGN KEY (LightTypeID)
     REFERENCES LightType(LightTypeID)
-go
+GO
 
 
 /* 
@@ -1441,7 +1574,17 @@ go
 ALTER TABLE EquipType ADD CONSTRAINT CoreGroupEquipType 
     FOREIGN KEY (CoreGroupID)
     REFERENCES CoreGroup(CoreGroupID)
-go
+GO
+
+
+/* 
+ * TABLE: HR 
+ */
+
+ALTER TABLE HR ADD CONSTRAINT RefHR496 
+    FOREIGN KEY (EmergencyContactHRID)
+    REFERENCES HR(HRID)
+GO
 
 
 /* 
@@ -1451,32 +1594,17 @@ go
 ALTER TABLE HRAddress ADD CONSTRAINT AddressTypeHRAddress 
     FOREIGN KEY (AddressTypeID)
     REFERENCES AddressType(AddressTypeID)
-go
+GO
 
 ALTER TABLE HRAddress ADD CONSTRAINT HRHRAddress 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID)
-go
+GO
 
 ALTER TABLE HRAddress ADD CONSTRAINT PostcodeHRAddress 
     FOREIGN KEY (PostcodeID)
     REFERENCES Postcode(PostcodeID)
-go
-
-
-/* 
- * TABLE: HRContactNum 
- */
-
-ALTER TABLE HRContactNum ADD CONSTRAINT ContactNumTypeHRContactNum 
-    FOREIGN KEY (ContactNumTypeID)
-    REFERENCES ContactNumType(ContactNumTypeID)
-go
-
-ALTER TABLE HRContactNum ADD CONSTRAINT HRHRContactNum 
-    FOREIGN KEY (HRID)
-    REFERENCES HR(HRID)
-go
+GO
 
 
 /* 
@@ -1486,27 +1614,27 @@ go
 ALTER TABLE HREmail ADD CONSTRAINT EmailTypeHREmail 
     FOREIGN KEY (EmailTypeID)
     REFERENCES EmailType(EmailTypeID)
-go
+GO
 
 ALTER TABLE HREmail ADD CONSTRAINT HRHREmail 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID)
-go
+GO
 
 
 /* 
- * TABLE: HRZone 
+ * TABLE: HRNumber 
  */
 
-ALTER TABLE HRZone ADD CONSTRAINT HRHRZone 
+ALTER TABLE HRNumber ADD CONSTRAINT HRHRNumber 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID)
-go
+GO
 
-ALTER TABLE HRZone ADD CONSTRAINT PostcodeHRZone 
-    FOREIGN KEY (PostcodeID)
-    REFERENCES Postcode(PostcodeID)
-go
+ALTER TABLE HRNumber ADD CONSTRAINT NumberTypeHRNumber 
+    FOREIGN KEY (NumberTypeID)
+    REFERENCES NumberType(NumberTypeID)
+GO
 
 
 /* 
@@ -1516,17 +1644,27 @@ go
 ALTER TABLE InspectionOrder ADD CONSTRAINT CustSiteInspectionOrder 
     FOREIGN KEY (CustSiteID, CustomerID, SiteID)
     REFERENCES CustSite(CustSiteID, CustomerID, SiteID)
-go
-
-ALTER TABLE InspectionOrder ADD CONSTRAINT HRInspectionOrder 
-    FOREIGN KEY (HRID)
-    REFERENCES HR(HRID)
-go
+GO
 
 ALTER TABLE InspectionOrder ADD CONSTRAINT InspectionStatusInspectionOrder 
     FOREIGN KEY (InspectionStatusID)
     REFERENCES InspectionStatus(InspectionStatusID)
-go
+GO
+
+
+/* 
+ * TABLE: InspectTime 
+ */
+
+ALTER TABLE InspectTime ADD CONSTRAINT HRInspectTime 
+    FOREIGN KEY (HRID)
+    REFERENCES HR(HRID)
+GO
+
+ALTER TABLE InspectTime ADD CONSTRAINT InpectionOrderIDHRID 
+    FOREIGN KEY (InspectionOrderID)
+    REFERENCES InspectionOrder(InspectionOrderID)
+GO
 
 
 /* 
@@ -1536,17 +1674,17 @@ go
 ALTER TABLE Log ADD CONSTRAINT CompanyInfoLog 
     FOREIGN KEY (CompanyInfoID)
     REFERENCES CompanyInfo(CompanyInfoID)
-go
+GO
 
 ALTER TABLE Log ADD CONSTRAINT LogCallerLog 
     FOREIGN KEY (LogCallerID)
     REFERENCES LogCaller(LogCallerID)
-go
+GO
 
 ALTER TABLE Log ADD CONSTRAINT LogErrLevelLog 
     FOREIGN KEY (LogErrLevelID)
     REFERENCES LogErrLevel(LogErrLevelID)
-go
+GO
 
 
 /* 
@@ -1556,7 +1694,7 @@ go
 ALTER TABLE PowerBoard ADD CONSTRAINT SitePowerBoard 
     FOREIGN KEY (SiteID)
     REFERENCES Site(SiteID)
-go
+GO
 
 
 /* 
@@ -1566,12 +1704,12 @@ go
 ALTER TABLE RoleList ADD CONSTRAINT HRRoleList 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID) ON DELETE CASCADE
-go
+GO
 
 ALTER TABLE RoleList ADD CONSTRAINT RoleRoleList 
     FOREIGN KEY (RoleID)
     REFERENCES Role(RoleID)
-go
+GO
 
 
 /* 
@@ -1581,7 +1719,7 @@ go
 ALTER TABLE Site ADD CONSTRAINT PostcodeSite 
     FOREIGN KEY (PostcodeID)
     REFERENCES Postcode(PostcodeID)
-go
+GO
 
 
 /* 
@@ -1591,12 +1729,12 @@ go
 ALTER TABLE Station ADD CONSTRAINT EquipmentStation 
     FOREIGN KEY (EquipmentID)
     REFERENCES Equipment(EquipmentID)
-go
+GO
 
 ALTER TABLE Station ADD CONSTRAINT SiteStation 
     FOREIGN KEY (SiteID)
     REFERENCES Site(SiteID)
-go
+GO
 
 
 /* 
@@ -1606,17 +1744,17 @@ go
 ALTER TABLE SurveyOrder ADD CONSTRAINT CustSiteSurveyOrder 
     FOREIGN KEY (CustSiteID, CustomerID, SiteID)
     REFERENCES CustSite(CustSiteID, CustomerID, SiteID)
-go
+GO
 
 ALTER TABLE SurveyOrder ADD CONSTRAINT HRSurveyOrder 
     FOREIGN KEY (HRID)
     REFERENCES HR(HRID)
-go
+GO
 
 ALTER TABLE SurveyOrder ADD CONSTRAINT SurveyStatusSurveyOrder 
     FOREIGN KEY (SurveyStatusID)
     REFERENCES SurveyStatus(SurveyStatusID)
-go
+GO
 
 
 /* 
@@ -1626,32 +1764,32 @@ go
 ALTER TABLE Test ADD CONSTRAINT EquipmentTest 
     FOREIGN KEY (EquipmentID)
     REFERENCES Equipment(EquipmentID)
-go
+GO
 
 ALTER TABLE Test ADD CONSTRAINT InspectionOrderTest 
     FOREIGN KEY (InspectionOrderID)
     REFERENCES InspectionOrder(InspectionOrderID)
-go
+GO
 
 ALTER TABLE Test ADD CONSTRAINT TestActionTest 
     FOREIGN KEY (TestActionID)
     REFERENCES TestAction(TestActionID)
-go
+GO
 
 ALTER TABLE Test ADD CONSTRAINT TestLifeCycleTest 
     FOREIGN KEY (TestLifeCycleID)
     REFERENCES TestLifeCycle(TestLifeCycleID)
-go
+GO
 
-ALTER TABLE Test ADD CONSTRAINT TestResultT33 
-    FOREIGN KEY (TestB)
-    REFERENCES TestResult(TestResultID)
-go
-
-ALTER TABLE Test ADD CONSTRAINT TestResultTest 
+ALTER TABLE Test ADD CONSTRAINT TestResultTestA 
     FOREIGN KEY (TestA)
     REFERENCES TestResult(TestResultID)
-go
+GO
+
+ALTER TABLE Test ADD CONSTRAINT TestResultTestB 
+    FOREIGN KEY (TestB)
+    REFERENCES TestResult(TestResultID)
+GO
 
 
 /* 
@@ -1723,12 +1861,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetCustAddressID') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetCustAddressID >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetCustAddressID >>>'
-go
+GO
 
 
 /* 
@@ -1829,12 +1967,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetCustAddrMultiLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetCustAddrMultiLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetCustAddrMultiLine >>>'
-go
+GO
 
 
 /* 
@@ -1941,12 +2079,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetCustAddrSingleLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetCustAddrSingleLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetCustAddrSingleLine >>>'
-go
+GO
 
 
 /* 
@@ -2019,103 +2157,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetCustContactID') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetCustContactID >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetCustContactID >>>'
-go
-
-
-/* 
- * FUNCTION: GetCustContactNum 
- */
-
-USE [IDFES]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetCustContactNum]    Script Date: 16/01/2022 1:04:23 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Ben Ambrose
--- Create date: 25/12/2021
--- Description:	Returns the 'best' customer AddressID
--- =============================================
-CREATE OR ALTER  FUNCTION [dbo].[GetCustContactNum] (
-	-- Add the parameters for the function here
-	@CustomerID INT
-	)
-RETURNS NVARCHAR(64)
-AS
-BEGIN
-	-- Declare the return variable here
-	-- Don't forget to assign the size of the NVARCHAR else result will only hold one charcter 
-	DECLARE @Result NVARCHAR(64)
-
-	-- DEFAULT :: NULLSTRING
-	SET @Result = '';
-
-	-- TRAP BAD CUSTOMER ID
-	IF @CustomerID IS NULL
-		OR @CustomerID = 0
-		RETURN @Result;
-
-	-- CTE table - TmpA 
-	WITH TmpA
-	AS (
-		SELECT dbo.CustContactNum.CustContactNumID
-			,dbo.CustContactNum.CustomerID
-			,dbo.CustContactNum.SortList
-			,dbo.CustContactNum.ContactNumTypeID
-			,dbo.CustContactNum.CreatedOn
-			,dbo.CustContactNum.ContactNum
-			,dbo.CustContactNum.IsArchived
-		FROM dbo.CustContactNum
-		WHERE (
-				(dbo.CustContactNum.CustomerID = @CustomerID)
-				AND (dbo.CustContactNum.ContactNum IS NOT NULL)
-				AND (dbo.CustContactNum.IsArchived <> 1)
-				)
-		)
-	-- Add the T-SQL statements to compute the return value here
-	SELECT TOP 1 @Result = (TmpA.ContactNum)
-	FROM TmpA
-	ORDER BY
-		-- GROUP ON Cust - REDUNDANT
-		CustomerID ASC
-		-- User custom sorts the contact numbers by priority NULL LAST
-		,CASE 
-			WHEN SortList IS NULL
-				THEN 0
-			ELSE 1
-			END DESC
-		,SortList ASC
-		-- The primary number has preference NULL LAST
-		,CASE 
-			WHEN ContactNumTypeID IS NULL
-				THEN 0
-			ELSE 1
-			END DESC
-		,ContactNumTypeID ASC
-		-- Last resort - date created
-		,CreatedOn DESC
-
-	-- Return the result of the function
-	RETURN @Result
-END
-GO
-
-
-
-go
-IF OBJECT_ID('GetCustContactNum') IS NOT NULL
-    PRINT '<<< CREATED FUNCTION GetCustContactNum >>>'
-ELSE
-    PRINT '<<< FAILED CREATING FUNCTION GetCustContactNum >>>'
-go
 
 
 /* 
@@ -2200,23 +2247,25 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetCustEmail') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetCustEmail >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetCustEmail >>>'
-go
+GO
 
 
 /* 
- * FUNCTION: GetCustSiteContactSingleLine 
+ * FUNCTION: GetCustNumber 
  */
 
 USE [IDFES]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetCustSiteContactSingleLine]    Script Date: 16/01/2022 1:04:23 PM ******/
+
+/****** Object:  UserDefinedFunction [dbo].[GetCustNumber]    Script Date: 01/04/24 10:10:02 AM ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -2224,60 +2273,66 @@ GO
 -- =============================================
 -- Author:		Ben Ambrose
 -- Create date: 25/12/2021
--- Description:	Get the site's contact name and number
--- returns MAX 96 CHARs
+-- Description:	Returns the 'best' customer AddressID
 -- =============================================
-CREATE OR ALTER FUNCTION [dbo].[GetCustSiteContactSingleLine] (
+CREATE FUNCTION [GetCustNumber] (
 	-- Add the parameters for the function here
-	@CustSiteID INT
-	-- default : display contact's number
-	, @DoHRContactNum BIT = 1
+	@CustomerID INT
 	)
-RETURNS NVARCHAR(96)
+RETURNS NVARCHAR(64)
 AS
 BEGIN
-	DECLARE @Result NVARCHAR(96);
+	-- Declare the return variable here
+	-- Don't forget to assign the size of the NVARCHAR else result will only hold one charcter 
+	DECLARE @Result NVARCHAR(64)
 
+	-- DEFAULT :: NULLSTRING
 	SET @Result = '';
 
 	-- TRAP BAD CUSTOMER ID
-	IF @CustSiteID IS NULL
-		OR @CustSiteID = 0
+	IF @CustomerID IS NULL
+		OR @CustomerID = 0
 		RETURN @Result;
 
 	-- CTE table - TmpA 
 	WITH TmpA
 	AS (
-		SELECT CustSite.CustSiteID
-			,CustSite.SiteContactID
-			,CONCAT (
-				HR.FirstName
-				,' '
-				,UPPER(HR.LastName)
-				) AS FName
-			,dbo.GetHRContactNum(CustSite.SiteContactID) AS SiteContactNum
-		FROM CustSite
-		INNER JOIN HR ON CustSite.SiteContactID = HR.HRID
-		WHERE CustSite.SiteContactID IS NOT NULL AND CustSite.CustSiteID = @CustSiteID
+		SELECT dbo.CustNumber.CustNumberID
+			,dbo.CustNumber.CustomerID
+			,dbo.CustNumber.StackOrder
+			,dbo.CustNumber.NumberTypeID
+			,dbo.CustNumber.CreatedOn
+			,dbo.CustNumber.Number
+			,dbo.CustNumber.IsArchived
+		FROM dbo.CustNumber
+		WHERE (
+				(dbo.CustNumber.CustomerID = @CustomerID)
+				AND (dbo.CustNumber.Number IS NOT NULL)
+				AND (dbo.CustNumber.IsArchived <> 1)
+				)
 		)
 	-- Add the T-SQL statements to compute the return value here
-		SELECT TOP 1 @Result = (
-				SUBSTRING(CASE 
-						WHEN FName IS NULL
-							THEN ''
-						ELSE CASE 
-								WHEN LEN(SiteContactNum) > 0
-									THEN CONCAT (
-											TmpA.FName
-											,' '
-											,IIF(@DoHRContactNum = 1, ' (' + TmpA.SiteContactNum + ')', '')
-											)
-								ELSE TmpA.FName
-								END
-						END, 1, 96)
-				)
-
+	SELECT TOP 1 @Result = (TmpA.Number)
 	FROM TmpA
+	ORDER BY
+		-- GROUP ON Cust - REDUNDANT
+		CustomerID ASC
+		-- User custom sorts the contact numbers by priority NULL LAST
+		,CASE 
+			WHEN StackOrder IS NULL
+				THEN 0
+			ELSE 1
+			END DESC
+		,StackOrder ASC
+		-- The primary number has preference NULL LAST
+		,CASE 
+			WHEN NumberTypeID IS NULL
+				THEN 0
+			ELSE 1
+			END DESC
+		,NumberTypeID ASC
+		-- Last resort - date created
+		,CreatedOn DESC
 
 	-- Return the result of the function
 	RETURN @Result
@@ -2286,12 +2341,106 @@ GO
 
 
 
-go
-IF OBJECT_ID('GetCustSiteContactSingleLine') IS NOT NULL
-    PRINT '<<< CREATED FUNCTION GetCustSiteContactSingleLine >>>'
+
+
+GO
+IF OBJECT_ID('GetCustNumber') IS NOT NULL
+    PRINT '<<< CREATED FUNCTION GetCustNumber >>>'
 ELSE
-    PRINT '<<< FAILED CREATING FUNCTION GetCustSiteContactSingleLine >>>'
-go
+    PRINT '<<< FAILED CREATING FUNCTION GetCustNumber >>>'
+GO
+
+
+/* 
+ * FUNCTION: GetCustSiteHRSingleLine 
+ */
+
+USE [IDFES]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].GetCustSiteHRSingleLine    Script Date: 01/04/24 10:33:00 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Ben Ambrose
+-- Create date: 25/12/2021
+-- Description:	Get the site's contact name and number
+-- returns MAX 96 CHARs
+-- =============================================
+CREATE FUNCTION GetCustSiteHRSingleLine
+(
+    -- Add the parameters for the function here
+    @CustSiteID INT
+  -- default: display contact's number
+  , @DoHRNumber BIT = 1
+)
+RETURNS NVARCHAR(96)
+AS
+BEGIN
+    DECLARE @Result NVARCHAR(96);
+
+    SET @Result = '';
+
+    -- TRAP BAD CUSTOMER ID
+    IF @CustSiteID IS NULL
+       OR @CustSiteID = 0
+        RETURN @Result;
+
+    -- CTE table - TmpA 
+    WITH TmpA
+    AS (SELECT CustSite.CustSiteID
+             , CustSite.SiteContactID
+             , CONCAT(HR.FirstName, ' ', UPPER(HR.LastName)) AS FName
+             , dbo.GetHRNumber(CustSite.SiteContactID) AS SiteContactNum
+        FROM CustSite
+            INNER JOIN HR
+                ON CustSite.SiteContactID = HR.HRID
+        WHERE CustSite.SiteContactID IS NOT NULL
+              AND CustSite.CustSiteID = @CustSiteID)
+    -- Compute the return value using a CASE statement
+    SELECT TOP 1
+           @Result = (SUBSTRING(   CASE
+                                       WHEN FName IS NULL THEN
+                                           ''
+                                       ELSE
+                                           CASE
+                                               WHEN LEN(SiteContactNum) > 0 THEN
+                                                   CONCAT(   TmpA.FName
+                                                           , ' '
+                                                           , CASE
+                                                                 WHEN @DoHRNumber = 1 THEN
+                                                                     ' (' + TmpA.SiteContactNum + ')'
+                                                                 ELSE
+                                                                     ''
+                                                             END
+                                                         )
+                                               ELSE
+                                                   TmpA.FName
+                                           END
+                                   END
+                                 , 1
+                                 , 96
+                               )
+                     )
+    FROM TmpA;
+
+    -- Return the result of the function
+    RETURN @Result;
+END
+GO
+
+
+
+GO
+IF OBJECT_ID('GetCustSiteHRSingleLine') IS NOT NULL
+    PRINT '<<< CREATED FUNCTION GetCustSiteHRSingleLine >>>'
+ELSE
+    PRINT '<<< FAILED CREATING FUNCTION GetCustSiteHRSingleLine >>>'
+GO
 
 
 /* 
@@ -2311,7 +2460,7 @@ GO
 -- Create date: 25/12/2021
 -- Description:	Returns the 'best' HR AddressID
 -- =============================================
-CREATE OR ALTER FUNCTION [dbo].[GetHRAddressID] (
+CREATE FUNCTION GetHRAddressID (
     -- Add the parameters for the function here
     @HRID INT
     )
@@ -2332,7 +2481,7 @@ BEGIN
     AS (
         SELECT HR.HRID
             , HRAddress.CreatedOn
-            , HRAddress.SortList
+            , HRAddress.StackOrder
             , HRAddress.HRAddressID
 			, HRAddress.AddressTypeID
         FROM HR
@@ -2362,12 +2511,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetHRAddressID') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetHRAddressID >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetHRAddressID >>>'
-go
+GO
 
 
 /* 
@@ -2468,12 +2617,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetHRAddrMultiLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetHRAddrMultiLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetHRAddrMultiLine >>>'
-go
+GO
 
 
 /* 
@@ -2581,168 +2730,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetHRAddrSingleLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetHRAddrSingleLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetHRAddrSingleLine >>>'
-go
-
-
-/* 
- * FUNCTION: GetHRContactNum 
- */
-
-USE [IDFES]
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetHRContactNum]    Script Date: 16/01/2022 1:04:23 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Ben Ambrose
--- Create date: 25/12/2021
--- Description:	Returns the 'best' customer AddressID
--- =============================================
-CREATE OR ALTER FUNCTION [dbo].[GetHRContactNum] (
-	-- Add the parameters for the function here
-	@HRID INT
-	)
-RETURNS NVARCHAR(64)
-AS
-BEGIN
-	-- Declare the return variable here
-	-- Don't forget to assign the size of the NVARCHAR else result will only hold one charcter 
-	DECLARE @Result NVARCHAR(64)
-
-	-- DEFAULT :: NULLSTRING
-	SET @Result = '';
-
-	-- TRAP BAD CUSTOMER ID
-	IF @HRID IS NULL
-		OR @HRID = 0
-		RETURN @Result;
-
-	-- CTE table - TmpA 
-	WITH TmpA
-	AS (
-		SELECT dbo.HRContactNum.HRContactNumID
-			,dbo.HRContactNum.HRID
-			,dbo.HRContactNum.SortList
-			,dbo.HRContactNum.ContactNumTypeID
-			,dbo.HRContactNum.CreatedOn
-			,dbo.HRContactNum.ContactNum
-			,dbo.HRContactNum.IsArchived
-		FROM dbo.HRContactNum
-		WHERE (
-				(dbo.HRContactNum.HRID = @HRID)
-				AND (dbo.HRContactNum.ContactNum IS NOT NULL)
-				AND (dbo.HRContactNum.IsArchived <> 1)
-				)
-		)
-	-- Add the T-SQL statements to compute the return value here
-	SELECT TOP 1 @Result = (TmpA.ContactNum)
-	FROM TmpA
-	ORDER BY
-		-- GROUP ON HR - REDUNDANT
-		HRID ASC
-		-- User custom sorts the contact numbers by priority NULL LAST
-		,CASE 
-			WHEN SortList IS NULL
-				THEN 0
-			ELSE 1
-			END DESC
-		,SortList ASC
-		-- The primary number has preference NULL LAST
-		,CASE 
-			WHEN ContactNumTypeID IS NULL
-				THEN 0
-			ELSE 1
-			END DESC
-		,ContactNumTypeID ASC
-		-- Last resort - date created
-		,CreatedOn DESC
-
-	-- Return the result of the function
-	RETURN @Result
-END
-GO
-
-
-
-go
-IF OBJECT_ID('GetHRContactNum') IS NOT NULL
-    PRINT '<<< CREATED FUNCTION GetHRContactNum >>>'
-ELSE
-    PRINT '<<< FAILED CREATING FUNCTION GetHRContactNum >>>'
-go
-
-
-/* 
- * FUNCTION: GetHRContactSingleLine 
- */
-
-USE [IDFES]
-GO
-/****** Object:  UserDefinedFunction [dbo].[GetHRContactSingleLine]    Script Date: 16/01/2022 1:04:23 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-
--- =============================================
--- Author:		Ben Ambrose
--- Create date: 25/12/2021
--- Description:	Get the FULL NAME and contact number of the HR
--- returns MAX 96 CHARs
--- =============================================
-CREATE OR ALTER FUNCTION [dbo].[GetHRContactSingleLine] (
-	-- Add the parameters for the function here
-	@HRID INT
-	-- default : display contact's number
-	, @DoHRContactNum BIT = 1
-	)
-RETURNS NVARCHAR(96)
-AS
-BEGIN
-	DECLARE @Result NVARCHAR(96);
-
-	SET @Result = '';
-
-	-- TRAP BAD CUSTOMER ID
-	IF @HRID IS NULL
-		OR @HRID = 0
-		RETURN @Result;
-
-	-- CTE table - TmpA 
-	SELECT  @Result = (
-		SUBSTRING(CASE WHEN @DoHRContactNum = 1 THEN
-			CONCAT (HR.FirstName,' ',UPPER(HR.LastName), iif(LEN(dbo.GetHRContactNum(HR.HRID)) = 0, '', ' ('+dbo.GetHRContactNum(HR.HRID)+ ')')	)
-		ELSE
-			CONCAT (HR.FirstName,' ',UPPER(HR.LastName))
-		END, 1, 96)
-		)
-
-		FROM dbo.HR
-		WHERE HR.HRID = @HRID
-
-	-- Return the result of the function
-	RETURN @Result
-END
-GO
-
-
-
-go
-IF OBJECT_ID('GetHRContactSingleLine') IS NOT NULL
-    PRINT '<<< CREATED FUNCTION GetHRContactSingleLine >>>'
-ELSE
-    PRINT '<<< FAILED CREATING FUNCTION GetHRContactSingleLine >>>'
-go
 
 
 /* 
@@ -2827,12 +2820,182 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetHREmail') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetHREmail >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetHREmail >>>'
-go
+GO
+
+
+/* 
+ * FUNCTION: GetHRNumber 
+ */
+
+USE [IDFES]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[GetHRNumber]    Script Date: 01/04/24 10:03:12 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Ben Ambrose
+-- Create date: 25/12/2021
+-- Description:	Returns the 'best' customer AddressID
+-- =============================================
+CREATE FUNCTION [GetHRNumber] (
+	-- Add the parameters for the function here
+	@HRID INT
+	)
+RETURNS NVARCHAR(64)
+AS
+BEGIN
+	-- Declare the return variable here
+	-- Don't forget to assign the size of the NVARCHAR else result will only hold one charcter 
+	DECLARE @Result NVARCHAR(64)
+
+	-- DEFAULT :: NULLSTRING
+	SET @Result = '';
+
+	-- TRAP BAD CUSTOMER ID
+	IF @HRID IS NULL
+		OR @HRID = 0
+		RETURN @Result;
+
+	-- CTE table - TmpA 
+	WITH TmpA
+	AS (
+		SELECT dbo.HRNumber.HRNumberID
+			,dbo.HRNumber.HRID
+			,dbo.HRNumber.StackOrder
+			,dbo.HRNumber.NumberTypeID
+			,dbo.HRNumber.CreatedOn
+			,dbo.HRNumber.Number
+			,dbo.HRNumber.IsArchived
+		FROM dbo.HRNumber
+		WHERE (
+				(dbo.HRNumber.HRID = @HRID)
+				AND (dbo.HRNumber.Number IS NOT NULL)
+				AND (dbo.HRNumber.IsArchived <> 1)
+				)
+		)
+	-- Add the T-SQL statements to compute the return value here
+	SELECT TOP 1 @Result = (TmpA.Number)
+	FROM TmpA
+	ORDER BY
+		-- GROUP ON HR - REDUNDANT
+		HRID ASC
+		-- User custom sorts the contact numbers by priority NULL LAST
+		,CASE 
+			WHEN StackOrder IS NULL
+				THEN 0
+			ELSE 1
+			END DESC
+		,StackOrder ASC
+		-- The primary number has preference NULL LAST
+		,CASE 
+			WHEN NumberTypeID IS NULL
+				THEN 0
+			ELSE 1
+			END DESC
+		,NumberTypeID ASC
+		-- Last resort - date created
+		,CreatedOn DESC
+
+	-- Return the result of the function
+	RETURN @Result
+END
+GO
+
+
+
+
+
+GO
+IF OBJECT_ID('GetHRNumber') IS NOT NULL
+    PRINT '<<< CREATED FUNCTION GetHRNumber >>>'
+ELSE
+    PRINT '<<< FAILED CREATING FUNCTION GetHRNumber >>>'
+GO
+
+
+/* 
+ * FUNCTION: GetHRSingleLine 
+ */
+
+USE [IDFES]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[GetHRSingleLine]    Script Date: 01/04/24 10:22:51 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+-- =============================================
+-- Author:		Ben Ambrose
+-- Create date: 25/12/2021
+-- Description:	Get the FULL NAME and contact number of the HR
+-- returns MAX 96 CHARs
+-- =============================================
+CREATE FUNCTION [GetHRSingleLine] (
+	-- Add the parameters for the function here
+	@HRID INT
+	-- default : display contact's number
+	, @DoHRNumber BIT = 1
+	)
+RETURNS NVARCHAR(96)
+AS
+BEGIN
+	DECLARE @Result NVARCHAR(96);
+
+	SET @Result = '';
+
+	-- TRAP BAD CUSTOMER ID
+	IF @HRID IS NULL
+		OR @HRID = 0
+		RETURN @Result;
+
+	-- CTE table - TmpA 
+	SELECT  @Result = (
+	
+		SUBSTRING(
+			CASE
+				WHEN @DoHRNumber = 1 THEN
+					CONCAT(HR.FirstName, ' ', UPPER(HR.LastName), 
+						CASE WHEN LEN(dbo.GetHRNumber(HR.HRID)) = 0 THEN '' ELSE ' (' + dbo.GetHRNumber(HR.HRID) + ')' END)
+				ELSE
+					CONCAT(HR.FirstName, ' ', UPPER(HR.LastName))
+			END, 1, 96)
+		)
+	
+		FROM dbo.HR
+		WHERE HR.HRID = @HRID
+
+	-- Return the result of the function
+	RETURN @Result
+END
+GO
+
+
+
+
+
+GO
+IF OBJECT_ID('GetHRSingleLine') IS NOT NULL
+    PRINT '<<< CREATED FUNCTION GetHRSingleLine >>>'
+ELSE
+    PRINT '<<< FAILED CREATING FUNCTION GetHRSingleLine >>>'
+GO
 
 
 /* 
@@ -2897,12 +3060,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetSiteAddrMultiLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetSiteAddrMultiLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetSiteAddrMultiLine >>>'
-go
+GO
 
 
 /* 
@@ -2975,12 +3138,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('GetSiteAddrSingleLine') IS NOT NULL
     PRINT '<<< CREATED FUNCTION GetSiteAddrSingleLine >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION GetSiteAddrSingleLine >>>'
-go
+GO
 
 
 /* 
@@ -3101,12 +3264,12 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('LastPassedInspection') IS NOT NULL
     PRINT '<<< CREATED FUNCTION LastPassedInspection >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION LastPassedInspection >>>'
-go
+GO
 
 
 /* 
@@ -3212,11 +3375,11 @@ GO
 
 
 
-go
+GO
 IF OBJECT_ID('NextLifeCycle') IS NOT NULL
     PRINT '<<< CREATED FUNCTION NextLifeCycle >>>'
 ELSE
     PRINT '<<< FAILED CREATING FUNCTION NextLifeCycle >>>'
-go
+GO
 
 

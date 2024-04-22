@@ -87,7 +87,7 @@ type
     StackPanel1: TStackPanel;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure actnGenerateCustCodeExecute(Sender: TObject);
+    procedure GenerateCustCode(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure vimgSetFiltersClick(Sender: TObject);
@@ -158,7 +158,7 @@ begin
       CopyData := PCopyDataStruct(Msg.LParam);
       FilterState := PFilterState(CopyData^.lpData);
       // store record data...
-      fCustFilterState.HideArchived := FilterState^.HideArchived;
+      fCustFilterState.ShowArchived := FilterState^.ShowArchived;
       fCustFilterState.HideLocked := FilterState^.HideLocked;
       fCustFilterState.HideLinked := FilterState^.HideLinked;
       fCustFilterState.StartDT := FilterState^.StartDT;
@@ -192,7 +192,7 @@ begin
   if (FileExists(iniFileName)) then ReadPreferences(iniFileName);
 end;
 
-procedure TCustomer.actnGenerateCustCodeExecute(Sender: TObject);
+procedure TCustomer.GenerateCustCode(Sender: TObject);
 var
   s: string;
 begin

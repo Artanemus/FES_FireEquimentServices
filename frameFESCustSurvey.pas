@@ -10,7 +10,7 @@ uses
   Vcl.ControlList, Vcl.StdCtrls, Vcl.WinXCtrls, dmCustomerData,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
   Vcl.Bind.ControlList, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
-  Data.Bind.Grid;
+  Data.Bind.Grid, dmFES;
 
 type
   TFESCustSurvey = class(TFrame)
@@ -19,7 +19,6 @@ type
     btnEditSurvey: TControlListButton;
     btnPinSurvey: TControlListButton;
     ctrllistCustSurvey: TControlList;
-    imgcollCustSurvey: TImageCollection;
     lblSurveyRequestedDT: TLabel;
     lblSurveySiteAddrStr: TLabel;
     lblSurveyTech: TLabel;
@@ -27,18 +26,8 @@ type
     LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
-    N1: TMenuItem;
-    puCopy: TMenuItem;
-    puDelete: TMenuItem;
-    puEdit: TMenuItem;
-    puFilter: TMenuItem;
-    puInsert: TMenuItem;
-    pumenuCustSurvey: TPopupMenu;
-    puPin: TMenuItem;
-    puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    vimglistCustSurvey: TVirtualImageList;
     procedure ctrllistCustSurveyBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);
   end;

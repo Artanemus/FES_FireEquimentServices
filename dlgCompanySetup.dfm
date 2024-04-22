@@ -23,11 +23,10 @@ object CompanySetup: TCompanySetup
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
-    Color = 11788021
+    Color = clWheat
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 694
     object Label1: TLabel
       Left = 70
       Top = 4
@@ -57,12 +56,10 @@ object CompanySetup: TCompanySetup
     Top = 57
     Width = 696
     Height = 612
-    ActivePage = TabSheet2
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 1
     OnChanging = PageControl1Changing
-    ExplicitWidth = 694
-    ExplicitHeight = 609
     object TabSheet1: TTabSheet
       Caption = 'Details'
       object Bevel1: TBevel
@@ -471,8 +468,6 @@ object CompanySetup: TCompanySetup
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 666
-    ExplicitWidth = 694
     DesignSize = (
       696
       52)
@@ -485,7 +480,6 @@ object CompanySetup: TCompanySetup
       Caption = 'btnClose'
       TabOrder = 0
       OnClick = btnCloseClick
-      ExplicitLeft = 580
     end
   end
   object SavePictureDialog1: TSavePictureDialog

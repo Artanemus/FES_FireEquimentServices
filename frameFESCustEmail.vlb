@@ -2,26 +2,14 @@
 Visible=False
 Coordinates=916,419,184,36
 
-[puDelete]
-Coordinates=916,309,66,36
-
 [CustomerData.dsCustEmails]
 Coordinates=447,1083,179,36
-
-[puEdit]
-Coordinates=916,364,51,36
 
 [CustomerData.dsCustContact]
 Coordinates=430,1,185,36
 
 [vimgHideUnPinned]
 Coordinates=10,816,124,36
-
-[imgcollCustEmail]
-Coordinates=916,529,114,36
-
-[puPin]
-Coordinates=192,569,47,36
 
 [CustomerData.qryCustContact]
 Coordinates=10,512,189,278
@@ -35,23 +23,14 @@ Coordinates=425,512,172,234
 [CustomerData.qryCustAddress]
 Coordinates=623,512,192,190
 
-[puCopy]
-Coordinates=916,584,59,36
-
 [CustomerData.dsCustSite]
 Coordinates=89,1083,163,36
 
 [CustomerData.dsCustomer]
 Coordinates=13,462,170,36
 
-[puInsert]
-Coordinates=916,639,61,36
-
 [lblEmail]
 Coordinates=627,128,60,58
-
-[puRefresh]
-Coordinates=916,694,74,36
 
 [CustomerData.dsCustInspect]
 Coordinates=430,298,182,36
@@ -62,29 +41,17 @@ Coordinates=211,1,181,36
 [bindListCustEmail]
 Coordinates=916,749,118,36
 
-[pumenuCustEmail]
-Coordinates=916,804,119,36
-
-[N1]
-Coordinates=916,914,40,36
-
 [bindsrcCustEmail]
 Coordinates=767,29,169,256
 
 [CustomerData.qryCustSite]
 Coordinates=223,10,167,322
 
-[puFilter]
-Coordinates=916,969,58,36
-
 [lblEmailType]
 Coordinates=1023,128,88,58
 
 [CustomerData.qryCustSurvey]
 Coordinates=416,10,185,322
-
-[vimglistCustEmail]
-Coordinates=916,1024,117,36
 
 [CustomerData.qryCustomer]
 Coordinates=225,512,174,278
@@ -103,7 +70,7 @@ Coordinates=1060,10,107,58
 Visible=True
 
 []
-Coordinates=841,512,101,58
+Coordinates=916,804,119,36
 
 [btnPinEmail]
 Coordinates=275,816,85,36

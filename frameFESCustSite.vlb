@@ -2,21 +2,12 @@
 Visible=False
 Coordinates=880,782,167,36
 
-[imgcollCustSite]
-Coordinates=880,232,104,36
-
 [StackPanel1]
 Coordinates=540,390,87,58
 LayerNames=NewLayer0
 
-[puFilter]
-Coordinates=880,287,58,36
-
 [CustomerData.qryCustEmails]
 Coordinates=623,512,184,234
-
-[puDelete]
-Coordinates=880,342,66,36
 
 [bindsrcCustSite]
 Coordinates=223,10,154,344
@@ -53,12 +44,6 @@ Coordinates=211,1,181,36
 [CustomerData.dsCustSite]
 Coordinates=211,462,163,36
 
-[puPin]
-Coordinates=381,481,47,36
-
-[puEdit]
-Coordinates=0,445,51,36
-
 [CustomerData.dsCustContact]
 Coordinates=430,551,185,36
 
@@ -72,32 +57,17 @@ Coordinates=10,10,187,476
 Coordinates=750,390,124,36
 LayerNames=NewLayer0
 
-[N1]
-Coordinates=880,562,40,36
-
 [CustomerData.qryCustomer]
 Coordinates=225,512,174,278
 
 [bindlistCustSite]
 Coordinates=880,617,104,36
 
-[puRefresh]
-Coordinates=880,672,74,36
-
-[pumenuCustSite]
-Coordinates=880,727,109,36
-
 [CustomerData.dsCustNum]
 Coordinates=653,1134,168,36
 
-[vimglistCustSite]
-Coordinates=880,837,107,36
-
-[puInsert]
-Coordinates=880,892,61,36
-
 []
-Coordinates=420,380,101,58
+Coordinates=880,727,109,36
 LayerNames=NewLayer0
 
 [Module Settings]

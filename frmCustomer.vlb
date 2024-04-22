@@ -85,9 +85,6 @@ Coordinates=10,564,94,58
 [PageControl1]
 Coordinates=668,564,93,36
 
-[(TMenuItem)]
-Coordinates=109,1472,75,33
-
 []
 Coordinates=494,564,164,36
 LayerNames=NewLayer0

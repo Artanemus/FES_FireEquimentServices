@@ -175,6 +175,7 @@ object FESMain: TFESMain
     Top = 0
     Width = 1295
     Height = 31
+    UseSystemFont = False
     ActionManager = actnmanMain
     Caption = 'ActionMainMenuBar1'
     Color = clMenuBar
@@ -183,7 +184,7 @@ object FESMain: TFESMain
     ColorMap.BtnSelectedFont = clBlack
     ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -310,8 +311,8 @@ object FESMain: TFESMain
         5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
         0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
       Display.ActiveEnd = 40
-      Display.CurrentPosFrom = 1004
-      Display.CurrentPosTo = 1004
+      Display.CurrentPosFrom = 1005
+      Display.CurrentPosTo = 1005
       Display.ColorNonActive = clWhite
       Display.HourLineColor = 15987699
       Font.Charset = DEFAULT_CHARSET
@@ -938,61 +939,61 @@ object FESMain: TFESMain
           item
             Items = <
               item
-                Action = EquipFind
-                Caption = '&Find Equipment'
-                ImageIndex = 1
-                ImageName = 'search'
+                Items = <
+                  item
+                    Action = LinkFind
+                    Caption = '&Find Link'
+                    ImageIndex = 1
+                    ImageName = 'search'
+                  end
+                  item
+                    Action = LinkBrowse
+                    Caption = '&Browse Links'
+                    ImageIndex = 18
+                    ImageName = 'open_in_browser'
+                  end
+                  item
+                    Action = LinkGotoID
+                    Caption = '&Goto Link ID'
+                    ImageIndex = 3
+                    ImageName = 'goto'
+                  end
+                  item
+                    Action = LinkNew
+                    Caption = '&Create New Link'
+                    ImageIndex = 5
+                    ImageName = 'new'
+                  end>
+                Caption = '&Link'
               end
               item
-                Action = EquipBrowse
-                Caption = '&Browse Equipment'
-                ImageIndex = 18
-                ImageName = 'open_in_browser'
+                Items = <
+                  item
+                    Action = EquipFind
+                    Caption = '&Find Equipment'
+                    ImageIndex = 1
+                    ImageName = 'search'
+                  end
+                  item
+                    Action = EquipBrowse
+                    Caption = '&Browse Equipment'
+                    ImageIndex = 18
+                    ImageName = 'open_in_browser'
+                  end
+                  item
+                    Action = EquipGotoID
+                    Caption = '&Goto Equipment ID'
+                    ImageIndex = 3
+                    ImageName = 'goto'
+                  end
+                  item
+                    Action = EquipNew
+                    Caption = '&Create New Equipment'
+                    ImageIndex = 5
+                    ImageName = 'new'
+                  end>
+                Caption = '&Equipment'
               end
-              item
-                Action = EquipGotoID
-                Caption = '&Goto Equipment ID'
-                ImageIndex = 3
-                ImageName = 'goto'
-              end
-              item
-                Action = EquipNew
-                Caption = '&Create New Equipment'
-                ImageIndex = 5
-                ImageName = 'new'
-              end>
-            Caption = '&Equipment'
-          end
-          item
-            Items = <
-              item
-                Action = LinkFind
-                Caption = '&Find Link'
-                ImageIndex = 1
-                ImageName = 'search'
-              end
-              item
-                Action = LinkBrowse
-                Caption = '&Browse Links'
-                ImageIndex = 18
-                ImageName = 'open_in_browser'
-              end
-              item
-                Action = LinkGotoID
-                Caption = '&Goto Link ID'
-                ImageIndex = 3
-                ImageName = 'goto'
-              end
-              item
-                Action = LinkNew
-                Caption = '&Create New Link'
-                ImageIndex = 5
-                ImageName = 'new'
-              end>
-            Caption = '&Link'
-          end
-          item
-            Items = <
               item
                 Action = ToolsCompanySetup
                 Caption = '&Company Setup'
@@ -1160,6 +1161,7 @@ object FESMain: TFESMain
       Caption = 'Browse for HR'
       ImageIndex = 18
       ImageName = 'open_in_browser'
+      OnExecute = HRBrowseExecute
     end
     object HRGotoID: TAction
       Category = 'HR'

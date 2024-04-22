@@ -10,7 +10,7 @@ uses
   dmCustomerData, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, Vcl.ControlList, Vcl.StdCtrls, Vcl.WinXCtrls,
   Vcl.Bind.ControlList, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
-  Data.Bind.Grid, Data.DB;
+  Data.Bind.Grid, Data.DB, dmFES;
 
 type
   TFESCustEmail = class(TFrame)
@@ -19,7 +19,6 @@ type
     btnEditEmail: TControlListButton;
     btnPinEmail: TControlListButton;
     ctrllistCustEmail: TControlList;
-    imgcollCustEmail: TImageCollection;
     lblEmailCreatedDT: TLabel;
     lblEmail: TLabel;
     lblEmailType: TLabel;
@@ -27,18 +26,8 @@ type
     LinkPropertyToField1: TLinkPropertyToField;
     LinkPropertyToField2: TLinkPropertyToField;
     LinkPropertyToField3: TLinkPropertyToField;
-    N1: TMenuItem;
-    puCopy: TMenuItem;
-    puDelete: TMenuItem;
-    puEdit: TMenuItem;
-    puFilter: TMenuItem;
-    puInsert: TMenuItem;
-    pumenuCustEmail: TPopupMenu;
-    puPin: TMenuItem;
-    puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     vimgHideUnPinned: TVirtualImage;
-    vimglistCustEmail: TVirtualImageList;
     procedure btnPinEmailClick(Sender: TObject);
     procedure ctrllistCustEmailBeforeDrawItem(AIndex: Integer; ACanvas: TCanvas;
         ARect: TRect; AState: TOwnerDrawState);

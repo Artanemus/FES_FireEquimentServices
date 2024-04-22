@@ -30,7 +30,6 @@ object InspectOrder: TInspectOrder
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 40
     object DBTextOrderNum: TDBText
       Left = 18
       Top = 6
@@ -313,7 +312,6 @@ object InspectOrder: TInspectOrder
         DataField = 'Note'
         DataSource = InspectOrderData.dsInspectOrder
         TabOrder = 4
-        ExplicitHeight = 196
       end
       object StackPanel1: TStackPanel
         Left = 0
@@ -433,12 +431,19 @@ object InspectOrder: TInspectOrder
           Height = 485
           ExplicitWidth = 705
           ExplicitHeight = 485
+          inherited lblNotes: TLabel
+            Width = 420
+          end
+          inherited lblStationNumber: TLabel
+            Height = 40
+          end
           inherited btnEdit: TControlListButton
             Left = 659
             ExplicitLeft = -42
           end
           inherited Label3: TLabel
             Left = 603
+            Height = 40
             ExplicitLeft = -98
           end
         end
@@ -645,7 +650,6 @@ object InspectOrder: TInspectOrder
     Width = 713
     Height = 0
     CustomButtons = <>
-    ExplicitTop = 82
     object VirtualImage5: TVirtualImage
       AlignWithMargins = True
       Left = 531

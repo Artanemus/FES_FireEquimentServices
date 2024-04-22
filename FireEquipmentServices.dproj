@@ -260,6 +260,15 @@
             <Form>FilterStatus</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="frmHR.pas">
+            <Form>HR</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dmHR.pas">
+            <Form>HRData</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

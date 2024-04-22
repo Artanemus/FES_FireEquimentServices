@@ -16,7 +16,6 @@ object FilterCommon: TFilterCommon
   OnCreate = FormCreate
   OnDeactivate = FormDeactivate
   OnKeyDown = FormKeyDown
-  OnShow = FormShow
   TextHeight = 21
   object RelativePanel1: TRelativePanel
     Left = 0
@@ -114,7 +113,7 @@ object FilterCommon: TFilterCommon
         Below = spbHideLocked
       end
       item
-        Control = spdHideArchived
+        Control = spdShowArchived
         AlignBottomWithPanel = False
         AlignHorizontalCenterWithPanel = False
         AlignLeftWithPanel = True
@@ -223,6 +222,7 @@ object FilterCommon: TFilterCommon
       Anchors = []
       Flat = True
       Margin = 0
+      Visible = False
     end
     object spdHideLinked: TSpeedButton
       AlignWithMargins = True
@@ -234,14 +234,15 @@ object FilterCommon: TFilterCommon
       Anchors = []
       Flat = True
       Margin = 0
+      Visible = False
     end
-    object spdHideArchived: TSpeedButton
+    object spdShowArchived: TSpeedButton
       AlignWithMargins = True
       Left = 4
       Top = 194
       Width = 229
       Height = 32
-      Action = actnHideArchived
+      Action = actnShowArchived
       Anchors = []
       Flat = True
       Margin = 0
@@ -251,8 +252,8 @@ object FilterCommon: TFilterCommon
     Images = FES.imgList32x32
     Left = 160
     Top = 88
-    object actnHideArchived: TAction
-      Caption = 'Hide Archived'
+    object actnShowArchived: TAction
+      Caption = 'Show Archived'
       ImageIndex = 23
       ImageName = 'checked_boxNIL'
       OnExecute = actnGenericExecute

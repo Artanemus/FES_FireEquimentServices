@@ -10,7 +10,7 @@ uses
   Vcl.ControlList, Vcl.StdCtrls, Vcl.WinXCtrls, dmCustomerData,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Vcl.Bind.ControlList, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
-  Data.Bind.Grid, Data.Bind.DBScope;
+  Data.Bind.Grid, Data.Bind.DBScope, dmFES;
 
 type
   TFESCustInspect = class(TFrame)
@@ -18,7 +18,6 @@ type
     btnEditInspect: TControlListButton;
     btnPinInspect: TControlListButton;
     ctrllistCustInspect: TControlList;
-    imgcollCustInspect: TImageCollection;
     lblInspectAddress: TLabel;
     lblInspectCompletedDT: TLabel;
     lblInspectInspectedDT: TLabel;
@@ -29,18 +28,8 @@ type
     LinkPropertyToField3: TLinkPropertyToField;
     LinkPropertyToField5: TLinkPropertyToField;
     LinkPropertyToField6: TLinkPropertyToField;
-    N1: TMenuItem;
-    puCopy: TMenuItem;
-    puDelete: TMenuItem;
-    puEdit: TMenuItem;
-    puFilter: TMenuItem;
-    puInsert: TMenuItem;
-    pumenuCustInspect: TPopupMenu;
-    puPin: TMenuItem;
-    puRefresh: TMenuItem;
     StackPanel1: TStackPanel;
     btnTogglePinVisibility: TVirtualImage;
-    vimglistCustInspect: TVirtualImageList;
     btnClipboard: TVirtualImage;
     btnNew: TVirtualImage;
     btnDelete: TVirtualImage;
