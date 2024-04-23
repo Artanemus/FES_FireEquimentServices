@@ -264,7 +264,7 @@
             <Form>HR</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="dmHR.pas">
+        <DCCReference Include="dmHRData.pas">
             <Form>HRData</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>

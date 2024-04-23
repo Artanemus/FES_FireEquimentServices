@@ -43,7 +43,7 @@ uses
   dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette},
   dlgFilterStatus in 'dlgFilterStatus.pas' {FilterStatus},
   frmHR in 'frmHR.pas' {HR},
-  dmHR in 'dmHR.pas' {HRData: TDataModule};
+  dmHRData in 'dmHRData.pas' {HRData: TDataModule};
 
 {$R *.res}
 

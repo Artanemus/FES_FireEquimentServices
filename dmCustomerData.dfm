@@ -1,7 +1,7 @@
 object CustomerData: TCustomerData
   OnCreate = DataModuleCreate
-  Height = 480
-  Width = 1430
+  Height = 651
+  Width = 326
   object qryCustomer: TFDQuery
     Active = True
     Connection = FES.fesConnection
@@ -21,8 +21,8 @@ object CustomerData: TCustomerData
       #9#9',[IsArchived]'
       'FROM [IDFES].[dbo].[Customer] '
       ';')
-    Left = 496
-    Top = 25
+    Left = 48
+    Top = 9
     object qryCustomerCustomerID: TFDAutoIncField
       FieldName = 'CustomerID'
       Origin = 'CustomerID'
@@ -74,8 +74,8 @@ object CustomerData: TCustomerData
   end
   object dsCustomer: TDataSource
     DataSet = qryCustomer
-    Left = 624
-    Top = 24
+    Left = 136
+    Top = 8
   end
   object qryCustNum: TFDQuery
     Tag = 1
@@ -111,7 +111,7 @@ object CustomerData: TCustomerData
   end
   object dsCustNum: TDataSource
     DataSet = qryCustNum
-    Left = 112
+    Left = 136
     Top = 128
   end
   object qryCustAddress: TFDQuery
@@ -141,13 +141,13 @@ object CustomerData: TCustomerData
         '      ON [CustAddress].[AddressTypeID] = [AddressType].[AddressT' +
         'ypeID] '
       '; ')
-    Left = 240
-    Top = 128
+    Left = 48
+    Top = 184
   end
   object dsCustAdress: TDataSource
     DataSet = qryCustAddress
-    Left = 312
-    Top = 128
+    Left = 136
+    Top = 184
   end
   object qryCustEmails: TFDQuery
     Tag = 1
@@ -176,13 +176,13 @@ object CustomerData: TCustomerData
       
         'LEFT JOIN  EmailType ON [CustEmail].EmailTypeID = EmailType.Emai' +
         'lTypeID')
-    Left = 432
-    Top = 128
+    Left = 48
+    Top = 240
   end
   object dsCustEmails: TDataSource
     DataSet = qryCustEmails
-    Left = 504
-    Top = 128
+    Left = 136
+    Top = 240
   end
   object qryCustSite: TFDQuery
     Tag = 1
@@ -220,13 +220,13 @@ object CustomerData: TCustomerData
       '  FROM [IDFES].[dbo].[CustSite]'
       '  --INNER JOIN dbo.Site ON CustSite.SiteID = Site.SiteID'
       '  --INNER JOIN dbo.HR ON CustSite.SiteContactID = HR.HRID')
-    Left = 592
-    Top = 128
+    Left = 48
+    Top = 296
   end
   object dsCustSite: TDataSource
     DataSet = qryCustSite
-    Left = 656
-    Top = 128
+    Left = 136
+    Top = 296
   end
   object qryCustContact: TFDQuery
     Tag = 1
@@ -252,7 +252,7 @@ object CustomerData: TCustomerData
       '     , ContactType.AliasCust AS ContactTypeStr'
       '     --, [CustContact].[Caption]'
       '     , [CustContact].[IsArchived]'
-      '     --, [CustContact].[SortList]'
+      '     , [CustContact].[StackOrder]'
       '     --, [CustContact].[ContactTypeID]'
       'FROM [IDFES].[dbo].[CustContact]'
       '    INNER JOIN HR'
@@ -260,13 +260,13 @@ object CustomerData: TCustomerData
       '    LEFT JOIN ContactType'
       '        ON CustContact.ContactTypeID = ContactType.ContactTypeID'
       'WHERE CustContact.HRID IS NOT NULL')
-    Left = 736
-    Top = 128
+    Left = 48
+    Top = 352
   end
   object dsCustContact: TDataSource
     DataSet = qryCustContact
-    Left = 800
-    Top = 128
+    Left = 136
+    Top = 352
   end
   object qryCustInspect: TFDQuery
     Active = True
@@ -314,15 +314,16 @@ object CustomerData: TCustomerData
         '        ON [InspectionOrder].InspectionStatusID = InspectionStat' +
         'us.InspectionStatusID'
       '')
-    Left = 904
-    Top = 128
+    Left = 48
+    Top = 408
   end
   object dsCustInspect: TDataSource
     DataSet = qryCustInspect
-    Left = 992
-    Top = 128
+    Left = 136
+    Top = 408
   end
   object qryCustSurvey: TFDQuery
+    Active = True
     IndexFieldNames = 'CustomerID'
     MasterSource = dsCustomer
     MasterFields = 'CustomerID'
@@ -361,12 +362,12 @@ object CustomerData: TCustomerData
       '        ON [SurveyOrder].SiteID = Site.SiteID'
       '    LEFT JOIN HR'
       '        ON SurveyOrder.HRID = HR.HRID;')
-    Left = 1200
-    Top = 128
+    Left = 48
+    Top = 464
   end
   object dsCustSurvey: TDataSource
     DataSet = qryCustSurvey
-    Left = 1272
-    Top = 128
+    Left = 136
+    Top = 464
   end
 end

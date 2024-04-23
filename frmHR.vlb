@@ -1,30 +1,21 @@
-﻿[VirtualImage2]
-Coordinates=194,876,81,33
-
-[TabSheet7]
-Coordinates=384,740,66,33
+﻿[TabSheet7]
+Coordinates=981,966,66,33
 
 [TabSheet1]
-Coordinates=10,876,66,33
-
-[vimgHideUnPinned]
-Coordinates=790,817,108,33
+Coordinates=286,966,66,33
 
 [HRData.qryNumberType]
 Coordinates=730,250,133,33
 Visible=False
 
-[ControlList5]
-Coordinates=714,663,74,51
-
 [StackPanel3]
-Coordinates=1447,663,75,51
+Coordinates=1364,690,75,51
 
 [TabSheet4]
-Coordinates=102,876,66,33
+Coordinates=10,1028,66,33
 
 [DBLabeledEdit5]
-Coordinates=537,817,93,33
+Coordinates=153,966,93,33
 
 [HRData.dsRole]
 Coordinates=0,0,88,33
@@ -33,178 +24,374 @@ Coordinates=0,0,88,33
 Coordinates=432,474,136,33
 
 [DBLabeledEdit1]
-Coordinates=476,740,93,33
+Coordinates=389,966,93,33
 
 [Panel2]
-Coordinates=210,740,47,51
+Coordinates=1170,690,47,51
 
 [TabSheet5]
-Coordinates=301,876,66,33
+Coordinates=113,1028,66,33
 
 [VirtualImage1]
-Coordinates=311,817,81,33
-
-[BindingsList1]
-Coordinates=630,804,82,33
+Coordinates=1217,966,81,33
 
 [PageControl1]
-Coordinates=1441,740,81,33
+Coordinates=1195,882,81,33
 
 [DBLabeledEdit6]
-Coordinates=702,740,93,33
+Coordinates=1084,966,93,33
 
 [FES.qryPlannerItem]
 Coordinates=10,10,128,627
 
-[VirtualImage4]
-Coordinates=393,876,81,33
-
-[VirtualImage5]
-Coordinates=1215,740,81,33
-
 [TabSheet9]
-Coordinates=500,876,66,33
-
-[StackPanel4]
-Coordinates=283,740,75,51
+Coordinates=852,882,66,33
 
 [TabSheet8]
-Coordinates=928,740,66,33
+Coordinates=1447,882,66,33
 
 [vimgFindCustomer]
-Coordinates=656,817,108,33
+Coordinates=216,1028,108,33
 
 [VirtualImage6]
-Coordinates=595,740,81,33
+Coordinates=955,882,81,33
 
 [FES.dsPlannerItem]
 Coordinates=51,165,108,33
 
-[Label1]
-Coordinates=1375,663,46,51
-
 [DBLabeledEdit4]
-Coordinates=1322,740,93,33
+Coordinates=522,966,93,33
 
 [ControlList6]
-Coordinates=412,663,74,51
-
-[StackPanel1]
-Coordinates=211,663,75,51
+Coordinates=10,882,74,51
 
 [TitleBarPanel1]
-Coordinates=924,817,85,33
+Coordinates=497,1028,85,33
 
 [TabSheet6]
-Coordinates=1127,817,66,33
+Coordinates=878,966,66,33
 
 [vimgToggleFilters]
-Coordinates=1219,817,103,33
+Coordinates=10,966,103,33
 
 [HRData.qryHR]
-Coordinates=164,10,119,249
-
-[ControlList3]
-Coordinates=10,740,74,51
+Coordinates=189,10,119,249
 
 [TabSheet3]
-Coordinates=1035,817,66,33
+Coordinates=775,966,66,33
 
 [DBMemo1]
-Coordinates=10,817,64,33
+Coordinates=742,1028,64,33
 
 [dbtxtHRID]
-Coordinates=914,663,64,51
+Coordinates=180,640,64,51
 
 [vimgSetFilters]
-Coordinates=1348,817,85,33
-
-[ControlList1]
-Coordinates=570,180,74,51
-Visible=True
+Coordinates=364,882,85,33
 
 [StackPanel7]
-Coordinates=512,663,75,51
+Coordinates=665,798,75,51
 
 [HRData.qryRoleList]
-Coordinates=864,10,111,123
+Coordinates=1180,340,111,33
+Visible=False
 
 [StackPanel2]
-Coordinates=1119,10,75,51
+Coordinates=201,798,75,51
 
 [StackPanel6]
-Coordinates=10,663,75,51
+Coordinates=888,798,75,51
 
 [DBLabeledEdit3]
-Coordinates=100,817,93,33
+Coordinates=1314,882,93,33
 
 [HRData.qryEmergencyHR]
-Coordinates=698,10,140,159
+Coordinates=180,280,140,159
 
 [HRData.dsRoleList]
 Coordinates=229,1,107,33
 
-[StackPanel5]
-Coordinates=613,663,75,51
-
 [VirtualImage7]
-Coordinates=1108,740,81,33
+Coordinates=622,1028,81,33
 
 [TabSheet2]
-Coordinates=219,817,66,33
+Coordinates=1337,966,66,33
 
 [HRData.dsHR]
 Coordinates=432,1001,81,33
 
 [ControlList7]
-Coordinates=814,663,74,51
-
-[ControlList4]
-Coordinates=312,663,74,51
+Coordinates=778,798,74,51
 
 [vimgSync]
-Coordinates=1020,740,62,33
+Coordinates=606,882,62,33
 
 [Panel1]
-Coordinates=1004,663,47,51
-
-[VirtualImage3]
-Coordinates=821,740,81,33
+Coordinates=1224,798,47,51
 
 [DBNavigator1]
-Coordinates=1267,663,82,51
+Coordinates=314,798,82,51
 
 [HRData.qryRole]
-Coordinates=1001,10,92,123
+Coordinates=180,460,92,123
 
 [dbtxtHRName]
-Coordinates=1220,10,82,51
-
-[ControlList2]
-Coordinates=110,740,74,51
+Coordinates=544,798,82,51
 
 [HRData.qryHRNumber]
 Coordinates=430,20,124,33
 Visible=False
 
 [DBLabeledEdit2]
-Coordinates=418,817,93,33
+Coordinates=364,1028,93,33
 
 [HRData.dsHRNumber]
 Coordinates=198,278,120,33
 
-[Label2]
-Coordinates=310,230,46,51
-
 []
-Coordinates=450,40,111,213
+Coordinates=1305,798,75,51
 
-[Label3]
-Coordinates=300,320,46,51
+[bindsrcNum]
+Coordinates=430,20,111,213
+LayerNames=Number
 
-[Label4]
-Coordinates=590,250,46,51
+[bindlistNum]
+Coordinates=630,804,73,33
 
-[BindSourceDB1]
-Coordinates=420,160,111,213
+[lblNumber]
+Coordinates=720,100,65,51
+LayerNames=Number
+
+[Module Settings]
+ModelLayerNames=Role;Number;Email;Address
+ActiveLayerNames=
+EditingLayerName=Email
+
+[lblAliasHRNum]
+Coordinates=590,190,88,51
+LayerNames=Number
+
+[stackNumber]
+Coordinates=1251,690,79,51
+
+[lblCreatedOnNum]
+Coordinates=600,110,101,51
+LayerNames=Number
+
+[vimgVisNum]
+Coordinates=702,882,76,33
+
+[vimgVisRole]
+Coordinates=1075,882,76,33
+
+[vimgNewNum]
+Coordinates=630,620,82,33
+
+[vimgDeleteNum]
+Coordinates=750,620,92,33
+
+[VirtualImage2]
+Coordinates=880,630,81,33
+
+[btnPinNum]
+Coordinates=1030,730,69,33
+
+[btnEditNum]
+Coordinates=910,710,72,33
+
+[btnDownNum]
+Coordinates=780,710,81,33
+
+[lblRole]
+Coordinates=1320,440,48,51
+LayerNames=Role
+
+[VirtualImage8]
+Coordinates=391,683,81,33
+
+[btnUpNum]
+Coordinates=391,738,66,33
+
+[lblCreatedOnRole]
+Coordinates=970,430,101,51
+LayerNames=Role
+
+[bindsrcRole]
+Coordinates=1180,340,97,159
+LayerNames=Role
+
+[vimgVisEmail]
+Coordinates=486,882,81,33
+
+[btnEditRole]
+Coordinates=80,720,72,33
+
+[btnPinRole]
+Coordinates=520,720,68,33
+
+[btnUpRole]
+Coordinates=180,730,66,33
+
+[btndownRole]
+Coordinates=250,730,79,33
+
+[ControlListButton2]
+Coordinates=1200,640,108,33
+
+[ControlListButton3]
+Coordinates=460,630,108,33
+
+[ControlListButton4]
+Coordinates=310,630,108,33
+
+[vimgNewEmail]
+Coordinates=112,830,87,33
+
+[vimgDeleteEmail]
+Coordinates=13,830,96,33
+
+[vimgCopyEmail]
+Coordinates=1330,620,91,33
+
+[lblCreatedOnEmail]
+Coordinates=380,450,106,51
+LayerNames=Email
+
+[ControlListButton1]
+Coordinates=1040,640,108,33
+
+[HRData.dsHREmail]
+Coordinates=606,382,108,33
+
+[HRData.qryHREmail]
+Coordinates=606,312,112,33
+Visible=False
+
+[lblHREmailType]
+Coordinates=760,470,92,51
+
+[lblHREmail]
+Coordinates=510,380,68,51
+LayerNames=Email
+
+[bindsrcEmail]
+Coordinates=600,340,100,213
+LayerNames=Email
+
+[HRData.qryAddress]
+Coordinates=870,140,111,33
+Visible=False
+
+[HRData.dsAddress]
+Coordinates=305,1102,107,33
+
+[StackPanel1]
+Coordinates=630,1160,75,51
+
+[lblHRAddrCreatedOn]
+Coordinates=720,20,117,51
+LayerNames=Address
+
+[lblHRAddr]
+Coordinates=780,220,65,51
+LayerNames=Address
+
+[lblHRAddrType]
+Coordinates=990,220,89,51
+LayerNames=Address
+
+[cntrlistHRAddr]
+Coordinates=1030,140,87,51
+Visible=True
+LayerNames=Address
+
+[bindsrcAddr]
+Coordinates=870,40,97,213
+LayerNames=Address
+
+[lblNotes]
+Coordinates=1040,790,54,51
+
+[vimgVisAddr]
+Coordinates=403,1339,77,33
+
+[vimgNewAddr]
+Coordinates=630,1237,83,33
+
+[vimgDeleteAddr]
+Coordinates=175,1339,93,33
+
+[vimgCopyAddr]
+Coordinates=502,1339,88,33
+
+[btnDownAddr]
+Coordinates=630,752,82,33
+
+[btnUpAddr]
+Coordinates=630,1292,68,33
+
+[btnPinAddr]
+Coordinates=274,1339,70,33
+
+[btnEditAddr]
+Coordinates=611,1339,73,33
+
+[cntrlistCustContact]
+Coordinates=1170,20,109,51
+Visible=True
+
+[cntrlistHREmail]
+Coordinates=750,330,91,51
+Visible=True
+LayerNames=Email
+
+[cntrlistRole]
+Coordinates=1040,350,70,51
+Visible=True
+LayerNames=Role
+
+[cntrlistNumber]
+Coordinates=610,40,87,51
+Visible=True
+LayerNames=Number
+
+[btnUpCustContact]
+Coordinates=920,570,105,33
+
+[HRData.qryCustContact]
+Coordinates=1270,90,131,33
+Visible=False
+
+[btnPinCustContact]
+Coordinates=606,672,107,33
+
+[VirtualImage13]
+Coordinates=275,901,87,33
+
+[VirtualImage12]
+Coordinates=186,901,87,33
+
+[VirtualImage5]
+Coordinates=97,901,81,33
+
+[btnEditCustContact]
+Coordinates=1050,570,111,33
+
+[HRData.dsCustContact]
+Coordinates=374,252,127,33
+
+[VirtualImage11]
+Coordinates=1180,570,87,33
+
+[btnDownCustContact]
+Coordinates=710,560,119,33
+
+[StackPanel4]
+Coordinates=606,260,75,51
+
+[bindsrcCustContact]
+Coordinates=1340,30,116,105
+
+[lblHRCustContactName]
+Coordinates=1170,90,130,51
 

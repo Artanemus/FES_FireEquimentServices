@@ -14,7 +14,7 @@ Coordinates=319,517,65,33
 Coordinates=233,10,119,159
 
 [qryRoleList]
-Coordinates=74,269,70,123
+Coordinates=74,269,70,141
 
 [puInsert]
 Coordinates=319,569,54,33
@@ -60,4 +60,16 @@ Coordinates=54,608,80,33
 
 []
 Coordinates=154,269,93,177
+
+[qryHREmail]
+Coordinates=294,258,72,195
+
+[dsHREmail]
+Coordinates=294,188,68,33
+
+[dsAddress]
+Coordinates=588,249,67,33
+
+[qryAddress]
+Coordinates=588,53,77,177
 

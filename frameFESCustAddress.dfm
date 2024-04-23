@@ -124,9 +124,7 @@ object FESCustAddress: TFESCustAddress
       ImageName = 'pin'
       Style = clbkToolButton
       OnClick = btnPinAddressClick
-      ExplicitLeft = 2
-      ExplicitTop = 19
-      ExplicitHeight = 32
+      ExplicitTop = 4
     end
     object lblPostalZone: TLabel
       Left = 15
@@ -211,6 +209,7 @@ object FESCustAddress: TFESCustAddress
     end
   end
   object bindsrcCustAddress: TBindSourceDB
+    DataSource.Enabled = False
     DataSet = CustomerData.qryCustAddress
     ScopeMappings = <>
     Left = 128

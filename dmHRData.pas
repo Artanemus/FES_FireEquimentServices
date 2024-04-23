@@ -1,4 +1,4 @@
-unit dmHR;
+unit dmHRData;
 
 interface
 
@@ -28,6 +28,12 @@ type
     puRefresh: TMenuItem;
     qryHRNumber: TFDQuery;
     dsHRNumber: TDataSource;
+    qryHREmail: TFDQuery;
+    dsHREmail: TDataSource;
+    qryAddress: TFDQuery;
+    dsAddress: TDataSource;
+    qryCustContact: TFDQuery;
+    dsCustContact: TDataSource;
   private
     { Private declarations }
   public
