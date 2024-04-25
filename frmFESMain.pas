@@ -122,6 +122,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure GenericUpdate(Sender: TObject);
     procedure HRBrowseExecute(Sender: TObject);
+    procedure HRFindExecute(Sender: TObject);
     procedure InspectBrowseOrdersExecute(Sender: TObject);
     procedure InspectFindOrderExecute(Sender: TObject);
     procedure vimgDayCountDecClick(Sender: TObject);
@@ -158,9 +159,9 @@ implementation
 
 {$R *.dfm}
 
-uses dlgInspectOrdersFind, dlgStatusPalette
+uses dlgFindInspectOrder, dlgStatusPalette
 
-    , System.IniFiles, unitFESutility, frmHR;
+    , System.IniFiles, unitFESutility, frmHR, dlgFindHR;
 
 procedure TFESMain.actnFilterToggleExecute(Sender: TObject);
 begin
@@ -340,6 +341,18 @@ var
   dlg: THR;
 begin
   dlg := THR.Create(self);
+  if IsPositiveResult(dlg.ShowModal()) then
+  begin;
+    // do something ....
+  end;
+  dlg.free;
+end;
+
+procedure TFESMain.HRFindExecute(Sender: TObject);
+var
+dlg: TFindHR;
+begin
+  dlg := TFindHR.Create(self);
   if IsPositiveResult(dlg.ShowModal()) then
   begin;
     // do something ....

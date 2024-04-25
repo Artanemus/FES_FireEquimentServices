@@ -34,6 +34,10 @@ type
     dsAddress: TDataSource;
     qryCustContact: TFDQuery;
     dsCustContact: TDataSource;
+    qrySiteZone: TFDQuery;
+    dsSiteZone: TDataSource;
+    qryTimeSheet: TFDQuery;
+    dsTimeSheet: TDataSource;
   private
     { Private declarations }
   public

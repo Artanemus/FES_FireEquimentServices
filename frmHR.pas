@@ -8,7 +8,8 @@ uses
   dmFES, Vcl.VirtualImage, Vcl.TitleBarCtrls, Vcl.StdCtrls, dmHRData, Vcl.ComCtrls,
   Vcl.Mask, Vcl.ControlList, Vcl.WinXPanels, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, System.Rtti, System.Bindings.Outputs,
-  Vcl.Bind.Editors, Data.Bind.DBScope, Vcl.Bind.ControlList, Data.Bind.Grid;
+  Vcl.Bind.Editors, Data.Bind.DBScope, Vcl.Bind.ControlList, Data.Bind.Grid,
+  Vcl.WinXCtrls;
 
 type
   THR = class(TForm)
@@ -37,7 +38,6 @@ type
     TabSheet8: TTabSheet;
     DBMemo1: TDBMemo;
     lblNotes: TLabel;
-    TabSheet9: TTabSheet;
     DBLabeledEdit4: TDBLabeledEdit;
     DBLabeledEdit5: TDBLabeledEdit;
     DBLabeledEdit6: TDBLabeledEdit;
@@ -52,13 +52,11 @@ type
     vimgVisEmail: TVirtualImage;
     cntrlistHRAddr: TControlList;
     cntrlistCustContact: TControlList;
-    ControlList6: TControlList;
-    StackPanel6: TStackPanel;
-    VirtualImage6: TVirtualImage;
-    ControlList7: TControlList;
+    cntlistHRSiteZones: TControlList;
+    cntrlistHRTimeSheet: TControlList;
     StackPanel7: TStackPanel;
-    VirtualImage7: TVirtualImage;
-    bindlistNum: TBindingsList;
+    vimgVisTimeSheet: TVirtualImage;
+    bindlistHR: TBindingsList;
     lblNumber: TLabel;
     lblAliasHRNum: TLabel;
     lblCreatedOnNum: TLabel;
@@ -118,10 +116,10 @@ type
     LinkPropertyToFieldCaption10: TLinkPropertyToField;
     LinkPropertyToFieldCaption11: TLinkPropertyToField;
     StackPanel4: TStackPanel;
-    VirtualImage5: TVirtualImage;
-    VirtualImage11: TVirtualImage;
-    VirtualImage12: TVirtualImage;
-    VirtualImage13: TVirtualImage;
+    vimgVisCC: TVirtualImage;
+    vimgNewCC: TVirtualImage;
+    vimgDeleteCC: TVirtualImage;
+    vimgCopyCC: TVirtualImage;
     btnEditCustContact: TControlListButton;
     btnPinCustContact: TControlListButton;
     btnUpCustContact: TControlListButton;
@@ -130,6 +128,32 @@ type
     LinkGridToDataSourceBindSourceDB15: TLinkGridToDataSource;
     lblHRCustContactName: TLabel;
     LinkPropertyToFieldCaption12: TLinkPropertyToField;
+    Label1: TLabel;
+    Panel4: TPanel;
+    RelativePanel1: TRelativePanel;
+    Splitter1: TSplitter;
+    Panel3: TPanel;
+    StackPanel5: TStackPanel;
+    vimgVisSiteZone: TVirtualImage;
+    Label2: TLabel;
+    LinkPropertyToFieldCaption13: TLinkPropertyToField;
+    bindsrcSiteZone: TBindSourceDB;
+    LinkGridToDataSourceBindSourceDB16: TLinkGridToDataSource;
+    lblHRSiteZone: TLabel;
+    LinkPropertyToFieldCaption14: TLinkPropertyToField;
+    lblHRZone: TLabel;
+    LinkPropertyToFieldCaption15: TLinkPropertyToField;
+    lblInspectOIDTS: TLabel;
+    lblSiteAddrTS: TLabel;
+    lblStartTS: TLabel;
+    lblEndTS: TLabel;
+    HeaderControl1: THeaderControl;
+    bindsrcTimeSheet: TBindSourceDB;
+    LinkGridToDataSourceBindSourceDB17: TLinkGridToDataSource;
+    LinkPropertyToFieldCaption16: TLinkPropertyToField;
+    LinkPropertyToFieldCaption17: TLinkPropertyToField;
+    LinkPropertyToFieldCaption18: TLinkPropertyToField;
+    LinkPropertyToFieldCaption19: TLinkPropertyToField;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

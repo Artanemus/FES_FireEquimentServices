@@ -1,4 +1,4 @@
-unit dlgInspectOrdersFind;
+unit dlgFindInspectOrder;
 
 interface
 

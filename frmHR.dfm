@@ -3,8 +3,8 @@ object HR: THR
   Top = 0
   BorderStyle = bsDialog
   Caption = 'HR'
-  ClientHeight = 563
-  ClientWidth = 829
+  ClientHeight = 713
+  ClientWidth = 816
   Color = clBtnFace
   CustomTitleBar.Control = TitleBarPanel1
   CustomTitleBar.Height = 31
@@ -19,19 +19,21 @@ object HR: THR
   TextHeight = 21
   object Panel1: TPanel
     Left = 0
-    Top = 494
-    Width = 829
+    Top = 644
+    Width = 816
     Height = 69
     Align = alBottom
     BevelEdges = []
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitTop = 494
+    ExplicitWidth = 829
     object DBNavigator1: TDBNavigator
       AlignWithMargins = True
       Left = 10
       Top = 10
-      Width = 809
+      Width = 796
       Height = 49
       Margins.Left = 10
       Margins.Top = 10
@@ -40,17 +42,19 @@ object HR: THR
       DataSource = HRData.dsHR
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 809
     end
   end
   object TitleBarPanel1: TTitleBarPanel
     Left = 0
     Top = 0
-    Width = 829
+    Width = 816
     Height = 31
     CustomButtons = <>
+    ExplicitWidth = 829
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 539
+      Left = 526
       Top = 0
       Width = 32
       Height = 31
@@ -72,7 +76,7 @@ object HR: THR
     end
     object vimgSync: TVirtualImage
       AlignWithMargins = True
-      Left = 647
+      Left = 634
       Top = 0
       Width = 32
       Height = 31
@@ -94,7 +98,7 @@ object HR: THR
     end
     object vimgSetFilters: TVirtualImage
       AlignWithMargins = True
-      Left = 503
+      Left = 490
       Top = 0
       Width = 32
       Height = 31
@@ -116,7 +120,7 @@ object HR: THR
     end
     object vimgFindCustomer: TVirtualImage
       AlignWithMargins = True
-      Left = 575
+      Left = 562
       Top = 0
       Width = 32
       Height = 31
@@ -138,7 +142,7 @@ object HR: THR
     end
     object VirtualImage1: TVirtualImage
       AlignWithMargins = True
-      Left = 611
+      Left = 598
       Top = 0
       Width = 32
       Height = 31
@@ -162,13 +166,14 @@ object HR: THR
   object Panel2: TPanel
     Left = 0
     Top = 31
-    Width = 829
+    Width = 816
     Height = 42
     Align = alTop
     BevelEdges = [beBottom]
     BevelKind = bkFlat
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 829
     object dbtxtHRID: TDBText
       Left = 16
       Top = 6
@@ -203,73 +208,194 @@ object HR: THR
   object PageControl1: TPageControl
     Left = 0
     Top = 73
-    Width = 829
-    Height = 421
-    ActivePage = TabSheet6
+    Width = 816
+    Height = 571
+    ActivePage = TabSheet8
     Align = alClient
     TabOrder = 3
     object TabSheet1: TTabSheet
       Caption = 'Details'
-      DesignSize = (
-        821
-        385)
-      object lblNotes: TLabel
-        Left = 65
-        Top = 124
-        Width = 41
-        Height = 21
-        Caption = 'Notes'
-      end
-      object DBLabeledEdit1: TDBLabeledEdit
-        Left = 112
-        Top = 16
-        Width = 337
-        Height = 29
-        DataField = 'FirstName'
-        DataSource = HRData.dsHR
+      object RelativePanel1: TRelativePanel
+        Left = 0
+        Top = 0
+        Width = 808
+        Height = 535
+        ControlCollection = <
+          item
+            Control = Panel4
+            AlignBottomWithPanel = True
+            AlignHorizontalCenterWithPanel = False
+            AlignLeftWith = Splitter1
+            AlignLeftWithPanel = False
+            AlignRightWithPanel = True
+            AlignTopWithPanel = True
+            AlignVerticalCenterWithPanel = False
+          end
+          item
+            Control = Splitter1
+            AlignBottomWithPanel = True
+            AlignHorizontalCenterWithPanel = True
+            AlignLeftWithPanel = False
+            AlignRightWithPanel = False
+            AlignTopWithPanel = True
+            AlignVerticalCenterWithPanel = True
+          end
+          item
+            Control = Panel3
+            AlignBottomWithPanel = True
+            AlignHorizontalCenterWithPanel = False
+            AlignLeftWithPanel = True
+            AlignRightWith = Splitter1
+            AlignRightWithPanel = False
+            AlignTopWithPanel = True
+            AlignVerticalCenterWithPanel = False
+          end>
+        Align = alClient
+        BevelOuter = bvNone
         TabOrder = 0
-        EditLabel.Width = 76
-        EditLabel.Height = 29
-        EditLabel.Caption = 'First Name'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
-      end
-      object DBLabeledEdit2: TDBLabeledEdit
-        Left = 112
-        Top = 51
-        Width = 337
-        Height = 29
-        DataSource = HRData.dsHR
-        TabOrder = 1
-        EditLabel.Width = 94
-        EditLabel.Height = 29
-        EditLabel.Caption = 'Middle Name'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
-      end
-      object DBLabeledEdit3: TDBLabeledEdit
-        Left = 112
-        Top = 86
-        Width = 337
-        Height = 29
-        DataField = 'LastName'
-        DataSource = HRData.dsHR
-        TabOrder = 2
-        EditLabel.Width = 74
-        EditLabel.Height = 29
-        EditLabel.Caption = 'Last Name'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
-      end
-      object DBMemo1: TDBMemo
-        Left = 112
-        Top = 121
-        Width = 706
-        Height = 262
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        DataField = 'Note'
-        DataSource = HRData.dsHR
-        TabOrder = 3
+        DesignSize = (
+          808
+          535)
+        object Panel4: TPanel
+          Left = 402
+          Top = 0
+          Width = 406
+          Height = 535
+          Anchors = []
+          BevelOuter = bvNone
+          Caption = 'Panel4'
+          ShowCaption = False
+          TabOrder = 0
+          object Label1: TLabel
+            Left = 20
+            Top = 43
+            Width = 194
+            Height = 21
+            Caption = 'DETAILS FOR STAFF ONLY ...'
+          end
+          object DBLabeledEdit4: TDBLabeledEdit
+            Left = 21
+            Top = 99
+            Width = 366
+            Height = 29
+            DataField = 'LastName'
+            DataSource = HRData.dsHR
+            TabOrder = 0
+            EditLabel.Width = 121
+            EditLabel.Height = 21
+            EditLabel.Caption = 'User Login Name'
+            LabelSpacing = 6
+          end
+          object DBLabeledEdit5: TDBLabeledEdit
+            Left = 21
+            Top = 157
+            Width = 366
+            Height = 29
+            DataField = 'FNAME'
+            DataSource = HRData.dsEmergencyHR
+            TabOrder = 1
+            EditLabel.Width = 134
+            EditLabel.Height = 21
+            EditLabel.Caption = 'Emergency Contact'
+            LabelSpacing = 6
+          end
+          object DBLabeledEdit6: TDBLabeledEdit
+            Left = 21
+            Top = 220
+            Width = 366
+            Height = 29
+            DataField = 'EmergencyNumber'
+            DataSource = HRData.dsEmergencyHR
+            TabOrder = 2
+            EditLabel.Width = 139
+            EditLabel.Height = 21
+            EditLabel.Caption = 'Emergency Number'
+            LabelSpacing = 6
+          end
+        end
+        object Splitter1: TSplitter
+          Left = 402
+          Top = 0
+          Height = 535
+          Visible = False
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 0
+          Width = 405
+          Height = 535
+          Anchors = []
+          BevelOuter = bvNone
+          Caption = 'Panel3'
+          ShowCaption = False
+          TabOrder = 1
+          DesignSize = (
+            405
+            535)
+          object lblNotes: TLabel
+            Left = 11
+            Top = 193
+            Width = 41
+            Height = 21
+            Caption = 'Notes'
+          end
+          object DBLabeledEdit1: TDBLabeledEdit
+            Left = 11
+            Top = 40
+            Width = 368
+            Height = 29
+            Anchors = [akLeft, akTop, akRight]
+            DataField = 'FirstName'
+            DataSource = HRData.dsHR
+            TabOrder = 0
+            EditLabel.Width = 76
+            EditLabel.Height = 21
+            EditLabel.Caption = 'First Name'
+            LabelSpacing = 6
+            ExplicitWidth = 366
+          end
+          object DBLabeledEdit2: TDBLabeledEdit
+            Left = 11
+            Top = 99
+            Width = 368
+            Height = 29
+            Anchors = [akLeft, akTop, akRight]
+            DataSource = HRData.dsHR
+            TabOrder = 1
+            EditLabel.Width = 94
+            EditLabel.Height = 21
+            EditLabel.Caption = 'Middle Name'
+            LabelSpacing = 6
+            ExplicitWidth = 366
+          end
+          object DBLabeledEdit3: TDBLabeledEdit
+            Left = 11
+            Top = 158
+            Width = 368
+            Height = 29
+            Anchors = [akLeft, akTop, akRight]
+            DataField = 'LastName'
+            DataSource = HRData.dsHR
+            TabOrder = 2
+            EditLabel.Width = 74
+            EditLabel.Height = 21
+            EditLabel.Caption = 'Last Name'
+            LabelSpacing = 6
+            ExplicitWidth = 366
+          end
+          object DBMemo1: TDBMemo
+            Left = 11
+            Top = 220
+            Width = 368
+            Height = 295
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            DataField = 'Note'
+            DataSource = HRData.dsHR
+            TabOrder = 3
+            ExplicitWidth = 366
+            ExplicitHeight = 293
+          end
+        end
       end
     end
     object TabSheet2: TTabSheet
@@ -278,8 +404,8 @@ object HR: THR
       object cntrlistNumber: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
         ItemHeight = 40
         ItemMargins.Left = 0
@@ -288,7 +414,8 @@ object HR: THR
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
-        ExplicitTop = 33
+        ExplicitWidth = 821
+        ExplicitHeight = 514
         object lblNumber: TLabel
           AlignWithMargins = True
           Left = 3
@@ -318,7 +445,7 @@ object HR: THR
         end
         object lblCreatedOnNum: TLabel
           AlignWithMargins = True
-          Left = 480
+          Left = 467
           Top = 3
           Width = 184
           Height = 34
@@ -330,7 +457,7 @@ object HR: THR
         end
         object btnPinNum: TControlListButton
           AlignWithMargins = True
-          Left = 739
+          Left = 726
           Top = 3
           Width = 32
           Height = 34
@@ -345,7 +472,7 @@ object HR: THR
         end
         object btnEditNum: TControlListButton
           AlignWithMargins = True
-          Left = 775
+          Left = 762
           Top = 3
           Width = 32
           Height = 34
@@ -362,7 +489,7 @@ object HR: THR
         end
         object btnUpNum: TControlListButton
           AlignWithMargins = True
-          Left = 703
+          Left = 690
           Top = 3
           Width = 32
           Height = 34
@@ -377,7 +504,7 @@ object HR: THR
         end
         object btnDownNum: TControlListButton
           AlignWithMargins = True
-          Left = 667
+          Left = 654
           Top = 3
           Width = 32
           Height = 34
@@ -394,7 +521,7 @@ object HR: THR
       object stackNumber: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -410,6 +537,7 @@ object HR: THR
           end>
         Orientation = spoHorizontal
         TabOrder = 1
+        ExplicitWidth = 821
         object vimgVisNum: TVirtualImage
           Left = 0
           Top = 0
@@ -460,8 +588,8 @@ object HR: THR
       object cntrlistRole: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
         ItemHeight = 40
         ItemMargins.Left = 0
@@ -470,6 +598,8 @@ object HR: THR
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
+        ExplicitWidth = 821
+        ExplicitHeight = 514
         object lblRole: TLabel
           AlignWithMargins = True
           Left = 3
@@ -484,7 +614,7 @@ object HR: THR
         end
         object btndownRole: TControlListButton
           AlignWithMargins = True
-          Left = 667
+          Left = 654
           Top = 3
           Width = 32
           Height = 34
@@ -500,7 +630,7 @@ object HR: THR
         end
         object btnUpRole: TControlListButton
           AlignWithMargins = True
-          Left = 703
+          Left = 690
           Top = 3
           Width = 32
           Height = 34
@@ -516,7 +646,7 @@ object HR: THR
         end
         object btnPinRole: TControlListButton
           AlignWithMargins = True
-          Left = 739
+          Left = 726
           Top = 3
           Width = 32
           Height = 34
@@ -531,7 +661,7 @@ object HR: THR
         end
         object btnEditRole: TControlListButton
           AlignWithMargins = True
-          Left = 775
+          Left = 762
           Top = 3
           Width = 32
           Height = 34
@@ -547,7 +677,7 @@ object HR: THR
         end
         object lblCreatedOnRole: TLabel
           AlignWithMargins = True
-          Left = 480
+          Left = 467
           Top = 3
           Width = 184
           Height = 34
@@ -562,7 +692,7 @@ object HR: THR
       object StackPanel2: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -578,6 +708,7 @@ object HR: THR
           end>
         Orientation = spoHorizontal
         TabOrder = 1
+        ExplicitWidth = 821
         object vimgVisRole: TVirtualImage
           Left = 0
           Top = 0
@@ -628,8 +759,8 @@ object HR: THR
       object cntrlistHREmail: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
         ItemHeight = 40
         ItemMargins.Left = 0
@@ -638,9 +769,11 @@ object HR: THR
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
+        ExplicitWidth = 821
+        ExplicitHeight = 514
         object lblCreatedOnEmail: TLabel
           AlignWithMargins = True
-          Left = 480
+          Left = 467
           Top = 3
           Width = 184
           Height = 34
@@ -653,7 +786,7 @@ object HR: THR
         end
         object ControlListButton1: TControlListButton
           AlignWithMargins = True
-          Left = 667
+          Left = 654
           Top = 3
           Width = 32
           Height = 34
@@ -669,7 +802,7 @@ object HR: THR
         end
         object ControlListButton2: TControlListButton
           AlignWithMargins = True
-          Left = 703
+          Left = 690
           Top = 3
           Width = 32
           Height = 34
@@ -685,7 +818,7 @@ object HR: THR
         end
         object ControlListButton3: TControlListButton
           AlignWithMargins = True
-          Left = 739
+          Left = 726
           Top = 3
           Width = 32
           Height = 34
@@ -700,7 +833,7 @@ object HR: THR
         end
         object ControlListButton4: TControlListButton
           AlignWithMargins = True
-          Left = 775
+          Left = 762
           Top = 3
           Width = 32
           Height = 34
@@ -746,7 +879,7 @@ object HR: THR
       object StackPanel3: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -765,6 +898,7 @@ object HR: THR
           end>
         Orientation = spoHorizontal
         TabOrder = 1
+        ExplicitWidth = 821
         object vimgVisEmail: TVirtualImage
           Left = 0
           Top = 0
@@ -829,8 +963,8 @@ object HR: THR
       object cntrlistHRAddr: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
         ItemHeight = 40
         ItemMargins.Left = 0
@@ -839,9 +973,11 @@ object HR: THR
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
+        ExplicitWidth = 821
+        ExplicitHeight = 514
         object btnDownAddr: TControlListButton
           AlignWithMargins = True
-          Left = 667
+          Left = 654
           Top = 3
           Width = 32
           Height = 34
@@ -857,7 +993,7 @@ object HR: THR
         end
         object btnUpAddr: TControlListButton
           AlignWithMargins = True
-          Left = 703
+          Left = 690
           Top = 3
           Width = 32
           Height = 34
@@ -873,7 +1009,7 @@ object HR: THR
         end
         object btnPinAddr: TControlListButton
           AlignWithMargins = True
-          Left = 739
+          Left = 726
           Top = 3
           Width = 32
           Height = 34
@@ -888,7 +1024,7 @@ object HR: THR
         end
         object btnEditAddr: TControlListButton
           AlignWithMargins = True
-          Left = 775
+          Left = 762
           Top = 3
           Width = 32
           Height = 34
@@ -933,20 +1069,20 @@ object HR: THR
         end
         object lblHRAddrCreatedOn: TLabel
           AlignWithMargins = True
-          Left = 660
+          Left = 647
           Top = 3
           Width = 4
           Height = 34
           Align = alRight
           Layout = tlCenter
-          ExplicitLeft = 569
+          ExplicitLeft = 660
           ExplicitHeight = 21
         end
       end
       object StackPanel1: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
@@ -965,7 +1101,7 @@ object HR: THR
           end>
         Orientation = spoHorizontal
         TabOrder = 1
-        ExplicitTop = -1
+        ExplicitWidth = 821
         object vimgVisAddr: TVirtualImage
           Left = 0
           Top = 0
@@ -1030,8 +1166,8 @@ object HR: THR
       object cntrlistCustContact: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
         ItemHeight = 40
         ItemMargins.Left = 0
@@ -1042,7 +1178,7 @@ object HR: THR
         TabOrder = 0
         object btnEditCustContact: TControlListButton
           AlignWithMargins = True
-          Left = 775
+          Left = 762
           Top = 3
           Width = 32
           Height = 34
@@ -1058,7 +1194,7 @@ object HR: THR
         end
         object btnPinCustContact: TControlListButton
           AlignWithMargins = True
-          Left = 739
+          Left = 726
           Top = 3
           Width = 32
           Height = 34
@@ -1069,11 +1205,12 @@ object HR: THR
           ImageIndex = 14
           ImageName = 'pin'
           Style = clbkToolButton
+          ExplicitLeft = 739
           ExplicitTop = 4
         end
         object btnUpCustContact: TControlListButton
           AlignWithMargins = True
-          Left = 703
+          Left = 690
           Top = 3
           Width = 32
           Height = 34
@@ -1084,11 +1221,12 @@ object HR: THR
           ImageIndex = 20
           ImageName = 'arrow_circle_up_FILL'
           Style = clbkToolButton
+          ExplicitLeft = 703
           ExplicitTop = 4
         end
         object btnDownCustContact: TControlListButton
           AlignWithMargins = True
-          Left = 667
+          Left = 654
           Top = 3
           Width = 32
           Height = 34
@@ -1103,36 +1241,58 @@ object HR: THR
           ExplicitTop = 6
         end
         object lblHRCustContactName: TLabel
-          Left = 24
-          Top = 8
-          Width = 4
-          Height = 21
+          AlignWithMargins = True
+          Left = 6
+          Top = 3
+          Width = 468
+          Height = 34
+          Margins.Left = 6
+          Align = alClient
+          AutoSize = False
+          Layout = tlCenter
+          ExplicitLeft = 24
+          ExplicitTop = 8
+          ExplicitWidth = 409
+          ExplicitHeight = 21
+        end
+        object Label2: TLabel
+          AlignWithMargins = True
+          Left = 480
+          Top = 3
+          Width = 171
+          Height = 34
+          Align = alRight
+          AutoSize = False
+          Layout = tlCenter
+          ExplicitLeft = 463
+          ExplicitTop = 4
+          ExplicitHeight = 21
         end
       end
       object StackPanel4: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
         ControlCollection = <
           item
-            Control = VirtualImage5
+            Control = vimgVisCC
           end
           item
-            Control = VirtualImage11
+            Control = vimgNewCC
           end
           item
-            Control = VirtualImage12
+            Control = vimgDeleteCC
           end
           item
-            Control = VirtualImage13
+            Control = vimgCopyCC
           end>
         Orientation = spoHorizontal
         TabOrder = 1
-        ExplicitTop = 8
-        object VirtualImage5: TVirtualImage
+        ExplicitWidth = 821
+        object vimgVisCC: TVirtualImage
           Left = 0
           Top = 0
           Width = 32
@@ -1146,7 +1306,7 @@ object HR: THR
           ParentShowHint = False
           ShowHint = True
         end
-        object VirtualImage11: TVirtualImage
+        object vimgNewCC: TVirtualImage
           Left = 34
           Top = 0
           Width = 32
@@ -1160,7 +1320,7 @@ object HR: THR
           ParentShowHint = False
           ShowHint = True
         end
-        object VirtualImage12: TVirtualImage
+        object vimgDeleteCC: TVirtualImage
           Left = 68
           Top = 0
           Width = 32
@@ -1174,7 +1334,7 @@ object HR: THR
           ParentShowHint = False
           ShowHint = True
         end
-        object VirtualImage13: TVirtualImage
+        object vimgCopyCC: TVirtualImage
           Left = 102
           Top = 0
           Width = 32
@@ -1193,32 +1353,58 @@ object HR: THR
     object TabSheet7: TTabSheet
       Caption = 'Sites-Zones'
       ImageIndex = 6
-      object ControlList6: TControlList
+      object cntlistHRSiteZones: TControlList
         Left = 0
         Top = 32
-        Width = 821
-        Height = 353
+        Width = 808
+        Height = 503
         Align = alClient
+        ItemHeight = 40
         ItemMargins.Left = 0
         ItemMargins.Top = 0
         ItemMargins.Right = 0
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
+        object lblHRSiteZone: TLabel
+          AlignWithMargins = True
+          Left = 6
+          Top = 3
+          Width = 4
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          Layout = tlCenter
+          ExplicitHeight = 21
+        end
+        object lblHRZone: TLabel
+          AlignWithMargins = True
+          Left = 19
+          Top = 3
+          Width = 4
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          Layout = tlCenter
+          ExplicitLeft = 291
+          ExplicitHeight = 21
+        end
       end
-      object StackPanel6: TStackPanel
+      object StackPanel5: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
         ControlCollection = <
           item
-            Control = VirtualImage6
+            Control = vimgVisSiteZone
           end>
+        Orientation = spoHorizontal
         TabOrder = 1
-        object VirtualImage6: TVirtualImage
+        ExplicitTop = 8
+        object vimgVisSiteZone: TVirtualImage
           Left = 0
           Top = 0
           Width = 32
@@ -1237,32 +1423,79 @@ object HR: THR
     object TabSheet8: TTabSheet
       Caption = 'Time Sheet'
       ImageIndex = 7
-      object ControlList7: TControlList
+      object cntrlistHRTimeSheet: TControlList
         Left = 0
-        Top = 32
-        Width = 821
-        Height = 353
+        Top = 49
+        Width = 808
+        Height = 486
         Align = alClient
+        ItemHeight = 40
         ItemMargins.Left = 0
         ItemMargins.Top = 0
         ItemMargins.Right = 0
         ItemMargins.Bottom = 0
         ParentColor = False
         TabOrder = 0
+        ExplicitTop = 50
+        object lblInspectOIDTS: TLabel
+          AlignWithMargins = True
+          Left = 6
+          Top = 3
+          Width = 51
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          AutoSize = False
+          Layout = tlCenter
+        end
+        object lblSiteAddrTS: TLabel
+          AlignWithMargins = True
+          Left = 66
+          Top = 3
+          Width = 391
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          AutoSize = False
+          Layout = tlCenter
+        end
+        object lblStartTS: TLabel
+          AlignWithMargins = True
+          Left = 466
+          Top = 3
+          Width = 90
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          AutoSize = False
+          Layout = tlCenter
+        end
+        object lblEndTS: TLabel
+          AlignWithMargins = True
+          Left = 565
+          Top = 3
+          Width = 90
+          Height = 34
+          Margins.Left = 6
+          Align = alLeft
+          AutoSize = False
+          Layout = tlCenter
+        end
       end
       object StackPanel7: TStackPanel
         Left = 0
         Top = 0
-        Width = 821
+        Width = 808
         Height = 32
         Align = alTop
         BevelOuter = bvNone
         ControlCollection = <
           item
-            Control = VirtualImage7
+            Control = vimgVisTimeSheet
           end>
         TabOrder = 1
-        object VirtualImage7: TVirtualImage
+        ExplicitWidth = 821
+        object vimgVisTimeSheet: TVirtualImage
           Left = 0
           Top = 0
           Width = 32
@@ -1277,59 +1510,45 @@ object HR: THR
           ShowHint = True
         end
       end
-    end
-    object TabSheet9: TTabSheet
-      Caption = 'Staff'
-      ImageIndex = 8
-      object DBLabeledEdit4: TDBLabeledEdit
-        Left = 184
-        Top = 22
-        Width = 225
-        Height = 29
-        DataField = 'LastName'
-        DataSource = HRData.dsHR
-        TabOrder = 0
-        EditLabel.Width = 121
-        EditLabel.Height = 29
-        EditLabel.Caption = 'User Login Name'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
-      end
-      object DBLabeledEdit5: TDBLabeledEdit
-        Left = 184
-        Top = 112
-        Width = 225
-        Height = 29
-        DataField = 'FNAME'
-        DataSource = HRData.dsEmergencyHR
-        TabOrder = 1
-        EditLabel.Width = 134
-        EditLabel.Height = 29
-        EditLabel.Caption = 'Emergency Contact'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
-      end
-      object DBLabeledEdit6: TDBLabeledEdit
-        Left = 184
-        Top = 147
-        Width = 225
-        Height = 29
-        DataField = 'EmergencyNumber'
-        DataSource = HRData.dsEmergencyHR
-        TabOrder = 2
-        EditLabel.Width = 139
-        EditLabel.Height = 29
-        EditLabel.Caption = 'Emergency Number'
-        LabelPosition = lpLeft
-        LabelSpacing = 6
+      object HeaderControl1: THeaderControl
+        Left = 0
+        Top = 32
+        Width = 808
+        Height = 17
+        Sections = <
+          item
+            Alignment = taCenter
+            ImageIndex = -1
+            Text = 'ID'
+            Width = 60
+          end
+          item
+            AutoSize = True
+            ImageIndex = -1
+            Text = 'SITE ADDRESS'
+            Width = 400
+          end
+          item
+            ImageIndex = -1
+            Text = 'PUNCH IN'
+            Width = 100
+          end
+          item
+            ImageIndex = -1
+            Text = 'PUNCH OUT '
+            Width = 100
+          end>
+        ExplicitLeft = 408
+        ExplicitTop = 256
+        ExplicitWidth = 0
       end
     end
   end
-  object bindlistNum: TBindingsList
+  object bindlistHR: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 388
-    Top = 253
+    Left = 364
+    Top = 245
     object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
       Category = 'Quick Bindings'
       DataSource = bindsrcNum
@@ -1444,6 +1663,67 @@ object HR: THR
       Component = lblHRCustContactName
       ComponentProperty = 'Caption'
     end
+    object LinkPropertyToFieldCaption13: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcCustContact
+      FieldName = 'CustNumber'
+      Component = Label2
+      ComponentProperty = 'Caption'
+    end
+    object LinkGridToDataSourceBindSourceDB16: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bindsrcSiteZone
+      GridControl = cntlistHRSiteZones
+      Columns = <>
+    end
+    object LinkPropertyToFieldCaption14: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcSiteZone
+      FieldName = 'Address'
+      Component = lblHRSiteZone
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToFieldCaption15: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcSiteZone
+      FieldName = 'Zone'
+      Component = lblHRZone
+      ComponentProperty = 'Caption'
+    end
+    object LinkGridToDataSourceBindSourceDB17: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bindsrcTimeSheet
+      GridControl = cntrlistHRTimeSheet
+      Columns = <>
+    end
+    object LinkPropertyToFieldCaption16: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcTimeSheet
+      FieldName = 'InspectionOrderID'
+      Component = lblInspectOIDTS
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToFieldCaption17: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcTimeSheet
+      FieldName = 'SiteAddr'
+      Component = lblSiteAddrTS
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToFieldCaption18: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcTimeSheet
+      FieldName = 'StartDT'
+      Component = lblStartTS
+      ComponentProperty = 'Caption'
+    end
+    object LinkPropertyToFieldCaption19: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = bindsrcTimeSheet
+      FieldName = 'EndDT'
+      Component = lblEndTS
+      ComponentProperty = 'Caption'
+    end
   end
   object bindsrcNum: TBindSourceDB
     DataSet = HRData.qryHRNumber
@@ -1472,7 +1752,19 @@ object HR: THR
   object bindsrcCustContact: TBindSourceDB
     DataSet = HRData.qryCustContact
     ScopeMappings = <>
-    Left = 560
-    Top = 320
+    Left = 248
+    Top = 392
+  end
+  object bindsrcSiteZone: TBindSourceDB
+    DataSet = HRData.qrySiteZone
+    ScopeMappings = <>
+    Left = 360
+    Top = 392
+  end
+  object bindsrcTimeSheet: TBindSourceDB
+    DataSet = HRData.qryTimeSheet
+    ScopeMappings = <>
+    Left = 464
+    Top = 392
   end
 end

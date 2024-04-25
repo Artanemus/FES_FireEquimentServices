@@ -246,3 +246,6 @@ Visible=True
 [FindInspectOrders.qryFindInspectOrder]
 Visible=False
 
+[FindHR.qryFindHR]
+Visible=False
+

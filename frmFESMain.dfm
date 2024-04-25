@@ -311,8 +311,8 @@ object FESMain: TFESMain
         5E5E5E5EAFAF56165E07070DA7A7675F5F5E5E5E5E5E56165E07EDAF0D0D0D0D
         0D0D0D0D0D0D0D0D5EECD9ED070707070707070707070707EDD1}
       Display.ActiveEnd = 40
-      Display.CurrentPosFrom = 1005
-      Display.CurrentPosTo = 1005
+      Display.CurrentPosFrom = 1008
+      Display.CurrentPosTo = 1008
       Display.ColorNonActive = clWhite
       Display.HourLineColor = 15987699
       Font.Charset = DEFAULT_CHARSET
@@ -1155,6 +1155,8 @@ object FESMain: TFESMain
       Caption = 'Find HR'
       ImageIndex = 1
       ImageName = 'search'
+      OnExecute = HRFindExecute
+      OnUpdate = GenericUpdate
     end
     object HRBrowse: TAction
       Category = 'HR'

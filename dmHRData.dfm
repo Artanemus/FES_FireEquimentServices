@@ -1,6 +1,6 @@
 object HRData: THRData
-  Height = 832
-  Width = 569
+  Height = 549
+  Width = 700
   object qryHR: TFDQuery
     Active = True
     Connection = FES.fesConnection
@@ -26,7 +26,7 @@ object HRData: THRData
   end
   object dsHR: TDataSource
     DataSet = qryHR
-    Left = 152
+    Left = 104
     Top = 8
   end
   object qryRoleList: TFDQuery
@@ -47,8 +47,8 @@ object HRData: THRData
       'FROM [IDFES].[dbo].[RoleList]'
       'LEFT JOIN Role ON RoleList.RoleID = Role.RoleID'
       'ORDER BY CreatedOn DESC')
-    Left = 56
-    Top = 144
+    Left = 240
+    Top = 8
   end
   object qryRole: TFDQuery
     Active = True
@@ -67,18 +67,18 @@ object HRData: THRData
       #9#9',[IsArchived]'
       'FROM [IDFES].[dbo].[Role] '
       'ORDER BY RoleID')
-    Left = 64
-    Top = 696
+    Left = 496
+    Top = 8
   end
   object dsRoleList: TDataSource
     DataSet = qryRoleList
-    Left = 152
-    Top = 144
+    Left = 336
+    Top = 8
   end
   object dsRole: TDataSource
     DataSet = qryRole
-    Left = 160
-    Top = 696
+    Left = 544
+    Top = 8
   end
   object qryEmergencyHR: TFDQuery
     Active = True
@@ -108,17 +108,17 @@ object HRData: THRData
       
         '-- INNER JOIN HRNumber ON HR.[EmergencyContactHRID] = HRNumber.H' +
         'RID')
-    Left = 56
-    Top = 200
+    Left = 240
+    Top = 64
   end
   object dsEmergencyHR: TDataSource
     DataSet = qryEmergencyHR
-    Left = 152
-    Top = 200
+    Left = 336
+    Top = 64
   end
   object pumenuHRCommon: TPopupMenu
-    Left = 376
-    Top = 144
+    Left = 56
+    Top = 112
     object puEdit: TMenuItem
       Caption = 'Edit'
       ImageIndex = 2
@@ -185,13 +185,13 @@ object HRData: THRData
         'LEFT JOIN NumberType ON HRNumber.NumberTypeID = NumberType.Numbe' +
         'rTypeID'
       'ORDER BY [StackOrder] DESC')
-    Left = 56
-    Top = 256
+    Left = 240
+    Top = 120
   end
   object dsHRNumber: TDataSource
     DataSet = qryHRNumber
-    Left = 152
-    Top = 256
+    Left = 336
+    Top = 120
   end
   object qryHREmail: TFDQuery
     Active = True
@@ -221,13 +221,13 @@ object HRData: THRData
         'LEFT JOIN EmailType ON HREmail.[EmailTypeID] = EmailType.[EmailT' +
         'ypeID] '
       'ORDER BY StackOrder ASC')
-    Left = 56
-    Top = 312
+    Left = 240
+    Top = 176
   end
   object dsHREmail: TDataSource
     DataSet = qryHREmail
-    Left = 152
-    Top = 312
+    Left = 336
+    Top = 176
   end
   object qryAddress: TFDQuery
     Active = True
@@ -255,13 +255,13 @@ object HRData: THRData
         'LEFT JOIN AddressType ON HRAddress.AddressTypeID = AddressType.A' +
         'ddressTypeID'
       'ORDER BY StackOrder')
-    Left = 56
-    Top = 368
+    Left = 240
+    Top = 232
   end
   object dsAddress: TDataSource
     DataSet = qryAddress
-    Left = 152
-    Top = 368
+    Left = 336
+    Top = 232
   end
   object qryCustContact: TFDQuery
     Active = True
@@ -293,15 +293,95 @@ object HRData: THRData
       'SELECT '
       #9#9' #tempCC.[HRID]'
       '         ,Customer.CustName -- add the string here'
+      
+        '         ,dbo.GetCustNumberAndType(#tempCC.[HRID], 1) AS CustNum' +
+        'ber'
       'FROM #tempcc'
       'INNER JOIN Customer ON #tempCC.CustomerID = Customer.CustomerID'
       'ORDER BY HRID')
-    Left = 56
-    Top = 424
+    Left = 240
+    Top = 288
   end
   object dsCustContact: TDataSource
     DataSet = qryCustContact
-    Left = 152
-    Top = 424
+    Left = 336
+    Top = 288
+  end
+  object qrySiteZone: TFDQuery
+    Active = True
+    IndexFieldNames = 'HRID'
+    MasterSource = dsHR
+    MasterFields = 'HRID'
+    DetailFields = 'HRID'
+    Connection = FES.fesConnection
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    SQL.Strings = (
+      'SELECT [Site].[SiteID]'
+      '     , [HR].[HRID]'
+      '     , [Customer].[CustomerID]'
+      '     --  ,[Customer].[CustName]'
+      '     , [Site].[Address]'
+      '     , [Postcode].[Zone]'
+      'FROM [IDFES].[dbo].[Site]'
+      '    INNER JOIN [CustSite]'
+      '        ON [Site].[SiteID] = [CustSite].[SiteID]'
+      '    INNER JOIN [Customer]'
+      '        ON [CustSite].[CustomerID] = [Customer].[CustomerID]'
+      '    INNER JOIN [CustContact]'
+      '        ON [Customer].CustomerID = [CustContact].[CustomerID]'
+      '    INNER JOIN [HR]'
+      '        ON [CustContact].[HRID] = [HR].[HRID]'
+      '    LEFT JOIN [Postcode]'
+      '        ON [Site].PostcodeID = [Postcode].[PostcodeID]'
+      'ORDER BY [HR].[HRID] DESC'
+      '       , [Site].[CreatedOn] DESC'
+      '       , [Customer].[CustomerID] DESC')
+    Left = 240
+    Top = 344
+  end
+  object dsSiteZone: TDataSource
+    DataSet = qrySiteZone
+    Left = 336
+    Top = 344
+  end
+  object qryTimeSheet: TFDQuery
+    Active = True
+    IndexFieldNames = 'HRID'
+    MasterSource = dsHR
+    MasterFields = 'HRID'
+    DetailFields = 'HRID'
+    Connection = FES.fesConnection
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    SQL.Strings = (
+      '                          SELECT '
+      #9#9' [InspectTime].[InspectTimeID]'
+      #9#9',[InspectTime].[StartDT]'
+      #9#9',[InspectTime].[EndDT]'
+      #9#9',[InspectTime].[InspectionOrderID]'
+      #9#9',[InspectTime].[HRID]'
+      
+        '        ,dbo.GetSiteAddrSingleLine(CustSite.SiteID, 1)  AS SiteA' +
+        'ddr'
+      'FROM [IDFES].[dbo].[InspectTime] '
+      
+        'INNER JOIN InspectionOrder ON [InspectTime].[InspectionOrderID] ' +
+        '= InspectionOrder.InspectionOrderID'
+      
+        'INNER JOIN CustSite ON InspectionOrder.CustSiteID = CustSite.Cus' +
+        'tSiteID'
+      '')
+    Left = 240
+    Top = 400
+  end
+  object dsTimeSheet: TDataSource
+    DataSet = qryTimeSheet
+    Left = 336
+    Top = 400
   end
 end

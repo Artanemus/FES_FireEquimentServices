@@ -1,21 +1,26 @@
 ﻿[TabSheet7]
-Coordinates=981,966,66,33
+Coordinates=1176,870,66,33
+Visible=False
 
 [TabSheet1]
 Coordinates=286,966,66,33
+Visible=False
 
 [HRData.qryNumberType]
 Coordinates=730,250,133,33
 Visible=False
 
 [StackPanel3]
-Coordinates=1364,690,75,51
+Coordinates=224,1140,75,33
+Visible=False
 
 [TabSheet4]
-Coordinates=10,1028,66,33
+Coordinates=1580,843,66,33
+Visible=False
 
 [DBLabeledEdit5]
 Coordinates=153,966,93,33
+Visible=False
 
 [HRData.dsRole]
 Coordinates=0,0,88,33
@@ -25,373 +30,514 @@ Coordinates=432,474,136,33
 
 [DBLabeledEdit1]
 Coordinates=389,966,93,33
+Visible=False
 
 [Panel2]
-Coordinates=1170,690,47,51
+Coordinates=30,1140,47,33
+Visible=False
 
 [TabSheet5]
-Coordinates=113,1028,66,33
+Coordinates=1683,843,66,33
+Visible=False
 
 [VirtualImage1]
-Coordinates=1217,966,81,33
+Coordinates=1796,913,81,33
+Visible=False
 
 [PageControl1]
-Coordinates=1195,882,81,33
+Coordinates=1061,800,81,33
+Visible=False
 
 [DBLabeledEdit6]
-Coordinates=1084,966,93,33
+Coordinates=1663,913,93,33
+Visible=False
 
 [FES.qryPlannerItem]
 Coordinates=10,10,128,627
 
-[TabSheet9]
-Coordinates=852,882,66,33
-
 [TabSheet8]
-Coordinates=1447,882,66,33
+Coordinates=1313,800,66,33
+Visible=False
 
 [vimgFindCustomer]
-Coordinates=216,1028,108,33
-
-[VirtualImage6]
-Coordinates=955,882,81,33
+Coordinates=1786,843,108,33
+Visible=False
 
 [FES.dsPlannerItem]
 Coordinates=51,165,108,33
 
 [DBLabeledEdit4]
 Coordinates=522,966,93,33
-
-[ControlList6]
-Coordinates=10,882,74,51
+Visible=False
 
 [TitleBarPanel1]
-Coordinates=497,1028,85,33
+Coordinates=1606,783,85,33
+Visible=False
 
 [TabSheet6]
-Coordinates=878,966,66,33
+Coordinates=1073,870,66,33
+Visible=False
 
 [vimgToggleFilters]
 Coordinates=10,966,103,33
+Visible=False
 
 [HRData.qryHR]
-Coordinates=189,10,119,249
+Coordinates=962,663,119,249
 
 [TabSheet3]
-Coordinates=775,966,66,33
+Coordinates=970,870,66,33
+Visible=False
 
 [DBMemo1]
-Coordinates=742,1028,64,33
+Coordinates=1851,783,64,33
+Visible=False
 
 [dbtxtHRID]
-Coordinates=180,640,64,51
+Coordinates=40,1050,64,33
+Visible=False
 
 [vimgSetFilters]
 Coordinates=364,882,85,33
+Visible=False
 
 [StackPanel7]
-Coordinates=665,798,75,51
+Coordinates=665,798,75,33
+Visible=False
 
 [HRData.qryRoleList]
-Coordinates=1180,340,111,33
+Coordinates=1123,1150,111,33
 Visible=False
 
 [StackPanel2]
-Coordinates=201,798,75,51
-
-[StackPanel6]
-Coordinates=888,798,75,51
+Coordinates=650,1230,75,33
+Visible=False
 
 [DBLabeledEdit3]
-Coordinates=1314,882,93,33
+Coordinates=1180,800,93,33
+Visible=False
 
 [HRData.qryEmergencyHR]
-Coordinates=180,280,140,159
+Coordinates=10,1150,140,159
 
 [HRData.dsRoleList]
 Coordinates=229,1,107,33
 
-[VirtualImage7]
-Coordinates=622,1028,81,33
-
 [TabSheet2]
-Coordinates=1337,966,66,33
+Coordinates=1916,913,66,33
+Visible=False
 
 [HRData.dsHR]
 Coordinates=432,1001,81,33
 
-[ControlList7]
-Coordinates=778,798,74,51
-
 [vimgSync]
 Coordinates=606,882,62,33
+Visible=False
 
 [Panel1]
-Coordinates=1224,798,47,51
+Coordinates=1536,913,47,33
+Visible=False
 
 [DBNavigator1]
-Coordinates=314,798,82,51
+Coordinates=314,798,82,33
+Visible=False
 
 [HRData.qryRole]
-Coordinates=180,460,92,123
+Coordinates=176,1150,92,123
 
 [dbtxtHRName]
-Coordinates=544,798,82,51
+Coordinates=544,798,82,33
+Visible=False
 
 [HRData.qryHRNumber]
-Coordinates=430,20,124,33
+Coordinates=549,1150,124,33
 Visible=False
 
 [DBLabeledEdit2]
-Coordinates=364,1028,93,33
+Coordinates=1473,783,93,33
+Visible=False
 
 [HRData.dsHRNumber]
 Coordinates=198,278,120,33
 
 []
-Coordinates=1305,798,75,51
+Coordinates=888,798,75,51
 
 [bindsrcNum]
-Coordinates=430,20,111,213
+Coordinates=155,693,111,213
 LayerNames=Number
 
-[bindlistNum]
-Coordinates=630,804,73,33
-
 [lblNumber]
-Coordinates=720,100,65,51
+Coordinates=10,774,65,51
 LayerNames=Number
 
 [Module Settings]
-ModelLayerNames=Role;Number;Email;Address
+ModelLayerNames=Role;Number;Email;Address;SiteZone;CustContact;TimeSheet
 ActiveLayerNames=
-EditingLayerName=Email
+EditingLayerName=TimeSheet
 
 [lblAliasHRNum]
-Coordinates=590,190,88,51
+Coordinates=352,885,88,51
 LayerNames=Number
 
 [stackNumber]
-Coordinates=1251,690,79,51
+Coordinates=111,1140,79,33
+Visible=False
 
 [lblCreatedOnNum]
-Coordinates=600,110,101,51
+Coordinates=346,774,101,51
 LayerNames=Number
 
 [vimgVisNum]
 Coordinates=702,882,76,33
+Visible=False
 
 [vimgVisRole]
-Coordinates=1075,882,76,33
+Coordinates=941,800,76,33
+Visible=False
 
 [vimgNewNum]
-Coordinates=630,620,82,33
+Coordinates=490,1030,82,33
+Visible=False
 
 [vimgDeleteNum]
-Coordinates=750,620,92,33
+Coordinates=610,1030,92,33
+Visible=False
 
 [VirtualImage2]
-Coordinates=880,630,81,33
+Coordinates=740,1040,81,33
+Visible=False
 
 [btnPinNum]
-Coordinates=1030,730,69,33
+Coordinates=50,1230,69,33
+Visible=False
 
 [btnEditNum]
-Coordinates=910,710,72,33
+Coordinates=1870,1130,72,33
+Visible=False
 
 [btnDownNum]
-Coordinates=780,710,81,33
+Coordinates=1740,1130,81,33
+Visible=False
 
 [lblRole]
-Coordinates=1320,440,48,51
+Coordinates=857,1073,48,51
 LayerNames=Role
 
 [VirtualImage8]
-Coordinates=391,683,81,33
+Coordinates=1340,980,81,33
+Visible=False
 
 [btnUpNum]
-Coordinates=391,738,66,33
+Coordinates=1351,1158,66,33
+Visible=False
 
 [lblCreatedOnRole]
-Coordinates=970,430,101,51
+Coordinates=488,1017,101,51
 LayerNames=Role
 
 [bindsrcRole]
-Coordinates=1180,340,97,159
+Coordinates=669,963,97,159
 LayerNames=Role
 
 [vimgVisEmail]
 Coordinates=486,882,81,33
+Visible=False
 
 [btnEditRole]
-Coordinates=80,720,72,33
+Coordinates=1040,1140,72,33
+Visible=False
 
 [btnPinRole]
-Coordinates=520,720,68,33
+Coordinates=1480,1140,68,33
+Visible=False
 
 [btnUpRole]
-Coordinates=180,730,66,33
+Coordinates=1140,1150,66,33
+Visible=False
 
 [btndownRole]
-Coordinates=250,730,79,33
+Coordinates=1210,1150,79,33
+Visible=False
 
 [ControlListButton2]
-Coordinates=1200,640,108,33
+Coordinates=1060,1050,108,33
+Visible=False
 
 [ControlListButton3]
-Coordinates=460,630,108,33
+Coordinates=320,1040,108,33
+Visible=False
 
 [ControlListButton4]
-Coordinates=310,630,108,33
+Coordinates=170,1040,108,33
+Visible=False
 
 [vimgNewEmail]
-Coordinates=112,830,87,33
+Coordinates=180,830,87,33
+Visible=False
 
 [vimgDeleteEmail]
 Coordinates=13,830,96,33
+Visible=False
 
 [vimgCopyEmail]
-Coordinates=1330,620,91,33
+Coordinates=1190,1030,91,33
+Visible=False
 
 [lblCreatedOnEmail]
-Coordinates=380,450,106,51
+Coordinates=984,121,106,51
 LayerNames=Email
 
 [ControlListButton1]
-Coordinates=1040,640,108,33
+Coordinates=900,1050,108,33
+Visible=False
 
 [HRData.dsHREmail]
 Coordinates=606,382,108,33
 
 [HRData.qryHREmail]
-Coordinates=606,312,112,33
+Coordinates=294,1150,112,33
 Visible=False
 
 [lblHREmailType]
-Coordinates=760,470,92,51
+Coordinates=632,121,92,51
 
 [lblHREmail]
-Coordinates=510,380,68,51
+Coordinates=1003,232,68,51
 LayerNames=Email
 
 [bindsrcEmail]
-Coordinates=600,340,100,213
+Coordinates=804,40,100,213
 LayerNames=Email
 
 [HRData.qryAddress]
-Coordinates=870,140,111,33
+Coordinates=699,1150,111,33
 Visible=False
 
 [HRData.dsAddress]
 Coordinates=305,1102,107,33
 
 [StackPanel1]
-Coordinates=630,1160,75,51
+Coordinates=400,1220,75,33
+Visible=False
 
 [lblHRAddrCreatedOn]
-Coordinates=720,20,117,51
+Coordinates=819,774,117,51
 LayerNames=Address
 
 [lblHRAddr]
-Coordinates=780,220,65,51
+Coordinates=845,885,65,51
 LayerNames=Address
 
 [lblHRAddrType]
-Coordinates=990,220,89,51
+Coordinates=473,774,89,51
 LayerNames=Address
 
 [cntrlistHRAddr]
-Coordinates=1030,140,87,51
-Visible=True
+Coordinates=834,663,87,51
 LayerNames=Address
 
 [bindsrcAddr]
-Coordinates=870,40,97,213
+Coordinates=642,693,97,213
 LayerNames=Address
 
 [lblNotes]
-Coordinates=1040,790,54,51
+Coordinates=1466,883,54,33
+Visible=False
 
 [vimgVisAddr]
-Coordinates=403,1339,77,33
+Coordinates=689,1150,77,33
+Visible=False
 
 [vimgNewAddr]
-Coordinates=630,1237,83,33
+Coordinates=280,1230,83,33
+Visible=False
 
 [vimgDeleteAddr]
-Coordinates=175,1339,93,33
+Coordinates=461,1150,93,33
+Visible=False
 
 [vimgCopyAddr]
-Coordinates=502,1339,88,33
+Coordinates=788,1150,88,33
+Visible=False
 
 [btnDownAddr]
-Coordinates=630,752,82,33
+Coordinates=1590,1172,82,33
+Visible=False
 
 [btnUpAddr]
-Coordinates=630,1292,68,33
+Coordinates=180,1230,68,33
+Visible=False
 
 [btnPinAddr]
-Coordinates=274,1339,70,33
+Coordinates=560,1150,70,33
+Visible=False
 
 [btnEditAddr]
-Coordinates=611,1339,73,33
+Coordinates=897,1150,73,33
+Visible=False
 
 [cntrlistCustContact]
-Coordinates=1170,20,109,51
-Visible=True
+Coordinates=343,962,109,51
+LayerNames=CustContact
 
 [cntrlistHREmail]
-Coordinates=750,330,91,51
-Visible=True
+Coordinates=992,10,91,51
 LayerNames=Email
 
 [cntrlistRole]
-Coordinates=1040,350,70,51
-Visible=True
+Coordinates=846,962,70,51
 LayerNames=Role
 
 [cntrlistNumber]
-Coordinates=610,40,87,51
-Visible=True
+Coordinates=353,663,87,51
 LayerNames=Number
 
 [btnUpCustContact]
-Coordinates=920,570,105,33
+Coordinates=1010,940,105,33
+Visible=False
 
 [HRData.qryCustContact]
-Coordinates=1270,90,131,33
+Coordinates=10,1335,131,33
 Visible=False
 
 [btnPinCustContact]
-Coordinates=606,672,107,33
-
-[VirtualImage13]
-Coordinates=275,901,87,33
-
-[VirtualImage12]
-Coordinates=186,901,87,33
-
-[VirtualImage5]
-Coordinates=97,901,81,33
+Coordinates=1525,1019,107,33
+Visible=False
 
 [btnEditCustContact]
-Coordinates=1050,570,111,33
+Coordinates=1140,940,111,33
+Visible=False
 
 [HRData.dsCustContact]
 Coordinates=374,252,127,33
 
-[VirtualImage11]
-Coordinates=1180,570,87,33
-
 [btnDownCustContact]
-Coordinates=710,560,119,33
+Coordinates=800,930,119,33
+Visible=False
 
 [StackPanel4]
-Coordinates=606,260,75,51
+Coordinates=1800,980,75,33
+Visible=False
 
 [bindsrcCustContact]
-Coordinates=1340,30,116,105
+Coordinates=136,981,116,123
+LayerNames=CustContact
 
 [lblHRCustContactName]
-Coordinates=1170,90,130,51
+Coordinates=332,1073,130,51
+LayerNames=CustContact
+
+[vimgVisCC]
+Coordinates=97,901,68,33
+Visible=False
+
+[vimgNewCC]
+Coordinates=1270,940,74,33
+Visible=False
+
+[vimgDeleteCC]
+Coordinates=186,901,84,33
+Visible=False
+
+[vimgCopyCC]
+Coordinates=275,901,79,33
+Visible=False
+
+[Label1]
+Coordinates=1420,1020,46,33
+Visible=False
+
+[StackPanel5]
+Coordinates=520,1230,75,33
+Visible=False
+
+[Splitter1]
+Coordinates=1930,1000,55,33
+Visible=False
+
+[Panel3]
+Coordinates=630,937,47,33
+Visible=False
+
+[RelativePanel1]
+Coordinates=352,1150,87,33
+Visible=False
+
+[Panel4]
+Coordinates=1710,1020,47,33
+Visible=False
+
+[Label2]
+Coordinates=10,1017,46,51
+LayerNames=CustContact
+
+[vimgVisSiteZone]
+Coordinates=1330,880,97,33
+Visible=False
+
+[HRData.dsSiteZone]
+Coordinates=816,1178,109,33
+
+[HRData.qrySiteZone]
+Coordinates=984,1150,113,33
+Visible=False
+
+[cntlistHRSiteZones]
+Coordinates=1287,962,108,51
+LayerNames=SiteZone
+
+[bindsrcSiteZone]
+Coordinates=1106,963,101,159
+LayerNames=SiteZone
+
+[lblHRSiteZone]
+Coordinates=942,1017,84,51
+LayerNames=SiteZone
+
+[lblHRZone]
+Coordinates=1309,1073,65,51
+LayerNames=SiteZone
+
+[vimgVisTimeSheet]
+Coordinates=1731,783,105,33
+Visible=False
+
+[lblInspectOIDTS]
+Coordinates=502,121,93,51
+LayerNames=TimeSheet
+
+[lblEndTS]
+Coordinates=164,177,58,51
+LayerNames=TimeSheet
+
+[HeaderControl1]
+Coordinates=310,320,91,33
+LayerNames=TimeSheet
+
+[lblSiteAddrTS]
+Coordinates=507,343,82,51
+LayerNames=TimeSheet
+
+[lblStartTS]
+Coordinates=517,232,62,51
+LayerNames=TimeSheet
+
+[HRData.dsTimeSheet]
+Coordinates=875,500,118,33
+
+[HRData.qryTimeSheet]
+Coordinates=836,1150,122,33
+Visible=False
+
+[cntrlistHRTimeSheet]
+Coordinates=491,10,115,51
+LayerNames=TimeSheet
+
+[bindsrcTimeSheet]
+Coordinates=302,114,109,177
+LayerNames=TimeSheet
+
+[bindlistHR]
+Coordinates=630,804,73,33
 

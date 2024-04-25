@@ -11,7 +11,7 @@ uses
   pickInspectStatus in 'pickInspectStatus.pas' {InspectStatus},
   dmFES in 'dmFES.pas' {FES: TDataModule},
   dlgInspectOrdersUpdate in 'dlgInspectOrdersUpdate.pas' {UpdateInspectOrders},
-  dlgInspectOrdersFind in 'dlgInspectOrdersFind.pas' {FindInspectOrders},
+  dlgFindInspectOrder in 'dlgFindInspectOrder.pas' {FindInspectOrders},
   frmInspectOrder in 'frmInspectOrder.pas' {InspectOrder},
   frmCustomer in 'frmCustomer.pas' {Customer},
   pickCustomerFilter in 'pickCustomerFilter.pas' {CustomerFilter},
@@ -43,7 +43,8 @@ uses
   dlgStatusPalette in 'dlgStatusPalette.pas' {StatusPalette},
   dlgFilterStatus in 'dlgFilterStatus.pas' {FilterStatus},
   frmHR in 'frmHR.pas' {HR},
-  dmHRData in 'dmHRData.pas' {HRData: TDataModule};
+  dmHRData in 'dmHRData.pas' {HRData: TDataModule},
+  dlgFindHR in 'dlgFindHR.pas' {FindHR};
 
 {$R *.res}
 

@@ -71,5 +71,23 @@ Coordinates=294,188,68,33
 Coordinates=588,249,67,33
 
 [qryAddress]
-Coordinates=588,53,77,177
+Coordinates=588,53,77,195
+
+[dsCustContact]
+Coordinates=204,608,87,33
+
+[qryCustContact]
+Coordinates=588,463,91,105
+
+[dsTimeSheet]
+Coordinates=627,587,78,33
+
+[qrySiteZone]
+Coordinates=459,859,73,141
+
+[qryTimeSheet]
+Coordinates=627,765,89,159
+
+[dsSiteZone]
+Coordinates=459,699,69,33
 

@@ -27,7 +27,6 @@ object FindInspectOrders: TFindInspectOrders
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 1502
     object Label1: TLabel
       Left = 11
       Top = 9
@@ -54,7 +53,6 @@ object FindInspectOrders: TFindInspectOrders
     Width = 889
     Height = 34
     CustomButtons = <>
-    ExplicitWidth = 1502
     object vimgToggleFilters: TVirtualImage
       AlignWithMargins = True
       Left = 599
@@ -302,11 +300,14 @@ object FindInspectOrders: TFindInspectOrders
       Height = 44
       Margins.Left = 6
       Align = alClient
+      BorderColor = 15987699
+      Color = 15987699
       HTMLText.Strings = (
         
           '<B>Tivoli Gardens  - The Body Corporate 2036</B><BR><FONT color=' +
           '"clgrey"><IND x="20">56 A Moores Pocket Rd TIVOLI, QLD 4305</FON' +
           'T>')
+      ParentColor = False
       Transparent = True
       Version = '2.3.0.0'
       ExplicitLeft = 240
@@ -416,7 +417,7 @@ object FindInspectOrders: TFindInspectOrders
     DataSet = qryFindInspectOrder
     ScopeMappings = <>
     Left = 160
-    Top = 168
+    Top = 160
   end
   object bindList: TBindingsList
     Methods = <>

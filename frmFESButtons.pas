@@ -10,7 +10,7 @@ uses
   Vcl.BaseImageCollection, Vcl.ImageCollection, Vcl.VirtualImage, Vcl.WinXCtrls,
   Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.StdActns, dmFES,
-  dlgInspectOrdersFind;
+  dlgFindInspectOrder;
 
 type
   TFESButtons = class(TForm)

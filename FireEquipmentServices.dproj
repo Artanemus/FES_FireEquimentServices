@@ -139,7 +139,7 @@
             <Form>UpdateInspectOrders</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="dlgInspectOrdersFind.pas">
+        <DCCReference Include="dlgFindInspectOrder.pas">
             <Form>FindInspectOrders</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -268,6 +268,10 @@
             <Form>HRData</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="dlgFindHR.pas">
+            <Form>FindHR</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
